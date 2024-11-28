@@ -13,6 +13,7 @@
     "@nuxtjs/auth-next": "^5.0.0-1667386184.dfbbb54",
     "@nuxtjs/strapi": "^2.0.0",
     "@pinia/nuxt": "^0.7.0",
+    "bootstrap": "^5.3.3",
     "nuxt": "^3.14.1592",
     "pinia": "^2.2.7",
     "vue": "latest",

@@ -6,6 +6,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt'
   ],
 
+  css: ['bootstrap/dist/css/bootstrap.min.css'],
+
   strapi: {
     url: process.env.STRAPI_URL || 'http://158.182.151.62:1337',
     prefix: '/api',
