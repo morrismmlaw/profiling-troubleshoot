@@ -15,8 +15,12 @@
     "@pinia/nuxt": "^0.7.0",
     "bootstrap": "^5.3.3",
     "nuxt": "^3.14.1592",
+    "nuxt-tiptap-editor": "^2.1.0",
     "pinia": "^2.2.7",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.81.0"
   }
 }

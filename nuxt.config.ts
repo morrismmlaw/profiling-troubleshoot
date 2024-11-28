@@ -1,12 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
-  modules: [
-    '@nuxtjs/strapi',
-    '@pinia/nuxt'
-  ],
+  modules: ['@nuxtjs/strapi', '@pinia/nuxt', 'nuxt-tiptap-editor'],
 
   css: ['bootstrap/dist/css/bootstrap.min.css'],
+
+  tiptap: {
+    prefix: 'Tiptap', //prefix for Tiptap imports, composables not included
+  },
 
   strapi: {
     url: process.env.STRAPI_URL || 'http://158.182.151.62:1337',

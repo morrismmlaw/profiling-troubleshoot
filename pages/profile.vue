@@ -1,20 +1,20 @@
 <template>
-  <div class="min-h-screen bg-gray-100">
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      <div class="px-4 py-6 sm:px-0">
-        <div v-if="authStore.isAuthenticated" class="max-w-3xl mx-auto">
-          <h2 class="text-2xl font-bold mb-6">Academic Profile</h2>
+  <div class="container-fluid bg-light min-vh-100">
+    <div class="row justify-content-center py-6">
+      <div class="col-sm-12 col-lg-8 col-xl-6">
+        <div v-if="authStore.isAuthenticated">
+          <h2 class="text-center mb-4">Academic Profile</h2>
           <ProfileForm
             :profile="authStore.user"
             @save="handleSave"
           />
         </div>
         <div v-else>
-          <p class="text-center text-red-600">Please login to view your profile.</p>
-          <div class="mt-4 text-center">
+          <p class="text-center text-danger">Please login to view your profile.</p>
+          <div class="text-center mt-4">
             <NuxtLink
               to="/"
-              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="btn btn-primary"
             >
               Go to Login
             </NuxtLink>

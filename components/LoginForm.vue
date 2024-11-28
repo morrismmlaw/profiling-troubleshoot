@@ -19,12 +19,21 @@ const handleSubmit = async () => {
   }
 };
 </script>
+
 <template>
-  <form @submit.prevent="handleSubmit" class="space-y-4">
-    <input id="ssoid" v-model="ssoid" label="SSOID" type="text" required />
-    <button type="submit" variant="primary" full-width :disabled="authStore.isLoading">
-      {{ authStore.isLoading ? 'Logging in...' : 'Login' }}
-    </button>
-    <p v-if="authStore.error" class="text-red-600 text-sm">{{ authStore.error }}</p>
-  </form>
+  <div class="container">
+
+    <form @submit.prevent="handleSubmit">
+      <div class="form-group">
+        <label for="ssoid">SSOID</label>
+        <input id="ssoid" v-model="ssoid" class="form-control" type="text" required placeholder="Enter your SSOID">
+        <small class="form-text text-muted">We'll never share your SSOID with anyone else.</small>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" :disabled="authStore.isLoading">
+        {{ authStore.isLoading ? 'Logging in...' : 'Login' }}
+      </button>
+      <p v-if="authStore.error" class="text-danger mt-2">{{ authStore.error }}</p>
+    </form>
+
+  </div>
 </template>
