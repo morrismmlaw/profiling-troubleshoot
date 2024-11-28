@@ -26,8 +26,8 @@ onMounted(() => {
   editor.value = new Editor({
     extensions: [TiptapStarterKit],
     content: props.formData[props.field],
-    onUpdate: ({ getHTML }) => {
-      props.formData[props.field] = getHTML()
+    onUpdate: ({ editor }) => {
+      props.formData[props.field] = editor.getHTML();
     },
   })
 })

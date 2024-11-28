@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, watch } from 'vue';
+import { reactive, watch, defineEmits } from 'vue';
 import { useProfileStore } from '../composables/useProfile'; // replace with your actual path
 import TiptapEditor from './TiptapEditor.vue' // path to your Tiptap editor component
 
@@ -9,6 +9,8 @@ const props = defineProps({
     default: null
   }
 });
+
+const emit = defineEmits(['save']);
 
 const profileStore = useProfileStore();
 
@@ -55,19 +57,6 @@ watch(() => props.profile, (newProfile) => {
         </div> -->
 
         <div class="row mb-3">
-          <label for="biography" class="col-sm-2 col-form-label">Biography</label>
-          <div class="col-sm-10">
-            <tiptap-editor :formData="formData" field="biography" />
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="academicInterests" class="col-sm-2 col-form-label">Academic Interests</label>
-          <div class="col-sm-10">
-            <tiptap-editor :formData="formData" field="researchInterests" />
-          </div>
-        </div>
-
-        <div class="row mb-3">
           <label class="col-sm-2 col-form-label">Name</label>
           <div class="col-sm-10">
             <p class="form-control-plaintext">{{ profile?.attributes.name }}</p>
@@ -77,6 +66,19 @@ watch(() => props.profile, (newProfile) => {
           <label class="col-sm-2 col-form-label">SSOID</label>
           <div class="col-sm-10">
             <p class="form-control-plaintext">{{ profile?.attributes.ssoid }}</p>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="biography" class="col-sm-2 col-form-label">Biography</label>
+          <div class="col-sm-10">
+            <tiptap-editor :formData="formData" field="biography" />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="academicInterests" class="col-sm-2 col-form-label">Academic Interests</label>
+          <div class="col-sm-10">
+            <tiptap-editor :formData="formData" field="researchInterests" />
           </div>
         </div>
 
