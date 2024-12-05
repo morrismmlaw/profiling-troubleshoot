@@ -50,9 +50,10 @@ import bgM from '@/assets/img/bg-masthead.jpg';
       <a class="navbar-brand" href="#">HKBU Science Faculty Academic Profile</a>
       <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
       <div id="navcol-1" class="collapse navbar-collapse">
-        <a class="btn btn-info ms-auto" role="button" href="/profile">Profile</a>
-        <a v-if="isLoggedIn" class="btn btn-danger" role="button" @click="logout">Log Out</a>
-        <a v-else class="btn btn-primary" role="button" href="/login">Sign In</a>
+        <a class="btn btn-info ms-auto me-2 shadow" role="button" href="/profile">Profile</a>
+        <a class="btn btn-info me-2 shadow" role="button" href="/profileVueForm">Profile New</a>
+        <a v-if="isLoggedIn" class="btn btn-danger shadow" role="button" @click="logout">Log Out</a>
+        <a v-else class="btn btn-outline-primary shadow" role="button" href="/login">Sign In</a>
       </div>
     </div>
   </nav>
@@ -254,6 +255,9 @@ import bgM from '@/assets/img/bg-masthead.jpg';
 @import url('/assets/bootstrap/css/bootstrap.min.css');
 @import url('/assets/css/animate.min.css');
 @import url('/assets/css/Login-Form-Basic-icons.css');
-
 @import url('/assets/fonts/font-awesome.min.css');
+
+.shadow {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
 </style>

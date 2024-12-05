@@ -5,7 +5,9 @@ export default defineNuxtConfig({
     '@nuxtjs/strapi',
     '@pinia/nuxt',
     'nuxt-tiptap-editor',
-    '@vesp/nuxt-fontawesome'
+    '@vesp/nuxt-fontawesome',
+    '@vueform/nuxt',
+    // '@vueform/builder-nuxt'
   ],
 
   css: [
