@@ -18,7 +18,8 @@ const formData = reactive({
   researchInterests: props.profile?.attributes.research_interest || '',
   biography: props.profile?.attributes.biography || '',
 
-  sustainable_development_goals: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : []
+  sustainable_development_goals: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
+  fcra: props.profile?.attributes.fcra || [],
 });
 
 const handleSubmit = () => {
@@ -40,16 +41,37 @@ const fcraOptions = ['Option 1', 'Option 2', 'Option 3']; // Replace with actual
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit" class="container mt-5">
 
-    {{ console.log("Props.profile", props.profile) }}
+  <div class="container-fluid">
 
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Personal Information</h5>
-        <p class="card-text">Your academic profile information.</p>
+    <div class="row mt-4">
 
-        <!-- <div class="row mb-3">
+      <div class="col-3">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"
+            :src="`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc9APxkj0xClmrU3PpMZglHQkx446nQPG6lA&s7`"
+            alt="Card image cap" />
+
+          <div class="card-body">
+            <h5 class="card-title">User Image</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+              content.</p>
+            <!-- <a href="#" class="btn btn-primary">TEST BUTTON</a> -->
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col">
+        <form @submit.prevent="handleSubmit" class="container-fluid">
+          {{ console.log("Props.profile", props.profile) }}
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Personal Information</h5>
+              <p class="card-text">Your academic profile information.</p>
+
+              <!-- <div class="row mb-3">
           <label for="academicInterests" class="col-sm-2 col-form-label">Academic Interests</label>
           <div class="col-sm-10">
             <textarea id="academicInterests" v-model="formData.researchInterests" rows="3"
@@ -63,93 +85,110 @@ const fcraOptions = ['Option 1', 'Option 2', 'Option 3']; // Replace with actual
           </div>
         </div> -->
 
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">Name</label>
-          <div class="col-sm-10">
-            <p class="form-control-plaintext">{{ profile?.attributes.name }}</p>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">SSOID</label>
-          <div class="col-sm-10">
-            <p class="form-control-plaintext">{{ profile?.attributes.ssoid }}</p>
-          </div>
-        </div>
+              <div class="row">
 
-        <div class="row mb-3">
-          <label for="biography" class="col-sm-2 col-form-label">Biography</label>
-          <div class="col-sm-10">
-            <tiptap-editor :formData="formData" field="biography" />
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="academicInterests" class="col-sm-2 col-form-label">Academic Interests</label>
-          <div class="col-sm-10">
-            <tiptap-editor :formData="formData" field="researchInterests" />
-          </div>
-        </div>
+                <div class="col">
+                  <div class="row mb-3">
+                    <label class="col-form-label">Name</label>
+                    <div class="col-sm-10">
+                      <p class="form-control-plaintext">{{ profile?.attributes.name }}</p>
+                    </div>
+                  </div>
+                </div>
 
+                <div class="col">
 
-        <div class="row">
+                  <!-- <o-field label="Chinese Name">
+                    <o-input v-model="profile.attributes.chiname" disabled/>
+                  </o-field> -->
 
-          <div class="col-2">
-            <h7>Sustainable Development Goals (SDG)</h7>
-          </div>
-
-          <div class="col">
-            <div class="columns is-multiline">
-              <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
-                <o-field>
-                  <o-checkbox v-model="formData.sustainable_development_goals" :native-value="sdg">
-                    {{ sdg }}
-                  </o-checkbox>
-                </o-field>
+                  <div class="row mb-3">
+                    <label class="col-form-label">Chinese Name</label>
+                    <div class="col-sm-10">
+                      <p class="form-control-plaintext">{{ profile?.attributes.chiname }}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              <!-- <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">SSOID</label>
+                <div class="col-sm-10">
+                  <p class="form-control-plaintext">{{ profile?.attributes.ssoid }}</p>
+                </div>
+              </div> -->
+
+              <div class="row mb-3">
+                <label for="biography" class="col-sm-2 col-form-label">Biography</label>
+                <div class="col-sm-10">
+                  <tiptap-editor :formData="formData" field="biography" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="academicInterests" class="col-sm-2 col-form-label">Academic Interests</label>
+                <div class="col-sm-10">
+                  <tiptap-editor :formData="formData" field="researchInterests" />
+                </div>
+              </div>
+
+
+              <div class="row">
+
+                <div class="col-2">
+                  <h7>Sustainable Development Goals (SDG)</h7>
+                </div>
+
+                <div class="col">
+                  <div class="columns is-multiline">
+                    <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
+                      <o-field>
+                        <o-checkbox v-model="formData.sustainable_development_goals" :native-value="sdg">
+                          {{ sdg }}
+                        </o-checkbox>
+                      </o-field>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                  <p class="form-control-plaintext">{{ profile?.attributes.email }}</p>
+                </div>
+              </div>
+
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Department</label>
+                <div class="col-sm-10">
+                  <p class="form-control-plaintext">{{ profile?.attributes.unit }}</p>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">HKBU Scholar Url</label>
+                <div class="col-sm-10">
+                  <!-- <p class="form-control-plaintext">{{ profile?.attributes.url }}</p> -->
+                  <a :href="profile?.attributes.url" target="_blank" class="form-control-plaintext">{{
+                    profile?.attributes.url }}</a>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
+                  {{ profileStore.isLoading ? 'Saving...' : 'Save' }}
+                </button>
+              </div>
+              <p v-if="profileStore.error" class="text-danger mt-3">{{ profileStore.error }}</p>
             </div>
           </div>
-
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <p class="form-control-plaintext">{{ profile?.attributes.email }}</p>
-          </div>
-        </div>
-
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">Department</label>
-          <div class="col-sm-10">
-            <p class="form-control-plaintext">{{ profile?.attributes.unit }}</p>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">Chinese Name</label>
-          <div class="col-sm-10">
-            <p class="form-control-plaintext">{{ profile?.attributes.chiname }}</p>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">HKBU Scholar Url</label>
-          <div class="col-sm-10">
-            <!-- <p class="form-control-plaintext">{{ profile?.attributes.url }}</p> -->
-            <a :href="profile?.attributes.url" target="_blank" class="form-control-plaintext">{{
-              profile?.attributes.url }}</a>
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
-            {{ profileStore.isLoading ? 'Saving...' : 'Save' }}
-          </button>
-        </div>
-        <p v-if="profileStore.error" class="text-danger mt-3">{{ profileStore.error }}</p>
+        </form>
       </div>
+
     </div>
-  </form>
+  </div>
 
 </template>
 
