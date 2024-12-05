@@ -16,7 +16,9 @@ const profileStore = useProfileStore();
 
 const formData = reactive({
   researchInterests: props.profile?.attributes.research_interest || '',
-  biography: props.profile?.attributes.biography || ''
+  biography: props.profile?.attributes.biography || '',
+
+  sustainable_development_goals: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : []
 });
 
 const handleSubmit = () => {
@@ -30,6 +32,11 @@ watch(() => props.profile, (newProfile) => {
     formData.researchInterests = newProfile.attributes.research_interest;
   }
 }, { immediate: true });
+
+
+const sdgOptions = ['SDG1', 'SDG2', 'SDG3', 'SDG4', 'SDG5', 'SDG6', 'SDG7', 'SDG8', 'SDG9', 'SDG10', 'SDG11', 'SDG12', 'SDG13', 'SDG14', 'SDG15', 'SDG16', 'SDG17']
+const fcraOptions = ['Option 1', 'Option 2', 'Option 3']; // Replace with actual FCRA options
+
 </script>
 
 <template>
@@ -82,6 +89,27 @@ watch(() => props.profile, (newProfile) => {
           </div>
         </div>
 
+
+        <div class="row">
+
+          <div class="col-2">
+            <h7>Sustainable Development Goals (SDG)</h7>
+          </div>
+
+          <div class="col">
+            <div class="columns is-multiline">
+              <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
+                <o-field>
+                  <o-checkbox v-model="formData.sustainable_development_goals" :native-value="sdg">
+                    {{ sdg }}
+                  </o-checkbox>
+                </o-field>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
@@ -123,5 +151,12 @@ watch(() => props.profile, (newProfile) => {
     </div>
   </form>
 
-
 </template>
+
+<style scoped>
+.columns {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 8px;
+}
+</style>
