@@ -10,7 +10,8 @@ export default defineNuxtConfig({
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
-    // 'font-awesome/css/font-awesome.css'
+    // 'font-awesome/css/font-awesome.css',
+    '@fortawesome/fontawesome-free/css/all.min.css'
   ],
 
   fontawesome: {
