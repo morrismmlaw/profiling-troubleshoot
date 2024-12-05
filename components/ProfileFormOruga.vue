@@ -1,10 +1,13 @@
-<script setup>
-</script>
-
 <template>
   <div>
     <h1>Academic Profile Form</h1>
     <p>A form to display academic profile information</p>
+
+    <o-button variant="primary">Primary</o-button>
+    <o-button variant="success">Success</o-button>
+    <o-button variant="danger">Danger</o-button>
+    <o-button variant="warning">Warning</o-button>
+    <o-button variant="info">Info</o-button>
 
     <o-field label="Full Name">
       <o-input v-model="formData.full_name" placeholder="John Doe" />
@@ -47,7 +50,8 @@
     </o-field>
 
     <o-field label="Sustainable Development Goals (SDG)">
-      <o-checkbox v-for="sdg in sdgOptions" :key="sdg" v-model="formData.sustainable_development_goals" :native-value="sdg">
+      <o-checkbox v-for="sdg in sdgOptions" :key="sdg" v-model="formData.sustainable_development_goals"
+        :native-value="sdg">
         {{ sdg }}
       </o-checkbox>
     </o-field>
