@@ -19,6 +19,12 @@ const handleLogout = () => {
   router.push('/')
 }
 
+const isLoggedIn = computed(() => authStore.isAuthenticated);
+
+const logout = () => {
+  authStore.logout();
+};
+
 //Background Image imports.
 import bgS1 from '@/assets/img/bg-showcase-1.jpg';
 import bgS2 from '@/assets/img/bg-showcase-2.jpg';
@@ -27,20 +33,31 @@ import bgM from '@/assets/img/bg-masthead.jpg';
 
 </script>
 
-
 <template>
 
-  <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
-  </head>
-
-  <nav class="navbar navbar-expand bg-light">
+  <!-- <nav class="navbar navbar-expand bg-light">
     <div class="container"><a class="navbar-brand" href="#">HKBU Science Faculty Academic Profile</a><button
         class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
-      <div id="navcol-1" class="collapse navbar-collapse"><a class="btn btn-info ms-auto" role="button"
-          href="/profile">Profiles</a></div><a class="btn btn-primary ms-auto" role="button" href="/login">Sign In</a>
+      <div id="navcol-1" class="collapse navbar-collapse">
+        <a class="btn btn-info ms-auto" role="button" href="/profile">Profiles</a>
+      </div>
+      <a class="btn btn-primary ms-auto" role="button" href="/login">Sign In</a>
+    </div>
+  </nav> -->
+
+  <nav class="navbar navbar-expand bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">HKBU Science Faculty Academic Profile</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
+      <div id="navcol-1" class="collapse navbar-collapse">
+        <a class="btn btn-info ms-auto" role="button" href="/profile">Profile</a>
+        <a v-if="isLoggedIn" class="btn btn-danger" role="button" @click="logout">Log Out</a>
+        <a v-else class="btn btn-primary" role="button" href="/login">Sign In</a>
+      </div>
     </div>
   </nav>
+
+
   <header class="text-center text-white masthead" style="no-repeat center center;background-size: cover;"
     :style="{ backgroundImage: `url(${bgM})` }">
     <div class="overlay"></div>

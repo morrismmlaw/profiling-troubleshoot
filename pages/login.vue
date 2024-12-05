@@ -11,7 +11,7 @@ const handleSubmit = async () => {
   console.log("Login Form doing the Login")
   const success = await authStore.login(ssoid.value);
   if (success) {
-    router.push('/profile');
+    router.push('/');
     emit('success');
   } else {
     emit('error');
@@ -22,7 +22,6 @@ const handleSubmit = async () => {
 
 <template>
   <div class="container">
-
 
     <section class="position-relative py-4 py-xl-5">
       <div class="container">
