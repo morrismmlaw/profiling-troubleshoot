@@ -7,14 +7,16 @@ export default defineNuxtConfig({
     'nuxt-tiptap-editor',
     '@vesp/nuxt-fontawesome',
     '@vueform/nuxt',
-    // '@vueform/builder-nuxt'
+    // '@vueform/builder-nuxt' // IT NEED KEYS
   ],
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
     // 'font-awesome/css/font-awesome.css',
-    '@fortawesome/fontawesome-free/css/all.min.css'
+    '@fortawesome/fontawesome-free/css/all.min.css',
   ],
+
+  plugins: [{ src: '~/plugins/oruga.js' }],
 
   fontawesome: {
     component: "fa",
