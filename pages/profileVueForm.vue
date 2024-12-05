@@ -32,8 +32,8 @@ const handleSave = async (data: { academicInterests: string }) => {
         <div v-if="authStore.isAuthenticated">
           <h2 class="text-center mb-4">Academic Profile</h2>
 
-          <!-- <ProfileFormVueForm :profile="authStore.user" @save="handleSave" /> -->
-          <ProfileFormOruga :profile="authStore.user" @save="handleSave" />
+          <ProfileFormVueForm :profile="authStore.user" @save="handleSave" />
+          <!-- <ProfileFormOruga :profile="authStore.user" @save="handleSave" /> -->
 
         </div>
         <div v-else>

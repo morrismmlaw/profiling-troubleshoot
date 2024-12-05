@@ -38,13 +38,69 @@ watch(() => props.profile, (newProfile) => {
 const sdgOptions = ['SDG1', 'SDG2', 'SDG3', 'SDG4', 'SDG5', 'SDG6', 'SDG7', 'SDG8', 'SDG9', 'SDG10', 'SDG11', 'SDG12', 'SDG13', 'SDG14', 'SDG15', 'SDG16', 'SDG17']
 const fcraOptions = ['Option 1', 'Option 2', 'Option 3']; // Replace with actual FCRA options
 
+//FCRA Search
+const options = [
+  {
+    label: "Jesse Simmons",
+    value: {
+      id: 1,
+      user: { first_name: "Jesse", last_name: "Simmons" },
+      date: "2016/10/15 13:43:27",
+      gender: "Male",
+    },
+  },
+  {
+    label: "John Jacobs",
+    value: {
+      id: 2,
+      user: { first_name: "John", last_name: "Jacobs" },
+      date: "2016/12/15 06:00:53",
+      gender: "Male",
+    },
+  },
+  {
+    label: "Tina Gilbert",
+    value: {
+      id: 3,
+      user: { first_name: "Tina", last_name: "Gilbert" },
+      date: "2016/04/26 06:26:28",
+      gender: "Female",
+    },
+  },
+  {
+    label: "Clarence Flores",
+    value: {
+      id: 4,
+      user: { first_name: "Clarence", last_name: "Flores" },
+      date: "2016/04/10 10:28:46",
+      gender: "Male",
+    },
+  },
+  {
+    label: "Ruby Snyder",
+    value: {
+      id: 21,
+      user: { first_name: "Ruby", last_name: "Snyder" },
+      date: "2017/04/01 12:04:39",
+      gender: "Female",
+    },
+  },
+];
+
+const tags = ref([]);
+const allowNew = ref(false);
+const allowDuplicates = ref(false);
+const openOnFocus = ref(false);
+const keepFirst = ref(false);
+const keepOpen = ref(true);
+
 </script>
 
 <template>
 
   <div class="container-fluid">
 
-    <div class="row mt-4">
+    <div class="row mt-4 mb-4">
 
       <div class="col-3">
         <div class="card" style="width: 18rem;">
@@ -86,7 +142,6 @@ const fcraOptions = ['Option 1', 'Option 2', 'Option 3']; // Replace with actual
         </div> -->
 
               <div class="row">
-
                 <div class="col">
                   <div class="row mb-3">
                     <label class="col-form-label">Name</label>
@@ -95,19 +150,39 @@ const fcraOptions = ['Option 1', 'Option 2', 'Option 3']; // Replace with actual
                     </div>
                   </div>
                 </div>
-
                 <div class="col">
-
                   <!-- <o-field label="Chinese Name">
                     <o-input v-model="profile.attributes.chiname" disabled/>
                   </o-field> -->
-
                   <div class="row mb-3">
                     <label class="col-form-label">Chinese Name</label>
                     <div class="col-sm-10">
                       <p class="form-control-plaintext">{{ profile?.attributes.chiname }}</p>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                  <p class="form-control-plaintext">{{ profile?.attributes.email }}</p>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Department</label>
+                <div class="col-sm-10">
+                  <p class="form-control-plaintext">{{ profile?.attributes.unit }}</p>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">HKBU Scholar Url</label>
+                <div class="col-sm-10">
+                  <!-- <p class="form-control-plaintext">{{ profile?.attributes.url }}</p> -->
+                  <a :href="profile?.attributes.url" target="_blank" class="form-control-plaintext">{{
+                    profile?.attributes.url }}</a>
                 </div>
               </div>
 
@@ -152,29 +227,19 @@ const fcraOptions = ['Option 1', 'Option 2', 'Option 3']; // Replace with actual
 
               </div>
 
-              <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                  <p class="form-control-plaintext">{{ profile?.attributes.email }}</p>
-                </div>
-              </div>
-
-
-              <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Department</label>
-                <div class="col-sm-10">
-                  <p class="form-control-plaintext">{{ profile?.attributes.unit }}</p>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">HKBU Scholar Url</label>
-                <div class="col-sm-10">
-                  <!-- <p class="form-control-plaintext">{{ profile?.attributes.url }}</p> -->
-                  <a :href="profile?.attributes.url" target="_blank" class="form-control-plaintext">{{
-                    profile?.attributes.url }}</a>
-                </div>
-              </div>
+              <!-- <div class="row mb-3">
+                <o-field label="FCRA">
+                  <o-select v-model="formData.fcra" multiple :data="fcraOptions" />
+                </o-field>
+              </div> -->
+              <section>
+                <o-field label="FCRA">
+                  <o-taginput v-model="tags" :options="options" :allow-new="allowNew" :allow-duplicates="false"
+                    :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                    placeholder="Add an item" expanded />
+                </o-field>
+                <!-- <p><b>FCRAS:</b> {{ tags }}</p> -->
+              </section>
 
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
