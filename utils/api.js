@@ -27,6 +27,7 @@ export const api = {
    */
   async updateProfile(id, data) {
     const { update } = useStrapi()
+    console.log("Updating", id, data);
     return await update('profiles', id, {
       data
     })

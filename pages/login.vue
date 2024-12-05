@@ -2,9 +2,6 @@
 import { ref } from 'vue';
 import { useAuthStore } from '../composables/useAuth'; // replace with your actual path
 
-import Button from '@/components/ui/Button.vue'
-import Input from '@/components/ui/Input.vue'
-
 const authStore = useAuthStore();
 const ssoid = ref('');
 const emit = defineEmits(['success', 'error']);
