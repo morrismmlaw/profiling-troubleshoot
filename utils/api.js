@@ -28,8 +28,14 @@ export const api = {
   async updateProfile(id, data) {
     const { update } = useStrapi()
     console.log("Updating", id, data);
-    return await update('profiles', id, {
-      data
-    })
+
+    return await update('profiles', id, data); // Need to unwrap the data to pass to strapi for update -> else key error.
+
+    // return await update('profiles', id, {...data}); // Need to unwrap the data to pass to strapi for update -> else key error.
+
+    // return await update('profiles', id, {
+    //   data
+    // })
+
   }
 }

@@ -15,22 +15,22 @@ const emit = defineEmits(['save']);
 const profileStore = useProfileStore();
 
 const formData = reactive({
-  researchInterests: props.profile?.attributes.research_interest || '',
+  research_interest: props.profile?.attributes.research_interest || '',
   biography: props.profile?.attributes.biography || '',
 
-  sustainable_development_goals: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
+  SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
   fcra: props.profile?.attributes.fcra || [],
 });
 
 const handleSubmit = () => {
   emit('save', {
-    researchInterests: formData.researchInterests
+    research_interest: formData.research_interests
   });
 };
 
 watch(() => props.profile, (newProfile) => {
   if (newProfile) {
-    formData.researchInterests = newProfile.attributes.research_interest;
+    formData.research_interests = newProfile.attributes.research_interest;
   }
 }, { immediate: true });
 
@@ -202,7 +202,7 @@ const keepOpen = ref(true);
               <div class="row mb-3">
                 <label for="academicInterests" class="col-sm-2 col-form-label">Academic Interests</label>
                 <div class="col-sm-10">
-                  <tiptap-editor :formData="formData" field="researchInterests" />
+                  <tiptap-editor :formData="formData" field="research_interest" />
                 </div>
               </div>
 
@@ -210,14 +210,14 @@ const keepOpen = ref(true);
               <div class="row">
 
                 <div class="col-2">
-                  <h7>Sustainable Development Goals (SDG)</h7>
+                  <h6>Sustainable Development Goals (SDG)</h6>
                 </div>
 
                 <div class="col">
                   <div class="columns is-multiline">
                     <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
                       <o-field>
-                        <o-checkbox v-model="formData.sustainable_development_goals" :native-value="sdg">
+                        <o-checkbox v-model="formData.SDG" :native-value="sdg">
                           {{ sdg }}
                         </o-checkbox>
                       </o-field>

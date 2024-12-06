@@ -12,7 +12,7 @@ onMounted(() => {
   }
 })
 
-const handleSave = async (data: { academicInterests: string }) => {
+const handleSave = async (data: { academic_interest: string }) => {
   const success = await profileStore.updateProfile(data)
   if (success) {
     alert('Profile updated successfully')

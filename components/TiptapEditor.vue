@@ -23,6 +23,9 @@ const props = defineProps({
 const editor = ref(null)
 
 onMounted(() => {
+
+  console.log(props.field);
+
   editor.value = new Editor({
     extensions: [TiptapStarterKit],
     content: props.formData[props.field],
