@@ -18,13 +18,17 @@ const formData = reactive({
   research_interest: props.profile?.attributes.research_interest || '',
   biography: props.profile?.attributes.biography || '',
 
+  documentId: props.profile?.attributes.documentId || '',
+
   SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
   fcra: props.profile?.attributes.fcra || [],
 });
 
 const handleSubmit = () => {
   emit('save', {
-    research_interest: formData.research_interests
+    research_interest: formData.research_interests,
+    biography: formData.biography,
+    documentId: formData.documentId //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
   });
 };
 

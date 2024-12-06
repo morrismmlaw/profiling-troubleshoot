@@ -21,17 +21,17 @@ export const api = {
 
   /**
    * Update profile
-   * @param {number} id
+   * @param {number} documentId
    * @param {{ academicInterests: string }} data
    * @returns {Promise<{ data: Profile }>}
    */
-  async updateProfile(id, data) {
+  async updateProfile(documentId, data) {
     const { update } = useStrapi()
-    console.log("Updating", id, data);
+    console.log("Updating", documentId, data);
 
-    return await update('profiles', id, data); // Need to unwrap the data to pass to strapi for update -> else key error.
+    // return await update('profiles', id, data); // Need to unwrap the data to pass to strapi for update -> else key error.
 
-    // return await update('profiles', id, {...data}); // Need to unwrap the data to pass to strapi for update -> else key error.
+    return await update('profiles', documentId, data); // Need to unwrap the data to pass to strapi for update -> else key error.
 
     // return await update('profiles', id, {
     //   data

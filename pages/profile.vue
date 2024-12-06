@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 const authStore = useAuthStore()
 const profileStore = useProfileStore()
 const router = useRouter()
@@ -12,7 +12,7 @@ onMounted(() => {
   }
 })
 
-const handleSave = async (data: { academic_interest: string }) => {
+const handleSave = async (data) => {
   const success = await profileStore.updateProfile(data)
   if (success) {
     alert('Profile updated successfully')

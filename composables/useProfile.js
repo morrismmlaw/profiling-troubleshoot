@@ -18,7 +18,8 @@ export const useProfileStore = defineStore('profile', {
         const authStore = useAuthStore()
         if (!authStore.user) return false
 
-        const response = await api.updateProfile(authStore.user.id, profileData)
+        console.log("useProfile", profileData);
+        const response = await api.updateProfile(profileData.documentId, profileData)
 
         if (response.data) {
           this.profile = response.data
