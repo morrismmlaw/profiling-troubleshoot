@@ -98,7 +98,7 @@ import bgM from '@/assets/img/bg-masthead.jpg';
             <div class="d-flex features-icons-icon">
               <i class="fa-solid fa-layer-group m-auto text-primary"></i>
             </div>
-            <h3>Bootstrap 5 Ready</h3>
+            <h3>Bootstrap 5 Ready Test MSG</h3>
             <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
           </div>
         </div>
