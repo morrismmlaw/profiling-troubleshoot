@@ -3,7 +3,8 @@
  */
 
 export const StorageKeys = {
-  USER: 'user'
+  USER: 'user',
+  COLLECTIONS: 'collections'
 }
 
 export const storage = {
@@ -15,7 +16,7 @@ export const storage = {
     const stored = localStorage.getItem(StorageKeys.USER)
     return stored ? JSON.parse(stored) : null
   },
-  
+
   /**
    * Set user in localStorage
    * @param {Profile|null} user
@@ -27,5 +28,19 @@ export const storage = {
     } else {
       localStorage.removeItem(StorageKeys.USER)
     }
+  },
+
+  getCollection: () => {
+    const stored = localStorage.getItem(StorageKeys.COLLECTIONS);
+    return stored ? JSON.parse(stored) : null;
+  },
+
+  setCollection: (collection) => {
+    if (collection) {
+      localStorage.setItem(StorageKeys.COLLECTIONS, JSON.stringify(collection));
+    } else {
+      localStorage.removeItem(StorageKeys.COLLECTIONS);
+    }
   }
+
 }

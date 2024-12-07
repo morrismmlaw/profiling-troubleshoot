@@ -28,7 +28,7 @@ const handleSave = async (data) => {
       <div class="col-sm-12 col-lg-11 col-xl-10">
         <div v-if="authStore.isAuthenticated">
           <!-- <h2 class="text-center mb-4">Academic Profile</h2> -->
-          <ProfileForm :profile="authStore.user" @save="handleSave" />
+          <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
         </div>
         <div v-else>
           <p class="text-center text-danger">Please login to view your profile.</p>

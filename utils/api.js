@@ -1,3 +1,5 @@
+
+
 /**
  * @typedef {import('~/types/profile').Profile} Profile
  */
@@ -20,6 +22,20 @@ export const api = {
   },
 
   /**
+   * Get Collection
+   */
+  async findCollection(name) {
+    const { find } = useStrapi()
+    const media = useStrapiMedia()
+
+    if (name === 'sdgs') {
+      console.log('MEDIA', media);
+    }
+
+    return await find(name);
+  },
+
+  /**
    * Update profile
    * @param {number} documentId
    * @param {{ academicInterests: string }} data
@@ -29,11 +45,10 @@ export const api = {
     const { update } = useStrapi()
     console.log("Updating", documentId, data);
 
-    // return await update('profiles', id, data); // Need to unwrap the data to pass to strapi for update -> else key error.
-
     return await update('profiles', documentId, data); // Need to unwrap the data to pass to strapi for update -> else key error.
+    // return await update('profiles', id, data); // Never use DAT Fake id in the table -> else not found error 404.
 
-    // return await update('profiles', id, {
+    // return await update('profiles', documentId, { //No need to wrap, as it is already an Object.
     //   data
     // })
 

@@ -124,7 +124,7 @@ const keepOpen = ref(true);
 
       <div class="col">
         <form @submit.prevent="handleSubmit" class="container-fluid">
-          {{ console.log("Props.profile", props.profile) }}
+          {{ console.log("ProfileForm - Props", props) }}
 
           <div class="card">
             <div class="card-body">
@@ -212,11 +212,9 @@ const keepOpen = ref(true);
 
 
               <div class="row">
-
                 <div class="col-2">
                   <h6>Sustainable Development Goals (SDG)</h6>
                 </div>
-
                 <div class="col">
                   <div class="columns is-multiline">
                     <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
@@ -228,7 +226,6 @@ const keepOpen = ref(true);
                     </div>
                   </div>
                 </div>
-
               </div>
 
               <!-- <div class="row mb-3">
