@@ -12,11 +12,15 @@ export default defineNuxtConfig({
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
-    '/assets/bootstrap/css/bootstrap.min.css',
     '@oruga-ui/theme-bootstrap/dist/bootstrap.css',
 
-    // 'font-awesome/css/font-awesome.css',
-    '@fortawesome/fontawesome-free/css/all.min.css', // Cause Change Page Bugged CSS
+    '@fortawesome/fontawesome-free/css/all.min.css',
+    'font-awesome/css/font-awesome.css',
+
+    //Shall put Bootstrap Studio CSS order at Last
+    '/assets/bootstrap/css/bootstrap.min.css',
+    '/assets/fonts/font-awesome.min.css',
+
   ],
 
   plugins: [{ src: '~/plugins/oruga.js' }],
@@ -55,7 +59,9 @@ export default defineNuxtConfig({
     timeline: {
       enabled: true
     }
-  }
+  },
+
+  // ssr: false, //Fix for Firefox... 
 
 
   // STRAPI TOKEN: 8a2a82b58882d99f781af813ec54b0bdfe773dd755c337081a22f07b33b81875005fb6004ffe9e08c575ff66e4d5f72645cd28286ed1307e70467ff65a6dbb804d8ce0c972515357c7b8693600380878fb497a2dff49f32e3da5ccdf3972bcb7b23781570af4c55fa1a690c344fa8ff430e689a946425dfcca7ac80c5f48d3d1
