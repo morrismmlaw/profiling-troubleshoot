@@ -6,12 +6,13 @@ const router = useRouter()
 
 onBeforeMount(() => {
 
-  import('/assets/bootstrap/css/bootstrap.min.css');
-  import ('/assets/css/animate.min.css');
-  import ('/assets/css/Login-Form-Basic-icons.css');
-  import ('/assets/fonts/font-awesome.min.css'); // Use Either One for ICON. */
+  //Loading customized CSS from Bootstrap Studio
+  // import('/assets/bootstrap/css/bootstrap.min.css');
+  // import ('/assets/css/animate.min.css');
+  // import ('/assets/css/Login-Form-Basic-icons.css');
 
-  /* @import url('@fortawesome/fontawesome-free/css/all.min.css'); */
+  // import ('/assets/fonts/font-awesome.min.css'); // Use Either One for ICON. */
+  // import ('@fortawesome/fontawesome-free/css/all.min.css'); 
 })
 
 //Background Image imports.
