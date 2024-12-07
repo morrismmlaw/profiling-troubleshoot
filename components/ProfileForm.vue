@@ -7,8 +7,18 @@ const props = defineProps({
   profile: {
     type: Object,
     default: null
+  },
+
+  collections: {
+    type: Object,
+    default: () => {}
   }
+
 });
+
+onMounted(() => {
+  console.log(props);
+})
 
 const emit = defineEmits(['save']);
 
@@ -39,7 +49,9 @@ const handleSubmit = () => {
 // }, { immediate: true });
 
 
-const sdgOptions = ['SDG1', 'SDG2', 'SDG3', 'SDG4', 'SDG5', 'SDG6', 'SDG7', 'SDG8', 'SDG9', 'SDG10', 'SDG11', 'SDG12', 'SDG13', 'SDG14', 'SDG15', 'SDG16', 'SDG17']
+// const sdgOptions = ['SDG1', 'SDG2', 'SDG3', 'SDG4', 'SDG5', 'SDG6', 'SDG7', 'SDG8', 'SDG9', 'SDG10', 'SDG11', 'SDG12', 'SDG13', 'SDG14', 'SDG15', 'SDG16', 'SDG17']
+const sdgOptions = props.collections.sdgs; 
+
 const fcraOptions = ['Option 1', 'Option 2', 'Option 3']; // Replace with actual FCRA options
 
 //FCRA Search
@@ -106,8 +118,8 @@ const keepOpen = ref(true);
 
     <div class="row mt-4 mb-4">
 
-      <div class="col-3">
-        <div class="card" style="width: 18rem;">
+      <div class="col-sm-1 col-md-2 col-lg-3">
+        <div class="card ms-5" style="width: 22rem;">
           <img class="card-img-top"
             :src="`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc9APxkj0xClmrU3PpMZglHQkx446nQPG6lA&s7`"
             alt="Card image cap" />
@@ -122,11 +134,11 @@ const keepOpen = ref(true);
       </div>
 
 
-      <div class="col">
+      <div class="col-sm-10 col-md-10 col-lg-9">
         <form @submit.prevent="handleSubmit" class="container-fluid">
           {{ console.log("ProfileForm - Props", props) }}
 
-          <div class="card">
+          <div class="card m-2">
             <div class="card-body">
               <h5 class="card-title">Personal Information</h5>
               <p class="card-text">Your academic profile information.</p>
@@ -213,7 +225,7 @@ const keepOpen = ref(true);
 
               <div class="row">
                 <div class="col-2">
-                  <h6>Sustainable Development Goals (SDG)</h6>
+                  <h6 class="col-form-label">Sustainable Development Goals (SDG)</h6>
                 </div>
                 <div class="col">
                   <div class="columns is-multiline">
@@ -234,7 +246,15 @@ const keepOpen = ref(true);
                 </o-field>
               </div> -->
               <section>
-                <o-field label="FCRA">
+                <o-field class="col-form-label" label="Faculty Collaborative Research Area">
+                  <o-taginput v-model="tags" :options="options" :allow-new="allowNew" :allow-duplicates="false"
+                    :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                    placeholder="Add an item" expanded />
+                </o-field>
+                <!-- <p><b>FCRAS:</b> {{ tags }}</p> -->
+              </section>
+              <section>
+                <o-field class="col-form-label" label="Research focus">
                   <o-taginput v-model="tags" :options="options" :allow-new="allowNew" :allow-duplicates="false"
                     :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
                     placeholder="Add an item" expanded />
@@ -263,5 +283,10 @@ const keepOpen = ref(true);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 8px;
+}
+
+.col-form-label {
+  font-weight: bold;
+  text-decoration: underline;
 }
 </style>

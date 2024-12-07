@@ -25,7 +25,7 @@ const handleSave = async (data) => {
 <template>
   <div class="container-fluid bg-light min-vh-100">
     <div class="row justify-content-center py-6">
-      <div class="col-sm-12 col-lg-11 col-xl-10">
+      <div class="col-sm-12 col-lg-12 col-xl-12">
         <div v-if="authStore.isAuthenticated">
           <!-- <h2 class="text-center mb-4">Academic Profile</h2> -->
           <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
