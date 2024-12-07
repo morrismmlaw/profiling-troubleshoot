@@ -1,6 +1,24 @@
 <script setup>
+import { onBeforeMount } from 'vue';
+
 const authStore = useAuthStore()
 const router = useRouter()
+
+onBeforeMount(() => {
+
+  import('/assets/bootstrap/css/bootstrap.min.css');
+  import ('/assets/css/animate.min.css');
+  import ('/assets/css/Login-Form-Basic-icons.css');
+  import ('/assets/fonts/font-awesome.min.css'); // Use Either One for ICON. */
+
+  /* @import url('@fortawesome/fontawesome-free/css/all.min.css'); */
+})
+
+//Background Image imports.
+import bgS1 from '@/assets/img/bg-showcase-1.jpg';
+import bgS2 from '@/assets/img/bg-showcase-2.jpg';
+import bgS3 from '@/assets/img/bg-showcase-3.jpg';
+import bgM from '@/assets/img/bg-masthead.jpg';
 
 onMounted(() => {
   authStore.initializeFromStorage()
@@ -24,12 +42,6 @@ const isLoggedIn = computed(() => authStore.isAuthenticated);
 const logout = () => {
   authStore.logout();
 };
-
-//Background Image imports.
-import bgS1 from '@/assets/img/bg-showcase-1.jpg';
-import bgS2 from '@/assets/img/bg-showcase-2.jpg';
-import bgS3 from '@/assets/img/bg-showcase-3.jpg';
-import bgM from '@/assets/img/bg-masthead.jpg';
 
 </script>
 
@@ -251,14 +263,13 @@ import bgM from '@/assets/img/bg-masthead.jpg';
 
 </template>
 
-<style scoped>
+<style>
+/* @import url('/assets/bootstrap/css/bootstrap.min.css'); */
+/* @import url('/assets/css/animate.min.css'); */
+/* @import url('/assets/css/Login-Form-Basic-icons.css'); */
 
-@import url('/assets/bootstrap/css/bootstrap.min.css');
-@import url('/assets/css/animate.min.css');
-@import url('/assets/css/Login-Form-Basic-icons.css');
-
-/* @import url('/assets/fonts/font-awesome.min.css'); // Use Either One. */
-@import url('@fortawesome/fontawesome-free/css/all.min.css');
+/* @import url('/assets/fonts/font-awesome.min.css'); // Use Either One for ICON. */
+/* @import url('@fortawesome/fontawesome-free/css/all.min.css'); */
 
 .shadow {
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);

@@ -12,10 +12,10 @@ export default defineNuxtConfig({
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
-    '/assets/bootstrap/css/bootstrap.min.css',
+    // '/assets/bootstrap/css/bootstrap.min.css',
     '@oruga-ui/theme-bootstrap/dist/bootstrap.css',
 
-    // 'font-awesome/css/font-awesome.css',
+    'font-awesome/css/font-awesome.css',
     // '@fortawesome/fontawesome-free/css/all.min.css', // Cause Change Page Bugged CSS
   ],
 
