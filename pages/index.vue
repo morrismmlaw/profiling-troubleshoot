@@ -252,10 +252,13 @@ import bgM from '@/assets/img/bg-masthead.jpg';
 </template>
 
 <style scoped>
+
 @import url('/assets/bootstrap/css/bootstrap.min.css');
 @import url('/assets/css/animate.min.css');
 @import url('/assets/css/Login-Form-Basic-icons.css');
-@import url('/assets/fonts/font-awesome.min.css');
+
+/* @import url('/assets/fonts/font-awesome.min.css'); // Use Either One. */
+@import url('@fortawesome/fontawesome-free/css/all.min.css');
 
 .shadow {
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
