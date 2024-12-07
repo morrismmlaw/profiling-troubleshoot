@@ -59,9 +59,8 @@ const fcraOptions = props.collections['research-centres'];
 const RSOptions = props.collections['research-outputs'];
 
 // const fcraOptions = props.collections.research-centres;
-
-console.log("FCRA OPTIONS", fcraOptions);
-console.log("RSOPTIONS", RSOptions);
+// console.log("FCRA OPTIONS", fcraOptions);
+// console.log("RSOPTIONS", RSOptions);
 
 // Map fcraOptions into the ORUGA example format
 const fcraOptionsOrugaNew = fcraOptions.map((option) => {
@@ -80,7 +79,29 @@ const fcraOptionsOrugaNew = fcraOptions.map((option) => {
   };
 });
 
+const RSOptionsOrugaNew = RSOptions.map((option) => {
+  return {
+    label: option.title,
+    value: {
+      id: option.id,
+      documentId: option.document_id,
+      recno: option.recno,
+      uoacode: option.uoacode,
+      title: option.title,
+      lastname: option.lastname,
+      othername: option.othername,
+      chiname: option.chiname,
+      dept: option.dept,
+      statement: option.statement,
+      createdAt: option.created_at,
+      updatedAt: option.updated_at,
+      publishedAt: option.published_at,
+    },
+  };
+});
+
 console.log("FCRA OPTIONS ORUGA2", fcraOptionsOrugaNew);
+console.log("RSOPTIONS ORUGA2", RSOptionsOrugaNew);
 
 //FCRA Search
 const fcraOptionsOruga = [
@@ -90,15 +111,6 @@ const fcraOptionsOruga = [
       id: 1,
       user: { first_name: "Jesse", last_name: "Simmons" },
       date: "2016/10/15 13:43:27",
-      gender: "Male",
-    },
-  },
-  {
-    label: "John Jacobs",
-    value: {
-      id: 2,
-      user: { first_name: "John", last_name: "Jacobs" },
-      date: "2016/12/15 06:00:53",
       gender: "Male",
     },
   },
@@ -262,15 +274,15 @@ const keepOpen = ref(true);
               </div> -->
               <section>
                 <o-field class="col-form-label" label="Faculty Collaborative Research Area">
-                  <o-taginput v-model="fcraTags" :options="fcraOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
-                    :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                    placeholder="Add an item" expanded />
+                  <o-taginput v-model="fcraTags" :options="fcraOptionsOrugaNew" :allow-new="allowNew"
+                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                    icon="tag" placeholder="Add an item" expanded />
                 </o-field>
                 <!-- <p><b>FCRAS:</b> {{ tags }}</p> -->
               </section>
               <section>
                 <o-field class="col-form-label" label="Research focus">
-                  <o-taginput v-model="RSTags" :options="fcraOptionsOruga" :allow-new="allowNew"
+                  <o-taginput v-model="RSTags" :options="RSOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
