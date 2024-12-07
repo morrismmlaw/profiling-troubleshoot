@@ -214,7 +214,7 @@ const keepOpen = ref(true);
                   <div class="columns is-multiline">
                     <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
 
-                      <o-field>
+                      <o-field class="sdg-field" >
                         <!-- <o-tooltip :label="`SDG: ${sdg.sdgid} \n\n Slogan: ${sdg.slogan}`" multiline> -->
                         <o-tooltip label="HTML Content" size="large" multiline>
                           <template #content>
@@ -301,4 +301,17 @@ const keepOpen = ref(true);
   width: 100px;
   font-weight: bold;
 }
+
+.sdg-field {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1em;
+  transition: box-shadow 0.2s ease;
+}
+
+.sdg-field:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 </style>
