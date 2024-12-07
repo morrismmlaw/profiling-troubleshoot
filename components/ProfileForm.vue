@@ -9,9 +9,10 @@ const props = defineProps({
     default: null
   },
 
+  //Include all the sdgs and fcras
   collections: {
     type: Object,
-    default: () => {}
+    default: () => { }
   }
 
 });
@@ -50,12 +51,12 @@ const handleSubmit = () => {
 
 
 // const sdgOptions = ['SDG1', 'SDG2', 'SDG3', 'SDG4', 'SDG5', 'SDG6', 'SDG7', 'SDG8', 'SDG9', 'SDG10', 'SDG11', 'SDG12', 'SDG13', 'SDG14', 'SDG15', 'SDG16', 'SDG17']
-const sdgOptions = props.collections.sdgs; 
-
-const fcraOptions = ['Option 1', 'Option 2', 'Option 3']; // Replace with actual FCRA options
+const sdgOptions = props.collections.sdgs;
+const fcraOptions = props.collections.research_centres;
+const RSOptions = props.collections.research_outputs;
 
 //FCRA Search
-const options = [
+const fcraOptionsOruga = [
   {
     label: "Jesse Simmons",
     value: {
@@ -83,27 +84,9 @@ const options = [
       gender: "Female",
     },
   },
-  {
-    label: "Clarence Flores",
-    value: {
-      id: 4,
-      user: { first_name: "Clarence", last_name: "Flores" },
-      date: "2016/04/10 10:28:46",
-      gender: "Male",
-    },
-  },
-  {
-    label: "Ruby Snyder",
-    value: {
-      id: 21,
-      user: { first_name: "Ruby", last_name: "Snyder" },
-      date: "2017/04/01 12:04:39",
-      gender: "Female",
-    },
-  },
 ];
 
-const tags = ref([]);
+const fcraTags = ref([]);
 const allowNew = ref(false);
 const allowDuplicates = ref(false);
 const openOnFocus = ref(false);
@@ -232,7 +215,16 @@ const keepOpen = ref(true);
                     <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
                       <o-field>
                         <o-checkbox v-model="formData.SDG" :native-value="sdg">
-                          {{ sdg }}
+                          SDG: {{ sdg.sdgid }}
+                          <nuxt-img
+                            :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
+                            :alt="sdg.title" class="img-fluid" />
+
+                          <br>
+                          Title: {{ sdg.title }}
+                          <br>
+                          Slogan: {{ sdg.slogan }}
+                          
                         </o-checkbox>
                       </o-field>
                     </div>
@@ -247,7 +239,7 @@ const keepOpen = ref(true);
               </div> -->
               <section>
                 <o-field class="col-form-label" label="Faculty Collaborative Research Area">
-                  <o-taginput v-model="tags" :options="options" :allow-new="allowNew" :allow-duplicates="false"
+                  <o-taginput v-model="fcraTags" :options="fcraOptions" :allow-new="allowNew" :allow-duplicates="false"
                     :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
                     placeholder="Add an item" expanded />
                 </o-field>
@@ -255,9 +247,9 @@ const keepOpen = ref(true);
               </section>
               <section>
                 <o-field class="col-form-label" label="Research focus">
-                  <o-taginput v-model="tags" :options="options" :allow-new="allowNew" :allow-duplicates="false"
-                    :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                    placeholder="Add an item" expanded />
+                  <o-taginput v-model="fcraTags" :options="fcraOptionsOruga" :allow-new="allowNew"
+                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                    icon="tag" placeholder="Add an item" expanded />
                 </o-field>
                 <!-- <p><b>FCRAS:</b> {{ tags }}</p> -->
               </section>
