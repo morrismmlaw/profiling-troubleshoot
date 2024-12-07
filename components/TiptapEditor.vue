@@ -24,13 +24,14 @@ const editor = ref(null)
 
 onMounted(() => {
 
-  console.log(props.field);
+  console.log("Tiptap field: ", props.field);
 
   editor.value = new Editor({
     extensions: [TiptapStarterKit],
     content: props.formData[props.field],
     onUpdate: ({ editor }) => {
       props.formData[props.field] = editor.getHTML();
+      // console.log('Tiptap Updated: ', props.formData[props.field]);
     },
   })
 })

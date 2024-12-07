@@ -26,17 +26,17 @@ const formData = reactive({
 
 const handleSubmit = () => {
   emit('save', {
-    research_interest: formData.research_interests,
+    research_interest: formData.research_interest, //HAHA TYPO
     biography: formData.biography,
     documentId: formData.documentId //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
   });
 };
 
-watch(() => props.profile, (newProfile) => {
-  if (newProfile) {
-    formData.research_interests = newProfile.attributes.research_interest;
-  }
-}, { immediate: true });
+// watch(() => props.profile, (newProfile) => {
+//   if (newProfile) {
+//     formData.research_interests = newProfile.attributes.research_interest;
+//   }
+// }, { immediate: true });
 
 
 const sdgOptions = ['SDG1', 'SDG2', 'SDG3', 'SDG4', 'SDG5', 'SDG6', 'SDG7', 'SDG8', 'SDG9', 'SDG10', 'SDG11', 'SDG12', 'SDG13', 'SDG14', 'SDG15', 'SDG16', 'SDG17']
