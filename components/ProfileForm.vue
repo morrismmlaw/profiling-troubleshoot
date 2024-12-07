@@ -213,20 +213,30 @@ const keepOpen = ref(true);
                 <div class="col">
                   <div class="columns is-multiline">
                     <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
-                      <o-field>
-                        <o-checkbox v-model="formData.SDG" :native-value="sdg">
-                          SDG: {{ sdg.sdgid }}
-                          <nuxt-img
-                            :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
-                            :alt="sdg.title" class="img-fluid" />
 
-                          <br>
-                          Title: {{ sdg.title }}
-                          <br>
-                          Slogan: {{ sdg.slogan }}
-                          
-                        </o-checkbox>
+                      <o-field>
+                        <!-- <o-tooltip :label="`SDG: ${sdg.sdgid} \n\n Slogan: ${sdg.slogan}`" multiline> -->
+                        <o-tooltip label="HTML Content" size="large" multiline>
+                          <template #content>
+                            <div class="sdg-info">
+                              <!-- <p><strong>SDG:</strong> {{ sdg.sdgid }}</p> -->
+                              <p><strong>Title</strong> <br> {{ sdg.title }}</p>
+                              <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
+                            </div>
+                          </template>
+                          <o-checkbox v-model="formData.SDG" :native-value="sdg">
+                            SDG {{ sdg.sdgid }}
+                            <nuxt-img
+                              :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
+                              :alt="sdg.title" class="img-fluid" />
+                            <!-- <br>
+                            Title: {{ sdg.title }}
+                            <br>
+                            Slogan: {{ sdg.slogan }} -->
+                          </o-checkbox>
+                        </o-tooltip>
                       </o-field>
+
                     </div>
                   </div>
                 </div>
@@ -280,5 +290,15 @@ const keepOpen = ref(true);
 .col-form-label {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.sdg-info p {
+  margin-bottom: 1em;
+}
+
+.sdg-info strong {
+  display: inline-block;
+  width: 100px;
+  font-weight: bold;
 }
 </style>
