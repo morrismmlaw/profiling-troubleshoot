@@ -12,7 +12,10 @@ const props = defineProps({
   //Include all the sdgs and fcras
   collections: {
     type: Object,
-    default: () => { }
+    default: () => ({
+      'research-centres': {},
+      'research-outputs': {}
+    })
   }
 
 });
@@ -52,8 +55,32 @@ const handleSubmit = () => {
 
 // const sdgOptions = ['SDG1', 'SDG2', 'SDG3', 'SDG4', 'SDG5', 'SDG6', 'SDG7', 'SDG8', 'SDG9', 'SDG10', 'SDG11', 'SDG12', 'SDG13', 'SDG14', 'SDG15', 'SDG16', 'SDG17']
 const sdgOptions = props.collections.sdgs;
-const fcraOptions = props.collections.research_centres;
-const RSOptions = props.collections.research_outputs;
+const fcraOptions = props.collections['research-centres'];
+const RSOptions = props.collections['research-outputs'];
+
+// const fcraOptions = props.collections.research-centres;
+
+console.log("FCRA OPTIONS", fcraOptions);
+console.log("RSOPTIONS", RSOptions);
+
+// Map fcraOptions into the ORUGA example format
+const fcraOptionsOrugaNew = fcraOptions.map((option) => {
+  return {
+    label: option.name,
+    value: {
+      id: option.id,
+      documentId: option.document_id,
+      name: option.name,
+      abbr: option.abbr,
+      createdAt: option.created_at,
+      updatedAt: option.updated_at,
+      publishedAt: option.published_at,
+      hidden: option.hidden,
+    },
+  };
+});
+
+console.log("FCRA OPTIONS ORUGA2", fcraOptionsOrugaNew);
 
 //FCRA Search
 const fcraOptionsOruga = [
@@ -87,6 +114,8 @@ const fcraOptionsOruga = [
 ];
 
 const fcraTags = ref([]);
+const RSTags = ref([]);
+
 const allowNew = ref(false);
 const allowDuplicates = ref(false);
 const openOnFocus = ref(false);
@@ -111,11 +140,9 @@ const keepOpen = ref(true);
             <h5 class="card-title">User Image</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
               content.</p>
-            <!-- <a href="#" class="btn btn-primary">TEST BUTTON</a> -->
           </div>
         </div>
       </div>
-
 
       <div class="col-sm-10 col-md-10 col-lg-9">
         <form @submit.prevent="handleSubmit" class="container-fluid">
@@ -125,20 +152,6 @@ const keepOpen = ref(true);
             <div class="card-body">
               <h5 class="card-title">Personal Information</h5>
               <p class="card-text">Your academic profile information.</p>
-
-              <!-- <div class="row mb-3">
-          <label for="academicInterests" class="col-sm-2 col-form-label">Academic Interests</label>
-          <div class="col-sm-10">
-            <textarea id="academicInterests" v-model="formData.researchInterests" rows="3"
-              class="form-control"></textarea>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="academicInterests" class="col-sm-2 col-form-label">Biography</label>
-          <div class="col-sm-10">
-            <textarea id="academicInterests" v-model="formData.biography" rows="3" class="form-control"></textarea>
-          </div>
-        </div> -->
 
               <div class="row">
                 <div class="col">
@@ -214,7 +227,7 @@ const keepOpen = ref(true);
                   <div class="columns is-multiline">
                     <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
 
-                      <o-field class="sdg-field" >
+                      <o-field class="sdg-field">
                         <!-- <o-tooltip :label="`SDG: ${sdg.sdgid} \n\n Slogan: ${sdg.slogan}`" multiline> -->
                         <o-tooltip label="HTML Content" size="large" multiline>
                           <template #content>
@@ -249,7 +262,7 @@ const keepOpen = ref(true);
               </div> -->
               <section>
                 <o-field class="col-form-label" label="Faculty Collaborative Research Area">
-                  <o-taginput v-model="fcraTags" :options="fcraOptions" :allow-new="allowNew" :allow-duplicates="false"
+                  <o-taginput v-model="fcraTags" :options="fcraOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                     :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
                     placeholder="Add an item" expanded />
                 </o-field>
@@ -257,7 +270,7 @@ const keepOpen = ref(true);
               </section>
               <section>
                 <o-field class="col-form-label" label="Research focus">
-                  <o-taginput v-model="fcraTags" :options="fcraOptionsOruga" :allow-new="allowNew"
+                  <o-taginput v-model="RSTags" :options="fcraOptionsOruga" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
@@ -313,5 +326,4 @@ const keepOpen = ref(true);
 .sdg-field:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 </style>
