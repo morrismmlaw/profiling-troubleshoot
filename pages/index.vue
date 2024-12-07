@@ -2,14 +2,20 @@
 
 import { onBeforeMount } from 'vue';
 
-//Background Image imports. - These CASUE SSR PROBLEM!!!
-// import bgS1 from '@/assets/img/bg-showcase-1.jpg';
-// import bgS2 from '@/assets/img/bg-showcase-2.jpg';
-// import bgS3 from '@/assets/img/bg-showcase-3.jpg';
-// import bgM from '@/assets/img/bg-masthead.jpg';
+//Background Image imports. - These CASUE SSR PROBLEM!!! - Either change it OR turn SSr = false.
+import bgS1 from '~/assets/img/bg-showcase-1.jpg';
+import bgS2 from '~/assets/img/bg-showcase-2.jpg';
+import bgS3 from '~/assets/img/bg-showcase-3.jpg';
+import bgM from '~/assets/img/bg-masthead.jpg';
 
 const authStore = useAuthStore()
 const router = useRouter()
+
+// let bgS1, bgS2, bgS3, bgM;
+// bgS1 = url('~@/assets/img/bg-showcase-1.jpg');
+// bgS2 = url('~@/assets/img/bg-showcase-2.jpg');
+// bgS3 = url('~@/assets/img/bg-showcase-3.jpg');
+// bgM = url('~@/assets/img/bg-masthead.jpg');
 
 onBeforeMount(() => {
 
@@ -49,10 +55,11 @@ const logout = () => {
 
 </script>
 
+
+
 <template>
 
   <div id="app">
-
     <!-- <h1> Hello World</h1> -->
     <!-- <a class="btn btn-info ms-auto me-2 shadow" role="button" href="/test">Test</a> -->
 
@@ -144,7 +151,8 @@ const logout = () => {
           </div>
           <div class="col-lg-6 my-auto order-lg-1 showcase-text">
             <h2>Fully Responsive Design</h2>
-            <p class="lead mb-0">When you use a theme created with Bootstrap, you know that the theme will look great on
+            <p class="lead mb-0">When you use a theme created with Bootstrap, you know that the theme will look great
+              on
               any device, whether it&#39;s a phone, tablet, or desktop the page will behave responsively!</p>
           </div>
         </div>
@@ -165,7 +173,8 @@ const logout = () => {
           <div class="col-lg-6 my-auto order-lg-1 showcase-text">
             <h2>Easy to Use &amp; Customize</h2>
             <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some
-              deeper customization options. Out of the box, just add your content and images, and your new landing page
+              deeper customization options. Out of the box, just add your content and images, and your new landing
+              page
               will be ready to go!</p>
           </div>
         </div>
@@ -271,6 +280,7 @@ const logout = () => {
 
   </div>
 </template>
+
 
 <style>
 /* @import url('/assets/bootstrap/css/bootstrap.min.css'); */
