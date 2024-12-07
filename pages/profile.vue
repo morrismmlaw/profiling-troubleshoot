@@ -7,9 +7,9 @@ onMounted(() => {
 
   authStore.initializeFromStorage()
 
-  if (!authStore.isAuthenticated) {
-    router.push('/')
-  }
+  // if (!authStore.isAuthenticated) {
+  //   router.push('/')
+  // }
 })
 
 const handleSave = async (data) => {
@@ -31,7 +31,7 @@ const handleSave = async (data) => {
           <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
         </div>
         <div v-else>
-          <p class="text-center text-danger">Please login to view your profile.</p>
+          <p class="text-center text-danger pt-4">Please login to view your profile.</p>
           <div class="text-center mt-4">
             <NuxtLink to="/" class="btn btn-primary">
               Go to Home Page

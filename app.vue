@@ -1,9 +1,7 @@
 <script setup>
-
 import Navbar from './components/ui/Navbar.vue';
 
 </script>
-
 
 <template>
   <div>

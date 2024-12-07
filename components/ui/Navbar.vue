@@ -1,19 +1,16 @@
 <template>
-  <div>
-    <nav class="navbar navbar-expand bg-light">
-      <div class="container">
-        <a class="navbar-brand" href="#">HKBU Science Faculty Academic Profile</a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
-        <div id="navcol-1" class="collapse navbar-collapse">
-          <!-- <a class="btn btn-info ms-auto me-2 shadow" role="button" href="/test">Test</a> -->
-          <a class="btn btn-info ms-auto me-2 shadow" role="button" href="/profile">Profile</a>
-          <a class="btn btn-info me-2 shadow" role="button" href="/profileVueForm">Profile New</a>
-          <a v-if="isLoggedIn" class="btn btn-danger shadow" role="button" @click="logout">Log Out</a>
-          <a v-else class="btn btn-outline-primary shadow" role="button" href="/login">Sign In</a>
-        </div>
+  <nav class="navbar navbar-expand bg-light">
+    <div class="container">
+      <NuxtLink class="navbar-brand" to="/">HKBU Science Faculty Academic Profile</NuxtLink>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
+      <div id="navcol-1" class="collapse navbar-collapse">
+        <NuxtLink class="btn btn-info ms-auto me-2 shadow" role="button" to="/profile">Profile</NuxtLink>
+        <NuxtLink class="btn btn-info me-2 shadow" role="button" to="/profileVueForm">Profile New</NuxtLink>
+        <button v-if="isLoggedIn" class="btn btn-danger shadow" role="button" @click="logout">Log Out</button>
+        <NuxtLink v-else class="btn btn-outline-primary shadow" role="button" to="/login">Sign In</NuxtLink>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </template>
 
 <script setup>
