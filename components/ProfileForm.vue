@@ -130,7 +130,7 @@ const RSTags = ref([]);
 
 const allowNew = ref(false);
 const allowDuplicates = ref(false);
-const openOnFocus = ref(false);
+const openOnFocus = ref(true);
 const keepFirst = ref(false);
 const keepOpen = ref(true);
 
@@ -333,6 +333,8 @@ const keepOpen = ref(true);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1em;
   transition: box-shadow 0.2s ease;
+  justify-content: space-between;
+
 }
 
 .sdg-field:hover {
