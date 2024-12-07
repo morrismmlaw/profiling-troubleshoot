@@ -4,7 +4,6 @@ import { Editor, EditorContent, BubbleMenu, FloatingMenu } from '@tiptap/vue-3'
 
 // import '/assets/css/tiptap.css' //Gotta need this for Tiptap menus.
 
-
 const props = defineProps({
   formData: {
     type: Object,

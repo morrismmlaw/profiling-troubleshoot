@@ -34,7 +34,7 @@ const handleSave = async (data) => {
           <p class="text-center text-danger">Please login to view your profile.</p>
           <div class="text-center mt-4">
             <NuxtLink to="/" class="btn btn-primary">
-              Go to Login
+              Go to Home Page
             </NuxtLink>
           </div>
         </div>
