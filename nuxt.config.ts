@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     //Shall put Bootstrap Studio CSS order at Last
     '/assets/bootstrap/css/bootstrap.min.css',
     '/assets/fonts/font-awesome.min.css',
-    '/assets/css/global.css', //Gotta need this for Tiptap menus.
 
   ],
 

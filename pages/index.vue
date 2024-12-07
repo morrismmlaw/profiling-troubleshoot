@@ -47,7 +47,7 @@ const handleLogout = () => {
   router.push('/')
 }
 
-const isLoggedIn = authStore.isAuthenticated;
+const isLoggedIn = computed(() => authStore.isAuthenticated);
 
 const logout = () => {
   authStore.logout();
@@ -79,7 +79,7 @@ const logout = () => {
         <a class="navbar-brand" href="#">HKBU Science Faculty Academic Profile</a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
         <div id="navcol-1" class="collapse navbar-collapse">
-          <a class="btn btn-info ms-auto me-2 shadow" role="button" href="/test">Test</a>
+          <!-- <a class="btn btn-info ms-auto me-2 shadow" role="button" href="/test">Test</a> -->
           <a class="btn btn-info ms-auto me-2 shadow" role="button" href="/profile">Profile</a>
           <a class="btn btn-info me-2 shadow" role="button" href="/profileVueForm">Profile New</a>
           <a v-if="isLoggedIn" class="btn btn-danger shadow" role="button" @click="logout">Log Out</a>

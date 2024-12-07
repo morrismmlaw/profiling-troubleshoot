@@ -1,3 +1,47 @@
+<script setup>
+import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { Editor, EditorContent, BubbleMenu, FloatingMenu } from '@tiptap/vue-3'
+
+// import '/assets/css/tiptap.css' //Gotta need this for Tiptap menus.
+
+
+const props = defineProps({
+  formData: {
+    type: Object,
+    required: true,
+  },
+  field: {
+    type: String,
+    required: true,
+  },
+})
+
+const editor = ref(null)
+
+onMounted(() => {
+  // console.log("Tiptap field: ", props.field);
+  editor.value = new Editor({
+    editorProps: {
+      attributes: {
+        class: 'border border-gray-400 p-4 rounded ',
+      },
+    },
+    extensions: [TiptapStarterKit],
+    content: props.formData[props.field],
+    onUpdate: ({ editor }) => {
+      props.formData[props.field] = editor.getHTML();
+      // console.log('Tiptap Updated: ', props.formData[props.field]);
+    },
+  })
+})
+
+onBeforeUnmount(() => {
+  editor.value.destroy()
+})
+</script>
+
+
+
 <template>
 
   <div v-if="editor">
@@ -38,47 +82,9 @@
 
 </template>
 
-<script setup>
-import { onMounted, onBeforeUnmount, ref } from 'vue'
-import { Editor, EditorContent, BubbleMenu, FloatingMenu } from '@tiptap/vue-3'
-
-
-const props = defineProps({
-  formData: {
-    type: Object,
-    required: true,
-  },
-  field: {
-    type: String,
-    required: true,
-  },
-})
-
-const editor = ref(null)
-
-onMounted(() => {
-  // console.log("Tiptap field: ", props.field);
-  editor.value = new Editor({
-    editorProps: {
-      attributes: {
-        class: 'border border-gray-400 p-4 rounded text-editor__edito',
-      },
-    },
-    extensions: [TiptapStarterKit],
-    content: props.formData[props.field],
-    onUpdate: ({ editor }) => {
-      props.formData[props.field] = editor.getHTML();
-      // console.log('Tiptap Updated: ', props.formData[props.field]);
-    },
-  })
-})
-
-onBeforeUnmount(() => {
-  editor.value.destroy()
-})
-</script>
-
 <style scoped>
+/* //Gotta need this for Tiptap menus. - SCOPED */
+@import url('/assets/css/tiptap.css');
 
 .editor-container {
   border: 1px solid #ccc;
@@ -97,7 +103,6 @@ onBeforeUnmount(() => {
   padding: 16px;
   /* Add more styles as needed */
 }
-
 </style>
 
 <style scoped lang="scss">
