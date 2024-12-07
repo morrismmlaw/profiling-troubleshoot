@@ -1,42 +1,39 @@
 <template>
 
-  <div class="editor editor-content">
+  <div v-if="editor">
 
-    <div v-if="editor">
+    <bubble-menu class="bubble-menu" :tippy-options="{ duration: 100 }" :editor="editor">
+      <button @click.prevent="editor.chain().focus().toggleBold().run()"
+        :class="{ 'is-active': editor.isActive('bold') }">
+        Bold
+      </button>
+      <button @click.prevent="editor.chain().focus().toggleItalic().run()"
+        :class="{ 'is-active': editor.isActive('italic') }">
+        Italic
+      </button>
+      <button @click.prevent="editor.chain().focus().toggleStrike().run()"
+        :class="{ 'is-active': editor.isActive('strike') }">
+        Strike
+      </button>
+    </bubble-menu>
 
-      <bubble-menu class="bubble-menu" :tippy-options="{ duration: 100 }" :editor="editor">
-        <button @click.prevent="editor.chain().focus().toggleBold().run()"
-          :class="{ 'is-active': editor.isActive('bold') }">
-          Bold
-        </button>
-        <button @click.prevent="editor.chain().focus().toggleItalic().run()"
-          :class="{ 'is-active': editor.isActive('italic') }">
-          Italic
-        </button>
-        <button @click.prevent="editor.chain().focus().toggleStrike().run()"
-          :class="{ 'is-active': editor.isActive('strike') }">
-          Strike
-        </button>
-      </bubble-menu>
+    <floating-menu class="floating-menu" :tippy-options="{ duration: 100 }" :editor="editor">
+      <button @click.prevent="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+        :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }">
+        H1
+      </button>
+      <button @click.prevent="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+        :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }">
+        H2
+      </button>
+      <button @click.prevent="editor.chain().focus().toggleBulletList().run()"
+        :class="{ 'is-active': editor.isActive('bulletList') }">
+        Bullet list
+      </button>
+    </floating-menu>
 
-      <floating-menu class="floating-menu" :tippy-options="{ duration: 100 }" :editor="editor">
-        <button @click.prevent="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-          :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }">
-          H1
-        </button>
-        <button @click.prevent="editor.chain().focus().toggleHeading({ level: 2 }).run()"
-          :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }">
-          H2
-        </button>
-        <button @click.prevent="editor.chain().focus().toggleBulletList().run()"
-          :class="{ 'is-active': editor.isActive('bulletList') }">
-          Bullet list
-        </button>
-      </floating-menu>
+    <editor-content :editor="editor" />
 
-      <editor-content :editor="editor" />
-
-    </div>
   </div>
 
 </template>
@@ -44,8 +41,6 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { Editor, EditorContent, BubbleMenu, FloatingMenu } from '@tiptap/vue-3'
-
-import StarterKit from '@tiptap/starter-kit'
 
 
 const props = defineProps({
@@ -102,11 +97,10 @@ onBeforeUnmount(() => {
   padding: 16px;
   /* Add more styles as needed */
 }
+
 </style>
 
 <style scoped lang="scss">
-
-
 /* Basic editor styles */
 .tiptap {
   :first-child {
