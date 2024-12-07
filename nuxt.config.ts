@@ -1,14 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
-  modules: [
-    '@nuxtjs/strapi',
-    '@pinia/nuxt',
-    'nuxt-tiptap-editor',
-    '@vesp/nuxt-fontawesome',
-    '@vueform/nuxt',
-    // '@vueform/builder-nuxt' // IT NEED KEYS
-  ],
+  modules: ['@nuxtjs/strapi', '@pinia/nuxt', 'nuxt-tiptap-editor', '@vesp/nuxt-fontawesome', // '@vueform/builder-nuxt' // IT NEED KEYS
+  '@vueform/nuxt', '@nuxt/image'],
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',

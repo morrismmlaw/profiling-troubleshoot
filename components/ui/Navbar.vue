@@ -1,7 +1,11 @@
 <template>
   <nav class="navbar navbar-expand bg-light">
     <div class="container">
-      <NuxtLink class="navbar-brand" to="/">HKBU Science Faculty Academic Profile</NuxtLink>
+      <NuxtLink class="navbar-brand" to="/">
+        <!-- This refer to public. -->
+        <NuxtImg src="/img/HKBU.jpg" alt="Logo" class="logo-img" /> 
+        HKBU Science Faculty Academic Profile
+      </NuxtLink>
       <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
       <div id="navcol-1" class="collapse navbar-collapse">
         <NuxtLink class="btn btn-info ms-auto me-2 shadow" role="button" to="/profile">Profile</NuxtLink>
@@ -54,7 +58,13 @@ const logout = () => {
   border: 5px;
   border-radius: 5px;
 
-  background-color: #f0f8ff;
+  background-color: #ffffff;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+/* Add this CSS to style the logo image */
+.logo-img {
+  height: 50px; /* Adjust the height as needed */
+}
+
 </style>
