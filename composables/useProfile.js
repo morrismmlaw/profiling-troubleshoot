@@ -12,19 +12,23 @@ export const useProfileStore = defineStore('profile', {
 
   actions: {
     async updateProfile(profileData) {
+      console.log("useProfile", profileData);
+      const { documentId, ...profileDataWithoutDocumentId } = profileData;
+
       this.isLoading = true
       this.error = null
       try {
         const authStore = useAuthStore()
         if (!authStore.user) return false
-
-        console.log("useProfile", profileData);
-        const response = await api.updateProfile(profileData.documentId, profileData)
+        const response = await api.updateProfile(documentId, profileDataWithoutDocumentId)
 
         if (response.data) {
+          console.log('update profile response:', response.data)
+          console.log(response.data)
+
           this.profile = response.data
-          authStore.user = response.data
-          storage.setUser(response.data)
+          authStore.user.attributes = response.data
+          storage.setUser(authStore.user)
           return true
         }
         return false
