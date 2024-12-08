@@ -150,29 +150,40 @@ if (formData.sdgs) {
 }
 
 const getSdgObject = (id) => {
-  let obj = props.collections.sdgs.find((sdg) => sdg.sdgid === id)
-  console.log('return id', id, obj);
-  return obj;
+  let sdgObj = props.collections.sdgs.find((sdg) => sdg.sdgid === id)
+  // console.log('return id', id, obj);
+
+  delete sdgObj.documentId;
+  delete sdgObj.iconweb.documentId;
+
+  console.log("SDG OBJ", sdgObj);
+
+  return sdgObj;
+}
+
+const syncCheckboxData = () => {
+  formData.sdgs = checkboxGroup.value.map((sdgId) => {
+    return getSdgObject(sdgId)
+  })
 }
 
 // Load checkbox group to FormData when checkbox group is modified
 watch(checkboxGroup, (newVal, oldVal) => {
-
   try {
-
-    console.log('checkbox Changed')
-
     formData.sdgs = [];
+    // console.log('checkbox Changed')
     formData.sdgs = newVal.map((sdgId) => {
       return getSdgObject(sdgId)
     })
-    // console.log("NEW FORM DATA", formData.value.sdgs);
 
   } catch (error) {
     console.error(error)
     // handle the error appropriately
   }
+})
 
+onMounted(() => {
+  syncCheckboxData();
 })
 
 // ORUGA SECTION
@@ -308,14 +319,14 @@ watch(checkboxGroup, (newVal, oldVal) => {
                       </o-field>
                     </div>
                   </div>
-                  <p><b>Selection:</b></p>
+                  <!-- <p><b>Selection:</b></p>
                   <p v-for="(item, index) in checkboxGroup" :key="index">
                     SDG - {{ item }}
                   </p>
                   <h3>Form Data </h3>
                   <p v-for="(item, index) in formData.sdgs" :key="index">
                     SDG - {{ item }}
-                  </p>
+                  </p> -->
                 </div>
               </div>
 

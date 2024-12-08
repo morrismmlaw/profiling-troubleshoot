@@ -69,7 +69,10 @@ export const api = {
     const { update } = useStrapi()
     console.log("Updating", documentId, data);
 
-    return await update('profiles', documentId, data); // Need to unwrap the data to pass to strapi for update -> else key error.
+    return await update('profiles', documentId, data, {
+
+      populate: ['sdgs']
+    }); // Need to unwrap the data to pass to strapi for update -> else key error.
     // return await update('profiles', id, data); // Never use DAT Fake id in the table -> else not found error 404.
 
     // return await update('profiles', documentId, { //No need to wrap, as it is already an Object.
