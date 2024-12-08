@@ -135,6 +135,7 @@ const fcraOptionsOrugaSAMPLE = [
   },
 ];
 
+const Tags = ref([]);
 const fcraTags = ref([]);
 const RSTags = ref([]);
 
@@ -172,7 +173,7 @@ const loadFormDataToORUGA = () => {
 
   if (formData) {
     console.log('load research_centres', formData.research_centres);
-    console.log('load RSOptionsOrugaNew', RSOptionsOrugaNew);
+    console.log('load fcraOptionsOrugaNew', fcraOptionsOrugaNew);
 
     fcraTags.value = formData.research_centres.map((rs) => {
       const matchingOption = fcraOptionsOrugaNew.find((option) => {
@@ -396,12 +397,12 @@ onMounted(() => {
                 </o-field>
               </div> -->
               <section>
-                <o-field class="col-form-label" label="Faculty Collaborative Research Area">
+                <o-field class="col-form-label" label="Strategic Research Centre">
                   <o-taginput v-model="fcraTags" :options="fcraOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
-                <p><b>FCRAS:</b> {{ fcraTags }}</p>
+                <!-- <p><b>FCRAS:</b> {{ fcraTags }}</p> -->
               </section>
               <section>
                 <o-field class="col-form-label" label="Research focus">
@@ -409,8 +410,25 @@ onMounted(() => {
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
-                <p><b>RESEARCH FOCUS:</b> {{ RSTags }}</p>
+                <!-- <p><b>RESEARCH FOCUS:</b> {{ RSTags }}</p> -->
               </section>
+              <section>
+                <o-field class="col-form-label" label="Faculty Collaborative Research Area">
+                  <o-taginput v-model="Tags" :options="fcraOptionsOrugaNew" :allow-new="allowNew"
+                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                    icon="tag" placeholder="Add an item" expanded />
+                </o-field>
+                <!-- <p><b>FCRAS:</b> {{ Tags }}</p> -->
+              </section>
+              <section>
+                <o-field class="col-form-label" label="Availability for Supervision">
+                  <o-taginput v-model="Tags" :options="fcraOptionsOrugaNew" :allow-new="allowNew"
+                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                    icon="tag" placeholder="Add an item" expanded />
+                </o-field>
+                <!-- <p><b>FCRAS:</b> {{ Tags }}</p> -->
+              </section>
+
 
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
