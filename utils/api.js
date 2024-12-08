@@ -13,31 +13,48 @@ export const api = {
   async findProfileBySSoid(ssoid) {
     const { findOne } = useStrapi()
 
-    return await findOne('profiles', {
+    return await findOne('profiles', { //Need to use Populate to fetch relationship && Media Type Data.
       where: { 'ssoid': ssoid },
       populate: ['sdgs']
     })
+
+    //   return await find('profiles', {
+    //     filters: {
+    //       ssoid: {
+    //         $eq: ssoid
+    //       }
+    //     }
+    //   })
+    // },
+
   },
 
-
-  //   return await find('profiles', {
-  //     filters: {
-  //       ssoid: {
-  //         $eq: ssoid
-  //       }
-  //     }
-  //   })
-  // },
-
-  /**
-   * Get Collection
-   */
+/**
+ * Get a collection based on the name provided.
+ *
+ * @param {string} name - The name of the collection to retrieve.
+ * @returns {Promise<Object>} A Promise that resolves to the collection data.
+ *
+ * @example
+ * // Get the 'sdgs' collection with the 'iconweb' URL populated
+ * findCollection('sdgs')
+ *   .then(data => {
+ *     console.log(data[0].iconweb.url);
+ *     // Output: /uploads/E_WEB_Goal_04_1779e135aa.png
+ *     // Need to Later Fix to to be: http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png
+ *   })
+ *   .catch(error => {
+ *     console.error('Error:', error);
+ *   });
+ */
   async findCollection(name) {
     const { find } = useStrapi()
-    const media = useStrapiMedia()
 
     if (name === 'sdgs') {
-      console.log('MEDIA', media);
+      console.log('POPULATE sdgs - Media Link');
+      return await find(name, {
+        populate: ['iconweb']
+      });
     }
 
     return await find(name);
