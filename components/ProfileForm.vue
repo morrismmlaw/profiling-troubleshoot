@@ -29,14 +29,19 @@ const emit = defineEmits(['save']);
 const profileStore = useProfileStore();
 
 const formData = reactive({
-  research_interest: props.profile?.attributes.research_interest || '',
-  biography: props.profile?.attributes.biography || '',
-
   documentId: props.profile?.attributes.documentId || '',
 
-  SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
+  research_interest: props.profile?.attributes.research_interest || '',
+  biography: props.profile?.attributes.biography || '',
+  // SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
+  sdgs: props.profile?.attributes.sdgs ? props.profile.attributes.sdgs : [],
   fcra: props.profile?.attributes.fcra || [],
 });
+
+// http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png.. Fix ?
+
+// console.log('SDG FORMDATA', formData.SDG);
+console.log('sdgs FORMDATA', formData.sdgs);
 
 const handleSubmit = () => {
   emit('save', {
@@ -53,7 +58,7 @@ const handleSubmit = () => {
 // }, { immediate: true });
 
 
-// const sdgOptions = ['SDG1', 'SDG2', 'SDG3', 'SDG4', 'SDG5', 'SDG6', 'SDG7', 'SDG8', 'SDG9', 'SDG10', 'SDG11', 'SDG12', 'SDG13', 'SDG14', 'SDG15', 'SDG16', 'SDG17']
+// ORUGA SECTION
 const sdgOptions = props.collections.sdgs;
 const fcraOptions = props.collections['research-centres'];
 const RSOptions = props.collections['research-outputs'];
@@ -133,6 +138,11 @@ const allowDuplicates = ref(false);
 const openOnFocus = ref(true);
 const keepFirst = ref(false);
 const keepOpen = ref(true);
+
+const checkboxGroup = ref([]);
+
+// ORUGA SECTION
+
 
 </script>
 
@@ -240,7 +250,6 @@ const keepOpen = ref(true);
                 <div class="col">
                   <div class="columns is-multiline">
                     <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
-
                       <o-field class="sdg-field">
                         <!-- <o-tooltip :label="`SDG: ${sdg.sdgid} \n\n Slogan: ${sdg.slogan}`" multiline> -->
                         <o-tooltip label="HTML Content" size="large" multiline>
@@ -251,7 +260,7 @@ const keepOpen = ref(true);
                               <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
                             </div>
                           </template>
-                          <o-checkbox v-model="formData.SDG" :native-value="sdg">
+                          <o-checkbox v-model="checkboxGroup" :native-value="sdg">
                             SDG {{ sdg.sdgid }}
                             <nuxt-img
                               :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
@@ -263,9 +272,10 @@ const keepOpen = ref(true);
                           </o-checkbox>
                         </o-tooltip>
                       </o-field>
-
                     </div>
                   </div>
+                  <p><b>Selection:</b></p>
+                  <p v-for="(item, index) in checkboxGroup" :key="index">{{ item.sdgid + ' ' + item.title }}</p>
                 </div>
               </div>
 
