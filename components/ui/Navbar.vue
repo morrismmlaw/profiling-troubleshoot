@@ -51,8 +51,6 @@ const logout = () => {
 
 </script>
 
-<style></style>
-
 <style scoped>
 .navbar {
   border: 5px;
