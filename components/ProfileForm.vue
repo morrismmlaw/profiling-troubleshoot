@@ -63,10 +63,6 @@ const sdgOptions = props.collections.sdgs;
 const fcraOptions = props.collections['research-centres'];
 const RSOptions = props.collections['research-outputs'];
 
-// const fcraOptions = props.collections.research-centres;
-// console.log("FCRA OPTIONS", fcraOptions);
-// console.log("RSOPTIONS", RSOptions);
-
 // Map fcraOptions into the ORUGA example format
 const fcraOptionsOrugaNew = fcraOptions.map((option) => {
   return {
@@ -141,8 +137,15 @@ const keepOpen = ref(true);
 
 const checkboxGroup = ref([]);
 
-// ORUGA SECTION
+// Load default SDG data into checkbox group.
+if (formData.sdgs) {
+  // Map the SDG objects to their IDs
+  console.log("Loading checkbox");
+  // checkboxGroup.value = formData.sdgs.map((sdg) => sdg);
+  checkboxGroup.value = formData.sdgs.map((sdg) => sdg.sdgid);
+}
 
+// ORUGA SECTION
 
 </script>
 
@@ -260,7 +263,8 @@ const checkboxGroup = ref([]);
                               <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
                             </div>
                           </template>
-                          <o-checkbox v-model="checkboxGroup" :native-value="sdg">
+                          <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
+                          <!-- <o-checkbox v-model="checkboxGroup" :native-value="sdg" :label="sdg.sdgid"> -->
                             SDG {{ sdg.sdgid }}
                             <nuxt-img
                               :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
@@ -275,7 +279,9 @@ const checkboxGroup = ref([]);
                     </div>
                   </div>
                   <p><b>Selection:</b></p>
-                  <p v-for="(item, index) in checkboxGroup" :key="index">{{ item.sdgid + ' ' + item.title }}</p>
+                  <p v-for="(item, index) in checkboxGroup" :key="index">
+                    {{ item }}
+                  </p>
                 </div>
               </div>
 
