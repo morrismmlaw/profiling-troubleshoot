@@ -16,7 +16,7 @@ const handleSave = async (data) => {
   const success = await profileStore.updateProfile(data)
   if (success) {
     alert('Profile updated successfully')
-    location.reload();
+    // location.reload();
   } else {
     alert('Failed to update profile')
   }

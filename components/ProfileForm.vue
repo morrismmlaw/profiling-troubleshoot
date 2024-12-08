@@ -53,10 +53,10 @@ const handleSubmit = () => { //Going to send back to profile.vue parent.
 
     sdgs: formData.sdgs,
 
-    FCRA: formData.FCRA,
-    research_focus: formData.research_focus,
+    documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
 
-    documentId: formData.documentId //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
+    // FCRA: formData.FCRA, //DEBUGGING
+    // research_focus: formData.research_focus,
   });
 };
 
@@ -186,7 +186,7 @@ const getSdgObject = (id) => {
   return sdgObj;
 }
 
-const syncCheckboxData = () => {
+const syncCheckboxToFormData = () => {
   formData.sdgs = checkboxGroup.value.map((sdgId) => {
     return getSdgObject(sdgId)
   })
@@ -224,8 +224,9 @@ watch([fcraTags, RSTags], (newVal, oldVal) => {
 })
 
 onMounted(() => {
-  syncCheckboxData();
   loadFormDataToORUGA();
+
+  syncCheckboxToFormData();
 })
 
 // ORUGA SECTION
