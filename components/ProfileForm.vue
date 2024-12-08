@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, watch, defineEmits } from 'vue';
+import { reactive, watch, defineEmits, registerRuntimeCompiler } from 'vue';
 import { useProfileStore } from '../composables/useProfile'; // replace with your actual path
 import TiptapEditor from './TiptapEditor.vue' // path to your Tiptap editor component
 
@@ -47,6 +47,9 @@ const handleSubmit = () => {
   emit('save', {
     research_interest: formData.research_interest, //HAHA TYPO
     biography: formData.biography,
+
+    sdgs: formData.sdgs,
+
     documentId: formData.documentId //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
   });
 };
@@ -143,7 +146,34 @@ if (formData.sdgs) {
   console.log("Loading checkbox");
   // checkboxGroup.value = formData.sdgs.map((sdg) => sdg);
   checkboxGroup.value = formData.sdgs.map((sdg) => sdg.sdgid);
+
 }
+
+const getSdgObject = (id) => {
+  let obj = props.collections.sdgs.find((sdg) => sdg.sdgid === id)
+  console.log('return id', id, obj);
+  return obj;
+}
+
+// Load checkbox group to FormData when checkbox group is modified
+watch(checkboxGroup, (newVal, oldVal) => {
+
+  try {
+
+    console.log('checkbox Changed')
+
+    formData.sdgs = [];
+    formData.sdgs = newVal.map((sdgId) => {
+      return getSdgObject(sdgId)
+    })
+    // console.log("NEW FORM DATA", formData.value.sdgs);
+
+  } catch (error) {
+    console.error(error)
+    // handle the error appropriately
+  }
+
+})
 
 // ORUGA SECTION
 
@@ -264,7 +294,7 @@ if (formData.sdgs) {
                             </div>
                           </template>
                           <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
-                          <!-- <o-checkbox v-model="checkboxGroup" :native-value="sdg" :label="sdg.sdgid"> -->
+                            <!-- <o-checkbox v-model="checkboxGroup" :native-value="sdg" :label="sdg.sdgid"> -->
                             SDG {{ sdg.sdgid }}
                             <nuxt-img
                               :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
@@ -280,7 +310,11 @@ if (formData.sdgs) {
                   </div>
                   <p><b>Selection:</b></p>
                   <p v-for="(item, index) in checkboxGroup" :key="index">
-                    {{ item }}
+                    SDG - {{ item }}
+                  </p>
+                  <h3>Form Data </h3>
+                  <p v-for="(item, index) in formData.sdgs" :key="index">
+                    SDG - {{ item }}
                   </p>
                 </div>
               </div>
