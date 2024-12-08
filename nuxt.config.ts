@@ -32,7 +32,7 @@ export default defineNuxtConfig({
   },
 
   strapi: {
-    url: process.env.STRAPI_URL || 'http://158.182.151.62:1337',
+    url: process.env.STRAPI_URL,
     prefix: '/api',
     admin: '/admin',
     version: 'v5',

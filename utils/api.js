@@ -1,5 +1,4 @@
 
-
 /**
  * @typedef {import('~/types/profile').Profile} Profile
  */
