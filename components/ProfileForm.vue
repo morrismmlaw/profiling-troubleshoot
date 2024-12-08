@@ -35,7 +35,10 @@ const formData = reactive({
   biography: props.profile?.attributes.biography || '',
   // SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
   sdgs: props.profile?.attributes.sdgs ? props.profile.attributes.sdgs : [],
-  fcra: props.profile?.attributes.fcra || [],
+
+  FCRA: props.profile?.attributes.FCRA || "", //String type
+  research_focus: props.profile?.attributes.research_focus || [],
+  research_centres: props.profile?.attributes.research_centres || [],
 });
 
 // http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png.. Fix ?
@@ -43,12 +46,15 @@ const formData = reactive({
 // console.log('SDG FORMDATA', formData.SDG);
 console.log('sdgs FORMDATA', formData.sdgs);
 
-const handleSubmit = () => {
+const handleSubmit = () => { //Going to send back to profile.vue parent. 
   emit('save', {
     research_interest: formData.research_interest, //HAHA TYPO
     biography: formData.biography,
 
     sdgs: formData.sdgs,
+
+    FCRA: formData.FCRA,
+    research_focus: formData.research_focus,
 
     documentId: formData.documentId //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
   });
@@ -140,23 +146,42 @@ const keepOpen = ref(true);
 
 const checkboxGroup = ref([]);
 
-// Load default SDG data into checkbox group.
-if (formData.sdgs) {
-  // Map the SDG objects to their IDs
-  console.log("Loading checkbox");
-  // checkboxGroup.value = formData.sdgs.map((sdg) => sdg);
-  checkboxGroup.value = formData.sdgs.map((sdg) => sdg.sdgid);
+const loadFormDataToORUGA = () => {
+  // Load default SDG data into checkbox group.
+  if (formData.sdgs) {
+    // Map the SDG objects to their IDs
+    // console.log("Loading checkbox");
+    // checkboxGroup.value = formData.sdgs.map((sdg) => sdg);
+    checkboxGroup.value = formData.sdgs.map((sdg) => sdg.sdgid);
+  }
 
+  if (formData) {
+    console.log('RC', formData.research_centres);
+    console.log('RC FD', RSOptionsOrugaNew);
+    RSTags.value = formData.research_centres.map((rs) => {
+      const matchingOption = RSOptionsOrugaNew.find((option) => {
+        console.log("Checking", option.label, rs.name);
+        option.label === rs.name
+      });
+
+      console.log("Match:", matchingOption);
+      return matchingOption ? matchingOption.value : [];
+    });
+  }
 }
 
+
+/**
+ * This function takes a sdgid as a parameter and returns the corresponding SDG object from the collections prop, after removing the 'documentId' and 'iconweb.documentId' properties.
+ * @param {string} id - The sdgid of the SDG object to retrieve.
+ * @returns {Object} The SDG object with the 'documentId' and 'iconweb.documentId' properties removed, or undefined if no matching object is found.
+ */
 const getSdgObject = (id) => {
   let sdgObj = props.collections.sdgs.find((sdg) => sdg.sdgid === id)
   // console.log('return id', id, obj);
-
   delete sdgObj.documentId;
   delete sdgObj.iconweb.documentId;
-
-  console.log("SDG OBJ", sdgObj);
+  // console.log("SDG OBJ", sdgObj);
 
   return sdgObj;
 }
@@ -165,6 +190,11 @@ const syncCheckboxData = () => {
   formData.sdgs = checkboxGroup.value.map((sdgId) => {
     return getSdgObject(sdgId)
   })
+}
+
+const syncFCRA = () => {
+  formData.FCRA = fcraTags.value;
+  formData.research_focus = RSTags.value;
 }
 
 // Load checkbox group to FormData when checkbox group is modified
@@ -182,8 +212,20 @@ watch(checkboxGroup, (newVal, oldVal) => {
   }
 })
 
+// Load checkbox group to FormData when checkbox group is modified
+watch([fcraTags, RSTags], (newVal, oldVal) => {
+  try {
+    syncFCRA();
+    console.log('FCRA Changed', formData)
+  } catch (error) {
+    console.error(error)
+    // handle the error appropriately
+  }
+})
+
 onMounted(() => {
   syncCheckboxData();
+  loadFormDataToORUGA();
 })
 
 // ORUGA SECTION
@@ -341,7 +383,7 @@ onMounted(() => {
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
-                <!-- <p><b>FCRAS:</b> {{ tags }}</p> -->
+                <p><b>FCRAS:</b> {{ fcraTags }}</p>
               </section>
               <section>
                 <o-field class="col-form-label" label="Research focus">
@@ -349,7 +391,7 @@ onMounted(() => {
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
-                <!-- <p><b>FCRAS:</b> {{ tags }}</p> -->
+                <p><b>RESEARCH FOCUS:</b> {{ RSTags }}</p>
               </section>
 
               <div class="d-flex justify-content-end">

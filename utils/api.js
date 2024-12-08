@@ -14,7 +14,7 @@ export const api = {
 
     return await findOne('profiles', { //Need to use Populate to fetch relationship && Media Type Data.
       where: { 'ssoid': ssoid },
-      populate: ['sdgs']
+      populate: ['sdgs', 'research_centres']
     })
 
     //   return await find('profiles', {
