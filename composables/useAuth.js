@@ -82,7 +82,7 @@ export const useAuthStore = defineStore('auth', {
 
     initializeFromStorage() {
       const storedUser = storage.getUser()
-      console.log(storedUser)
+      // console.log(storedUser)
       if (storedUser) {
         this.user = storedUser
         this.isAuthenticated = true

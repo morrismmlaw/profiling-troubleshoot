@@ -104,7 +104,7 @@ console.log("FCRA OPTIONS ORUGA2", fcraOptionsOrugaNew);
 console.log("RSOPTIONS ORUGA2", RSOptionsOrugaNew);
 
 //FCRA Search
-const fcraOptionsOruga = [
+const fcraOptionsOrugaSAMPLE = [
   {
     label: "Jesse Simmons",
     value: {
@@ -139,9 +139,7 @@ const keepOpen = ref(true);
 <template>
 
   <div class="container-fluid">
-
     <div class="row mt-4 mb-4">
-
       <div class="col-sm-1 col-md-2 col-lg-3">
         <div class="card ms-5" style="width: 22rem;">
           <img class="card-img-top"
@@ -187,26 +185,30 @@ const keepOpen = ref(true);
                 </div>
               </div>
 
-              <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                  <p class="form-control-plaintext">{{ profile?.attributes.email }}</p>
+              <div class="row">
+                <div class="col">
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                      <p class="form-control-plaintext">{{ profile?.attributes.email }}</p>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Department</label>
+                    <div class="col-sm-9">
+                      <p class="form-control-plaintext">{{ profile?.attributes.unit }}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Department</label>
-                <div class="col-sm-10">
-                  <p class="form-control-plaintext">{{ profile?.attributes.unit }}</p>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label class="col-sm-4 col-form-label">HKBU Scholar Url</label>
-                <div class="col-sm-10">
-                  <!-- <p class="form-control-plaintext">{{ profile?.attributes.url }}</p> -->
-                  <a :href="profile?.attributes.url" target="_blank" class="form-control-plaintext">{{
-                    profile?.attributes.url }}</a>
+                <div class="col">
+                  <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">HKBU Scholar Url</label>
+                    <div class="col-sm-10">
+                      <!-- <p class="form-control-plaintext">{{ profile?.attributes.url }}</p> -->
+                      <a :href="profile?.attributes.url" target="_blank" class="form-control-plaintext">{{
+                        profile?.attributes.url }}</a>
+                    </div>
+                  </div>
                 </div>
               </div>
 

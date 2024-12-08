@@ -11,15 +11,23 @@ export const api = {
    * @returns {Promise<{ data: Profile[] }>}
    */
   async findProfileBySSoid(ssoid) {
-    const { find } = useStrapi()
-    return await find('profiles', {
-      filters: {
-        ssoid: {
-          $eq: ssoid
-        }
-      }
+    const { findOne } = useStrapi()
+
+    return await findOne('profiles', {
+      where: { 'ssoid': ssoid },
+      populate: ['sdgs']
     })
   },
+
+
+  //   return await find('profiles', {
+  //     filters: {
+  //       ssoid: {
+  //         $eq: ssoid
+  //       }
+  //     }
+  //   })
+  // },
 
   /**
    * Get Collection
