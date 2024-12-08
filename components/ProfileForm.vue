@@ -156,18 +156,35 @@ const loadFormDataToORUGA = () => {
   }
 
   if (formData) {
-    console.log('RC', formData.research_centres);
-    console.log('RC FD', RSOptionsOrugaNew);
-    RSTags.value = formData.research_centres.map((rs) => {
+    console.log('load research_focus', formData.research_focus);
+    console.log('load RSOptionsOrugaNew', RSOptionsOrugaNew);
+
+    RSTags.value = formData.research_focus.map((rs) => {
       const matchingOption = RSOptionsOrugaNew.find((option) => {
         console.log("Checking", option.label, rs.name);
-        option.label === rs.name
+        return option.label === rs.name
       });
 
-      console.log("Match:", matchingOption);
+      console.log("Match Research focus:", matchingOption);
       return matchingOption ? matchingOption.value : [];
     });
   }
+
+  if (formData) {
+    console.log('load research_centres', formData.research_centres);
+    console.log('load RSOptionsOrugaNew', RSOptionsOrugaNew);
+
+    fcraTags.value = formData.research_centres.map((rs) => {
+      const matchingOption = fcraOptionsOrugaNew.find((option) => {
+        console.log("Checking", option.label, rs.name);
+        return option.label === rs.name
+      });
+
+      console.log("Match FCRA:", matchingOption);
+      return matchingOption ? matchingOption.value : [];
+    });
+  }
+
 }
 
 
