@@ -39,8 +39,6 @@ onBeforeUnmount(() => {
 })
 </script>
 
-
-
 <template>
 
   <div v-if="editor">
