@@ -256,7 +256,7 @@ onMounted(() => {
   <div class="container-fluid">
     <div class="row mt-4 mb-4">
       <div class="col-sm-1 col-md-2 col-lg-3">
-        <div class="card ms-5" style="width: 22rem;">
+        <div class="card ms-2" style="width: 22rem;">
           <img class="card-img-top"
             :src="`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc9APxkj0xClmrU3PpMZglHQkx446nQPG6lA&s7`"
             alt="Card image cap" />
@@ -269,11 +269,11 @@ onMounted(() => {
         </div>
       </div>
 
-      <div class="col-sm-10 col-md-10 col-lg-9">
+      <div class="col-sm-10 col-md-9 col-lg-9">
         <form @submit.prevent="handleSubmit" class="container-fluid">
           {{ console.log("ProfileForm - Props", props) }}
 
-          <div class="card m-2">
+          <div class="card mx-2">
             <div class="card-body">
               <h5 class="card-title">Personal Information</h5>
               <p class="card-text">Your academic profile information.</p>
