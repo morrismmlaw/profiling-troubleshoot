@@ -18,7 +18,8 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  console.log(props);
+  console.log("props.Profile", props.profile);
+  console.log("props.Collections", props.collections);
 })
 
 const emit = defineEmits(['save']);
@@ -45,8 +46,6 @@ const formData = reactive({
   photoURL: props.profile?.attributes.photoURL || [],
 });
 
-// console.log('SDG FORMDATA', formData.SDG);
-// console.log('sdgs FORMDATA', formData.sdgs);
 
 const handleSubmit = () => { //Going to send back to profile.vue parent. 
   emit('save', {
@@ -68,8 +67,6 @@ const sdgOptions = props.collections.sdgs;
 const SRCOptions = props.collections['research-centres'];
 const RFOptions = props.collections['research-foci'];
 const FCRAOptions = props.collections['fcras'];
-
-console.log('SRC Options', SRCOptions);
 
 // Map SRCOptions into the ORUGA TagInput format
 const SRCOptionsOrugaNew = SRCOptions.map((option) => {
@@ -108,8 +105,15 @@ const ROOptionsOrugaNew = ROOptions.map((option) => {
   };
 });
 
-console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
-console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
+const debugMsg = () => {
+
+  // console.log('SRC Options', SRCOptions);
+  // console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
+  // console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
+
+  // console.log('SDG FORMDATA', formData.SDG);
+  // console.log('sdgs FORMDATA', formData.sdgs);
+}
 
 //FCRA Search
 const fcraOptionsOrugaSAMPLE = [
@@ -146,7 +150,6 @@ const keepOpen = ref(true);
 const checkboxGroup = ref([]);
 
 const loadFormDataToORUGA = () => {
-
   if (!formData) {
     throw new Error("No Form Data!");
   }
@@ -159,32 +162,25 @@ const loadFormDataToORUGA = () => {
     checkboxGroup.value = formData.sdgs.map((sdg) => sdg.sdgid);
   }
 
-  if (formData) {
+  if (formData.research_foci) {
     console.log('load research_foci', formData.research_foci);
     console.log('load RSOptionsOrugaNew', ROOptionsOrugaNew);
-
     ROTags.value = formData.research_foci.map((rs) => {
       const matchingOption = ROOptionsOrugaNew.find((option) => {
         console.log("Checking", option.label, rs.name);
         return option.label === rs.name
       });
-
       console.log("Match Research focus:", matchingOption);
       return matchingOption ? matchingOption.value : [];
     });
   }
 
-  if (formData) {
-    console.log('load research_centres', formData.research_centres);
-    console.log('load fcraOptionsOrugaNew', SRCOptionsOrugaNew);
-
+  if (formData.research_centres) {
     SRCTags.value = formData.research_centres.map((rs) => {
       const matchingOption = SRCOptionsOrugaNew.find((option) => {
         console.log("Checking", option.label, rs.name);
         return option.label === rs.name
       });
-
-      console.log("Match SRC:", matchingOption);
       return matchingOption ? matchingOption.value : [];
     });
   }
@@ -277,8 +273,6 @@ onMounted(() => {
 
       <div class="col-sm-10 col-md-9 col-lg-9">
         <form @submit.prevent="handleSubmit" class="container-fluid">
-          {{ console.log("ProfileForm - Props", props) }}
-
           <div class="card mx-2">
             <div class="card-body">
               <h5 class="card-title">Personal Information</h5>

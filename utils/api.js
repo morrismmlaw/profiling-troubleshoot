@@ -3,6 +3,11 @@
  * @typedef {import('~/types/profile').Profile} Profile
  */
 
+let populateFields =  [
+  'sdgs', // Populate the 'sdgs' field with the related data
+  'research_centres' // Populate the 'research_centres' field with the related data
+]
+
 async function updateResearch_Centres(documentId, data) {
   const { update } = useStrapi()
   console.log("Updating Research_Centres", documentId, data);
@@ -25,7 +30,7 @@ export const api = {
 
     return await findOne('profiles', { //Need to use Populate to fetch relationship && Media Type Data.
       where: { 'ssoid': ssoid },
-      populate: ['sdgs', 'research_centres']
+      populate: populateFields
     })
 
     //   return await find('profiles', {
@@ -84,7 +89,7 @@ export const api = {
     await updateResearch_Centres(documentId, data); //Relations
 
     return await update('profiles', documentId, data,
-      { populate: ['sdgs', 'research_centres'] } //Return the Populated data.
+      { populate: populateFields } //Return the Populated data.
     );
 
     // Need to unwrap the data to pass to strapi for update -> else key error.
