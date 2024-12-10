@@ -9,6 +9,16 @@ import { defineStore } from 'pinia'
 import { storage } from '~/utils/storage'
 import { api } from '~/utils/api'
 
+const collectionNames = [
+  'departments',
+  'research-centres',
+  'research-outputs',
+  'research-foci',
+  'sdgs',
+  'fcras',
+  'available-supervisions',
+];
+
 // Function to get all other collections type from Strapi
 async function findCollection(collectionName) {
 
@@ -43,19 +53,19 @@ export const useAuthStore = defineStore('auth', {
       this.isLoading = true
       this.error = null
 
-      try { 
+      try {
         //Get the Profile Data
         const response = await api.findProfileBySSoid(ssoid)
         if (response.data.length > 0) {
+          console.log('Got the Profile from API', response);
           this.user = {}; //Init the Object
           this.user.attributes = { ...response.data[0] }; // Lets store em here
 
-          this.collections = {
-            'departments' : await findCollection('departments'),
-            'research-centres' : await findCollection('research-centres'),
-            'research-outputs' : await findCollection('research-outputs'),
-            'sdgs' : await findCollection('sdgs'),
-          };
+          this.collections = {};
+
+          for (const name of collectionNames) {
+            this.collections[name] = await findCollection(name);
+          }
 
           this.isAuthenticated = true
           console.log("Got the User", this.user);

@@ -19,12 +19,8 @@
 
 <script setup>
 
-import { onBeforeMount } from 'vue';
-
-
 const authStore = useAuthStore()
 const router = useRouter()
-
 
 onMounted(() => {
   authStore.initializeFromStorage()

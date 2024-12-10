@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, watch, defineEmits, registerRuntimeCompiler } from 'vue';
+import { reactive, watch, defineEmits } from 'vue';
 import { useProfileStore } from '../composables/useProfile'; // replace with your actual path
 import TiptapEditor from './TiptapEditor.vue' // path to your Tiptap editor component
 
@@ -9,13 +9,10 @@ const props = defineProps({
     default: null
   },
 
-  //Include all the sdgs and fcras
+  //Include all the sdgs and fcras - for Options populations.
   collections: {
     type: Object,
-    default: () => ({
-      'research-centres': {},
-      'research-outputs': {}
-    })
+    default: () => ({})
   }
 
 });
@@ -25,71 +22,72 @@ onMounted(() => {
 })
 
 const emit = defineEmits(['save']);
-
 const profileStore = useProfileStore();
 
+//Used for Reactive for ORUGA to Update..
 const formData = reactive({
   documentId: props.profile?.attributes.documentId || '',
 
-  research_interest: props.profile?.attributes.research_interest || '',
+  research_interest: props.profile?.attributes.research_interest || '', //Remind, the profile's field is winout s.. 
   biography: props.profile?.attributes.biography || '',
+
   // SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
+  // SDG // http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png.. Fix ?
   sdgs: props.profile?.attributes.sdgs ? props.profile.attributes.sdgs : [],
 
   FCRA: props.profile?.attributes.FCRA || "", //String type
-  research_focus: props.profile?.attributes.research_focus || [],
+  research_foci: props.profile?.attributes.research_foci || [],
   research_centres: props.profile?.attributes.research_centres || [],
+
+  availability_for_supervison: props.profile?.attributes.availability_for_supervison || [],
+  department: props.profile?.attributes.department || [],
+
+  photoURL: props.profile?.attributes.photoURL || [],
 });
 
-// http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png.. Fix ?
-
 // console.log('SDG FORMDATA', formData.SDG);
-console.log('sdgs FORMDATA', formData.sdgs);
+// console.log('sdgs FORMDATA', formData.sdgs);
 
 const handleSubmit = () => { //Going to send back to profile.vue parent. 
   emit('save', {
     research_interest: formData.research_interest, //HAHA TYPO
     biography: formData.biography,
-
     sdgs: formData.sdgs,
 
-    documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
+    research_centres: formData.research_centres,
 
+    documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
     // FCRA: formData.FCRA, //DEBUGGING
     // research_focus: formData.research_focus,
   });
 };
 
-// watch(() => props.profile, (newProfile) => {
-//   if (newProfile) {
-//     formData.research_interests = newProfile.attributes.research_interest;
-//   }
-// }, { immediate: true });
-
-
 // ORUGA SECTION
+const ROOptions = props.collections['research-outputs']; //HTHIS IS FOR DA SEARCH ENGINE.
 const sdgOptions = props.collections.sdgs;
-const fcraOptions = props.collections['research-centres'];
-const RSOptions = props.collections['research-outputs'];
+const SRCOptions = props.collections['research-centres'];
+const RFOptions = props.collections['research-foci'];
+const FCRAOptions = props.collections['fcras'];
 
-// Map fcraOptions into the ORUGA example format
-const fcraOptionsOrugaNew = fcraOptions.map((option) => {
+console.log('SRC Options', SRCOptions);
+
+// Map SRCOptions into the ORUGA TagInput format
+const SRCOptionsOrugaNew = SRCOptions.map((option) => {
   return {
     label: option.name,
     value: {
       id: option.id,
-      documentId: option.document_id,
+      documentId: option.documentId,
       name: option.name,
       abbr: option.abbr,
-      createdAt: option.created_at,
-      updatedAt: option.updated_at,
-      publishedAt: option.published_at,
-      hidden: option.hidden,
+      createdAt: option.createdAt,
+      updatedAt: option.updatedAt,
+      publishedAt: option.publishedAt,
     },
   };
 });
 
-const RSOptionsOrugaNew = RSOptions.map((option) => {
+const ROOptionsOrugaNew = ROOptions.map((option) => {
   return {
     label: option.title,
     value: {
@@ -110,8 +108,8 @@ const RSOptionsOrugaNew = RSOptions.map((option) => {
   };
 });
 
-console.log("FCRA OPTIONS ORUGA2", fcraOptionsOrugaNew);
-console.log("RSOPTIONS ORUGA2", RSOptionsOrugaNew);
+console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
+console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
 
 //FCRA Search
 const fcraOptionsOrugaSAMPLE = [
@@ -136,8 +134,8 @@ const fcraOptionsOrugaSAMPLE = [
 ];
 
 const Tags = ref([]);
-const fcraTags = ref([]);
-const RSTags = ref([]);
+const SRCTags = ref([]);
+const ROTags = ref([]);
 
 const allowNew = ref(false);
 const allowDuplicates = ref(false);
@@ -148,6 +146,11 @@ const keepOpen = ref(true);
 const checkboxGroup = ref([]);
 
 const loadFormDataToORUGA = () => {
+
+  if (!formData) {
+    throw new Error("No Form Data!");
+  }
+
   // Load default SDG data into checkbox group.
   if (formData.sdgs) {
     // Map the SDG objects to their IDs
@@ -157,11 +160,11 @@ const loadFormDataToORUGA = () => {
   }
 
   if (formData) {
-    console.log('load research_focus', formData.research_focus);
-    console.log('load RSOptionsOrugaNew', RSOptionsOrugaNew);
+    console.log('load research_foci', formData.research_foci);
+    console.log('load RSOptionsOrugaNew', ROOptionsOrugaNew);
 
-    RSTags.value = formData.research_focus.map((rs) => {
-      const matchingOption = RSOptionsOrugaNew.find((option) => {
+    ROTags.value = formData.research_foci.map((rs) => {
+      const matchingOption = ROOptionsOrugaNew.find((option) => {
         console.log("Checking", option.label, rs.name);
         return option.label === rs.name
       });
@@ -173,15 +176,15 @@ const loadFormDataToORUGA = () => {
 
   if (formData) {
     console.log('load research_centres', formData.research_centres);
-    console.log('load fcraOptionsOrugaNew', fcraOptionsOrugaNew);
+    console.log('load fcraOptionsOrugaNew', SRCOptionsOrugaNew);
 
-    fcraTags.value = formData.research_centres.map((rs) => {
-      const matchingOption = fcraOptionsOrugaNew.find((option) => {
+    SRCTags.value = formData.research_centres.map((rs) => {
+      const matchingOption = SRCOptionsOrugaNew.find((option) => {
         console.log("Checking", option.label, rs.name);
         return option.label === rs.name
       });
 
-      console.log("Match FCRA:", matchingOption);
+      console.log("Match SRC:", matchingOption);
       return matchingOption ? matchingOption.value : [];
     });
   }
@@ -210,9 +213,13 @@ const syncCheckboxToFormData = () => {
   })
 }
 
-const syncFCRA = () => {
-  formData.FCRA = fcraTags.value;
-  formData.research_focus = RSTags.value;
+const syncTagsFormData = () => {
+  formData.research_centres = SRCTags.value;
+  formData.research_foci = ROTags.value;
+
+  //TBD
+  // formData.FCRA = ROTags.value;
+  // formData.availability_for_supervison = ROTags.value;
 }
 
 // Load checkbox group to FormData when checkbox group is modified
@@ -230,11 +237,11 @@ watch(checkboxGroup, (newVal, oldVal) => {
   }
 })
 
-// Load checkbox group to FormData when checkbox group is modified
-watch([fcraTags, RSTags], (newVal, oldVal) => {
+// Load Tags Input group to FormData when modified
+watch([SRCTags, ROTags], (newVal, oldVal) => {
   try {
-    syncFCRA();
-    console.log('FCRA Changed', formData)
+    syncTagsFormData();
+    console.log('FormData Changed', formData)
   } catch (error) {
     console.error(error)
     // handle the error appropriately
@@ -243,7 +250,6 @@ watch([fcraTags, RSTags], (newVal, oldVal) => {
 
 onMounted(() => {
   loadFormDataToORUGA();
-
   syncCheckboxToFormData();
 })
 
@@ -398,7 +404,7 @@ onMounted(() => {
               </div> -->
               <section>
                 <o-field class="col-form-label" label="Strategic Research Centre">
-                  <o-taginput v-model="fcraTags" :options="fcraOptionsOrugaNew" :allow-new="allowNew"
+                  <o-taginput v-model="SRCTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
@@ -406,7 +412,7 @@ onMounted(() => {
               </section>
               <section>
                 <o-field class="col-form-label" label="Research focus">
-                  <o-taginput v-model="RSTags" :options="RSOptionsOrugaNew" :allow-new="allowNew"
+                  <o-taginput v-model="ROTags" :options="ROOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
@@ -414,7 +420,7 @@ onMounted(() => {
               </section>
               <section>
                 <o-field class="col-form-label" label="Faculty Collaborative Research Area">
-                  <o-taginput v-model="Tags" :options="fcraOptionsOrugaNew" :allow-new="allowNew"
+                  <o-taginput v-model="Tags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
@@ -422,7 +428,7 @@ onMounted(() => {
               </section>
               <section>
                 <o-field class="col-form-label" label="Availability for Supervision">
-                  <o-taginput v-model="Tags" :options="fcraOptionsOrugaNew" :allow-new="allowNew"
+                  <o-taginput v-model="Tags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
@@ -448,30 +454,28 @@ onMounted(() => {
 
 <style>
 :root {
-    --white: #FFF;
-    --black: #2E2B29;
-    --black-contrast: #110F0E;
-    --gray-1: rgba(61, 37, 20, .05);
-    --gray-2: rgba(61, 37, 20, .08);
-    --gray-3: rgba(61, 37, 20, .12);
-    --gray-4: rgba(53, 38, 28, .3);
-    --gray-5: rgba(28, 25, 23, .6);
-    --green: #22C55E;
-    --purple: #6A00F5;
-    --purple-contrast: #5800CC;
-    --purple-light: rgba(88, 5, 255, .05);
-    --yellow-contrast: #FACC15;
-    --yellow: rgba(250, 204, 21, .4);
-    --yellow-light: #FFFAE5;
-    --red: #FF5C33;
-    --red-light: #FFEBE5;
-    --shadow: 0px 12px 33px 0px rgba(0, 0, 0, .06), 0px 3.618px 9.949px 0px rgba(0, 0, 0, .04)
+  --white: #FFF;
+  --black: #2E2B29;
+  --black-contrast: #110F0E;
+  --gray-1: rgba(61, 37, 20, .05);
+  --gray-2: rgba(61, 37, 20, .08);
+  --gray-3: rgba(61, 37, 20, .12);
+  --gray-4: rgba(53, 38, 28, .3);
+  --gray-5: rgba(28, 25, 23, .6);
+  --green: #22C55E;
+  --purple: #6A00F5;
+  --purple-contrast: #5800CC;
+  --purple-light: rgba(88, 5, 255, .05);
+  --yellow-contrast: #FACC15;
+  --yellow: rgba(250, 204, 21, .4);
+  --yellow-light: #FFFAE5;
+  --red: #FF5C33;
+  --red-light: #FFEBE5;
+  --shadow: 0px 12px 33px 0px rgba(0, 0, 0, .06), 0px 3.618px 9.949px 0px rgba(0, 0, 0, .04)
 }
 </style>
 
 <style scoped>
-
-
 .columns {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

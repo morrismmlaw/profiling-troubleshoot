@@ -3,6 +3,17 @@
  * @typedef {import('~/types/profile').Profile} Profile
  */
 
+async function updateResearch_Centres(documentId, data) {
+  const { update } = useStrapi()
+  console.log("Updating Research_Centres", documentId, data);
+
+  // Assuming data.research_centres is an array of IDs of the related research centers
+  const researchCenterIds = data.research_centres.map((center) => center.id);
+  delete data.research_centres; //RELATION SPECIAL TREATMENT
+
+  return await update('profiles', documentId, { research_centres: researchCenterIds }, { populate: ['sdgs', 'research_centres'] });
+}
+
 export const api = {
   /**
    * Find profile by SSOID
@@ -28,24 +39,24 @@ export const api = {
 
   },
 
-/**
- * Get a collection based on the name provided.
- *
- * @param {string} name - The name of the collection to retrieve.
- * @returns {Promise<Object>} A Promise that resolves to the collection data.
- *
- * @example
- * // Get the 'sdgs' collection with the 'iconweb' URL populated
- * findCollection('sdgs')
- *   .then(data => {
- *     console.log(data[0].iconweb.url);
- *     // Output: /uploads/E_WEB_Goal_04_1779e135aa.png
- *     // Need to Later Fix to to be: http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png
- *   })
- *   .catch(error => {
- *     console.error('Error:', error);
- *   });
- */
+  /**
+   * Get a collection based on the name provided.
+   *
+   * @param {string} name - The name of the collection to retrieve.
+   * @returns {Promise<Object>} A Promise that resolves to the collection data.
+   *
+   * @example
+   * // Get the 'sdgs' collection with the 'iconweb' URL populated
+   * findCollection('sdgs')
+   *   .then(data => {
+   *     console.log(data[0].iconweb.url);
+   *     // Output: /uploads/E_WEB_Goal_04_1779e135aa.png
+   *     // Need to Later Fix to to be: http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png
+   *   })
+   *   .catch(error => {
+   *     console.error('Error:', error);
+   *   });
+   */
   async findCollection(name) {
     const { find } = useStrapi()
 
@@ -60,7 +71,8 @@ export const api = {
   },
 
   /**
-   * Update profile
+   * Update profile // GOTTA POPULATE...
+   * 
    * @param {number} documentId
    * @param {{ academicInterests: string }} data
    * @returns {Promise<{ data: Profile }>}
@@ -69,15 +81,17 @@ export const api = {
     const { update } = useStrapi()
     console.log("Updating", documentId, data);
 
-    return await update('profiles', documentId, data, {
+    await updateResearch_Centres(documentId, data); //Relations
 
-      populate: ['sdgs']
-    }); // Need to unwrap the data to pass to strapi for update -> else key error.
+    return await update('profiles', documentId, data,
+      { populate: ['sdgs', 'research_centres'] } //Return the Populated data.
+    );
+
+    // Need to unwrap the data to pass to strapi for update -> else key error.
     // return await update('profiles', id, data); // Never use DAT Fake id in the table -> else not found error 404.
 
     // return await update('profiles', documentId, { //No need to wrap, as it is already an Object.
     //   data
     // })
-
   }
 }
