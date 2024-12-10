@@ -18,8 +18,8 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  console.log("props.Profile", props.profile);
-  console.log("props.Collections", props.collections);
+  console.log("props.profile", props.profile);
+  console.log("props.collections", props.collections);
 })
 
 const emit = defineEmits(['save']);
@@ -41,7 +41,7 @@ const formData = reactive({
   research_foci: props.profile?.attributes.research_foci || [],
   research_centres: props.profile?.attributes.research_centres || [],
 
-  availability_for_supervison: props.profile?.attributes.availability_for_supervison || [],
+  available_supervisions: props.profile?.attributes.available_supervisions || [],
   department: props.profile?.attributes.department || [],
 
   photoURL: props.profile?.attributes.photoURL || [],
@@ -58,6 +58,7 @@ const handleSubmit = () => { //Going to send back to profile.vue parent.
     research_foci: formData.research_foci,
 
     fcras: formData.fcras,
+    available_supervisions: formData.available_supervisions,
 
     documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
     // FCRA: formData.FCRA, //DEBUGGING
@@ -71,6 +72,7 @@ const sdgOptions = props.collections.sdgs;
 const SRCOptions = props.collections['research-centres'];
 const RFOptions = props.collections['research-foci'];
 const FCRAOptions = props.collections['fcras'];
+const ASOptions = props.collections['available-supervisions'];
 
 // Map SRCOptions into the ORUGA TagInput format
 const SRCOptionsOrugaNew = SRCOptions.map((option) => {
@@ -139,15 +141,32 @@ const FCRAOptionsOrugaNew = FCRAOptions.map((option) => {
   };
 });
 
+// Map ASOptions into the ORUGA TagInput format
+const ASOptionsOrugaNew = ASOptions.map((option) => {
+  return {
+    label: option.name,
+    value: {
+      id: option.id,
+      documentId: option.documentId,
+      name: option.name,
+      createdAt: option.createdAt,
+      updatedAt: option.updatedAt,
+      publishedAt: option.publishedAt,
+    }
+  };
+});
+
 const debugMsg = () => {
 
   // console.log('SRC Options', SRCOptions);
   // console.log('RF Options', RFOptions);
-  console.log('FCRA Options', FCRAOptions);
+  // console.log('FCRA Options', FCRAOptions);
+  console.log('AS Options', ASOptions);
 
   // console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
   // console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
-  console.log("FCRA OPTIONS ORUGA2", FCRAOptionsOrugaNew);
+  // console.log("FCRA OPTIONS ORUGA2", FCRAOptionsOrugaNew);
+  console.log("AS OPTIONS ORUGA2", ASOptionsOrugaNew);
 
   // console.log('SDG FORMDATA', formData.SDG);
   // console.log('sdgs FORMDATA', formData.sdgs);
@@ -235,6 +254,15 @@ const loadFormDataToORUGA = () => {
     });
   }
 
+  if (formData.available_supervisions) {
+    ASTags.value = formData.available_supervisions.map((rs) => {
+      const matchingOption = ASOptionsOrugaNew.find((option) => {
+        return option.label === rs.name
+      });
+      return matchingOption ? matchingOption.value : [];
+    });
+  }
+
 }
 
 
@@ -265,9 +293,8 @@ const syncTagsFormData = () => {
   formData.research_foci = RFTags.value;
 
   formData.fcras = FCRATags.value;
-
+  formData.available_supervisions = ASTags.value;
   //TBD
-  // formData.availability_for_supervison = ROTags.value;
   // formData.department = DEPTags.value;
 }
 
@@ -287,7 +314,7 @@ watch(checkboxGroup, (newVal, oldVal) => {
 })
 
 // Load Tags Input group to FormData when modified
-watch([SRCTags, ROTags, RFTags, FCRATags], (newVal, oldVal) => {
+watch([SRCTags, ROTags, RFTags, FCRATags, ASTags], (newVal, oldVal) => {
   try {
     syncTagsFormData();
     console.log('FormData Changed', formData)
@@ -475,7 +502,7 @@ onMounted(() => {
               </section>
               <section>
                 <o-field class="col-form-label" label="Availability for Supervision">
-                  <o-taginput v-model="ASTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
+                  <o-taginput v-model="ASTags" :options="ASOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>

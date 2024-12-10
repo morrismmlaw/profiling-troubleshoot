@@ -4,16 +4,27 @@
  */
 
 
-//For Get and return of Update profile.
+//For Get and return of Update profile (inside, not api collection.).
 let populateFields = [
   'sdgs', // Populate the 'sdgs' field with the related data
   'research_centres', // Populate the 'research_centres' field with the related data
   'research_foci',
-  'fcras'
+  'fcras',
+  'available_supervisions',
 ]
 
 //Helper.
 
+/**
+ * Updates a relation field in a profile document in the Strapi API.
+ *
+ * @async
+ * @function updateRelationField
+ * @param {string} documentId - The ID of the profile document to update.
+ * @param {Object} data - The data object containing the updated relation field.
+ * @param {string} field - The name of the relation field in FORMData to update.
+ * @returns {Promise<Object>} A promise that resolves with the updated profile document.
+ */
 async function updateRelationField(documentId, data, field) {
   const { update } = useStrapi();
   const fieldIds = data[field].map((item) => item.id);
@@ -34,6 +45,10 @@ async function updateResearch_Foci(documentId, data) {
 
 async function update_fcras(documentId, data) {
   return await updateRelationField(documentId, data, 'fcras');
+}
+
+async function update_available_supervisions(documentId, data) {
+  return await updateRelationField(documentId, data, 'available_supervisions');
 }
 
 // async function updateResearch_Centres(documentId, data) {
@@ -134,6 +149,7 @@ export const api = {
     await updateResearch_Centres(documentId, data); //Relations
     await updateResearch_Foci(documentId, data); //Relations
     await update_fcras(documentId, data); //Relations
+    await update_available_supervisions(documentId, data); //Relations
 
     return await update('profiles', documentId, data,
       { populate: populateFields } //Return the Populated data.
