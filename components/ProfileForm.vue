@@ -35,8 +35,9 @@ const formData = reactive({
   // SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
   // SDG // http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png.. Fix ?
   sdgs: props.profile?.attributes.sdgs ? props.profile.attributes.sdgs : [],
+  // FCRA: props.profile?.attributes.FCRA || "", //String type
 
-  FCRA: props.profile?.attributes.FCRA || "", //String type
+  fcras: props.profile?.attributes.fcras || [], //String type
   research_foci: props.profile?.attributes.research_foci || [],
   research_centres: props.profile?.attributes.research_centres || [],
 
@@ -55,6 +56,8 @@ const handleSubmit = () => { //Going to send back to profile.vue parent.
 
     research_centres: formData.research_centres,
     research_foci: formData.research_foci,
+
+    fcras: formData.fcras,
 
     documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
     // FCRA: formData.FCRA, //DEBUGGING
@@ -121,12 +124,30 @@ const RFOptionsOrugaNew = RFOptions.map((option) => {
   };
 });
 
+// Map FCRAOptions into the ORUGA TagInput format
+const FCRAOptionsOrugaNew = FCRAOptions.map((option) => {
+  return {
+    label: option.name,
+    value: {
+      id: option.id,
+      documentId: option.documentId,
+      name: option.name,
+      createdAt: option.createdAt,
+      updatedAt: option.updatedAt,
+      publishedAt: option.publishedAt,
+    }
+  };
+});
+
 const debugMsg = () => {
 
   // console.log('SRC Options', SRCOptions);
+  // console.log('RF Options', RFOptions);
+  console.log('FCRA Options', FCRAOptions);
+
   // console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
   // console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
-  console.log('RF Options', RFOptions);
+  console.log("FCRA OPTIONS ORUGA2", FCRAOptionsOrugaNew);
 
   // console.log('SDG FORMDATA', formData.SDG);
   // console.log('sdgs FORMDATA', formData.sdgs);
@@ -158,6 +179,9 @@ const Tags = ref([]);
 const SRCTags = ref([]);
 const ROTags = ref([]);
 const RFTags = ref([]);
+const ASTags = ref([]);
+const FCRATags = ref([]);
+const DEPTags = ref([]);
 
 const allowNew = ref(false);
 const allowDuplicates = ref(false);
@@ -202,6 +226,15 @@ const loadFormDataToORUGA = () => {
     });
   }
 
+  if (formData.fcras) {
+    FCRATags.value = formData.fcras.map((rs) => {
+      const matchingOption = FCRAOptionsOrugaNew.find((option) => {
+        return option.label === rs.name
+      });
+      return matchingOption ? matchingOption.value : [];
+    });
+  }
+
 }
 
 
@@ -231,8 +264,9 @@ const syncTagsFormData = () => {
   formData.research_centres = SRCTags.value;
   formData.research_foci = RFTags.value;
 
+  formData.fcras = FCRATags.value;
+
   //TBD
-  // formData.FCRA = ROTags.value;
   // formData.availability_for_supervison = ROTags.value;
   // formData.department = DEPTags.value;
 }
@@ -253,7 +287,7 @@ watch(checkboxGroup, (newVal, oldVal) => {
 })
 
 // Load Tags Input group to FormData when modified
-watch([SRCTags, ROTags, RFTags], (newVal, oldVal) => {
+watch([SRCTags, ROTags, RFTags, FCRATags], (newVal, oldVal) => {
   try {
     syncTagsFormData();
     console.log('FormData Changed', formData)
@@ -434,19 +468,24 @@ onMounted(() => {
               </section>
               <section>
                 <o-field class="col-form-label" label="Faculty Collaborative Research Area">
-                  <o-taginput v-model="Tags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
+                  <o-taginput v-model="FCRATags" :options="FCRAOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
-                <!-- <p><b>FCRAS:</b> {{ Tags }}</p> -->
               </section>
               <section>
                 <o-field class="col-form-label" label="Availability for Supervision">
-                  <o-taginput v-model="Tags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
+                  <o-taginput v-model="ASTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
-                <!-- <p><b>FCRAS:</b> {{ Tags }}</p> -->
+              </section>
+              <section>
+                <o-field class="col-form-label" label="Department">
+                  <o-taginput v-model="DEPTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
+                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                    icon="tag" placeholder="Add an item" expanded />
+                </o-field>
               </section>
 
 
