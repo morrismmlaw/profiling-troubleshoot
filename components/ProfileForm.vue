@@ -54,6 +54,7 @@ const handleSubmit = () => { //Going to send back to profile.vue parent.
     sdgs: formData.sdgs,
 
     research_centres: formData.research_centres,
+    research_foci: formData.research_foci,
 
     documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
     // FCRA: formData.FCRA, //DEBUGGING
@@ -105,11 +106,27 @@ const ROOptionsOrugaNew = ROOptions.map((option) => {
   };
 });
 
+// Map RFOptions into the ORUGA TagInput format
+const RFOptionsOrugaNew = RFOptions.map((option) => {
+  return {
+    label: option.name,
+    value: {
+      id: option.id,
+      documentId: option.documentId,
+      name: option.name,
+      createdAt: option.createdAt,
+      updatedAt: option.updatedAt,
+      publishedAt: option.publishedAt,
+    }
+  };
+});
+
 const debugMsg = () => {
 
   // console.log('SRC Options', SRCOptions);
   // console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
   // console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
+  console.log('RF Options', RFOptions);
 
   // console.log('SDG FORMDATA', formData.SDG);
   // console.log('sdgs FORMDATA', formData.sdgs);
@@ -140,6 +157,7 @@ const fcraOptionsOrugaSAMPLE = [
 const Tags = ref([]);
 const SRCTags = ref([]);
 const ROTags = ref([]);
+const RFTags = ref([]);
 
 const allowNew = ref(false);
 const allowDuplicates = ref(false);
@@ -163,14 +181,14 @@ const loadFormDataToORUGA = () => {
   }
 
   if (formData.research_foci) {
-    console.log('load research_foci', formData.research_foci);
-    console.log('load RSOptionsOrugaNew', ROOptionsOrugaNew);
-    ROTags.value = formData.research_foci.map((rs) => {
-      const matchingOption = ROOptionsOrugaNew.find((option) => {
-        console.log("Checking", option.label, rs.name);
+    // console.log('load research_foci', formData.research_foci);
+    // console.log('load RSOptionsOrugaNew', ROOptionsOrugaNew);
+    RFTags.value = formData.research_foci.map((rs) => {
+      const matchingOption = RFOptionsOrugaNew.find((option) => {
+        // console.log("Checking", option.label, rs.name);
         return option.label === rs.name
       });
-      console.log("Match Research focus:", matchingOption);
+      // console.log("Match Research focus:", matchingOption);
       return matchingOption ? matchingOption.value : [];
     });
   }
@@ -178,7 +196,6 @@ const loadFormDataToORUGA = () => {
   if (formData.research_centres) {
     SRCTags.value = formData.research_centres.map((rs) => {
       const matchingOption = SRCOptionsOrugaNew.find((option) => {
-        console.log("Checking", option.label, rs.name);
         return option.label === rs.name
       });
       return matchingOption ? matchingOption.value : [];
@@ -209,20 +226,22 @@ const syncCheckboxToFormData = () => {
   })
 }
 
+//Got 5 Tags to Sync! 
 const syncTagsFormData = () => {
   formData.research_centres = SRCTags.value;
-  formData.research_foci = ROTags.value;
+  formData.research_foci = RFTags.value;
 
   //TBD
   // formData.FCRA = ROTags.value;
   // formData.availability_for_supervison = ROTags.value;
+  // formData.department = DEPTags.value;
 }
 
 // Load checkbox group to FormData when checkbox group is modified
 watch(checkboxGroup, (newVal, oldVal) => {
   try {
     formData.sdgs = [];
-    // console.log('checkbox Changed')
+    console.log('Checkbox Changed', formData)
     formData.sdgs = newVal.map((sdgId) => {
       return getSdgObject(sdgId)
     })
@@ -234,7 +253,7 @@ watch(checkboxGroup, (newVal, oldVal) => {
 })
 
 // Load Tags Input group to FormData when modified
-watch([SRCTags, ROTags], (newVal, oldVal) => {
+watch([SRCTags, ROTags, RFTags], (newVal, oldVal) => {
   try {
     syncTagsFormData();
     console.log('FormData Changed', formData)
@@ -247,6 +266,8 @@ watch([SRCTags, ROTags], (newVal, oldVal) => {
 onMounted(() => {
   loadFormDataToORUGA();
   syncCheckboxToFormData();
+
+  debugMsg();
 })
 
 // ORUGA SECTION
@@ -347,7 +368,6 @@ onMounted(() => {
                 </div>
               </div>
 
-
               <div class="row">
                 <div class="col-2">
                   <h6 class="col-form-label">Sustainable Development Goals (SDG)</h6>
@@ -406,7 +426,7 @@ onMounted(() => {
               </section>
               <section>
                 <o-field class="col-form-label" label="Research focus">
-                  <o-taginput v-model="ROTags" :options="ROOptionsOrugaNew" :allow-new="allowNew"
+                  <o-taginput v-model="RFTags" :options="RFOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>

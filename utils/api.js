@@ -3,21 +3,35 @@
  * @typedef {import('~/types/profile').Profile} Profile
  */
 
-let populateFields =  [
+let populateFields = [
   'sdgs', // Populate the 'sdgs' field with the related data
-  'research_centres' // Populate the 'research_centres' field with the related data
+  'research_centres', // Populate the 'research_centres' field with the related data
+  'research_foci',
 ]
 
+//Helper.
 async function updateResearch_Centres(documentId, data) {
   const { update } = useStrapi()
-  console.log("Updating Research_Centres", documentId, data);
-
   // Assuming data.research_centres is an array of IDs of the related research centers
   const researchCenterIds = data.research_centres.map((center) => center.id);
   delete data.research_centres; //RELATION SPECIAL TREATMENT
 
-  return await update('profiles', documentId, { research_centres: researchCenterIds }, { populate: ['sdgs', 'research_centres'] });
+  console.log("Updating Research_Centres", documentId, researchCenterIds);
+
+  return await update('profiles', documentId, { research_centres: researchCenterIds });
 }
+
+async function updateResearch_Foci(documentId, data) {
+  const { update } = useStrapi()
+  // Assuming data.research_centres is an array of IDs of the related research centers
+  const researchFociIds = data.research_foci.map((center) => center.id);
+  delete data.research_foci; //RELATION SPECIAL TREATMENT
+
+  console.log("Updating Research_Foci", documentId, researchFociIds);
+
+  return await update('profiles', documentId, { research_foci: researchFociIds });
+}
+
 
 export const api = {
   /**
@@ -87,6 +101,8 @@ export const api = {
     console.log("Updating", documentId, data);
 
     await updateResearch_Centres(documentId, data); //Relations
+
+    await updateResearch_Foci(documentId, data); //Relations
 
     return await update('profiles', documentId, data,
       { populate: populateFields } //Return the Populated data.

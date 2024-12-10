@@ -4,9 +4,7 @@ const profileStore = useProfileStore()
 const router = useRouter()
 
 onMounted(() => {
-
   authStore.initializeFromStorage()
-
   // if (!authStore.isAuthenticated) {
   //   router.push('/')
   // }
