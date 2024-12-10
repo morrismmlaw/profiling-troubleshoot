@@ -42,7 +42,7 @@ const formData = reactive({
   research_centres: props.profile?.attributes.research_centres || [],
 
   available_supervisions: props.profile?.attributes.available_supervisions || [],
-  department: props.profile?.attributes.department || [],
+  departments: props.profile?.attributes.departments || [],
 
   photoURL: props.profile?.attributes.photoURL || [],
 });
@@ -59,6 +59,7 @@ const handleSubmit = () => { //Going to send back to profile.vue parent.
 
     fcras: formData.fcras,
     available_supervisions: formData.available_supervisions,
+    // departments: formData.departments,
 
     documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
     // FCRA: formData.FCRA, //DEBUGGING
@@ -73,6 +74,7 @@ const SRCOptions = props.collections['research-centres'];
 const RFOptions = props.collections['research-foci'];
 const FCRAOptions = props.collections['fcras'];
 const ASOptions = props.collections['available-supervisions'];
+const DEPOptions = props.collections['departments'];
 
 // Map SRCOptions into the ORUGA TagInput format
 const SRCOptionsOrugaNew = SRCOptions.map((option) => {
@@ -156,17 +158,35 @@ const ASOptionsOrugaNew = ASOptions.map((option) => {
   };
 });
 
+// Map DEPOptions into the ORUGA TagInput format
+const DEPOptionsOrugaNew = DEPOptions.map((option) => {
+  return {
+    label: option.name,
+    value: {
+      id: option.id,
+      documentId: option.documentId,
+      name: option.name,
+      abbr: option.abbr,
+      createdAt: option.createdAt,
+      updatedAt: option.updatedAt,
+      publishedAt: option.publishedAt,
+    }
+  };
+});
+
 const debugMsg = () => {
 
   // console.log('SRC Options', SRCOptions);
   // console.log('RF Options', RFOptions);
   // console.log('FCRA Options', FCRAOptions);
-  console.log('AS Options', ASOptions);
+  // console.log('AS Options', ASOptions);
+  // console.log('DEP Options', DEPOptions);
 
   // console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
   // console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
   // console.log("FCRA OPTIONS ORUGA2", FCRAOptionsOrugaNew);
-  console.log("AS OPTIONS ORUGA2", ASOptionsOrugaNew);
+  // console.log("AS OPTIONS ORUGA2", ASOptionsOrugaNew);
+  // console.log("DEP OPTIONS ORUGA2", DEPOptionsOrugaNew);
 
   // console.log('SDG FORMDATA', formData.SDG);
   // console.log('sdgs FORMDATA', formData.sdgs);
@@ -263,6 +283,15 @@ const loadFormDataToORUGA = () => {
     });
   }
 
+  // if (formData.departments) {
+  //   DEPTags.value = formData.departments.map((rs) => {
+  //     const matchingOption = ASOptionsOrugaNew.find((option) => {
+  //       return option.label === rs.name
+  //     });
+  //     return matchingOption ? matchingOption.value : [];
+  //   });
+  // }
+
 }
 
 
@@ -294,8 +323,10 @@ const syncTagsFormData = () => {
 
   formData.fcras = FCRATags.value;
   formData.available_supervisions = ASTags.value;
+
+
   //TBD
-  // formData.department = DEPTags.value;
+  // formData.departments = DEPTags.value;
 }
 
 // Load checkbox group to FormData when checkbox group is modified
@@ -314,7 +345,7 @@ watch(checkboxGroup, (newVal, oldVal) => {
 })
 
 // Load Tags Input group to FormData when modified
-watch([SRCTags, ROTags, RFTags, FCRATags, ASTags], (newVal, oldVal) => {
+watch([SRCTags, ROTags, RFTags, FCRATags, ASTags, DEPTags], (newVal, oldVal) => {
   try {
     syncTagsFormData();
     console.log('FormData Changed', formData)
@@ -509,7 +540,7 @@ onMounted(() => {
               </section>
               <section>
                 <o-field class="col-form-label" label="Department">
-                  <o-taginput v-model="DEPTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
+                  <o-taginput v-model="DEPTags" :options="DEPOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>

@@ -11,6 +11,7 @@ let populateFields = [
   'research_foci',
   'fcras',
   'available_supervisions',
+  // 'departments',
 ]
 
 //Helper.
@@ -49,6 +50,10 @@ async function update_fcras(documentId, data) {
 
 async function update_available_supervisions(documentId, data) {
   return await updateRelationField(documentId, data, 'available_supervisions');
+}
+
+async function update_departments(documentId, data) {
+  return await updateRelationField(documentId, data, 'departments');
 }
 
 // async function updateResearch_Centres(documentId, data) {
@@ -150,6 +155,8 @@ export const api = {
     await updateResearch_Foci(documentId, data); //Relations
     await update_fcras(documentId, data); //Relations
     await update_available_supervisions(documentId, data); //Relations
+
+    // await update_departments(documentId, data); //Relations
 
     return await update('profiles', documentId, data,
       { populate: populateFields } //Return the Populated data.
