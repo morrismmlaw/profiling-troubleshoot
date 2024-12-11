@@ -3,7 +3,8 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/strapi', '@pinia/nuxt', 'nuxt-tiptap-editor', '@vesp/nuxt-fontawesome',
-    '@nuxt/image', '@hypernym/nuxt-gsap'],
+    '@nuxt/image', '@hypernym/nuxt-gsap', 'nuxt-particles'
+  ],
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',

@@ -17,7 +17,7 @@
   </nav> 
   -->
 
-  <nav class="navbar bg-body-white py-0">
+  <nav class="navbar bg-body-white py-0 z-3">
     <div class="container-fluid">
       <!-- <a class="navbar-brand" href="#">Offcanvas navbar</a> -->
       <NuxtLink class="navbar-brand" to="/">
