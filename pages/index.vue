@@ -46,7 +46,6 @@ const logout = () => {
 </script>
 
 
-
 <template>
 
   <div id="app">
@@ -244,12 +243,13 @@ const logout = () => {
 </template>
 
 
-<style>
+<style scoped>
 /* @import url('/assets/bootstrap/css/bootstrap.min.css'); */
 /* @import url('/assets/css/animate.min.css'); */
 /* @import url('/assets/css/Login-Form-Basic-icons.css'); */
 
-/* @import url('/assets/fonts/font-awesome.min.css'); // Use Either One for ICON. */
+/* // Use Either One for ICON. */
+/* @import url('/assets/fonts/font-awesome.min.css');  */
 /* @import url('@fortawesome/fontawesome-free/css/all.min.css'); */
 
 .shadow {

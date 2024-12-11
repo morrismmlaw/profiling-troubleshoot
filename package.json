@@ -21,7 +21,6 @@
     "@vueform/builder-nuxt": "^1.8.0",
     "@vueform/nuxt": "^1.8.0",
     "@vueuse/nuxt": "^12.0.0",
-    "bootstrap": "^5.3.3",
     "consola": "^3.2.3",
     "D": "^1.0.0",
     "defu": "^6.1.4",
@@ -33,13 +32,15 @@
     "sass": "^1.82.0",
     "sass-loader": "^16.0.4",
     "vue": "latest",
-    "vue-router": "latest",
-    "vueform": "^2.0.0"
+    "vue-router": "latest"
   },
   "devDependencies": {
+    "@bootstrap-vue-next/nuxt": "^0.26.13",
     "@fortawesome/free-brands-svg-icons": "^6.7.1",
     "@fortawesome/free-regular-svg-icons": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "bootstrap": "^5.3.3",
+    "bootstrap-vue-next": "^0.26.13",
     "sass-embedded": "^1.81.0"
   }
 }
