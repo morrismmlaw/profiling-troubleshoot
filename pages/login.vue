@@ -25,7 +25,7 @@ const handleSubmit = async () => {
 
 
     <section class="position-relative py-4 py-xl-5">
-      <div class="container col-md-6 col-xl-4 bg-semi-transparent rounded-3 p-5">
+      <div class="container col-md-6 col-xl-4 bg-semi-transparent rounded-3 p-5 shadow-sm">
         <div class="row mb-5">
           <div class="col-md-8 col-xl-6 text-center mx-auto">
             <h1>Log in</h1>
@@ -88,6 +88,7 @@ background-size: cover;
 }
 
 .bg-semi-transparent {
-  background-color: rgba(255, 255, 255, 0.35);
+  background: linear-gradient(to bottom right, #ffffff, #B9FFFF, 0.3);
+  background-color: rgba(255, 255, 255, 0.55);
 }
 </style>
