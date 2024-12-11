@@ -11,7 +11,7 @@ let populateFields = [
   'research_foci',
   'fcras',
   'available_supervisions',
-  // 'departments',
+  'departments',
 ]
 
 //Helper.
@@ -155,6 +155,7 @@ export const api = {
     await updateResearch_Foci(documentId, data); //Relations
     await update_fcras(documentId, data); //Relations
     await update_available_supervisions(documentId, data); //Relations
+    await update_departments(documentId, data); //Relations
 
     // await update_departments(documentId, data); //Relations
 

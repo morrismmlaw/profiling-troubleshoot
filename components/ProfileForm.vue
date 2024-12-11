@@ -59,7 +59,8 @@ const handleSubmit = () => { //Going to send back to profile.vue parent.
 
     fcras: formData.fcras,
     available_supervisions: formData.available_supervisions,
-    // departments: formData.departments,
+
+    departments: formData.departments,
 
     documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
     // FCRA: formData.FCRA, //DEBUGGING
@@ -180,13 +181,13 @@ const debugMsg = () => {
   // console.log('RF Options', RFOptions);
   // console.log('FCRA Options', FCRAOptions);
   // console.log('AS Options', ASOptions);
-  // console.log('DEP Options', DEPOptions);
+  console.log('DEP Options', DEPOptions);
 
   // console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
   // console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
   // console.log("FCRA OPTIONS ORUGA2", FCRAOptionsOrugaNew);
   // console.log("AS OPTIONS ORUGA2", ASOptionsOrugaNew);
-  // console.log("DEP OPTIONS ORUGA2", DEPOptionsOrugaNew);
+  console.log("DEP OPTIONS ORUGA2", DEPOptionsOrugaNew);
 
   // console.log('SDG FORMDATA', formData.SDG);
   // console.log('sdgs FORMDATA', formData.sdgs);
@@ -283,14 +284,14 @@ const loadFormDataToORUGA = () => {
     });
   }
 
-  // if (formData.departments) {
-  //   DEPTags.value = formData.departments.map((rs) => {
-  //     const matchingOption = ASOptionsOrugaNew.find((option) => {
-  //       return option.label === rs.name
-  //     });
-  //     return matchingOption ? matchingOption.value : [];
-  //   });
-  // }
+  if (formData.departments) {
+    DEPTags.value = formData.departments.map((rs) => {
+      const matchingOption = DEPOptionsOrugaNew.find((option) => {
+        return option.label === rs.name
+      });
+      return matchingOption ? matchingOption.value : [];
+    });
+  }
 
 }
 
@@ -324,10 +325,16 @@ const syncTagsFormData = () => {
   formData.fcras = FCRATags.value;
   formData.available_supervisions = ASTags.value;
 
-
-  //TBD
-  // formData.departments = DEPTags.value;
+  formData.departments = DEPTags.value;
 }
+
+const imgCardStyle = computed(() => {
+  if (window.innerWidth <= 768) {
+    return { width: '100%' }
+  } else {
+    return { width: '22rem' }
+  }
+})
 
 // Load checkbox group to FormData when checkbox group is modified
 watch(checkboxGroup, (newVal, oldVal) => {
@@ -370,9 +377,9 @@ onMounted(() => {
 
   <div class="container-fluid">
     <div class="row mt-4 mb-4">
-      <div class="col-sm-1 col-md-2 col-lg-3">
-        <div class="card ms-2" style="width: 22rem;">
-          <img class="card-img-top"
+      <div class="col-sm-2 col-md-3 col-lg-3 mb-2">
+        <div class="card ms-2">
+          <img class="card-img-top img-fluid"
             :src="`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc9APxkj0xClmrU3PpMZglHQkx446nQPG6lA&s7`"
             alt="Card image cap" />
 
@@ -384,9 +391,9 @@ onMounted(() => {
         </div>
       </div>
 
-      <div class="col-sm-10 col-md-9 col-lg-9">
+      <div class="col-sm-12 col-md-11 col-lg-9">
         <form @submit.prevent="handleSubmit" class="container-fluid">
-          <div class="card mx-2">
+          <div class="card ms-md-0 ms-2">
             <div class="card-body">
               <h5 class="card-title">Personal Information</h5>
               <p class="card-text">Your academic profile information.</p>
@@ -401,9 +408,6 @@ onMounted(() => {
                   </div>
                 </div>
                 <div class="col">
-                  <!-- <o-field label="Chinese Name">
-                    <o-input v-model="profile.attributes.chiname" disabled/>
-                  </o-field> -->
                   <div class="row mb-3">
                     <label class="col-form-label">Chinese Name</label>
                     <div class="col-sm-10">
@@ -439,13 +443,6 @@ onMounted(() => {
                   </div>
                 </div>
               </div>
-
-              <!-- <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">SSOID</label>
-                <div class="col-sm-10">
-                  <p class="form-control-plaintext">{{ profile?.attributes.ssoid }}</p>
-                </div>
-              </div> -->
 
               <div class="row mb-3">
                 <label for="biography" class="col-sm-2 col-form-label">Biography</label>
@@ -483,31 +480,14 @@ onMounted(() => {
                             <nuxt-img
                               :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
                               :alt="sdg.title" class="img-fluid" />
-                            <!-- <br>
-                            Title: {{ sdg.title }}
-                            <br>
-                            Slogan: {{ sdg.slogan }} -->
                           </o-checkbox>
                         </o-tooltip>
                       </o-field>
                     </div>
                   </div>
-                  <!-- <p><b>Selection:</b></p>
-                  <p v-for="(item, index) in checkboxGroup" :key="index">
-                    SDG - {{ item }}
-                  </p>
-                  <h3>Form Data </h3>
-                  <p v-for="(item, index) in formData.sdgs" :key="index">
-                    SDG - {{ item }}
-                  </p> -->
                 </div>
               </div>
 
-              <!-- <div class="row mb-3">
-                <o-field label="FCRA">
-                  <o-select v-model="formData.fcra" multiple :data="fcraOptions" />
-                </o-field>
-              </div> -->
               <section>
                 <o-field class="col-form-label" label="Strategic Research Centre">
                   <o-taginput v-model="SRCTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
