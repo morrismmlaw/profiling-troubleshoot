@@ -1,37 +1,27 @@
 <script setup>
 
 import { onBeforeMount } from 'vue';
-import Navbar from '~/components/ui/Navbar.vue';
 
-//Background Image imports. - These CASUE SSR PROBLEM!!! - Either change it OR turn SSr = false.
-import bgS1 from '~/assets/img/bg-showcase-1.jpg';
-import bgS2 from '~/assets/img/bg-showcase-2.jpg';
-import bgS3 from '~/assets/img/bg-showcase-3.jpg';
-import bgM from '~/assets/img/bg-masthead.jpg';
+const bgS1 = ref('')
+const bgS2 = ref('')
+const bgS3 = ref('')
+const bgM = ref('')
 
 const authStore = useAuthStore()
 const router = useRouter()
 
-// let bgS1, bgS2, bgS3, bgM;
-// bgS1 = url('~@/assets/img/bg-showcase-1.jpg');
-// bgS2 = url('~@/assets/img/bg-showcase-2.jpg');
-// bgS3 = url('~@/assets/img/bg-showcase-3.jpg');
-// bgM = url('~@/assets/img/bg-masthead.jpg');
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
 
   console.log("On before Mount")
 
-  //Loading customized CSS from Bootstrap Studio
-  // import('/assets/bootstrap/css/bootstrap.min.css');
-  // import ('/assets/css/animate.min.css');
-  // import ('/assets/css/Login-Form-Basic-icons.css');
-
-  // import ('/assets/fonts/font-awesome.min.css'); // Use Either One for ICON. */
-  // import ('@fortawesome/fontawesome-free/css/all.min.css'); 
+  bgS1.value = '/img/bg-showcase-1.jpg'
+  bgS2.value = '/img/bg-showcase-2.jpg'
+  bgS3.value = '/img/bg-showcase-3.jpg'
+  bgM.value = '/img/bg-masthead.jpg'
 })
 
-onMounted(() => {
+onMounted(async () => {
   authStore.initializeFromStorage()
 })
 
@@ -186,14 +176,14 @@ const logout = () => {
         <div class="row">
           <div class="col-lg-4">
             <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3"
-                src="/assets/img/testimonials-1.jpg" />
+                src="/public/img/testimonials-1.jpg" />
               <h5>Margaret E.</h5>
               <p class="fw-light mb-0">&quot;This is fantastic! Thanks so much guys!&quot;</p>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3"
-                src="/assets/img/testimonials-2.jpg" />
+                src="/public/img/testimonials-2.jpg" />
               <h5>Fred S.</h5>
               <p class="fw-light mb-0">&quot;Bootstrap is amazing. I&#39;ve been using it to create lots of super nice
                 landing pages.&quot;</p>
@@ -201,7 +191,7 @@ const logout = () => {
           </div>
           <div class="col-lg-4">
             <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3"
-                src="/assets/img/testimonials-3.jpg" />
+                src="/public/img/testimonials-3.jpg" />
               <h5>Sarah W.</h5>
               <p class="fw-light mb-0">&quot;Thanks so much for making these free resources available to us!&quot;</p>
             </div>

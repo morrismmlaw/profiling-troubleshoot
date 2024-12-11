@@ -55,9 +55,6 @@ export default defineNuxtConfig({
     }
   },
 
-  ssr: false, //Fix for Firefox... 
-
-
+  // ssr: false, //Fix for Firefox... 
   // STRAPI TOKEN: 8a2a82b58882d99f781af813ec54b0bdfe773dd755c337081a22f07b33b81875005fb6004ffe9e08c575ff66e4d5f72645cd28286ed1307e70467ff65a6dbb804d8ce0c972515357c7b8693600380878fb497a2dff49f32e3da5ccdf3972bcb7b23781570af4c55fa1a690c344fa8ff430e689a946425dfcca7ac80c5f48d3d1
-
 })
