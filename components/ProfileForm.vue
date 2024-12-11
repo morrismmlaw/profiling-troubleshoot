@@ -387,7 +387,7 @@ onMounted(() => {
       <div class="col-sm-12 col-md-11 col-lg-9">
         <form @submit.prevent="handleSubmit" class="container-fluid">
           <div class="card ms-md-0 ms-2 shadow">
-            <div class="card-body">
+            <div class="card-body rounded-1">
               <h5 class="card-title">Personal Information</h5>
               <p class="card-text">Your academic profile information.</p>
 

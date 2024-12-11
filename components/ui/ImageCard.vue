@@ -23,9 +23,8 @@ function deleteDropFile(index: number): void {
         alt="Card image cap" />
 
       <div class="card-body">
-        <h5 class="card-title">User Image</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
+        <h5 class="card-title">Profile Image</h5>
+        <p class="card-text"> Upload an Alternative Image</p>
         <section>
           <o-field>
             <o-upload v-model="dropFiles" multiple drag-drop>
