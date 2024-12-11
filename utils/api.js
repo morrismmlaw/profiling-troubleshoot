@@ -56,33 +56,6 @@ async function update_departments(documentId, data) {
   return await updateRelationField(documentId, data, 'departments');
 }
 
-// async function updateResearch_Centres(documentId, data) {
-//   const { update } = useStrapi()
-//   // Assuming data.research_centres is an array of IDs of the related research centers
-//   const researchCenterIds = data.research_centres.map((center) => center.id);
-//   delete data.research_centres; //RELATION SPECIAL TREATMENT
-//   console.log("Updating Research_Centres", documentId, researchCenterIds);
-//   return await update('profiles', documentId, { research_centres: researchCenterIds });
-// }
-
-// async function updateResearch_Foci(documentId, data) {
-//   const { update } = useStrapi()
-//   // Assuming data.research_centres is an array of IDs of the related research centers
-//   const researchFociIds = data.research_foci.map((center) => center.id);
-//   delete data.research_foci; //RELATION SPECIAL TREATMENT
-//   console.log("Updating Research_Foci", documentId, researchFociIds);
-//   return await update('profiles', documentId, { research_foci: researchFociIds });
-// }
-
-// async function update_fcras(documentId, data) {
-//   const { update } = useStrapi()
-//   // Assuming data.research_centres is an array of IDs of the related research centers
-//   const fcrasIds = data.fcras.map((center) => center.id);
-//   delete data.fcras; //RELATION SPECIAL TREATMENT
-//   console.log("Updating fcras", documentId, fcrasIds);
-//   return await update('profiles', documentId, { fcras: fcrasIds });
-// }
-
 
 export const api = {
   /**
@@ -97,16 +70,6 @@ export const api = {
       where: { 'ssoid': ssoid },
       populate: populateFields
     })
-
-    //   return await find('profiles', {
-    //     filters: {
-    //       ssoid: {
-    //         $eq: ssoid
-    //       }
-    //     }
-    //   })
-    // },
-
   },
 
   /**

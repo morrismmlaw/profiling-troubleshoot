@@ -12,17 +12,16 @@ const router = useRouter()
 
 
 onBeforeMount(async () => {
-
   console.log("On before Mount")
+})
+
+onMounted(async () => {
+  authStore.initializeFromStorage()
 
   bgS1.value = '/img/bg-showcase-1.jpg'
   bgS2.value = '/img/bg-showcase-2.jpg'
   bgS3.value = '/img/bg-showcase-3.jpg'
   bgM.value = '/img/bg-masthead.jpg'
-})
-
-onMounted(async () => {
-  authStore.initializeFromStorage()
 })
 
 const handleLoginSuccess = () => {
@@ -51,33 +50,6 @@ const logout = () => {
 <template>
 
   <div id="app">
-    <!-- <h1> Hello World</h1> -->
-    <!-- <a class="btn btn-info ms-auto me-2 shadow" role="button" href="/test">Test</a> -->
-
-    <!-- <nav class="navbar navbar-expand bg-light">
-      <div class="container">
-        <a class="navbar-brand" href="#">HKBU Science Faculty Academic Profile</a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
-        <div id="navcol-1" class="collapse navbar-collapse">
-          <a class="btn btn-info ms-auto" role="button" href="/profile">Profiles</a>
-        </div>
-        <a class="btn btn-primary ms-auto" role="button" href="/login">Sign In</a>
-      </div>
-    </nav> -->
-
-    <!-- <nav class="navbar navbar-expand bg-light">
-      <div class="container">
-        <a class="navbar-brand" href="#">HKBU Science Faculty Academic Profile</a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
-        <div id="navcol-1" class="collapse navbar-collapse">
-          <a class="btn btn-info ms-auto me-2 shadow" role="button" href="/profile">Profile</a>
-          <a class="btn btn-info me-2 shadow" role="button" href="/profileVueForm">Profile New</a>
-          <a v-if="isLoggedIn" class="btn btn-danger shadow" role="button" @click="logout">Log Out</a>
-          <a v-else class="btn btn-outline-primary shadow" role="button" href="/login">Sign In</a>
-        </div>
-      </div>
-    </nav> -->
-
 
     <header class="text-center text-white masthead" style="no-repeat center center;background-size: cover;"
       :style="{ backgroundImage: `url(${bgM})` }">
