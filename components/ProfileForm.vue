@@ -1,7 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { reactive, watch, defineEmits } from 'vue';
 import { useProfileStore } from '../composables/useProfile'; // replace with your actual path
 import TiptapEditor from './TiptapEditor.vue' // path to your Tiptap editor component
+import ImageCard from './ui/ImageCard.vue';
 
 const props = defineProps({
   profile: {
@@ -175,19 +176,19 @@ const DEPOptionsOrugaNew = DEPOptions.map((option) => {
   };
 });
 
-const debugMsg = () => {
+const debugTagsMsg = () => {
 
   // console.log('SRC Options', SRCOptions);
   // console.log('RF Options', RFOptions);
   // console.log('FCRA Options', FCRAOptions);
   // console.log('AS Options', ASOptions);
-  console.log('DEP Options', DEPOptions);
+  // console.log('DEP Options', DEPOptions);
 
   // console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
   // console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
   // console.log("FCRA OPTIONS ORUGA2", FCRAOptionsOrugaNew);
   // console.log("AS OPTIONS ORUGA2", ASOptionsOrugaNew);
-  console.log("DEP OPTIONS ORUGA2", DEPOptionsOrugaNew);
+  // console.log("DEP OPTIONS ORUGA2", DEPOptionsOrugaNew);
 
   // console.log('SDG FORMDATA', formData.SDG);
   // console.log('sdgs FORMDATA', formData.sdgs);
@@ -366,10 +367,11 @@ onMounted(() => {
   loadFormDataToORUGA();
   syncCheckboxToFormData();
 
-  debugMsg();
+  debugTagsMsg();
 })
-
 // ORUGA SECTION
+
+
 
 </script>
 
@@ -377,18 +379,9 @@ onMounted(() => {
 
   <div class="container-fluid">
     <div class="row mt-4 mb-4">
-      <div class="col-sm-2 col-md-3 col-lg-3 mb-2">
-        <div class="card ms-2">
-          <img class="card-img-top img-fluid"
-            :src="`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc9APxkj0xClmrU3PpMZglHQkx446nQPG6lA&s7`"
-            alt="Card image cap" />
 
-          <div class="card-body">
-            <h5 class="card-title">User Image</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-          </div>
-        </div>
+      <div class="col-sm-2 col-md-3 col-lg-3 mb-2">
+        <image-card :profile="profile" />
       </div>
 
       <div class="col-sm-12 col-md-11 col-lg-9">
