@@ -14,7 +14,7 @@
 
       <div class="col-md-11 col-lg-10 col-xl-9 mx-auto position-relative">
 
-        <div class="container-fluid p-4 m-4">
+        <div class="container-fluid p-3 m-3">
           <form @submit.prevent="handleSearch">
             <div id="myInputSearch"
               style="margin-left: 1px;background: var(--bs-light);border-radius: 41px;/*box-shadow: inset 1px 1px 5px 1px;*/margin-top: 2px;height: 53px;border-width: thin;border-style: solid;">
