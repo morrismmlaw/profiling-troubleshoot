@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --host 0.0.0.0 --ssl-cert hkbusci-2024-wca.crt --ssl-key hkbusci-2024.key",
-    "//": "nuxt dev --host 0.0.0.0",
+    "//": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --host 0.0.0.0 --ssl-cert hkbusci-2024-wca.crt --ssl-key hkbusci-2024.key",
+    "dev": "nuxt dev --host 0.0.0.0",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"

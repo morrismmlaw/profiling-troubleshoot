@@ -1,12 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
-  modules: ['@nuxtjs/strapi', '@pinia/nuxt', 'nuxt-tiptap-editor', '@vesp/nuxt-fontawesome', // '@vueform/builder-nuxt' // IT NEED KEYS
-  '@vueform/nuxt', '@nuxt/image'],
+  modules: ['@nuxtjs/strapi', '@pinia/nuxt', 'nuxt-tiptap-editor', '@vesp/nuxt-fontawesome', '@nuxt/image', '@hypernym/nuxt-gsap', 'nuxt-particles', 'nuxt-bootstrap-icons', '@nuxt/fonts'],
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
     '@oruga-ui/theme-bootstrap/dist/bootstrap.css',
+    'bootstrap-icons/font/bootstrap-icons.min.css',
 
     '@fortawesome/fontawesome-free/css/all.min.css',
     'font-awesome/css/font-awesome.css',
@@ -15,6 +15,8 @@ export default defineNuxtConfig({
     '/assets/bootstrap/css/bootstrap.min.css',
     '/assets/fonts/font-awesome.min.css',
 
+    '/assets/css/_variables.css', //My css for navbar
+    '/assets/css/styles.min.css', //My css for BS components
   ],
 
   plugins: [{ src: '~/plugins/oruga.js' }],
@@ -55,5 +57,5 @@ export default defineNuxtConfig({
     }
   },
 
-  // ssr: false, //Fix for Firefox...
+  ssr: false, //Fix for Firefox...
 })
