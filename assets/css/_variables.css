@@ -1,4 +1,11 @@
 :root {
-  --nav-height: 70px;
+  /* --nav-height: 70px; */
+  --nav-height: 0px;
   --height-offset: calc(100vh - var(--nav-height));
+
+  --margin-offset: 70px;
+}
+
+.login-box {
+  margin-top: calc(var(--margin-offset) + 10px);
 }

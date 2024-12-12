@@ -1,13 +1,19 @@
 <template>
 
-  <nav class="navbar bg-body-white py-0 z-3">
+
+  <nav class="navbar py-0 z-3" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 2; background-color: transparent">
     <div class="container-fluid">
-      <!-- <a class="navbar-brand" href="#">Offcanvas navbar</a> -->
+
+      <div class="d-flex">
       <NuxtLink class="navbar-brand" to="/">
-        <NuxtImg src="/img/HKBU1.png" alt="Logo" class="logo-img mx-4" />
-        <!-- <span class="custom-text">HKBU Science Faculty Academic Profile</span> -->
+        <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img ms-4" />
       </NuxtLink>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      <NuxtLink class="navbar-brand" to="/">
+        <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img" />
+      </NuxtLink>
+      </div>
+
+      <button class="navbar-toggler bg-body-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -110,5 +116,4 @@ const logout = () => {
 .bi {
   font-size: 1.5rem;
 }
-
 </style>

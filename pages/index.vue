@@ -53,6 +53,8 @@ const logout = () => {
   authStore.logout();
 };
 
+import Navbar from '~/components/ui/Navbar.vue';
+
 </script>
 
 
@@ -119,7 +121,8 @@ const logout = () => {
                             <path
                               d="M2.99519 17.0096C2.44556 17.0096 2 17.4552 2 18.0048C2 18.5544 2.44556 19 2.99519 19H15.0048C15.5544 19 16 18.5544 16 18.0048C16 17.4552 15.5544 17.0096 15.0048 17.0096H2.99519Z"
                               fill="currentColor"></path>
-                          </svg></a></label></div>
+                          </svg></a></label>
+                    </div>
 
                   </div>
 
@@ -131,7 +134,139 @@ const logout = () => {
       </div>
     </header>
 
-    <footer>
+    <footer class="text-white bg-blue-subtle" data-v-2ddf58e4=""
+      style="background-image: url(&quot;/img/bottom.8ea92c85.jpg&quot;); background-size: cover; background-repeat: no-repeat;">
+      <!-- Grid container -->
+      <div class="container p-4" data-v-2ddf58e4=""><!-- Section: Social media -->
+        <section class="mb-4 text-center" data-v-2ddf58e4=""><a class="btn btn-outline-light btn-floating m-1"
+            href="https://www.facebook.com/pages/Faculty-of-Science-HKBU/190697024296041" role="button" target="_blank"
+            data-v-2ddf58e4=""><i class="fab fa-facebook-f" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/hkbusci/" role="button"
+            target="_blank" data-v-2ddf58e4=""><i class="fab fa-instagram" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1" href="https://www.twitter.com/hkbu_science" role="button"
+            target="_blank" data-v-2ddf58e4=""><i class="fab fa-x-twitter" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1"
+            href="https://www.linkedin.com/in/hkbu-faculty-of-science-0039461b9" role="button" target="_blank"
+            data-v-2ddf58e4=""><i class="fab fa-linkedin-in" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1" href="https://weibo.com/hkbuscience" role="button"
+            target="_blank" data-v-2ddf58e4=""><i class="fab fa-weibo" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1"
+            href="https://www.youtube.com/channel/UCKjUBhV5SiJ-FvLAhVVCvyQ" role="button" target="_blank"
+            data-v-2ddf58e4=""><i class="fab fa-youtube" data-v-2ddf58e4=""></i></a></section>
+        <!-- Section: Social media --><!-- Section: Text --><!-- <section class="mb-4">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+        repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+        eum harum corrupti dicta, aliquam sequi voluptate quas.
+      </p>
+    </section> --><!-- Section: Text --><!-- Section: Links -->
+        <section class="" data-v-2ddf58e4=""><!--Grid row-->
+          <div class="row" data-v-2ddf58e4=""><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">About</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="/vision-mission?lang=en" class="text-white" data-v-2ddf58e4="">Vision
+                    &amp; Mission</a></li>
+                <li data-v-2ddf58e4=""><a href="/deans-message?lang=en" class="text-white" data-v-2ddf58e4="">Dean's
+                    Message</a></li>
+                <li data-v-2ddf58e4=""><a href="/faculty-advisory-committee?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Faculty Advisory Committee</a></li>
+                <li data-v-2ddf58e4=""><a href="/distinguished-professorship?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Distinguished Professorship</a></li>
+                <li data-v-2ddf58e4=""><a href="/faculty-administration?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Faculty Administration</a></li>
+                <li data-v-2ddf58e4=""><a href="/dean_office?lang=en" class="text-white" data-v-2ddf58e4="">Staff
+                    List</a></li>
+                <li data-v-2ddf58e4=""><a href="/pages/contact-us?lang=en" class="text-white" data-v-2ddf58e4="">Contact
+                    Us</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">Department</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="http://biol.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Biology</a></li>
+                <li data-v-2ddf58e4=""><a href="http://chem.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Chemistry</a></li>
+                <li data-v-2ddf58e4=""><a href="http://www.comp.hkbu.edu.hk/v1/?lang=en" target="_blank"
+                    class="text-white" data-v-2ddf58e4="">Computer Science</a></li>
+                <li data-v-2ddf58e4=""><a href="http://www.math.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Mathematics</a></li>
+                <li data-v-2ddf58e4=""><a href="http://physics.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Physics</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">Programme</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="/ug-programmes?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Undergraduate Programmes</a></li>
+                <li data-v-2ddf58e4=""><a href="/taught-postgraduate-programmes?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Taught Postgraduate Programmes</a></li>
+                <li data-v-2ddf58e4=""><a href="/research-postgraduate-programmes?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Research Postgraduate Programmes</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">Research</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="/faculty-niche-research-area?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Faculty Niche Research Areas</a></li>
+                <li data-v-2ddf58e4=""><a href="/research-impact?lang=en" class="text-white" data-v-2ddf58e4="">Research
+                    Impact</a></li>
+                <li data-v-2ddf58e4=""><a href="/research-spotlight?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Research Spotlights</a></li>
+                <li data-v-2ddf58e4=""><a href="/science-insights?lang=en" class="text-white" data-v-2ddf58e4="">SCIENCE
+                    Insights</a></li>
+                <li data-v-2ddf58e4=""><a href="/key-research-units?lang=en" class="text-white" data-v-2ddf58e4="">Key
+                    Research Units</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">News</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="/press-releases?lang=en" class="text-white" data-v-2ddf58e4="">News</a>
+                </li>
+                <li data-v-2ddf58e4=""><a href="/events?lang=en" class="text-white" data-v-2ddf58e4="">Events</a></li>
+                <li data-v-2ddf58e4=""><a href="/science-in-the-media?lang=en" class="text-white"
+                    data-v-2ddf58e4="">HKBU SCIENCE in the Media</a></li>
+                <li data-v-2ddf58e4=""><a href="/awards-achievements?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Awards &amp; Achievements</a></li>
+                <li data-v-2ddf58e4=""><a href="/newsletters?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Newsletters</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">Other</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="https://60anni.sci.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">60th Anniversary</a></li>
+                <li data-v-2ddf58e4=""><a href="https://alumni.sci.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Alumni</a></li>
+                <li data-v-2ddf58e4=""><a href="https://intranet.sci.hkbu.edu.hk/index.php" target="_blank"
+                    class="text-white" data-v-2ddf58e4="">Intranet</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column-->
+          </div><!--Grid row-->
+        </section><!-- Section: Links -->
+      </div><!-- Grid container --><!-- Copyright -->
+      <div class="text-center p-3" data-v-2ddf58e4="" style="background-color: rgba(0, 0, 0, 0.4);">
+        <div data-v-2ddf58e4=""><a class="text-white" href="/pages/contact-us?lang=en"
+            data-v-2ddf58e4="">Enquiry</a>&nbsp;| <a class="text-white" href="/nav/sitemap?lang=en"
+            data-v-2ddf58e4="">Sitemap</a>&nbsp;| <a class="text-white" href="/nav/disclaimer?lang=en"
+            data-v-2ddf58e4="">Disclaimer</a>&nbsp;| <a class="text-white"
+            href="https://www.hkbu.edu.hk/eng/about/privacy.jsp" target="_blank" data-v-2ddf58e4="">Privacy Policy</a>
+        </div> All rights reserved © 2024 Faculty of Science, HKBU
+      </div><!-- Copyright -->
+    </footer>
+
+    <!-- <footer>
       <div class="container py-4 py-lg-5">
         <div class="row justify-content-center">
           <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
@@ -200,7 +335,7 @@ const logout = () => {
           </ul>
         </div>
       </div>
-    </footer>
+    </footer> -->
 
   </div>
 </template>
