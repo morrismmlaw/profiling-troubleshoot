@@ -11,7 +11,7 @@
         <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
         </NuxtLink>
-      </div>      
+      </div>
       <div v-else class="d-flex">
         <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img-1 ms-4" />
@@ -25,7 +25,8 @@
         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-end semi-transparent-1" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas offcanvas-end semi-transparent-1" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
             <span class="d-flex align-items-center flex-nowrap ">
@@ -102,6 +103,8 @@ const navbarStylePerRoute = computed(() => {
   if (route.path === '/profile') {
     return { backgroundColor: 'rgba(37, 150, 190, 0.7)' };
     // return { backgroundColor: 'transparent' };
+  } else if (route.path === '/search') {
+    return { backgroundColor: 'gray' };
   } else {
     return { backgroundColor: 'transparent' };
   }
@@ -149,5 +152,4 @@ const navbarStylePerRoute = computed(() => {
 .semi-transparent-1 {
   background-color: hsla(0, 0%, 100%, 0.9);
 }
-
 </style>
