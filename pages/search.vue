@@ -60,7 +60,7 @@
 
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid m-1 p-1">
       <h1>Search Results</h1>
       <p>You searched for: {{ $route.query.q }}</p>
     </div>

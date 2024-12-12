@@ -104,7 +104,7 @@ const navbarStylePerRoute = computed(() => {
     return { backgroundColor: 'rgba(37, 150, 190, 0.7)' }; //Marine Blue
     // return { backgroundColor: 'transparent' };
   } else if (route.path === '/search') {
-    return { backgroundColor: 'gray' };
+    return { backgroundColor: 'rgb(177, 177, 177, 0.9)' };
   } else if (route.path === '/login') {
     return { backgroundColor: 'rgba(83,183,209,0.3)' }; //Light Blue
   } else {
