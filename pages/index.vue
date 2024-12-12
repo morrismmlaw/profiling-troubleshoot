@@ -150,8 +150,8 @@ const handleSearch = () => {
                         </label>
                       </div>
                     </form>
-                  </div>
 
+                  </div>
                 </div>
               </form>
             </div>
