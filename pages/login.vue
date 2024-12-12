@@ -84,7 +84,8 @@ onMounted(() => {
           <div class="row mb-5">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
               <h1>Log in</h1>
-              <p class="w-lg-90">Login With SSOID - Academic Staff</p>
+              <br>
+              <p class="w-lg-90">Login With SSOID <br> Academic Staff</p>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
