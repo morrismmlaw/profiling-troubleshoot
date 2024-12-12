@@ -63,7 +63,7 @@ import Navbar from '~/components/ui/Navbar.vue';
   <div id="app">
     <header id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="overlay"></div>
-      <div class="carousel-inner">
+      <div class="carousel-inner" style="width: 100vw;">
         <div class="carousel-item active" data-bs-interval="5000">
           <img :src="bgM" class="d-block w-100 carousel-height" alt="background1">
         </div>
@@ -381,16 +381,18 @@ import Navbar from '~/components/ui/Navbar.vue';
 
 .carousel-height {
   height: var(--height-offset);
+  width: 100vw;
+
   object-fit: cover;
   object-position: top;
 }
 
 .carousel-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50vh;
+  left: 50vw;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: 100vw;
   z-index: 1;
 }
 

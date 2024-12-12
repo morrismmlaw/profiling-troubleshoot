@@ -1,7 +1,7 @@
 <template>
 
 
-  <nav class="navbar py-0 z-3" :style="navbarStyle"
+  <nav class="navbar sticky-top py-0 z-3" :style="navbarStyle"
     style="position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
     <div class="container-fluid">
 
