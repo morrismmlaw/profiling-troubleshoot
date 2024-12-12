@@ -1,20 +1,21 @@
 <template>
 
 
-  <nav class="navbar py-0 z-3" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 2; background-color: transparent">
+  <nav class="navbar py-0 z-3" :style="navbarStyle"
+    style="position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
     <div class="container-fluid">
 
       <div class="d-flex">
-      <NuxtLink class="navbar-brand" to="/">
-        <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img ms-4" />
-      </NuxtLink>
-      <NuxtLink class="navbar-brand" to="/">
-        <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img" />
-      </NuxtLink>
+        <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img ms-4" />
+        </NuxtLink>
+        <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img" />
+        </NuxtLink>
       </div>
 
-      <button class="navbar-toggler bg-body-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <button class="navbar-toggler bg-body-secondary" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -65,6 +66,7 @@
 
 const authStore = useAuthStore()
 const router = useRouter()
+const route = useRoute()
 
 onMounted(() => {
   authStore.initializeFromStorage()
@@ -88,6 +90,14 @@ const isLoggedIn = computed(() => authStore.isAuthenticated);
 const logout = () => {
   authStore.logout();
 };
+
+const navbarStyle = computed(() => {
+  if (route.path === '/profile') {
+    return { backgroundColor: 'rgba(37, 150, 190, 0.7)' };
+  } else {
+    return { backgroundColor: 'transparent' };
+  }
+});
 
 </script>
 

@@ -23,7 +23,7 @@ const handleSave = async (data) => {
 </script>
 
 <template>
-  <div class="container-fluid bg-light min-vh-100 custom-background">
+  <div class="container-fluid bg-light min-vh-100 custom-background nav-offset">
     <div class="row justify-content-center py-6">
       <div class="col-sm-12 col-lg-12 col-xl-12 ">
         <div v-if="authStore.isAuthenticated">

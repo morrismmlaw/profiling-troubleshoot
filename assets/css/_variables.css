@@ -9,3 +9,7 @@
 .login-box {
   margin-top: calc(var(--margin-offset) + 10px);
 }
+
+.nav-offset {
+  margin-top: calc(var(--margin-offset) + 0px);
+}
