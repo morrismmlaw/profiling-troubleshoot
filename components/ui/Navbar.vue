@@ -96,7 +96,7 @@ const logout = () => {
 
 /* Add this CSS to style the logo image */
 .logo-img {
-  height: 50px;
+  height: 60px;
   /* Adjust the height as needed */
 }
 

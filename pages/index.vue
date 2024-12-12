@@ -10,7 +10,6 @@ const bgM = ref('')
 const authStore = useAuthStore()
 const router = useRouter()
 
-
 onBeforeMount(async () => {
   console.log("On before Mount")
 })
@@ -62,14 +61,14 @@ const logout = () => {
       <div class="container">
         <div class="row">
           <div class="col-xl-9 mx-auto position-relative">
-            <h1 class="mb-5 bold-elegant">Find an Expert at Hong Kong Baptist University</h1>
-            <h3 class="mb-5">Your search starts here, whether you are looking for a supervisor to undertake a research degree, an industry expert for a specific project, or a potential partner or collaborator.</h3>
+            <h1 class="mb-5 bold-elegant-title">Find an Expert at Hong Kong Baptist University</h1>
+            <h3 class="mb-5 bold-elegant-sub">Your search starts here, whether you are looking for a supervisor to undertake a research degree, an industry expert for a specific project, or a potential partner or collaborator.</h3>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
             <form>
               <div class="row">
                 <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control form-control-lg" type="email"
-                    placeholder="Enter your email..." /></div>
+                    placeholder="Search By Name or Keyword" /></div>
                 <div class="col-12 col-md-3"><button class="btn btn-primary btn-lg" type="submit">Sign up!</button>
                 </div>
               </div>
@@ -105,28 +104,6 @@ const logout = () => {
       </div>
     </footer>
 
-    <!-- <div class="container-fluid bg-light min-vh-100">
-    <div class="row justify-content-center py-6">
-      <div class="col-sm-12 col-lg-6 col-xl-4">
-        <div v-if="!authStore.isAuthenticated">
-          <h2 class="text-center mb-4">Login</h2>
-          <LoginForm @success="handleLoginSuccess" @error="handleLoginError" />
-        </div>
-        <div v-else>
-          <h2 class="text-center mb-4">Welcome, {{ authStore.user.attributes.name }}</h2>
-          <div class="d-flex justify-content-center">
-            <NuxtLink to="/profile" class="btn btn-primary mr-2">
-              View Profile
-            </NuxtLink>
-            <button @click="handleLogout" class="btn btn-danger">
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
   </div>
 </template>
 
@@ -144,8 +121,17 @@ const logout = () => {
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-.bold-elegant {
+.bold-elegant-title {
+  font-size: 43px;
   font-weight: bold;
   font-family: 'Arial Black', Gadget, sans-serif;
+}
+
+
+.bold-elegant-sub {
+  font-size: 19px;
+  font-weight: lighter;
+  font-family: popins, sans-serif;
+  line-height: 1.5;
 }
 </style>
