@@ -16,6 +16,8 @@ export default defineNuxtConfig({
     '/assets/bootstrap/css/bootstrap.min.css',
     '/assets/fonts/font-awesome.min.css',
 
+    '/assets/css/_variables.css', //My css for navbar
+
   ],
 
   plugins: [{ src: '~/plugins/oruga.js' }],

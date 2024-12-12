@@ -55,7 +55,7 @@ const logout = () => {
 
   <div id="app">
 
-    <header class="text-center text-white masthead" style="no-repeat center center;background-size: cover; height: calc(100vh - var(--navbar-height))"
+    <header class="text-center text-white masthead" style="no-repeat center center;background-size: cover; height: var(--height-offset);"
       :style="{ backgroundImage: `url(${bgM})` }">
 
       <div class="container">

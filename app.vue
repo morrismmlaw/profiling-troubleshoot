@@ -11,9 +11,3 @@ import Navbar from './components/ui/Navbar.vue';
     </NuxtLayout>
   </div>
 </template>
-
-<style>
-:root {
-  --navbar-height: 70px;
-}
-</style>

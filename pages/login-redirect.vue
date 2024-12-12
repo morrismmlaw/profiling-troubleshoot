@@ -1,17 +1,17 @@
 <template>
-  <div class="container-fluid ">
+  <div class="container-fluid p-0 m-0">
 
     <div class="login-background-image" style="position: relative; z-index: 0;">
-
       <NuxtParticles id="tsparticles" :options="TSoptions" />
       <NuxtParticles v-if="show" id="tsparticles2" :options="TSoptions" />
 
-      <section class="position-relative py-4 py-xl-5">
+      <section class="position-relative py-1 py-xl-2">
         <div class="container col-md-6 col-xl-4 bg-semi-transparent rounded-3 p-5 shadow-sm">
           <div class="row mb-5">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
               <h1>Log in</h1>
-              <p class="w-lg-90">Login With SSOID - Academic Staff</p>
+              <br>
+              <p class="w-lg-90">Login With SSOID <br> Academic Staff</p>
             </div>
           </div>
           <div>

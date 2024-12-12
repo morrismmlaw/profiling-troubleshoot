@@ -1,0 +1,4 @@
+:root {
+  --nav-height: 70px;
+  --height-offset: calc(100vh - var(--nav-height));
+}
