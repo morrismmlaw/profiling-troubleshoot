@@ -59,9 +59,12 @@ const logout = () => {
 <template>
 
   <div id="app">
+
+
     <header id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
-      <div class="overlay"></div>
+
       <div class="carousel-inner">
+
         <div class="carousel-item active" data-bs-interval="5000">
           <img :src="bgM" class="d-block w-100 carousel-height" alt="background1">
         </div>
@@ -69,6 +72,9 @@ const logout = () => {
           <img :src="bgM1" class="d-block w-100 carousel-height" alt="background2">
         </div>
       </div>
+
+      <div class="carousel-overlay"></div> <!-- Add this line -->
+
       <button class="carousel-control-prev z-2" type="button" data-bs-target="#carouselExampleAutoplaying"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -79,6 +85,8 @@ const logout = () => {
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
+
+
 
       <div class="carousel-text">
         <div class="container">
@@ -119,7 +127,8 @@ const logout = () => {
                             <path
                               d="M2.99519 17.0096C2.44556 17.0096 2 17.4552 2 18.0048C2 18.5544 2.44556 19 2.99519 19H15.0048C15.5544 19 16 18.5544 16 18.0048C16 17.4552 15.5544 17.0096 15.0048 17.0096H2.99519Z"
                               fill="currentColor"></path>
-                          </svg></a></label></div>
+                          </svg></a></label>
+                    </div>
 
                   </div>
 
@@ -282,5 +291,16 @@ svg {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+  transition: background-position 5s ease; /* Adjust the duration (0.5s) to change the transition time */
 }
 </style>
