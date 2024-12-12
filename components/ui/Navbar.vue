@@ -6,18 +6,18 @@
 
       <div v-if="isLoggedIn" class="d-flex">
         <NuxtLink class="navbar-brand" to="/">
-          <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img ms-4" />
+          <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img-1 ms-4" />
         </NuxtLink>
         <NuxtLink class="navbar-brand" to="/">
-          <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img" />
+          <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
         </NuxtLink>
       </div>      
       <div v-else class="d-flex">
         <NuxtLink class="navbar-brand" to="/">
-          <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img ms-4" />
+          <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img-1 ms-4" />
         </NuxtLink>
         <NuxtLink class="navbar-brand" to="/">
-          <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img" />
+          <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img-2" />
         </NuxtLink>
       </div>
 
@@ -119,9 +119,16 @@ const navbarStylePerRoute = computed(() => {
 }
 
 /* Add this CSS to style the logo image */
-.logo-img {
-  height: 60px;
+.logo-img-1 {
+  height: 50px;
   /* Adjust the height as needed */
+  margin-top: 5px;
+}
+
+.logo-img-2 {
+  height: 65px;
+  /* Adjust the height as needed */
+  margin-top: -5px;
 }
 
 .custom-text {
