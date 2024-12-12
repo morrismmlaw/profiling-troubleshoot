@@ -26,7 +26,8 @@ onMounted(async () => {
   // bgM.value = '/img/bg-pergamon.jpg'
   // bgM.value = '/img/bg-inno.jpg'
 
-  bgM.value = '/img/bg-scifac-2.jpg'
+  // bgM.value = '/img/bg-scifac-2.jpg'
+  bgM.value = '/img/bg-scifac-2-4k.jpeg'
 })
 
 const handleLoginSuccess = () => {
