@@ -55,15 +55,21 @@ const logout = () => {
 
   <div id="app">
 
-    <header class="text-center text-white masthead" style="no-repeat center center;background-size: cover;"
+    <header class="text-center text-white masthead" style="no-repeat center center;background-size: cover; height: calc(100vh - var(--navbar-height))"
       :style="{ backgroundImage: `url(${bgM})` }">
-      <div class="overlay"></div>
+
       <div class="container">
+        <div class="overlay">
+        </div>
+
         <div class="row">
           <div class="col-xl-9 mx-auto position-relative">
             <h1 class="mb-5 bold-elegant-title">Find an Expert at Hong Kong Baptist University</h1>
-            <h3 class="mb-5 bold-elegant-sub">Your search starts here, whether you are looking for a supervisor to undertake a research degree, an industry expert for a specific project, or a potential partner or collaborator.</h3>
+            <h3 class="mb-5 bold-elegant-sub">Your search starts here, whether you are looking for a supervisor to
+              undertake a research degree, an industry expert for a specific project, or a potential partner or
+              collaborator.</h3>
           </div>
+
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
             <form>
               <div class="row">
@@ -76,6 +82,7 @@ const logout = () => {
           </div>
         </div>
       </div>
+
     </header>
 
     <footer class="bg-light footer">
