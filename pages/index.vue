@@ -151,7 +151,7 @@ const logout = () => {
         </div>
         <hr />
         <div class="d-flex justify-content-between align-items-center pt-3">
-          <p class="text-muted mb-0">Copyright © 2024 Brand</p>
+          <p class="text-muted mb-0">Copyright © 2024 Hong Kong Baptist University</p>
           <ul class="list-inline mb-0">
             <li class="list-inline-item"><svg class="bi bi-facebook" xmlns="http://www.w3.org/2000/svg" width="1em"
                 height="1em" fill="currentColor" viewBox="0 0 16 16">
@@ -175,32 +175,6 @@ const logout = () => {
         </div>
       </div>
     </footer>
-
-    <!-- <footer class="bg-light footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 text-center text-lg-start my-auto h-100">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item"><a href="#">About</a></li>
-              <li class="list-inline-item"><span>⋅</span></li>
-              <li class="list-inline-item"><a href="#">Contact</a></li>
-              <li class="list-inline-item"><span>⋅</span></li>
-              <li class="list-inline-item"><a href="#">Terms of  Use</a></li>
-              <li class="list-inline-item"><span>⋅</span></li>
-              <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-            </ul>
-            <p class="text-muted small mb-4 mb-lg-0">© HKBU Science Faculty 2024. All Rights Reserved.</p>
-          </div>
-          <div class="col-lg-6 text-center text-lg-end my-auto h-100">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item"><a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
-              <li class="list-inline-item"><a href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
-              <li class="list-inline-item"><a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer> -->
 
   </div>
 </template>
