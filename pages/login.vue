@@ -2,8 +2,6 @@
 import { ref } from 'vue';
 import { useAuthStore } from '../composables/useAuth'; // replace with your actual path
 
-import { gsap } from "gsap";
-
 const authStore = useAuthStore();
 const ssoid = ref('');
 const router = useRouter();
@@ -12,11 +10,16 @@ const emit = defineEmits(['success', 'error']);
 const handleSubmit = async () => {
   console.log("Login Form doing the Login")
   const success = await authStore.login(ssoid.value);
+
   if (success) {
-    router.push('/');
-    emit('success');
+    router.push('/login-redirect');
+    // emit('success');
   } else {
-    emit('error');
+    router.push({
+      path: '/login-redirect',
+      query: { error: 'Login failed. Please try again.' }
+    })
+    // emit('error');
   }
 };
 
@@ -105,7 +108,6 @@ const TSoptions = {
                     </button>
                     <p class="text-muted">Forgot your password?</p>
                   </form>
-
                 </div>
               </div>
             </div>
@@ -119,7 +121,7 @@ const TSoptions = {
 
 </template>
 
-<style scoped>
+<style>
 /* @import url('/assets/bootstrap/css/bootstrap.min.css'); */
 @import url('/assets/css/animate.min.css');
 @import url('/assets/css/Login-Form-Basic-icons.css');
