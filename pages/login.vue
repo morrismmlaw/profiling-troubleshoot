@@ -57,6 +57,13 @@ const TSoptions = {
   }
 }
 
+onMounted(() => {
+  //Stop Logined User from accessing.
+  if (authStore.isAuthenticated) {
+    router.push('/login-redirect');
+  }
+})
+
 </script>
 
 <template>
