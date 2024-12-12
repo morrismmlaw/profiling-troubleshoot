@@ -140,9 +140,9 @@ const handleSearch = () => {
                               fill="currentColor"></path>
                           </svg>
                           <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item disabled" href="#">Search Option</a></li>
+                            <li><a class="dropdown-item" href="#">Free text search</a></li>
+                            <li><a class="dropdown-item" href="#">Tag based search</a></li>
                           </ul>
                         </div>
                         <!-- <a href="#">
