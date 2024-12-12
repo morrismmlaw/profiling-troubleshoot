@@ -21,7 +21,13 @@ onMounted(async () => {
   bgS1.value = '/img/bg-showcase-1.jpg'
   bgS2.value = '/img/bg-showcase-2.jpg'
   bgS3.value = '/img/bg-showcase-3.jpg'
-  bgM.value = '/img/bg-masthead.jpg'
+
+  // bgM.value = '/img/bg-masthead.jpg' //Water Background
+  // bgM.value = '/img/bg-scifac-1.webp'
+  // bgM.value = '/img/bg-pergamon.jpg'
+  // bgM.value = '/img/bg-inno.jpg'
+
+  bgM.value = '/img/bg-scifac-2.jpg'
 })
 
 const handleLoginSuccess = () => {
@@ -56,7 +62,8 @@ const logout = () => {
       <div class="container">
         <div class="row">
           <div class="col-xl-9 mx-auto position-relative">
-            <h1 class="mb-5">Build a landing page for your business or project and generate more leads!</h1>
+            <h1 class="mb-5 bold-elegant">Find an Expert at Hong Kong Baptist University</h1>
+            <h3 class="mb-5">Your search starts here, whether you are looking for a supervisor to undertake a research degree, an industry expert for a specific project, or a potential partner or collaborator.</h3>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
             <form>
@@ -71,126 +78,7 @@ const logout = () => {
         </div>
       </div>
     </header>
-    <section class="text-center bg-light features-icons">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-              <div class="d-flex features-icons-icon">
-                <i class="fas fa-desktop m-auto text-primary"></i>
-              </div>
-              <h3>Fully Responsive</h3>
-              <p class="icon-screen-desktop mb-0">This theme will look great on any device, no matter the size!</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-              <div class="d-flex features-icons-icon">
-                <i class="fa-solid fa-layer-group m-auto text-primary"></i>
-              </div>
-              <h3>Bootstrap 5 Ready Test MSG</h3>
-              <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-              <div class="d-flex features-icons-icon">
-                <i class="fas fa-check m-auto text-primary"></i>
-              </div>
-              <h3>Easy to Use</h3>
-              <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="showcase">
-      <div class="container-fluid p-0">
-        <div class="row g-0">
-          <div class="col-lg-6 text-white order-lg-2 showcase-img" :style="{ backgroundImage: `url(${bgS1})` }">
-            <span></span>
-          </div>
-          <div class="col-lg-6 my-auto order-lg-1 showcase-text">
-            <h2>Fully Responsive Design</h2>
-            <p class="lead mb-0">When you use a theme created with Bootstrap, you know that the theme will look great
-              on
-              any device, whether it&#39;s a phone, tablet, or desktop the page will behave responsively!</p>
-          </div>
-        </div>
-        <div class="row g-0">
-          <div class="col-lg-6 text-white showcase-img" :style="{ backgroundImage: `url(${bgS2})` }">
-            <span></span>
-          </div>
-          <div class="col-lg-6 my-auto order-lg-1 showcase-text">
-            <h2>Updated For Bootstrap 5</h2>
-            <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in
-              mobile responsive web development! All of the themes are now using Bootstrap 5!</p>
-          </div>
-        </div>
-        <div class="row g-0">
-          <div class="col-lg-6 text-white order-lg-2 showcase-img" :style="{ backgroundImage: `url(${bgS3})` }">
-            <span></span>
-          </div>
-          <div class="col-lg-6 my-auto order-lg-1 showcase-text">
-            <h2>Easy to Use &amp; Customize</h2>
-            <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some
-              deeper customization options. Out of the box, just add your content and images, and your new landing
-              page
-              will be ready to go!</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="text-center bg-light testimonials">
-      <div class="container">
-        <h2 class="mb-5">What people are saying...</h2>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3"
-                src="/public/img/testimonials-1.jpg" />
-              <h5>Margaret E.</h5>
-              <p class="fw-light mb-0">&quot;This is fantastic! Thanks so much guys!&quot;</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3"
-                src="/public/img/testimonials-2.jpg" />
-              <h5>Fred S.</h5>
-              <p class="fw-light mb-0">&quot;Bootstrap is amazing. I&#39;ve been using it to create lots of super nice
-                landing pages.&quot;</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3"
-                src="/public/img/testimonials-3.jpg" />
-              <h5>Sarah W.</h5>
-              <p class="fw-light mb-0">&quot;Thanks so much for making these free resources available to us!&quot;</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="text-center text-white call-to-action" style="no-repeat center center;background-size: cover;"
-      :style="{ backgroundImage: `url(${bgM})` }">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto position-relative">
-            <h2 class="mb-4">Ready to get started? Sign up now!</h2>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
-            <form>
-              <div class="row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control form-control-lg" type="email"
-                    placeholder="Enter your email..." /></div>
-                <div class="col-12 col-md-3"><button class="btn btn-primary btn-lg" type="submit">Sign up!</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+
     <footer class="bg-light footer">
       <div class="container">
         <div class="row">
@@ -254,5 +142,10 @@ const logout = () => {
 
 .shadow {
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bold-elegant {
+  font-weight: bold;
+  font-family: 'Arial Black', Gadget, sans-serif;
 }
 </style>

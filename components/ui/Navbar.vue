@@ -4,8 +4,8 @@
     <div class="container-fluid">
       <!-- <a class="navbar-brand" href="#">Offcanvas navbar</a> -->
       <NuxtLink class="navbar-brand" to="/">
-        <NuxtImg src="/img/HKBU.jpg" alt="Logo" class="logo-img mx-2" />
-        <span class="custom-text">HKBU Science Faculty Academic Profile</span>
+        <NuxtImg src="/img/HKBU1.png" alt="Logo" class="logo-img mx-2" />
+        <!-- <span class="custom-text">HKBU Science Faculty Academic Profile</span> -->
       </NuxtLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
