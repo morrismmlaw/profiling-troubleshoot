@@ -14,26 +14,38 @@
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-            <p class="bi bi-list">
+            <span class="d-flex align-items-center flex-nowrap ">
+              <i class="bi bi-list me-2"> </i>
               Menu
-            </p>
+            </span>
           </h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <NuxtLink class="nav-link bi bi-house" to="/"> Home</NuxtLink>
+              <span class="d-flex align-items-center flex-nowrap ">
+                <i class="bi bi-house me-2"></i>
+                <NuxtLink class="nav-link" to="/">Home</NuxtLink>
+              </span>
             </li>
             <li v-if="!isLoggedIn" class="nav-item">
-              <NuxtLink class="nav-link bi bi-box-arrow-in-right" to="/login"> Staff Login</NuxtLink>
+              <span class="d-flex align-items-center flex-nowrap ">
+                <i class="bi bi-box-arrow-in-right me-2"></i>
+                <NuxtLink class="nav-link" to="/login">Staff Login</NuxtLink>
+              </span>
             </li>
             <li v-if="isLoggedIn" class="nav-item">
-              <NuxtLink class="nav-link bi bi-person-circle" to="/profile"> Your Profile</NuxtLink>
+              <span class="d-flex align-items-center flex-nowrap ">
+                <i class="bi bi-person-circle me-2"></i>
+                <NuxtLink class="nav-link" to="/profile"> Your Profile</NuxtLink>
+              </span>
             </li>
             <li v-if="isLoggedIn" class="nav-item">
-              <NuxtLink @click="logout" class="nav-link bi bi-box-arrow-left" to="/"> Logout</NuxtLink>
-              <!-- <a class="nav-link" href="#">Login</a> -->
+              <span class="d-flex align-items-center flex-nowrap ">
+                <i class=" bi bi-box-arrow-left me-2"></i>
+                <NuxtLink @click="logout" class="nav-link" to="/"> Logout</NuxtLink>
+              </span>
             </li>
           </ul>
         </div>
