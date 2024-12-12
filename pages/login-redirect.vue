@@ -20,13 +20,23 @@
             <div class="col-md-12 col-xl-12">
               <div class="card mb-5 border-0 shadow rounded-3">
                 <div class="card-body d-flex flex-column align-items-center">
-                  <div class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4"><svg class="bi bi-person"
-                      xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                      viewBox="0 0 16 16">
+
+                  <div v-if="isLoggedIn" class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                      class="bi bi-check2-all" viewBox="0 0 16 16">
                       <path
-                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z">
-                      </path>
-                    </svg></div>
+                        d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0" />
+                      <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708" />
+                    </svg>
+                  </div>
+
+                  <div v-else class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon bg-danger my-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                      class="bi bi-exclamation" viewBox="0 0 16 16">
+                      <path
+                        d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0z" />
+                    </svg>
+                  </div>
 
                   <h1 class="card-title">{{ message }}</h1>
                   <p v-if="error" class="card-text">{{ error }}</p>
