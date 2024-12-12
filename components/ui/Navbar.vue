@@ -1,22 +1,5 @@
 <template>
 
-  <!-- 
-  <nav class="navbar navbar-expand bg-light">
-    <div class="container-fluid">
-      <NuxtLink class="navbar-brand" to="/">
-        <NuxtImg src="/img/HKBU.jpg" alt="Logo" class="logo-img" />
-        HKBU Science Faculty Academic Profile
-      </NuxtLink>
-      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"></button>
-      <div id="navcol-1" class="collapse navbar-collapse">
-        <NuxtLink class="btn btn-info ms-auto me-2 shadow" role="button" to="/profile">Profile</NuxtLink>
-        <button v-if="isLoggedIn" class="btn btn-danger shadow" role="button" @click="logout">Log Out</button>
-        <NuxtLink v-else class="btn btn-outline-primary shadow" role="button" to="/login">Sign In</NuxtLink>
-      </div>
-    </div>
-  </nav> 
-  -->
-
   <nav class="navbar bg-body-white py-0 z-3">
     <div class="container-fluid">
       <!-- <a class="navbar-brand" href="#">Offcanvas navbar</a> -->
