@@ -6,6 +6,8 @@ const bgS1 = ref('')
 const bgS2 = ref('')
 const bgS3 = ref('')
 const bgM = ref('')
+const bgM1 = ref('')
+const bgM2 = ref('')
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -24,10 +26,12 @@ onMounted(async () => {
   // bgM.value = '/img/bg-masthead.jpg' //Water Background
   // bgM.value = '/img/bg-scifac-1.webp'
   // bgM.value = '/img/bg-pergamon.jpg'
-  // bgM.value = '/img/bg-inno.jpg'
 
+  // bgM.value = '/img/bg-inno.jpg'
   // bgM.value = '/img/bg-scifac-2.jpg'
   bgM.value = '/img/bg-scifac-2-4k.jpeg'
+  bgM1.value = '/img/bg-pergamon-4k.jpeg'
+
 })
 
 const handleLoginSuccess = () => {
@@ -55,35 +59,50 @@ const logout = () => {
 <template>
 
   <div id="app">
-
-    <header class="text-center text-white masthead" style="no-repeat center center;background-size: cover; height: var(--height-offset);"
-      :style="{ backgroundImage: `url(${bgM})` }">
-
-      <div class="container">
-        <div class="overlay">
+    <header id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="overlay"></div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+          <img :src="bgM" class="d-block w-100 carousel-height" alt="background1">
         </div>
+        <div class="carousel-item" data-bs-interval="5000">
+          <img :src="bgM1" class="d-block w-100 carousel-height" alt="background2">
+        </div>
+      </div>
+      <button class="carousel-control-prev z-2" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next z-2" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
 
-        <div class="row">
-          <div class="col-xl-9 mx-auto position-relative">
-            <h1 class="mb-5 bold-elegant-title">Find an Expert at Hong Kong Baptist University</h1>
-            <h3 class="mb-5 bold-elegant-sub">Your search starts here, whether you are looking for a supervisor to
-              undertake a research degree, an industry expert for a specific project, or a potential partner or
-              collaborator.</h3>
-          </div>
+      <div class="carousel-text">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-9 mx-auto position-relative">
+              <h1 class="mb-5 bold-elegant-title">Find an Expert at Hong Kong Baptist University</h1>
+              <h3 class="mb-5 bold-elegant-sub">Your search starts here, whether you are looking for a supervisor to
+                undertake a research degree, an industry expert for a specific project, or a potential partner or
+                collaborator.</h3>
+            </div>
 
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
-            <form>
-              <div class="row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control form-control-lg" type="email"
-                    placeholder="Search By Name or Keyword" /></div>
-                <div class="col-12 col-md-3"><button class="btn btn-primary btn-lg" type="submit">Sign up!</button>
+            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
+              <form>
+                <div class="row">
+                  <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control form-control-lg" type="email"
+                      placeholder="Search By Name or Keyword" /></div>
+                  <div class="col-12 col-md-3"><button class="btn btn-primary btn-lg" type="submit">Sign up!</button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-
     </header>
 
     <footer class="bg-light footer">
@@ -133,13 +152,48 @@ const logout = () => {
   font-size: 43px;
   font-weight: bold;
   font-family: 'Arial Black', Gadget, sans-serif;
-}
 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .bold-elegant-sub {
   font-size: 19px;
   font-weight: lighter;
   font-family: popins, sans-serif;
   line-height: 1.5;
+
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.carousel-height {
+  height: var(--height-offset);
+  object-fit: cover;
+}
+
+.carousel-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 1;
+}
+
+.carousel-text .container {
+  max-width: 1200px;
+}
+
+.carousel-text h1,
+.carousel-text h3 {
+  color: #fff;
+  text-align: center;
 }
 </style>
