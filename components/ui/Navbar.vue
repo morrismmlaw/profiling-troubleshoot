@@ -101,12 +101,12 @@ const logout = () => {
 
 const navbarStylePerRoute = computed(() => {
   if (route.path === '/profile') {
-    return { backgroundColor: 'rgba(37, 150, 190, 0.7)' };
+    return { backgroundColor: 'rgba(37, 150, 190, 0.7)' }; //Marine Blue
     // return { backgroundColor: 'transparent' };
   } else if (route.path === '/search') {
     return { backgroundColor: 'gray' };
   } else if (route.path === '/login') {
-    return { backgroundColor: 'rgba(83,183,209,0.3)' };
+    return { backgroundColor: 'rgba(83,183,209,0.3)' }; //Light Blue
   } else {
     return { backgroundColor: 'transparent' };
   }
