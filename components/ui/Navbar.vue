@@ -15,7 +15,7 @@
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
             <span class="d-flex align-items-center flex-nowrap ">
-              <i class="bi bi-list me-2"> </i>
+              <i class="bi bi-list me-3"> </i>
               Menu
             </span>
           </h5>
@@ -25,25 +25,25 @@
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
               <span class="d-flex align-items-center flex-nowrap ">
-                <i class="bi bi-house me-2"></i>
+                <i class="bi bi-house me-3"></i>
                 <NuxtLink class="nav-link" to="/">Home</NuxtLink>
               </span>
             </li>
             <li v-if="!isLoggedIn" class="nav-item">
               <span class="d-flex align-items-center flex-nowrap ">
-                <i class="bi bi-box-arrow-in-right me-2"></i>
+                <i class="bi bi-box-arrow-in-right me-3"></i>
                 <NuxtLink class="nav-link" to="/login">Staff Login</NuxtLink>
               </span>
             </li>
             <li v-if="isLoggedIn" class="nav-item">
               <span class="d-flex align-items-center flex-nowrap ">
-                <i class="bi bi-person-circle me-2"></i>
+                <i class="bi bi-person-circle me-3"></i>
                 <NuxtLink class="nav-link" to="/profile"> Your Profile</NuxtLink>
               </span>
             </li>
             <li v-if="isLoggedIn" class="nav-item">
               <span class="d-flex align-items-center flex-nowrap ">
-                <i class=" bi bi-box-arrow-left me-2"></i>
+                <i class=" bi bi-box-arrow-left me-3"></i>
                 <NuxtLink @click="logout" class="nav-link" to="/"> Logout</NuxtLink>
               </span>
             </li>
