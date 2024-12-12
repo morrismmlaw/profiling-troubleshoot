@@ -2,16 +2,14 @@
   <div class="container-fluid nav-offset">
 
     <div class="row">
-      <div class="centered-heading">
-        <h1 class="heading-text-style" aria-describedby="headingDescription">EXPERTS SEARCH<span id="headingDescription"
-            hidden="">Find researchers at Deakin University.</span></h1>
+      <div class="centered-heading shadow">
+        <h1 class="heading-text-style m-1" aria-describedby="headingDescription">EXPERTS SEARCH<span
+            id="headingDescription" hidden="">Find researchers at Hong kong Baptist University.</span></h1>
       </div>
     </div>
 
-
     <div class="row"
       style="background-image: url(&quot;/img/bottom.8ea92c85.jpg&quot;); background-size: cover; background-repeat: no-repeat;">
-
       <div class="col-md-11 col-lg-10 col-xl-9 mx-auto position-relative">
 
         <div class="container-fluid p-3 m-3">
@@ -100,5 +98,6 @@ const handleSearch = () => {
   height: 42px;
   line-height: 45px;
 
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
 }
 </style>
