@@ -23,17 +23,16 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-
-              <NuxtLink class="nav-link" to="/">Home</NuxtLink>
+              <NuxtLink class="nav-link bi bi-house" to="/"> Home</NuxtLink>
             </li>
             <li v-if="!isLoggedIn" class="nav-item">
-              <NuxtLink class="nav-link" to="/login">Staff Login</NuxtLink>
+              <NuxtLink class="nav-link bi bi-box-arrow-in-right" to="/login"> Staff Login</NuxtLink>
             </li>
             <li v-if="isLoggedIn" class="nav-item">
-              <NuxtLink class="nav-link" to="/profile">Your Profile</NuxtLink>
+              <NuxtLink class="nav-link bi bi-person-circle" to="/profile"> Your Profile</NuxtLink>
             </li>
             <li v-if="isLoggedIn" class="nav-item">
-              <NuxtLink @click="logout" class="nav-link" to="/">Logout</NuxtLink>
+              <NuxtLink @click="logout" class="nav-link bi bi-box-arrow-left" to="/"> Logout</NuxtLink>
               <!-- <a class="nav-link" href="#">Login</a> -->
             </li>
           </ul>
