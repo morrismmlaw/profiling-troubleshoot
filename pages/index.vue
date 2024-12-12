@@ -277,4 +277,11 @@ const logout = () => {
 
   color: blueviolet;
 }
+
+#my-search-input,
+svg {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
 </style>

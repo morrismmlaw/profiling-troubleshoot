@@ -31,7 +31,7 @@
             </li>
             <li v-if="!isLoggedIn" class="nav-item">
               <span class="d-flex align-items-center flex-nowrap ">
-                <i class="bi bi-box-arrow-in-right me-3"></i>
+                <i class="bi bi-box-arrow-in-right me-3" style="margin-left: -3px;"></i>
                 <NuxtLink class="nav-link" to="/login">Staff Login</NuxtLink>
               </span>
             </li>
@@ -106,4 +106,9 @@ const logout = () => {
   font-style: italic;
   font-size: 1.3rem;
 }
+
+.bi {
+  font-size: 1.5rem;
+}
+
 </style>
