@@ -21,11 +21,11 @@
         </NuxtLink>
       </div>
 
-      <button class="navbar-toggler bg-body-secondary" type="button" data-bs-toggle="offcanvas"
+      <button class="navbar-toggler bg-body-secondary semi-transparent" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas offcanvas-end semi-transparent-1" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
             <span class="d-flex align-items-center flex-nowrap ">
@@ -134,4 +134,13 @@ const navbarStylePerRoute = computed(() => {
 .bi {
   font-size: 1.5rem;
 }
+
+.semi-transparent {
+  opacity: 0.5;
+}
+
+.semi-transparent-1 {
+  background-color: hsla(0, 0%, 100%, 0.9);
+}
+
 </style>
