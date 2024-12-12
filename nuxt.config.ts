@@ -1,14 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
-  modules: [
-    '@nuxtjs/strapi', '@pinia/nuxt', 'nuxt-tiptap-editor', '@vesp/nuxt-fontawesome',
-    '@nuxt/image', '@hypernym/nuxt-gsap', 'nuxt-particles'
-  ],
+  modules: ['@nuxtjs/strapi', '@pinia/nuxt', 'nuxt-tiptap-editor', '@vesp/nuxt-fontawesome', '@nuxt/image', '@hypernym/nuxt-gsap', 'nuxt-particles', 'nuxt-bootstrap-icons'],
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
     '@oruga-ui/theme-bootstrap/dist/bootstrap.css',
+
+    'bootstrap-icons/font/bootstrap-icons.min.css',
 
     '@fortawesome/fontawesome-free/css/all.min.css',
     'font-awesome/css/font-awesome.css',
