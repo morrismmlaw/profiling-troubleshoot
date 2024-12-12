@@ -60,19 +60,17 @@ const logout = () => {
 
   <div id="app">
 
-
     <header id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
-
       <div class="carousel-inner">
-
         <div class="carousel-item active" data-bs-interval="5000">
+          <div class="overlay"></div> <!-- Add this line -->
           <img :src="bgM" class="d-block w-100 carousel-height" alt="background1">
         </div>
         <div class="carousel-item" data-bs-interval="5000">
+          <div class="overlay"></div> <!-- Add this line -->
           <img :src="bgM1" class="d-block w-100 carousel-height" alt="background2">
         </div>
       </div>
-
       <div class="carousel-overlay"></div> <!-- Add this line -->
 
       <button class="carousel-control-prev z-2" type="button" data-bs-target="#carouselExampleAutoplaying"
@@ -301,6 +299,16 @@ svg {
   height: 100%;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
   pointer-events: none;
-  transition: background-position 5s ease; /* Adjust the duration (0.5s) to change the transition time */
+  transition: background-position 5s ease;
+  /* Adjust the duration (0.5s) to change the transition time */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); 
 }
 </style>
