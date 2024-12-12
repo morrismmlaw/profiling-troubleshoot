@@ -247,6 +247,7 @@ const logout = () => {
 .carousel-height {
   height: var(--height-offset);
   object-fit: cover;
+  object-position: top;
 }
 
 .carousel-text {
