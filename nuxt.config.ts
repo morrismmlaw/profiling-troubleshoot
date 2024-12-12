@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     '/assets/fonts/font-awesome.min.css',
 
     '/assets/css/_variables.css', //My css for navbar
+    '/assets/css/styles.min.css', //My css for BS components
 
   ],
 

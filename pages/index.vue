@@ -90,13 +90,38 @@ const logout = () => {
                 collaborator.</h3>
             </div>
 
-            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
+            <div class="col-md-11 col-lg-10 col-xl-9 mx-auto position-relative">
               <form>
                 <div class="row">
-                  <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control form-control-lg" type="email"
-                      placeholder="Search By Name or Keyword" /></div>
-                  <div class="col-12 col-md-3"><button class="btn btn-primary btn-lg" type="submit">Sign up!</button>
+                  <div class="col-12 mb-2 mb-md-0">
+                    <!-- <input class="form-control form-control-lg" type="email"
+                      placeholder="Search By Name or Keyword" /> -->
+
+                    <div id="myInputSearch"
+                      style="margin-left: 1px;background: var(--bs-secondary-bg);border-radius: 41px;"><label
+                        class="form-label" style="width: 100%;"><svg class="bi bi-search"
+                          xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                          viewBox="0 0 16 16" style="margin-left: 14px;font-size: 20px;margin-top: -6px;">
+                          <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0">
+                          </path>
+                        </svg><input id="my-search-input" type="search" placeholder="Search by name or keyword"
+                          style="margin-left: 12px;margin-top: 10px;width: calc(100% - 95px);border-style: none;background: rgb(233,236,239);" /><svg
+                          xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                          style="margin-left: 12px;font-size: 28px;">
+                          <path
+                            d="M2 5.99519C2 5.44556 2.44556 5 2.99519 5H11.0048C11.5544 5 12 5.44556 12 5.99519C12 6.54482 11.5544 6.99039 11.0048 6.99039H2.99519C2.44556 6.99039 2 6.54482 2 5.99519Z"
+                            fill="currentColor"></path>
+                          <path
+                            d="M2 11.9998C2 11.4501 2.44556 11.0046 2.99519 11.0046H21.0048C21.5544 11.0046 22 11.4501 22 11.9998C22 12.5494 21.5544 12.9949 21.0048 12.9949H2.99519C2.44556 12.9949 2 12.5494 2 11.9998Z"
+                            fill="currentColor"></path>
+                          <path
+                            d="M2.99519 17.0096C2.44556 17.0096 2 17.4552 2 18.0048C2 18.5544 2.44556 19 2.99519 19H15.0048C15.5544 19 16 18.5544 16 18.0048C16 17.4552 15.5544 17.0096 15.0048 17.0096H2.99519Z"
+                            fill="currentColor"></path>
+                        </svg></label>
+                      </div>
                   </div>
+
                 </div>
               </form>
             </div>
@@ -250,5 +275,4 @@ const logout = () => {
 
   color: blueviolet;
 }
-
 </style>
