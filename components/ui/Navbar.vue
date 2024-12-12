@@ -1,11 +1,18 @@
 <template>
 
-
-  <nav class="navbar sticky-top py-0 z-3" :style="navbarStyle"
+  <nav class="navbar sticky-top py-0 z-3" :style="navbarStylePerRoute"
     style="position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
     <div class="container-fluid">
 
-      <div class="d-flex">
+      <div v-if="isLoggedIn" class="d-flex">
+        <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img ms-4" />
+        </NuxtLink>
+        <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img" />
+        </NuxtLink>
+      </div>      
+      <div v-else class="d-flex">
         <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img ms-4" />
         </NuxtLink>
@@ -91,9 +98,10 @@ const logout = () => {
   authStore.logout();
 };
 
-const navbarStyle = computed(() => {
+const navbarStylePerRoute = computed(() => {
   if (route.path === '/profile') {
     return { backgroundColor: 'rgba(37, 150, 190, 0.7)' };
+    // return { backgroundColor: 'transparent' };
   } else {
     return { backgroundColor: 'transparent' };
   }
