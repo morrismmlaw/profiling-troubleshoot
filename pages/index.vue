@@ -109,15 +109,16 @@ const logout = () => {
       <div class="container py-4 py-lg-5">
         <div class="row justify-content-center">
           <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-            <h3 class="fs-6">Services</h3>
+            <h3 class="fs-6 footer-title">CONTACT <br> Hong Kong Baptist University</h3>
             <ul class="list-unstyled">
-              <li><a class="link-secondary" href="#">Web design</a></li>
-              <li><a class="link-secondary" href="#">Development</a></li>
-              <li><a class="link-secondary" href="#">Hosting</a></li>
+              <li><nuxt-img src="/img/HKBU.jpg" alt="Uni Logo" /></li>
+              <li><a class="link-secondary" href="#">0000 0000</a></li>
+              <li><a class="link-secondary" href="#">enquire@hkbu.edu.hk</a></li>
+              <li><a class="link-secondary" href="#">Locations</a></li>
             </ul>
           </div>
           <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-            <h3 class="fs-6">About</h3>
+            <h3 class="fs-6 footer-title">About</h3>
             <ul class="list-unstyled">
               <li><a class="link-secondary" href="#">Company</a></li>
               <li><a class="link-secondary" href="#">Team</a></li>
@@ -125,7 +126,7 @@ const logout = () => {
             </ul>
           </div>
           <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-            <h3 class="fs-6">Careers</h3>
+            <h3 class="fs-6 footer-title">Careers</h3>
             <ul class="list-unstyled">
               <li><a class="link-secondary" href="#">Job openings</a></li>
               <li><a class="link-secondary" href="#">Employee success</a></li>
@@ -144,7 +145,7 @@ const logout = () => {
                   <path
                     d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z">
                   </path>
-                </svg></span><span>Brand</span></div>
+                </svg></span><span class="footer-title">Brand</span></div>
             <p class="text-muted copyright">Sem eleifend donec molestie, integer quisque orci aliquam.</p>
           </div>
         </div>
@@ -266,4 +267,14 @@ const logout = () => {
   color: #fff;
   text-align: center;
 }
+
+.footer-title {
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: .76px;
+  line-height: 23px;
+
+  color: blueviolet;
+}
+
 </style>
