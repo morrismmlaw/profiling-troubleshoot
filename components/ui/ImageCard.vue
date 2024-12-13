@@ -15,13 +15,15 @@ function deleteDropFile(index: number): void {
   dropFiles.value.splice(index, 1);
 }
 
+const imgUrl = props.profile.attributes.photoURL || 'https://scholars.hkbu.edu.hk/assets/no-portrait-473c6d005990baa1f418d9c668dcd4ec.png';
+
 // ORUGA FILE SECTION
 </script>
 
 <template>
   <div>
     <div class="card ms-3 shadow" style="max-width: 25rem;">
-      <img class="card-img-top img-fluid" style="object-fit: cover;" :src="`${props.profile.attributes.photoURL}`"
+      <img class="card-img-top img-fluid" style="object-fit: cover;" :src="imgUrl"
         alt="Card image cap" />
 
       <div class="card-body">
