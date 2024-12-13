@@ -370,9 +370,9 @@ svg {
 }
 
 .loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid #FFF;
+  width: 100px;
+  height: 100px;
+  border: 10px solid #FFF;
   border-bottom-color: #FF3D00;
   border-radius: 50%;
   display: inline-block;
