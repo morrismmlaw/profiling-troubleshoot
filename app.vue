@@ -5,6 +5,7 @@ import Navbar from './components/ui/Navbar.vue';
 
 <template>
   <div>
+    <NuxtLoadingIndicator :throttle="0" />
     <NuxtLayout>
       <Navbar />
       <NuxtPage />

@@ -12,6 +12,8 @@ const bgM2 = ref('')
 const authStore = useAuthStore()
 const router = useRouter()
 
+const isLoaded = ref(false);
+
 onBeforeMount(async () => {
   console.log("On before Mount")
 })
@@ -32,6 +34,11 @@ onMounted(async () => {
   bgM.value = '/img/bg-scifac-2-4k.jpeg'
   bgM1.value = '/img/bg-pergamon-4k.jpeg'
 
+  const img = new Image();
+  img.onload = () => {
+    isLoaded.value = true;
+  };
+  img.src = bgM.value;
 })
 
 const handleLoginSuccess = () => {
@@ -60,8 +67,10 @@ import SearchBar from '~/components/ui/SearchBar.vue';
 
 <template>
 
-  <div id="app">
-
+  <div v-if="!isLoaded" class="loading-container nav-offset">
+    <span class="loader"></span>
+  </div>
+  <div v-else>
     <header id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="overlay"></div>
       <div class="carousel-inner" style="width: 100vw;">
@@ -106,7 +115,7 @@ import SearchBar from '~/components/ui/SearchBar.vue';
                     <!-- <input class="form-control form-control-lg" type="email"
                       placeholder="Search By Name or Keyword" /> -->
 
-                      <SearchBar />
+                    <SearchBar />
 
                   </div>
                 </div>
@@ -360,4 +369,31 @@ svg {
   background: rgba(0, 0, 0, 0.4);
 }
 
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: #FF3D00;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 </style>
