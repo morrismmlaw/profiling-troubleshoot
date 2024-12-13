@@ -176,6 +176,16 @@ const DEPOptionsOrugaNew = DEPOptions.map((option) => {
   };
 });
 
+const sortTagOptions = () => {
+  DEPOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
+  // ASOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
+  FCRAOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
+  RFOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
+  SRCOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
+}
+
+sortTagOptions();
+
 const debugTagsMsg = () => {
 
   // console.log('SRC Options', SRCOptions);
