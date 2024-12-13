@@ -53,6 +53,16 @@ const logout = () => {
   authStore.logout();
 };
 
+const searchInput = ref('')
+
+const handleSearch = () => {
+  console.log("Clicked Search:", searchInput.value)
+  router.push({
+    path: '/search',
+    query: { q: searchInput.value }
+  })
+}
+
 </script>
 
 
@@ -61,7 +71,8 @@ const logout = () => {
   <div id="app">
 
     <header id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
-      <div class="carousel-inner">
+      <div class="overlay"></div>
+      <div class="carousel-inner" style="width: 100vw;">
         <div class="carousel-item active" data-bs-interval="5000">
           <div class="overlay"></div> <!-- Add this line -->
           <img :src="bgM" class="d-block w-100 carousel-height" alt="background1">
@@ -103,33 +114,51 @@ const logout = () => {
                     <!-- <input class="form-control form-control-lg" type="email"
                       placeholder="Search By Name or Keyword" /> -->
 
-                    <div id="myInputSearch"
-                      style="margin-left: 1px;background: var(--bs-light);border-radius: 41px;/*box-shadow: inset 1px 1px 5px 1px;*/margin-top: 2px;height: 53px;border-width: thin;border-style: solid;">
-                      <label class="form-label" style="width: 100%;margin-top: 0px;"><a href="#"><svg class="text-black"
-                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
-                            style="margin-left: 14px;font-size: 30px;margin-top: -3px;color: var(--bs-secondary);">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M18.319 14.4326C20.7628 11.2941 20.542 6.75347 17.6569 3.86829C14.5327 0.744098 9.46734 0.744098 6.34315 3.86829C3.21895 6.99249 3.21895 12.0578 6.34315 15.182C9.22833 18.0672 13.769 18.2879 16.9075 15.8442C16.921 15.8595 16.9351 15.8745 16.9497 15.8891L21.1924 20.1317C21.5829 20.5223 22.2161 20.5223 22.6066 20.1317C22.9971 19.7412 22.9971 19.1081 22.6066 18.7175L18.364 14.4749C18.3493 14.4603 18.3343 14.4462 18.319 14.4326ZM16.2426 5.28251C18.5858 7.62565 18.5858 11.4246 16.2426 13.7678C13.8995 16.1109 10.1005 16.1109 7.75736 13.7678C5.41421 11.4246 5.41421 7.62565 7.75736 5.28251C10.1005 2.93936 13.8995 2.93936 16.2426 5.28251Z"
-                              fill="currentColor"></path>
-                          </svg></a><input id="my-search-input" type="search"
-                          style="margin-left: 7px;margin-top: 4px;width: calc(100% - 100px);border-style: none;background: var(--bs-light);height: 45px;font-size: 20px;font-family: Abel, sans-serif;"
-                          placeholder="Search by name or keyword" /><a href="#"><svg class="text-black"
-                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
-                            style="font-size: 30px;margin-top: -4px;color: var(--bs-secondary);margin-left: 8px;">
-                            <path
-                              d="M2 5.99519C2 5.44556 2.44556 5 2.99519 5H11.0048C11.5544 5 12 5.44556 12 5.99519C12 6.54482 11.5544 6.99039 11.0048 6.99039H2.99519C2.44556 6.99039 2 6.54482 2 5.99519Z"
-                              fill="currentColor"></path>
-                            <path
-                              d="M2 11.9998C2 11.4501 2.44556 11.0046 2.99519 11.0046H21.0048C21.5544 11.0046 22 11.4501 22 11.9998C22 12.5494 21.5544 12.9949 21.0048 12.9949H2.99519C2.44556 12.9949 2 12.5494 2 11.9998Z"
-                              fill="currentColor"></path>
-                            <path
-                              d="M2.99519 17.0096C2.44556 17.0096 2 17.4552 2 18.0048C2 18.5544 2.44556 19 2.99519 19H15.0048C15.5544 19 16 18.5544 16 18.0048C16 17.4552 15.5544 17.0096 15.0048 17.0096H2.99519Z"
-                              fill="currentColor"></path>
-                          </svg></a></label>
-                    </div>
+                    <form @submit.prevent="handleSearch">
+                      <div id="myInputSearch"
+                        style="margin-left: 1px;background: var(--bs-light);border-radius: 41px;/*box-shadow: inset 1px 1px 5px 1px;*/margin-top: 2px;height: 53px;border-width: thin;border-style: solid;">
+                        <label class="form-label" style="width: 100%;margin-top: 0px;">
+                          <NuxtLink to="/search" @click="handleSearch">
+                            <svg class="text-black" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                              viewBox="0 0 24 24" fill="none"
+                              style="margin-left: 14px;font-size: 30px;margin-top: -3px;color: var(--bs-secondary);">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M18.319 14.4326C20.7628 11.2941 20.542 6.75347 17.6569 3.86829C14.5327 0.744098 9.46734 0.744098 6.34315 3.86829C3.21895 6.99249 3.21895 12.0578 6.34315 15.182C9.22833 18.0672 13.769 18.2879 16.9075 15.8442C16.921 15.8595 16.9351 15.8745 16.9497 15.8891L21.1924 20.1317C21.5829 20.5223 22.2161 20.5223 22.6066 20.1317C22.9971 19.7412 22.9971 19.1081 22.6066 18.7175L18.364 14.4749C18.3493 14.4603 18.3343 14.4462 18.319 14.4326ZM16.2426 5.28251C18.5858 7.62565 18.5858 11.4246 16.2426 13.7678C13.8995 16.1109 10.1005 16.1109 7.75736 13.7678C5.41421 11.4246 5.41421 7.62565 7.75736 5.28251C10.1005 2.93936 13.8995 2.93936 16.2426 5.28251Z"
+                                fill="currentColor"></path>
+                            </svg>
+                          </NuxtLink>
+                          <input @keyup.enter="handleSearch" v-model="searchInput" id="my-search-input" type="search"
+                            style="margin-left: 7px;margin-top: 4px;width: calc(100% - 100px);border-style: none;background: var(--bs-light);height: 45px;font-size: 20px;font-family: Abel, sans-serif;"
+                            placeholder="Search by name or keyword" />
+                          <div class="dropdown">
+                            <!-- <i class="bi bi-list dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                          </i> -->
+                            <svg class="text-black dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                              xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+                              fill="none"
+                              style="font-size: 30px;margin-top: -4px;color: var(--bs-secondary);margin-left: 8px;">
+                              <path
+                                d="M2 5.99519C2 5.44556 2.44556 5 2.99519 5H11.0048C11.5544 5 12 5.44556 12 5.99519C12 6.54482 11.5544 6.99039 11.0048 6.99039H2.99519C2.44556 6.99039 2 6.54482 2 5.99519Z"
+                                fill="currentColor"></path>
+                              <path
+                                d="M2 11.9998C2 11.4501 2.44556 11.0046 2.99519 11.0046H21.0048C21.5544 11.0046 22 11.4501 22 11.9998C22 12.5494 21.5544 12.9949 21.0048 12.9949H2.99519C2.44556 12.9949 2 12.5494 2 11.9998Z"
+                                fill="currentColor"></path>
+                              <path
+                                d="M2.99519 17.0096C2.44556 17.0096 2 17.4552 2 18.0048C2 18.5544 2.44556 19 2.99519 19H15.0048C15.5544 19 16 18.5544 16 18.0048C16 17.4552 15.5544 17.0096 15.0048 17.0096H2.99519Z"
+                                fill="currentColor"></path>
+                            </svg>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item disabled" href="#">Search Option</a></li>
+                              <li><a class="dropdown-item" href="#">Free text search</a></li>
+                              <li><a class="dropdown-item" href="#">Tag based search</a></li>
+                            </ul>
+                          </div>
+                        </label>
+                      </div>
+                    </form>
 
                   </div>
-
                 </div>
               </form>
             </div>
@@ -138,75 +167,136 @@ const logout = () => {
       </div>
     </header>
 
-    <footer>
-      <div class="container py-4 py-lg-5">
-        <div class="row justify-content-center">
-          <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-            <h3 class="fs-6 footer-title">CONTACT <br> Hong Kong Baptist University</h3>
-            <ul class="list-unstyled">
-              <li><nuxt-img src="/img/HKBU.jpg" alt="Uni Logo" /></li>
-              <li><a class="link-secondary" href="#">0000 0000</a></li>
-              <li><a class="link-secondary" href="#">enquire@hkbu.edu.hk</a></li>
-              <li><a class="link-secondary" href="#">Locations</a></li>
-            </ul>
-          </div>
-          <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-            <h3 class="fs-6 footer-title">About</h3>
-            <ul class="list-unstyled">
-              <li><a class="link-secondary" href="#">Company</a></li>
-              <li><a class="link-secondary" href="#">Team</a></li>
-              <li><a class="link-secondary" href="#">Legacy</a></li>
-            </ul>
-          </div>
-          <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-            <h3 class="fs-6 footer-title">Careers</h3>
-            <ul class="list-unstyled">
-              <li><a class="link-secondary" href="#">Job openings</a></li>
-              <li><a class="link-secondary" href="#">Employee success</a></li>
-              <li><a class="link-secondary" href="#">Benefits</a></li>
-            </ul>
-          </div>
-          <div
-            class="col-lg-3 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last item social">
-            <div class="fw-bold d-flex align-items-center mb-2"><span
-                class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center bs-icon me-2"><svg
-                  class="bi bi-bezier" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                  viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z">
-                  </path>
-                  <path
-                    d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z">
-                  </path>
-                </svg></span><span class="footer-title">Brand</span></div>
-            <p class="text-muted copyright">Sem eleifend donec molestie, integer quisque orci aliquam.</p>
-          </div>
-        </div>
-        <hr />
-        <div class="d-flex justify-content-between align-items-center pt-3">
-          <p class="text-muted mb-0">Copyright © 2024 Hong Kong Baptist University</p>
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item"><svg class="bi bi-facebook" xmlns="http://www.w3.org/2000/svg" width="1em"
-                height="1em" fill="currentColor" viewBox="0 0 16 16">
-                <path
-                  d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951">
-                </path>
-              </svg></li>
-            <li class="list-inline-item"><svg class="bi bi-twitter" xmlns="http://www.w3.org/2000/svg" width="1em"
-                height="1em" fill="currentColor" viewBox="0 0 16 16">
-                <path
-                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15">
-                </path>
-              </svg></li>
-            <li class="list-inline-item"><svg class="bi bi-instagram" xmlns="http://www.w3.org/2000/svg" width="1em"
-                height="1em" fill="currentColor" viewBox="0 0 16 16">
-                <path
-                  d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334">
-                </path>
-              </svg></li>
-          </ul>
-        </div>
-      </div>
+    <footer class="text-white bg-blue-subtle" data-v-2ddf58e4=""
+      style="background-image: url(&quot;/img/bottom.8ea92c85.jpg&quot;); background-size: cover; background-repeat: no-repeat;">
+      <!-- Grid container -->
+      <div class="container p-4" data-v-2ddf58e4=""><!-- Section: Social media -->
+        <section class="mb-4 text-center" data-v-2ddf58e4=""><a class="btn btn-outline-light btn-floating m-1"
+            href="https://www.facebook.com/pages/Faculty-of-Science-HKBU/190697024296041" role="button" target="_blank"
+            data-v-2ddf58e4=""><i class="fab fa-facebook-f" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/hkbusci/" role="button"
+            target="_blank" data-v-2ddf58e4=""><i class="fab fa-instagram" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1" href="https://www.twitter.com/hkbu_science" role="button"
+            target="_blank" data-v-2ddf58e4=""><i class="fab fa-x-twitter" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1"
+            href="https://www.linkedin.com/in/hkbu-faculty-of-science-0039461b9" role="button" target="_blank"
+            data-v-2ddf58e4=""><i class="fab fa-linkedin-in" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1" href="https://weibo.com/hkbuscience" role="button"
+            target="_blank" data-v-2ddf58e4=""><i class="fab fa-weibo" data-v-2ddf58e4=""></i></a><a
+            class="btn btn-outline-light btn-floating m-1"
+            href="https://www.youtube.com/channel/UCKjUBhV5SiJ-FvLAhVVCvyQ" role="button" target="_blank"
+            data-v-2ddf58e4=""><i class="fab fa-youtube" data-v-2ddf58e4=""></i></a></section>
+        <!-- Section: Social media --><!-- Section: Text --><!-- <section class="mb-4">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+        repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+        eum harum corrupti dicta, aliquam sequi voluptate quas.
+      </p>
+    </section> --><!-- Section: Text --><!-- Section: Links -->
+        <section class="" data-v-2ddf58e4=""><!--Grid row-->
+          <div class="row" data-v-2ddf58e4=""><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">About</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="/vision-mission?lang=en" class="text-white" data-v-2ddf58e4="">Vision
+                    &amp; Mission</a></li>
+                <li data-v-2ddf58e4=""><a href="/deans-message?lang=en" class="text-white" data-v-2ddf58e4="">Dean's
+                    Message</a></li>
+                <li data-v-2ddf58e4=""><a href="/faculty-advisory-committee?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Faculty Advisory Committee</a></li>
+                <li data-v-2ddf58e4=""><a href="/distinguished-professorship?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Distinguished Professorship</a></li>
+                <li data-v-2ddf58e4=""><a href="/faculty-administration?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Faculty Administration</a></li>
+                <li data-v-2ddf58e4=""><a href="/dean_office?lang=en" class="text-white" data-v-2ddf58e4="">Staff
+                    List</a></li>
+                <li data-v-2ddf58e4=""><a href="/pages/contact-us?lang=en" class="text-white" data-v-2ddf58e4="">Contact
+                    Us</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">Department</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="http://biol.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Biology</a></li>
+                <li data-v-2ddf58e4=""><a href="http://chem.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Chemistry</a></li>
+                <li data-v-2ddf58e4=""><a href="http://www.comp.hkbu.edu.hk/v1/?lang=en" target="_blank"
+                    class="text-white" data-v-2ddf58e4="">Computer Science</a></li>
+                <li data-v-2ddf58e4=""><a href="http://www.math.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Mathematics</a></li>
+                <li data-v-2ddf58e4=""><a href="http://physics.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Physics</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">Programme</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="/ug-programmes?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Undergraduate Programmes</a></li>
+                <li data-v-2ddf58e4=""><a href="/taught-postgraduate-programmes?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Taught Postgraduate Programmes</a></li>
+                <li data-v-2ddf58e4=""><a href="/research-postgraduate-programmes?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Research Postgraduate Programmes</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">Research</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="/faculty-niche-research-area?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Faculty Niche Research Areas</a></li>
+                <li data-v-2ddf58e4=""><a href="/research-impact?lang=en" class="text-white" data-v-2ddf58e4="">Research
+                    Impact</a></li>
+                <li data-v-2ddf58e4=""><a href="/research-spotlight?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Research Spotlights</a></li>
+                <li data-v-2ddf58e4=""><a href="/science-insights?lang=en" class="text-white" data-v-2ddf58e4="">SCIENCE
+                    Insights</a></li>
+                <li data-v-2ddf58e4=""><a href="/key-research-units?lang=en" class="text-white" data-v-2ddf58e4="">Key
+                    Research Units</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">News</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="/press-releases?lang=en" class="text-white" data-v-2ddf58e4="">News</a>
+                </li>
+                <li data-v-2ddf58e4=""><a href="/events?lang=en" class="text-white" data-v-2ddf58e4="">Events</a></li>
+                <li data-v-2ddf58e4=""><a href="/science-in-the-media?lang=en" class="text-white"
+                    data-v-2ddf58e4="">HKBU SCIENCE in the Media</a></li>
+                <li data-v-2ddf58e4=""><a href="/awards-achievements?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Awards &amp; Achievements</a></li>
+                <li data-v-2ddf58e4=""><a href="/newsletters?lang=en" class="text-white"
+                    data-v-2ddf58e4="">Newsletters</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column--><!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-v-2ddf58e4="">
+              <h5 class="text-uppercase" data-v-2ddf58e4="">Other</h5>
+              <ul class="list-unstyled mb-0" data-v-2ddf58e4="">
+                <li data-v-2ddf58e4=""><a href="https://60anni.sci.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">60th Anniversary</a></li>
+                <li data-v-2ddf58e4=""><a href="https://alumni.sci.hkbu.edu.hk/" target="_blank" class="text-white"
+                    data-v-2ddf58e4="">Alumni</a></li>
+                <li data-v-2ddf58e4=""><a href="https://intranet.sci.hkbu.edu.hk/index.php" target="_blank"
+                    class="text-white" data-v-2ddf58e4="">Intranet</a></li>
+                <li data-v-2ddf58e4="">&nbsp;</li>
+              </ul>
+            </div><!--Grid column-->
+          </div><!--Grid row-->
+        </section><!-- Section: Links -->
+      </div><!-- Grid container --><!-- Copyright -->
+      <div class="text-center p-3" data-v-2ddf58e4="" style="background-color: rgba(0, 0, 0, 0.4);">
+        <div data-v-2ddf58e4=""><a class="text-white" href="/pages/contact-us?lang=en"
+            data-v-2ddf58e4="">Enquiry</a>&nbsp;| <a class="text-white" href="/nav/sitemap?lang=en"
+            data-v-2ddf58e4="">Sitemap</a>&nbsp;| <a class="text-white" href="/nav/disclaimer?lang=en"
+            data-v-2ddf58e4="">Disclaimer</a>&nbsp;| <a class="text-white"
+            href="https://www.hkbu.edu.hk/eng/about/privacy.jsp" target="_blank" data-v-2ddf58e4="">Privacy Policy</a>
+        </div> All rights reserved © 2024 Faculty of Science, HKBU
+      </div><!-- Copyright -->
     </footer>
 
   </div>
@@ -224,6 +314,11 @@ const logout = () => {
 
 .shadow {
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.overlay {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+  /* Darker gradient */
 }
 
 .bold-elegant-title {
@@ -253,15 +348,18 @@ const logout = () => {
 
 .carousel-height {
   height: var(--height-offset);
+  width: 100vw;
+
   object-fit: cover;
+  object-position: top;
 }
 
 .carousel-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50vh;
+  left: 50vw;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: 100vw;
   z-index: 1;
 }
 

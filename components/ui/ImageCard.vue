@@ -16,9 +16,11 @@ function deleteDropFile(index: number): void {
 }
 
 // ORUGA FILE SECTION
-</script><template>
+</script>
+
+<template>
   <div>
-    <div class="card ms-5 shadow" style="max-width: 20rem;">
+    <div class="card ms-3 shadow" style="max-width: 25rem;">
       <img class="card-img-top img-fluid" style="object-fit: cover;" :src="`${props.profile.attributes.photoURL}`"
         alt="Card image cap" />
 

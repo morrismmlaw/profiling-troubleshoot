@@ -1,17 +1,32 @@
 <template>
 
-  <nav class="navbar bg-body-white py-0 z-3">
+  <nav class="navbar sticky-top py-0 z-3" :style="navbarStylePerRoute"
+    style="position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
     <div class="container-fluid">
-      <!-- <a class="navbar-brand" href="#">Offcanvas navbar</a> -->
-      <NuxtLink class="navbar-brand" to="/">
-        <NuxtImg src="/img/HKBU1.png" alt="Logo" class="logo-img mx-4" />
-        <!-- <span class="custom-text">HKBU Science Faculty Academic Profile</span> -->
-      </NuxtLink>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+
+      <div v-if="isLoggedIn" class="d-flex">
+        <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img-1 ms-4" />
+        </NuxtLink>
+        <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
+        </NuxtLink>
+      </div>
+      <div v-else class="d-flex">
+        <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img-1 ms-4" />
+        </NuxtLink>
+        <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img-2" />
+        </NuxtLink>
+      </div>
+
+      <button class="navbar-toggler bg-body-secondary semi-transparent" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas offcanvas-end semi-transparent-1" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
             <span class="d-flex align-items-center flex-nowrap ">
@@ -59,6 +74,7 @@
 
 const authStore = useAuthStore()
 const router = useRouter()
+const route = useRoute()
 
 onMounted(() => {
   authStore.initializeFromStorage()
@@ -83,6 +99,19 @@ const logout = () => {
   authStore.logout();
 };
 
+const navbarStylePerRoute = computed(() => {
+  if (route.path === '/profile') {
+    return { backgroundColor: 'rgba(37, 150, 190, 0.7)' }; //Marine Blue
+    // return { backgroundColor: 'transparent' };
+  } else if (route.path === '/search') {
+    return { backgroundColor: 'rgb(177, 177, 177, 0.9)' };
+  } else if (route.path === '/login') {
+    return { backgroundColor: 'rgba(83,183,209,0.3)' }; //Light Blue
+  } else {
+    return { backgroundColor: 'transparent' };
+  }
+});
+
 </script>
 
 <style scoped>
@@ -95,9 +124,16 @@ const logout = () => {
 }
 
 /* Add this CSS to style the logo image */
-.logo-img {
-  height: 60px;
+.logo-img-1 {
+  height: 50px;
   /* Adjust the height as needed */
+  margin-top: 5px;
+}
+
+.logo-img-2 {
+  height: 65px;
+  /* Adjust the height as needed */
+  margin-top: -5px;
 }
 
 .custom-text {
@@ -111,4 +147,11 @@ const logout = () => {
   font-size: 1.5rem;
 }
 
+.semi-transparent {
+  opacity: 0.5;
+}
+
+.semi-transparent-1 {
+  background-color: hsla(0, 0%, 100%, 0.9);
+}
 </style>
