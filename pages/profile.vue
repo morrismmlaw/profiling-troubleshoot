@@ -1,14 +1,10 @@
 <script setup>
+
+import Modal from 'bootstrap/js/dist/modal';
+
 const authStore = useAuthStore()
 const profileStore = useProfileStore()
 const router = useRouter()
-
-onMounted(() => {
-  authStore.initializeFromStorage()
-  // if (!authStore.isAuthenticated) {
-  //   router.push('/')
-  // }
-})
 
 const handleSave = async (data) => {
   const success = await profileStore.updateProfile(data)
@@ -18,12 +14,14 @@ const handleSave = async (data) => {
   } else {
     alert('Failed to update profile')
   }
-
 }
 
-import { Modal } from 'bootstrap';
-
 onMounted(() => {
+  // if (!authStore.isAuthenticated) {
+  //   router.push('/')
+  // }
+  authStore.initializeFromStorage()
+
   const myModal = new Modal(document.getElementById('exampleModal'));
   myModal.show();
 });
@@ -65,7 +63,8 @@ watch(checkedForm, (newVal) => {
             </p>
 
             <div class="form-check">
-              <input @click="handleCheck" class="form-check-input" type="checkbox" :value="checkedForm" id="flexCheckDefault">
+              <input @click="handleCheck" class="form-check-input" type="checkbox" :value="checkedForm"
+                id="flexCheckDefault">
               <label class="form-check-label" for="flexCheckDefault">
                 Don't show again
               </label>

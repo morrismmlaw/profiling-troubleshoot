@@ -95,14 +95,16 @@ const handleLoginError = () => {
 }
 
 const handleLogout = () => {
-  authStore.logout()
-  router.push('/')
+  authStore.logout();
+  router.push('/');
 }
 
 const isLoggedIn = computed(() => authStore.isAuthenticated);
 
 const logout = () => {
   authStore.logout();
+  // window.location.reload(); // Fix Dat bad Search dropdown.. after logout
+  router.push('/'); 
 };
 
 const navbarStylePerRoute = computed(() => {
