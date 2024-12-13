@@ -14,7 +14,7 @@
 
         <div v-if="$route.path === '/profile'" class="d-flex align-items-center ms-1">
           {{ console.log("is in profile") }}
-          <div class="custom-text"> Academic Profile</div>
+          <div class="custom-text-bar"> Academic Profile</div>
         </div>
       </div>
       <div v-else class="d-flex">
@@ -39,7 +39,8 @@
               Menu
             </span>
           </h5>
-          <button type="button" class="btn-close" style="width: 3rem; height: 2rem; margin-right: 12px;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn-close" style="width: 3rem; height: 2rem; margin-right: 12px;"
+            data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -103,7 +104,7 @@ const isLoggedIn = computed(() => authStore.isAuthenticated);
 const logout = () => {
   authStore.logout();
   // window.location.reload(); // Fix Dat bad Search dropdown.. after logout
-  router.push('/'); 
+  router.push('/');
 };
 
 const navbarStylePerRoute = computed(() => {
@@ -148,6 +149,20 @@ const navbarStylePerRoute = computed(() => {
   font-weight: 400;
   font-style: normal;
   font-size: 1.2rem;
+}
+
+.custom-text-bar {
+  font-family: system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .bi {
