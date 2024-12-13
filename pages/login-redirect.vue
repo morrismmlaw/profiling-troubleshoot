@@ -5,7 +5,7 @@
       <NuxtParticles id="tsparticles" :options="TSoptions" />
       <NuxtParticles v-if="show" id="tsparticles2" :options="TSoptions" />
 
-      <section class="position-relative py-0 py-xl-1">
+      <section class="position-relative py-2 py-xl-3">
         <div class="container col-md-6 col-xl-4 bg-semi-transparent rounded-3 p-5 shadow-sm login-box">
           <div class="row">
             <div class="col-md-8 col-xl-6 text-center mx-auto">

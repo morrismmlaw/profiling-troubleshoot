@@ -31,7 +31,7 @@ const imgUrl = props.profile.attributes.photoURL || 'https://scholars.hkbu.edu.h
         <p class="card-text"> Upload an Alternative Image</p>
         <section>
           <o-field>
-            <o-upload v-model="dropFiles" multiple drag-drop>
+            <o-upload v-model="dropFiles" drag-drop>
               <div style="text-align: center">
                 <p>
                   <o-icon icon="upload" size="is-large" />

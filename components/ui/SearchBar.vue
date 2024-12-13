@@ -72,4 +72,22 @@ input[type="search"]::-webkit-search-cancel-button {
   background: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='currentColor' class='bi bi-x-circle-fill' viewBox='-7 -5 25 25'%3E%3Cpath d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z'/%3E%3C/svg%3E");
   cursor: pointer;
 }
+
+.icon-hover:hover {
+  /* opacity: .5; */
+  background-color: rgb(161, 161, 161, 0.3);
+  border-radius: 100%;
+  transform: scale(1.1);
+  transition: transform 0.1s ease-in-out;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #000000;
+    transition: background-color 5000s ease-in-out 0s;
+    /* box-shadow: inset 0 0 20px 20px #23232329; */
+}
 </style>
