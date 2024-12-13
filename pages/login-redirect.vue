@@ -7,7 +7,7 @@
 
       <section class="position-relative py-0 py-xl-1">
         <div class="container col-md-6 col-xl-4 bg-semi-transparent rounded-3 p-5 shadow-sm login-box">
-          <div class="row mb-5">
+          <div class="row">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
               <h1>Log in</h1>
               <br>
