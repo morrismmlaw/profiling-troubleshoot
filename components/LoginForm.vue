@@ -21,7 +21,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="container ">
+  <div class="container">
 
     <section class="position-relative py-4 py-xl-5">
       <div class="container">
@@ -72,7 +72,8 @@ const handleSubmit = async () => {
 </template>
 
 <style scoped>
-@import url('/assets/bootstrap/css/bootstrap.min.css');
+/* @import url('/assets/bootstrap/css/bootstrap.min.css'); */
+
 @import url('/assets/css/animate.min.css');
 @import url('/assets/css/Login-Form-Basic-icons.css');
 
