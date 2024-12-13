@@ -9,7 +9,7 @@
     </div>
 
     <div class="row"
-      style="background-image: url(&quot;/img/bottom.8ea92c85.jpg&quot;); background-size: cover; background-repeat: no-repeat;">
+      style="background-image: url(&quot;/img/bottom.8ea92c85.jpg&quot;); background-size: cover; background-repeat: repeat; background-position: top;">
       <div class="col-md-11 col-lg-10 col-xl-9 mx-auto position-relative">
 
         <div class="container-fluid p-3 m-3">
