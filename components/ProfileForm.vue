@@ -427,7 +427,7 @@ onMounted(() => {
                 </div>
                 <div class="col">
                   <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">HKBU Scholar Url</label>
+                    <label class="col-sm-4 col-form-label">HKBU Scholar URL</label>
                     <div class="col-sm-10">
                       <!-- <p class="form-control-plaintext">{{ profile?.attributes.url }}</p> -->
                       <a :href="profile?.attributes.url" target="_blank" class="form-control-plaintext">{{
@@ -452,7 +452,7 @@ onMounted(() => {
 
               <div class="row">
                 <div class="col-2">
-                  <h6 class="col-form-label">Sustainable Development Goals (SDG)</h6>
+                  <h6 class="col-form-label">Sustainable Development Goals (SDGs)</h6>
                 </div>
                 <div class="col">
                   <div class="columns is-multiline">
@@ -481,6 +481,14 @@ onMounted(() => {
                 </div>
               </div>
 
+
+              <section>
+                <o-field class="col-form-label" label="Department">
+                  <o-taginput v-model="DEPTags" :options="DEPOptionsOrugaNew" :allow-new="allowNew"
+                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                    icon="tag" placeholder="Add an item" expanded />
+                </o-field>
+              </section>
               <section>
                 <o-field class="col-form-label" label="Strategic Research Centre">
                   <o-taginput v-model="SRCTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
@@ -490,7 +498,7 @@ onMounted(() => {
                 <!-- <p><b>FCRAS:</b> {{ fcraTags }}</p> -->
               </section>
               <section>
-                <o-field class="col-form-label" label="Research focus">
+                <o-field class="col-form-label" label="Research Focus">
                   <o-taginput v-model="RFTags" :options="RFOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
@@ -507,13 +515,6 @@ onMounted(() => {
               <section>
                 <o-field class="col-form-label" label="Availability for Supervision">
                   <o-taginput v-model="ASTags" :options="ASOptionsOrugaNew" :allow-new="allowNew"
-                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Add an item" expanded />
-                </o-field>
-              </section>
-              <section>
-                <o-field class="col-form-label" label="Department">
-                  <o-taginput v-model="DEPTags" :options="DEPOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
