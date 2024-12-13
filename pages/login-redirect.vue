@@ -19,7 +19,7 @@
           <div class="row d-flex justify-content-center">
             <div class="col-md-12 col-xl-12">
               <div class="card mb-5 border-0 shadow rounded-3 login-box-inner">
-                <div class="card-body d-flex flex-column align-items-center">
+                <div class="card-body d-flex flex-column align-items-center p-5">
 
                   <div v-if="isLoggedIn" class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
