@@ -21,12 +21,22 @@ const handleSave = async (data) => {
 
 }
 
-
 import { Modal } from 'bootstrap';
+
 onMounted(() => {
   const myModal = new Modal(document.getElementById('exampleModal'));
   myModal.show();
 });
+
+const checkedForm = ref(false);
+
+const handleCheck = () => {
+  checkedForm.value = !checkedForm.value;
+}
+
+watch(checkedForm, (newVal) => {
+  console.log('Form Changed', newVal);
+})
 
 </script>
 
@@ -39,15 +49,28 @@ onMounted(() => {
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Academic Profile Information</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Academic Profile Notification</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            Your name, Chinese name, email, HKBU Scholar URL, and department have been imported from HKBU Scholars. 
-            <br>
-            If you would like to make any changes, please do so on HKBU Scholars. 
-            <br>
-            We appreciate your help in updating the rest of the content as needed.
+            <p class="message">
+              <br>
+              Your name, Chinese name, email, HKBU Scholar URL, and department have been imported from HKBU Scholars.
+              <br>
+              <br>
+              If you would like to make any changes, please do so on HKBU Scholars.
+              <br>
+              <br>
+              We appreciate your help in updating the rest of the content as needed.
+            </p>
+
+            <div class="form-check">
+              <input @click="handleCheck" class="form-check-input" type="checkbox" :value="checkedForm" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Don't show again
+              </label>
+            </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -82,5 +105,11 @@ onMounted(() => {
   background-image: url('https://play.tailwindcss.com/img/beams.jpg');
   background-size: cover;
   background-position: center;
+}
+
+.message {
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 </style>
