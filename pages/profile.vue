@@ -20,10 +20,43 @@ const handleSave = async (data) => {
   }
 
 }
+
+
+import { Modal } from 'bootstrap';
+onMounted(() => {
+  const myModal = new Modal(document.getElementById('exampleModal'));
+  myModal.show();
+});
+
 </script>
 
 <template>
+
+
   <div class="container-fluid bg-light min-vh-100 custom-background nav-offset">
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Academic Profile Information</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Your name, Chinese name, email, HKBU Scholar URL, and department have been imported from HKBU Scholars. 
+            <br>
+            If you would like to make any changes, please do so on HKBU Scholars. 
+            <br>
+            We appreciate your help in updating the rest of the content as needed.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row justify-content-center py-6">
       <div class="col-sm-12 col-lg-12 col-xl-12 ">
         <div v-if="authStore.isAuthenticated">
