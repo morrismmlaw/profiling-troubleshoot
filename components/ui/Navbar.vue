@@ -40,29 +40,29 @@
               Menu
             </span>
           </h5>
-          <button type="button" class="btn-close me-4" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn-close" style="width: 3rem; height: 2rem; margin-right: 12px;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
+            <li class="nav-item custom-nav-item">
               <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-house me-3"></i>
                 <NuxtLink class="nav-link" to="/">Home</NuxtLink>
               </span>
             </li>
-            <li v-if="!isLoggedIn" class="nav-item">
+            <li v-if="!isLoggedIn" class="nav-item custom-nav-item">
               <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-box-arrow-in-right me-3" style="margin-left: -3px;"></i>
                 <NuxtLink class="nav-link" to="/login">Staff Login</NuxtLink>
               </span>
             </li>
-            <li v-if="isLoggedIn" class="nav-item">
+            <li v-if="isLoggedIn" class="nav-item custom-nav-item">
               <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-person-circle me-3"></i>
                 <NuxtLink class="nav-link" to="/profile"> Your Profile</NuxtLink>
               </span>
             </li>
-            <li v-if="isLoggedIn" class="nav-item">
+            <li v-if="isLoggedIn" class="nav-item custom-nav-item">
               <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class=" bi bi-box-arrow-left me-3"></i>
                 <NuxtLink @click="logout" class="nav-link" to="/"> Logout</NuxtLink>
@@ -159,5 +159,12 @@ const navbarStylePerRoute = computed(() => {
 
 .semi-transparent-1 {
   background-color: hsla(0, 0%, 100%, 0.9);
+}
+
+.custom-nav-item {
+  font-size: 1.2rem;
+  /* padding: 1rem; */
+  padding-top: 0.5rem;
+
 }
 </style>
