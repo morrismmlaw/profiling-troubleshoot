@@ -67,7 +67,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container-fluid p-0 m-0 my-scale">
+  <div class="container-fluid p-0 m-0">
 
     <div class="login-background-image" style="position: relative; z-index: 0;">
       <NuxtParticles id="tsparticles" :options="TSoptions" />
@@ -128,7 +128,4 @@ onMounted(() => {
 @import url('/assets/css/animate.min.css');
 @import url('/assets/css/Login-Form-Basic-icons.css');
 
-.my-scale {
-  zoom: 0.999;
-}
 </style>
