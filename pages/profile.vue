@@ -22,8 +22,10 @@ onMounted(() => {
   // }
   authStore.initializeFromStorage()
 
-  const myModal = new Modal(document.getElementById('exampleModal'));
-  myModal.show();
+  if (authStore.isAuthenticated) {
+    const myModal = new Modal(document.getElementById('exampleModal'));
+    myModal.show();
+  }
 });
 
 const checkedForm = ref(false);
