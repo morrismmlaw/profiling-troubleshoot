@@ -29,3 +29,11 @@
   background: linear-gradient(to bottom right, #ffffff, #B9FFFF, 0.3);
   background-color: rgba(255, 255, 255, 0.55);
 }
+
+.icon-hover:hover {
+  /* opacity: .5; */
+  background-color: rgb(161, 161, 161, 0.3);
+  border-radius: 100%;
+  transform: scale(1.1);
+  transition: transform 0.1s ease-in-out;
+}
