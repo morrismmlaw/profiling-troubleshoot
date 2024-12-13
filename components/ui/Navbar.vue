@@ -11,6 +11,11 @@
         <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
         </NuxtLink>
+
+        <div v-if="$route.path === '/profile'" class="d-flex align-items-center ms-1" >
+          {{ console.log("is in profile") }}
+          <div class="custom-text" > Academic Profile</div>
+        </div>
       </div>
       <div v-else class="d-flex">
         <NuxtLink class="navbar-brand" to="/">
@@ -20,6 +25,7 @@
           <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img-2" />
         </NuxtLink>
       </div>
+
 
       <button class="navbar-toggler bg-body-secondary semi-transparent" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -138,9 +144,9 @@ const navbarStylePerRoute = computed(() => {
 
 .custom-text {
   font-family: system-ui;
-  font-weight: 350;
-  font-style: italic;
-  font-size: 1.3rem;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
 }
 
 .bi {
