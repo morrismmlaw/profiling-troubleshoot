@@ -12,9 +12,9 @@
           <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
         </NuxtLink>
 
-        <div v-if="$route.path === '/profile'" class="d-flex align-items-center ms-1" >
+        <div v-if="$route.path === '/profile'" class="d-flex align-items-center ms-1">
           {{ console.log("is in profile") }}
-          <div class="custom-text" > Academic Profile</div>
+          <div class="custom-text"> Academic Profile</div>
         </div>
       </div>
       <div v-else class="d-flex">
@@ -32,7 +32,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end semi-transparent-1" tabindex="-1" id="offcanvasNavbar"
-        aria-labelledby="offcanvasNavbarLabel">
+        aria-labelledby="offcanvasNavbarLabel" data-bs-backdrop="false">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
             <span class="d-flex align-items-center flex-nowrap ">
@@ -40,30 +40,30 @@
               Menu
             </span>
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn-close me-4" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <span class="d-flex align-items-center flex-nowrap ">
+              <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-house me-3"></i>
                 <NuxtLink class="nav-link" to="/">Home</NuxtLink>
               </span>
             </li>
             <li v-if="!isLoggedIn" class="nav-item">
-              <span class="d-flex align-items-center flex-nowrap ">
+              <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-box-arrow-in-right me-3" style="margin-left: -3px;"></i>
                 <NuxtLink class="nav-link" to="/login">Staff Login</NuxtLink>
               </span>
             </li>
             <li v-if="isLoggedIn" class="nav-item">
-              <span class="d-flex align-items-center flex-nowrap ">
+              <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-person-circle me-3"></i>
                 <NuxtLink class="nav-link" to="/profile"> Your Profile</NuxtLink>
               </span>
             </li>
             <li v-if="isLoggedIn" class="nav-item">
-              <span class="d-flex align-items-center flex-nowrap ">
+              <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class=" bi bi-box-arrow-left me-3"></i>
                 <NuxtLink @click="logout" class="nav-link" to="/"> Logout</NuxtLink>
               </span>
