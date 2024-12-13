@@ -84,7 +84,7 @@ onMounted(() => {
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col-md-12 col-xl-12">
-              <div class="card mb-5 border-0 shadow rounded-3">
+              <div class="card mb-5 border-0 shadow rounded-3 login-box-inner">
                 <div class="card-body d-flex flex-column align-items-center">
                   <div class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4"><svg class="bi bi-person"
                       xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
@@ -127,5 +127,4 @@ onMounted(() => {
 /* @import url('/assets/bootstrap/css/bootstrap.min.css'); */
 @import url('/assets/css/animate.min.css');
 @import url('/assets/css/Login-Form-Basic-icons.css');
-
 </style>

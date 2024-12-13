@@ -9,6 +9,11 @@
 .login-box {
   margin-top: calc(var(--margin-offset) + 10px);
   margin-bottom: 2vh;
+  height: 80vh;
+}
+
+.login-box-inner {
+  height: 50vh;
 }
 
 .nav-offset {

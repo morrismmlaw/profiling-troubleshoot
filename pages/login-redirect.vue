@@ -18,7 +18,7 @@
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col-md-12 col-xl-12">
-              <div class="card mb-5 border-0 shadow rounded-3">
+              <div class="card mb-5 border-0 shadow rounded-3 login-box-inner">
                 <div class="card-body d-flex flex-column align-items-center">
 
                   <div v-if="isLoggedIn" class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4">
