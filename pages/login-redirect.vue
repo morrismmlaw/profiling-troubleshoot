@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid p-0 m-0">
 
-    <div class="login-background-image" style="position: relative; z-index: 0;">
+    <div class="login-background-image-dark" style="position: relative; z-index: 0;">
       <ParticlesBackground />
 
       <section class="position-relative py-2 py-xl-3">
