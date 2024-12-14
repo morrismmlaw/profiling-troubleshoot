@@ -46,9 +46,9 @@ onMounted(() => {
         <div class="container col-md-6 col-xl-4 bg-semi-transparent rounded-3 p-5 shadow-sm login-box">
           <div class="row">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
-              <h1>Log in</h1>
+              <h1 class="login-text">Log in</h1>
               <br>
-              <p class="w-lg-90">Login With SSOID <br> Academic Staff</p>
+              <p class="w-lg-90 login-text">Login With SSOID <br> Academic Staff</p>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
