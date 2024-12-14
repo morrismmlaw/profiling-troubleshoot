@@ -4,7 +4,7 @@
     style="position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
     <div class="container-fluid">
 
-      <div v-if="isLoggedIn" class="d-flex">
+      <div v-if="isLoggedIn || isSearch" class="d-flex">
         <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img-1 ms-4" />
         </NuxtLink>
@@ -101,6 +101,8 @@ const handleLogout = () => {
 
 const isLoggedIn = computed(() => authStore.isAuthenticated);
 
+const isSearch = computed(() => route.path === '/search');
+
 const logout = () => {
   authStore.logout();
   // window.location.reload(); // Fix Dat bad Search dropdown.. after logout
@@ -109,12 +111,15 @@ const logout = () => {
 
 const navbarStylePerRoute = computed(() => {
   if (route.path === '/profile') {
-    return { backgroundColor: 'rgba(37, 150, 190, 0.7)' }; //Marine Blue
+    // return { backgroundColor: 'rgba(37, 150, 190, 0.7)' }; //Marine Blue
+    return { backgroundColor: 'white' };
     // return { backgroundColor: 'transparent' };
   } else if (route.path === '/search') {
-    return { backgroundColor: 'rgb(177, 177, 177, 0.9)' };
+    // return { backgroundColor: 'rgb(177, 177, 177, 0.9)' };
+    // return { backgroundColor: 'rgba(37, 150, 190, 0.9)' }; //Light Blue
+    return { backgroundColor: 'white' };
   } else if (route.path === '/login' || route.path === '/login-redirect') {
-    return { backgroundColor: 'rgba(83,183,209,0.3)' }; //Light Blue
+    return { backgroundColor: 'rgba(83 ,183, 209, 0.55)' }; //Light Blue
   } else {
     return { backgroundColor: 'transparent' };
   }
