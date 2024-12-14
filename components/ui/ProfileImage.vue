@@ -2,7 +2,7 @@
   <div>
     <nuxt-img class="position-relative rounded-circle profile-card-image" :src="props.imgUrl" alt="Card image cap" />
 
-    <button v-if="props.hasUpload" class="position-absolute upload-icon">
+    <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute upload-icon">
       <o-tooltip label="Upload an alternative image" position="bottom">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-upload"
           viewBox="0 0 16 16">
@@ -14,10 +14,26 @@
       </o-tooltip>
     </button>
 
+    <BButton variant="primary" @click="show = !show">Click me</BButton>
+    <BModal v-model="show">
+      <cropper :src="img" :stencil-props="{
+        aspectRatio: 1 / 2
+      }" @change="change">
+      </cropper>
+    </BModal>
+
+
+
   </div>
 </template>
 
 <script lang="ts" setup>
+
+import 'vue-advanced-cropper/dist/style.css';
+import { Cropper } from 'vue-advanced-cropper';
+const show = ref(false)
+
+
 const props = defineProps({
   imgUrl: {
     type: String,
@@ -28,6 +44,17 @@ const props = defineProps({
     default: false,
   },
 });
+
+const img = ref('https://images.unsplash.com/photo-1600984575359-310ae7b6bdf2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80')
+
+const change = ({ coordinates, canvas }) => {
+  console.log(coordinates, canvas);
+}
+
+const handleUpload = () => {
+  console.log("Upload an Image");
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -50,11 +77,5 @@ const props = defineProps({
   border-radius: 50%;
 
   border: none;
-
-  svg {
-    margin-top: 1px;
-    // margin-left: 8px;
-  }
-
 }
 </style>

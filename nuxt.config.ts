@@ -1,7 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
-  modules: ['@nuxtjs/strapi', '@pinia/nuxt', 'nuxt-tiptap-editor', '@vesp/nuxt-fontawesome', '@nuxt/image', '@hypernym/nuxt-gsap', 'nuxt-particles', 'nuxt-bootstrap-icons', '@nuxt/fonts'],
+  modules: ['@nuxtjs/strapi', '@pinia/nuxt',
+    'nuxt-tiptap-editor', '@vesp/nuxt-fontawesome',
+    '@nuxt/image', '@hypernym/nuxt-gsap',
+    'nuxt-particles', 'nuxt-bootstrap-icons',
+    '@nuxt/fonts', '@bootstrap-vue-next/nuxt'],
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
@@ -19,7 +23,14 @@ export default defineNuxtConfig({
     '/assets/css/styles.min.css', //My css for BS components
   ],
 
-  plugins: [{ src: '~/plugins/oruga.js' }],
+  plugins: [
+    {
+      src: '~/plugins/oruga.js'
+    },
+    {
+      src: '~/plugins/vue-advanced-cropper.ts'
+    }
+  ],
 
   fontawesome: {
     component: "fa",

@@ -34,15 +34,17 @@
     "sass": "^1.82.0",
     "sass-loader": "^16.0.4",
     "vue": "latest",
+    "vue-advanced-cropper": "^2.8.9",
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@bootstrap-vue-next/nuxt": "^0.26.13",
+    "@bootstrap-vue-next/nuxt": "^0.26.15",
     "@fortawesome/free-brands-svg-icons": "^6.7.1",
     "@fortawesome/free-regular-svg-icons": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@hypernym/nuxt-gsap": "^2.4.3",
     "bootstrap": "^5.3.3",
+    "bootstrap-vue-next": "^0.26.15",
     "nuxt-particles": "^0.3.0",
     "sass-embedded": "^1.81.0"
   }
