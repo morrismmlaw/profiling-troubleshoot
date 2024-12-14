@@ -2,7 +2,7 @@
 import { reactive, watch, defineEmits } from 'vue';
 import { useProfileStore } from '../composables/useProfile'; // replace with your actual path
 import TiptapEditor from './TiptapEditor.vue' // path to your Tiptap editor component
-import ImageCard from './ui/ImageCard.vue';
+import ImageCard from './ui/ProfileImageCard.vue';
 
 const props = defineProps({
   profile: {
