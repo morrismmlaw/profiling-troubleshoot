@@ -3,7 +3,7 @@
     <nuxt-img class="position-relative rounded-circle profile-card-image" :src="props.imgUrl" alt="Card image cap" />
 
     <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute upload-icon">
-      <o-tooltip label="Upload an alternative image" position="bottom">
+      <o-tooltip label="Upload an alternative image" position="bottom" data-bs-toggle="modal" data-bs-target="#empty-cart">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-upload"
           viewBox="0 0 16 16">
           <path
@@ -14,14 +14,25 @@
       </o-tooltip>
     </button>
 
-    <BButton variant="primary" @click="show = !show">Click me</BButton>
-    <BModal v-model="show">
-      <cropper :src="img" :stencil-props="{
-        aspectRatio: 1 / 2
-      }" @change="change">
-      </cropper>
-    </BModal>
-
+    <div ref="modal" class="modal fade" id="empty-cart" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded shadow border-0">
+          <div class="modal-body py-5">
+            <div class="text-center">
+              <div>
+                <cropper ref="cropperRef" class="cropper" :src="img" :stencil-props="{ aspectRatio: 10 / 12 }"
+                  @change="change" />
+              </div>
+              <div class="mt-4">
+                <div class="mt-4">
+                  <a href="javascript:void(0)" class="btn btn-primary">Start Shopping</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
   </div>
@@ -29,9 +40,12 @@
 
 <script lang="ts" setup>
 
-import 'vue-advanced-cropper/dist/style.css';
 import { Cropper } from 'vue-advanced-cropper';
+import 'vue-advanced-cropper/dist/style.css';
+
 const show = ref(false)
+const modal = ref(null)
+const cropperRef = ref(null)
 
 
 const props = defineProps({
@@ -54,6 +68,18 @@ const change = ({ coordinates, canvas }) => {
 const handleUpload = () => {
   console.log("Upload an Image");
 }
+
+onMounted(() => {
+  const modalElement = modal.value;
+  if (modalElement) {
+    modalElement.addEventListener('shown.bs.modal', () => {
+      const cropperInstance = cropperRef.value;
+      if (cropperInstance) {
+        cropperInstance.refresh();
+      }
+    });
+  }
+});
 
 </script>
 
