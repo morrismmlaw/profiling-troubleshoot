@@ -24,38 +24,7 @@ const handleSubmit = async () => {
 };
 
 //TS PARTICLE
-import { loadFull } from 'tsparticles'
-import { tsParticles } from '@tsparticles/engine'
-
-const { mode } = useRuntimeConfig().public.particles
-
-const show = ref(true)
-
-if (import.meta.client && mode === 'custom') {
-  await loadFull(tsParticles)
-}
-
-const TSoptions = {
-  fullScreen: {
-    enable: true,
-    zIndex: -1
-  },
-  particles: {
-    color: {
-      value: "#c9a0a0"
-    },
-    links: {
-      color: "#ff0000",
-      enable: true
-    },
-    move: {
-      enable: true
-    },
-    number: {
-      value: 50
-    }
-  }
-}
+import ParticlesBackground from '~/components/ui/ParticlesBackground.vue';
 
 onMounted(() => {
   //Stop Logined User from accessing.
@@ -64,14 +33,14 @@ onMounted(() => {
   }
 })
 
+
 </script>
 
 <template>
   <div class="container-fluid p-0 m-0">
 
     <div class="login-background-image" style="position: relative; z-index: 0;">
-      <NuxtParticles id="tsparticles" :options="TSoptions" />
-      <NuxtParticles v-if="show" id="tsparticles2" :options="TSoptions" />
+      <ParticlesBackground />
 
       <section class="position-relative py-2 py-xl-3" style="margin-bottom: 2vh;">
         <div class="container col-md-6 col-xl-4 bg-semi-transparent rounded-3 p-5 shadow-sm login-box">
