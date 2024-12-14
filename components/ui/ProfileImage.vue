@@ -3,7 +3,8 @@
     <nuxt-img class="position-relative rounded-circle profile-card-image" :src="props.imgUrl" alt="Card image cap" />
 
     <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute upload-icon">
-      <o-tooltip label="Upload an alternative image" position="bottom" data-bs-toggle="modal" data-bs-target="#empty-cart">
+      <o-tooltip label="Upload an alternative image" position="bottom" data-bs-toggle="modal"
+        data-bs-target="#modal-cropper">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-upload"
           viewBox="0 0 16 16">
           <path
@@ -14,18 +15,19 @@
       </o-tooltip>
     </button>
 
-    <div ref="modal" class="modal fade" id="empty-cart" tabindex="-1" aria-hidden="true">
+    <div ref="modal" class="modal fade" id="modal-cropper" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded shadow border-0">
           <div class="modal-body py-5">
             <div class="text-center">
               <div>
-                <cropper ref="cropperRef" class="cropper" :src="img" :stencil-props="{ aspectRatio: 10 / 12 }"
+                <cropper ref="cropperRef" class="cropper" :src="img" :stencil-props="{ aspectRatio: 1 / 1 }"
                   @change="change" />
               </div>
               <div class="mt-4">
                 <div class="mt-4">
-                  <a href="javascript:void(0)" class="btn btn-primary">Start Shopping</a>
+                  <a href="javascript:void(0)" class="btn btn-primary">Upload Image</a>
+                  <a href="javascript:void(0)" class="btn btn-primary">Save Avatar</a>
                 </div>
               </div>
             </div>
@@ -59,7 +61,7 @@ const props = defineProps({
   },
 });
 
-const img = ref('https://images.unsplash.com/photo-1600984575359-310ae7b6bdf2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80')
+const img = ref('https://images.pexels.com/photos/379419/pexels-photo-379419.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
 
 const change = ({ coordinates, canvas }) => {
   console.log(coordinates, canvas);
