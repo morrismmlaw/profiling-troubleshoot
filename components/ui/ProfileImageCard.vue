@@ -16,24 +16,25 @@ function deleteDropFile(index: number): void {
 }
 
 const imgUrl = props.profile.attributes.photoURL || 'https://scholars.hkbu.edu.hk/assets/no-portrait-473c6d005990baa1f418d9c668dcd4ec.png';
-
 // ORUGA FILE SECTION
+
+import ProfileImage from './ProfileImage.vue';
+
 </script>
 
 <template>
-  <div>
-    <div class="card ms-5 shadow rounded-5 profile-card" style="max-width: 20vw;">
+  <div class="container-fluid">
+    <div class="card shadow rounded-5 profile-card">
 
-      <div class="container p-5 m-5">
-        <img class="card-img-top rounded-circle img-fluid profile-card-image" style="object-fit: cover;" :src="imgUrl"
-          alt="Card image cap" />
-
-        <i class="bi bi-upload upload-icon"></i>
+      <div class="row p-2 m-2">
+        <div class="d-flex justify-content-center">
+          <ProfileImage :img-url="imgUrl" :has-upload="true" />
+        </div>
       </div>
 
       <div class="card-body">
-        <h5 class="card-title  profile-card-text">Profile Image</h5>
-        <p class="card-text  profile-card-text"> Upload an Alternative Image</p>
+        <h5 class="card-title profile-card-text">Profile Image</h5>
+        <p class="card-text profile-card-text"> Upload an Alternative Image</p>
         <section>
           <o-field>
             <o-upload v-model="dropFiles" drag-drop>
@@ -63,44 +64,11 @@ const imgUrl = props.profile.attributes.photoURL || 'https://scholars.hkbu.edu.h
 
 
 <style scoped>
-.profile-card-image {
-  width: 240px;
-  height: 240px;
-}
-
 .profile-card {
-  background-color: #17769b
+  background-color: #17769b;
 }
 
 .profile-card-text {
   color: aliceblue;
 }
-
-.upload-icon {
-  color: white;
-  font-size: 1.5rem;
-  position: relative;
-
-  left: -70px;
-  top: 100px;
-
-  padding: 10px;
-
-  background: gray;
-  border-radius: 50%;
-}
-
-/* .upload-icon::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: gray;
-  border-radius: 50%;
-  opacity: 0.5;
-} */
 </style>

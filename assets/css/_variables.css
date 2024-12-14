@@ -4,6 +4,7 @@
   --height-offset: calc(100vh - var(--nav-height));
 
   --margin-offset: 70px;
+  --profile-image-size: 240px;
 }
 
 .login-box {
