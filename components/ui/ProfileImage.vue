@@ -1,9 +1,6 @@
 <template>
   <div>
     <nuxt-img class="position-relative rounded-circle profile-card-image" :src="props.imgUrl" alt="Card image cap" />
-
-    <!-- <span v-if="props.hasUpload" class="bi bi-upload position-absolute upload-icon"></span> -->
-
     <p v-if="props.hasUpload" class="position-absolute upload-icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-upload"
         viewBox="0 0 16 16">
