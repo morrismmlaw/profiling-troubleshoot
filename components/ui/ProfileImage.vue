@@ -17,12 +17,12 @@
 
     <div ref="modal" class="modal fade" id="modal-cropper" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded shadow border-0">
+        <div class="modal-content rounded shadow border-0 mx-5">
           <div class="modal-header">
             <h5 class="modal-title">Upload and Crop Image</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body py-2">
+          <div class="modal-body mt-2">
             <div class="text-center">
               <div>
                 <cropper ref="cropperRef" class="cropper" :src="img" :stencil-props="{ aspectRatio: 1 / 1 }"
