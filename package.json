@@ -35,7 +35,8 @@
     "sass-loader": "^16.0.4",
     "vue": "latest",
     "vue-advanced-cropper": "^2.8.9",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue-typewriter-effect": "^1.0.1"
   },
   "devDependencies": {
     "@bootstrap-vue-next/nuxt": "^0.26.15",

@@ -1,6 +1,7 @@
 <script setup>
 
 import { onBeforeMount } from 'vue';
+import VueTypewriterEffect from "vue-typewriter-effect";
 
 const bgS1 = ref('')
 const bgS2 = ref('')
@@ -102,7 +103,13 @@ import SearchBar from '~/components/ui/SearchBar.vue';
         <div class="container">
           <div class="row">
             <div class="col-xl-9 mx-auto position-relative">
-              <h1 class="mb-5 bold-elegant-title">Find an Expert at Hong Kong Baptist University</h1>
+              <!-- <h1 class="mb-5 bold-elegant-title">Find an Expert at Hong Kong Baptist University</h1> -->
+              <h1 class="mb-5 bold-elegant-title">
+                <span class="">Find an </span>
+                <!-- <span class="title-typed">Expert </span> -->
+                <span> <vue-typewriter-effect :strings="['Expert']" :delay="200" :pauseFor="5000" style="color: blueviolet;" /></span>
+                <span class=""> at Hong Kong Baptist University</span>
+              </h1>
               <h3 class="mb-5 bold-elegant-sub">Your search starts here, whether you are looking for a supervisor to
                 undertake a research degree, an industry expert for a specific project, or a potential partner or
                 collaborator.</h3>
@@ -290,7 +297,17 @@ import SearchBar from '~/components/ui/SearchBar.vue';
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  .title-typed {
+    color: blueviolet;
+  }
+
 }
+
+.cursor {
+  color: white;
+}
+
 
 .bold-elegant-sub {
   font-size: 19px;
