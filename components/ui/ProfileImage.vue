@@ -48,7 +48,7 @@
                 <div class="input-group-sm">
                   <div class="d-flex justify-content-end">
                     <button class="btn btn-danger" @click="clearImage">Clear</button>
-                    <button class="btn btn-primary" @click="saveCroppedImage">Save</button>
+                    <button class="btn btn-primary" data-bs-dismiss="modal" @click="saveCroppedImage">Save</button>
                   </div>
                 </div>
               </div>
@@ -112,7 +112,6 @@ const handleUpload = (event) => {
 
   const file = event.target.files[0];
   fileType.value = file.type;
-
   console.log("Upload an Image", fileType);
 
   if (file && validImageTypes.includes(fileType.value)) {
@@ -120,7 +119,7 @@ const handleUpload = (event) => {
     reader.onload = (e) => {
       img.value = e.target.result;
       hasUpload.value = true;
-      console.log(img.value)
+      // console.log(img.value)
     };
     reader.readAsDataURL(file);
   } else {
