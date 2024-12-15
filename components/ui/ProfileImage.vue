@@ -177,7 +177,7 @@ onMounted(() => {
   height: 40px;
 
   left: calc(75% - 70px);
-  top: calc(50% + 40px);
+  top: calc(50% + 10px);
 
   background: gray;
   border-radius: 50%;
