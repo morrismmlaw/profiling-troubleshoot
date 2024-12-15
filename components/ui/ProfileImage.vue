@@ -1,8 +1,8 @@
 /**
- * A component for displaying a user profile image and allowing the user to upload and crop a new image.
- * @example
- * <profile-image img-url="https://example.com/image.jpg" />
- */
+* A component for displaying a user profile image and allowing the user to upload and crop a new image.
+* @example
+* <profile-image img-url="https://example.com/image.jpg" />
+*/
 
 <template>
   <div>
@@ -59,7 +59,6 @@
       </div>
     </div>
 
-
   </div>
 </template>
 
@@ -84,8 +83,11 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['update:imgUrl', 'croppedImg']);
+
 // const img = ref('https://images.pexels.com/photos/379419/pexels-photo-379419.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
 const img = ref('')
+const croppedImg = ref('')
 const dropFiles = ref<File[]>([]);
 const hasUpload = ref(false);
 
@@ -129,10 +131,10 @@ const handleUpload = (event) => {
 const saveCroppedImage = () => {
   if (cropperRef.value) {
     const { canvas } = cropperRef.value.getResult();
+    croppedImg.value = canvas.toDataURL(fileType.value);
+    emit('croppedImg', croppedImg.value);
 
-    const newImg = canvas.toDataURL(fileType.value);
-
-    console.log('Cropped Image URL:', newImg);
+    // console.log('Cropped Image URL:', croppedImg.value);
 
     // Show the img in new Windows
     // const newTab = window.open();
@@ -141,7 +143,6 @@ const saveCroppedImage = () => {
     //     fileType.value
     //   )}"></img>`;
     // }
-
   }
 }
 
