@@ -27,17 +27,32 @@
               <div>
                 <cropper ref="cropperRef" class="cropper" :src="img" :stencil-props="{ aspectRatio: 1 / 1 }"
                   @change="change" />
+                <o-field @change="handleUpload" v-show="!hasUpload">
+                  <o-upload v-model="dropFiles" drag-drop>
+                    <div style="text-align: center">
+                      <p>
+                        <o-icon icon="upload" size="is-large" />
+                      </p>
+                      <p>Drop your files here or click to upload</p>
+                    </div>
+                  </o-upload>
+                </o-field>
               </div>
               <div class="mt-4">
                 <div class="mt-4">
                   <!-- <a href="javascript:void(0)" class="btn btn-primary">Upload Image</a> -->
-                  <label for="file-input" class="btn btn-primary">Upload Image</label>
+                  <!-- <label for="file-input" class="btn btn-primary">Upload Image</label>
                   <input id="file-input" type="file" accept="image/jpeg, image/png" style="display: none;"
-                    @change="handleUpload">
-                  <btn class="btn btn-danger" @click="clearImage">Clear Image</btn>
-                  <a href="javascript:void(0)" class="btn btn-primary">Save Avatar</a>
+                    @change="handleUpload"> -->
+                  <div class="input-group-sm">
+                    <div class="d-flex justify-content-end">
+                      <button class="btn btn-danger" @click="clearImage">Clear Image</button>
+                      <button class="btn btn-primary">Save Avatar</button>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -71,12 +86,14 @@ const props = defineProps({
 
 // const img = ref('https://images.pexels.com/photos/379419/pexels-photo-379419.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
 const img = ref('')
-const dropFiles = ref([]);
+const dropFiles = ref<File[]>([]);
 const hasUpload = ref(false);
 
 const clearImage = () => {
   img.value = ('');
+  hasUpload.value = false;
 }
+
 
 const change = ({ coordinates, canvas }) => {
   console.log(coordinates, canvas);
@@ -88,7 +105,10 @@ const handleUpload = (event) => {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = (e) => { img.value = e.target.result; };
+    reader.onload = (e) => {
+      img.value = e.target.result;
+      hasUpload.value = true;
+    };
     reader.readAsDataURL(file);
   }
 
