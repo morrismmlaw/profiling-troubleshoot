@@ -104,11 +104,13 @@ onMounted(() => {
   border-radius: 50%;
   border: none;
 
+  opacity: 0.9;
+
   :hover {
-    opacity: 0.9;
+    opacity: 1;
     // background-color: rgb(161, 161, 161, 0.3);
     // border-radius: 50%;
-    transform: scale(1.05);
+    transform: scale(1.07);
     transition: transform 0.1s ease-in-out;
   }
 
