@@ -21,7 +21,7 @@ const handleCroppedImg = (croppedImg) => {
   if (croppedImg === null) {
     imgUrl.value = props.profile.attributes.photoURL;
   } else {
-    // console.log('Capture Emit Cropped image:', croppedImg);
+    console.log('Capture Emit Cropped image:', croppedImg);
     imgUrl.value = croppedImg;
     // handle the croppedImg value as needed
   }
@@ -31,7 +31,7 @@ const handleCroppedImg = (croppedImg) => {
 
 <template>
   <div class="container-fluid">
-    <div class="card shadow rounded-5 profile-card">
+    <div class="card shadow rounded-5 profile-card ms-3">
 
       <div class="row p-2 m-2">
         <div class="d-flex justify-content-center">
@@ -39,9 +39,18 @@ const handleCroppedImg = (croppedImg) => {
         </div>
       </div>
 
-      <div class="card-body">
-        <h5 class="card-title profile-card-text">Profile Image</h5>
-        <p class="card-text profile-card-text"> Upload an Alternative Image</p>
+      <div class="row">
+        <div class="card-body text-center">
+          <h5 class="card-title profile-card-text"> {{ props.profile.attributes.post }} </h5>
+          <p class="card-text profile-card-text">{{ props.profile.attributes.name }} </p>
+        </div>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="card-body text-center d-flex justify-content-center">
+          <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
+          <a :href="props.profile.attributes.orcidURL" class="card-text profile-card-text ms-2">{{ props.profile.attributes.orcidURL }} </a>
+        </div>
       </div>
 
     </div>
