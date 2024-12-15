@@ -18,6 +18,10 @@
     <div ref="modal" class="modal fade" id="modal-cropper" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded shadow border-0">
+          <div class="modal-header">
+            <h5 class="modal-title">Upload and Crop Image</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
           <div class="modal-body py-5">
             <div class="text-center">
               <div>
@@ -26,7 +30,11 @@
               </div>
               <div class="mt-4">
                 <div class="mt-4">
-                  <a href="javascript:void(0)" class="btn btn-primary">Upload Image</a>
+                  <!-- <a href="javascript:void(0)" class="btn btn-primary">Upload Image</a> -->
+                  <label for="file-input" class="btn btn-primary">Upload Image</label>
+                  <input id="file-input" type="file" accept="image/jpeg, image/png" style="display: none;"
+                    @change="handleUpload">
+                  <btn class="btn btn-danger" @click="clearImage">Clear Image</btn>
                   <a href="javascript:void(0)" class="btn btn-primary">Save Avatar</a>
                 </div>
               </div>
@@ -61,14 +69,29 @@ const props = defineProps({
   },
 });
 
-const img = ref('https://images.pexels.com/photos/379419/pexels-photo-379419.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+// const img = ref('https://images.pexels.com/photos/379419/pexels-photo-379419.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+const img = ref('')
+const dropFiles = ref([]);
+const hasUpload = ref(false);
+
+const clearImage = () => {
+  img.value = ('');
+}
 
 const change = ({ coordinates, canvas }) => {
   console.log(coordinates, canvas);
 }
 
-const handleUpload = () => {
+const handleUpload = (event) => {
   console.log("Upload an Image");
+
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => { img.value = e.target.result; };
+    reader.readAsDataURL(file);
+  }
+
 }
 
 onMounted(() => {
