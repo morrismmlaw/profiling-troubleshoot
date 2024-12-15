@@ -22,7 +22,7 @@
             <h5 class="modal-title">Upload and Crop Image</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body py-5">
+          <div class="modal-body py-2">
             <div class="text-center">
               <div>
                 <cropper ref="cropperRef" class="cropper" :src="img" :stencil-props="{ aspectRatio: 1 / 1 }"
@@ -38,17 +38,11 @@
                   </o-upload>
                 </o-field>
               </div>
-              <div class="mt-4">
-                <div class="mt-4">
-                  <!-- <a href="javascript:void(0)" class="btn btn-primary">Upload Image</a> -->
-                  <!-- <label for="file-input" class="btn btn-primary">Upload Image</label>
-                  <input id="file-input" type="file" accept="image/jpeg, image/png" style="display: none;"
-                    @change="handleUpload"> -->
-                  <div class="input-group-sm">
-                    <div class="d-flex justify-content-end">
-                      <button class="btn btn-danger" @click="clearImage">Clear Image</button>
-                      <button class="btn btn-primary">Save Avatar</button>
-                    </div>
+              <div class="pt-2 mt-2">
+                <div class="input-group-sm">
+                  <div class="d-flex justify-content-end">
+                    <button class="btn btn-danger" @click="clearImage">Clear</button>
+                    <button class="btn btn-primary">Save</button>
                   </div>
                 </div>
               </div>
