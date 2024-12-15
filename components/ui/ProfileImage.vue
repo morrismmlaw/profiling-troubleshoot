@@ -94,7 +94,6 @@ onMounted(() => {
 
 .upload-icon {
   color: white;
-
   width: 40px;
   height: 40px;
 
@@ -103,7 +102,15 @@ onMounted(() => {
 
   background: gray;
   border-radius: 50%;
-
   border: none;
+
+  :hover {
+    opacity: 0.9;
+    // background-color: rgb(161, 161, 161, 0.3);
+    // border-radius: 50%;
+    transform: scale(1.05);
+    transition: transform 0.1s ease-in-out;
+  }
+
 }
 </style>
