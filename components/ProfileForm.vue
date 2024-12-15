@@ -401,7 +401,7 @@ onMounted(() => {
               <h5 class="card-title">Personal Information</h5>
               <p class="card-text">Your academic profile information.</p>
 
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col">
                   <div class="row mb-3">
                     <label class="col-form-label">Name</label>
@@ -418,9 +418,9 @@ onMounted(() => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col">
                   <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Email</label>
@@ -439,13 +439,12 @@ onMounted(() => {
                   <div class="row mb-3">
                     <label class="col-sm-4 col-form-label">HKBU Scholar URL</label>
                     <div class="col-sm-10">
-                      <!-- <p class="form-control-plaintext">{{ profile?.attributes.url }}</p> -->
                       <a :href="profile?.attributes.url" target="_blank" class="form-control-plaintext">{{
                         profile?.attributes.url }}</a>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <div class="row mb-3">
                 <label for="biography" class="col-sm-2 col-form-label">Biography</label>
