@@ -33,7 +33,7 @@
                       <p>
                         <o-icon icon="upload" size="is-large" />
                       </p>
-                      <p>Drop your files here or click to upload</p>
+                      <p>Drop your JPG / PNG Image here or click to upload</p>
                     </div>
                   </o-upload>
                 </o-field>
@@ -42,7 +42,7 @@
                 <div class="input-group-sm">
                   <div class="d-flex justify-content-end">
                     <button class="btn btn-danger" @click="clearImage">Clear</button>
-                    <button class="btn btn-primary">Save</button>
+                    <button class="btn btn-primary" @click="saveCroppedImage">Save</button>
                   </div>
                 </div>
               </div>
@@ -93,19 +93,39 @@ const change = ({ coordinates, canvas }) => {
   console.log(coordinates, canvas);
 }
 
+const validImageTypes = ['image/jpeg', 'image/png'];
+const fileType = ref('');
+
 const handleUpload = (event) => {
-  console.log("Upload an Image");
 
   const file = event.target.files[0];
-  if (file) {
+  fileType.value = file.type;
+
+  console.log("Upload an Image", fileType);
+
+  if (file && validImageTypes.includes(fileType.value)) {
     const reader = new FileReader();
     reader.onload = (e) => {
       img.value = e.target.result;
       hasUpload.value = true;
+      console.log(img.value)
     };
     reader.readAsDataURL(file);
+  } else {
+    alert('Invalid file type. Please select a JPG image.');
   }
+}
 
+const saveCroppedImage = () => {
+  if (cropperRef.value) {
+    const { canvas } = cropperRef.value.getResult();
+    const newTab = window.open();
+    if (newTab && canvas) {
+      newTab.document.body.innerHTML = `<img src="${canvas.toDataURL(
+        fileType.value
+      )}"></img>`;
+    }
+  }
 }
 
 onMounted(() => {
