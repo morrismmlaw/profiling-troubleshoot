@@ -130,10 +130,15 @@ const handleUpload = (event) => {
 const saveCroppedImage = () => {
   if (cropperRef.value) {
     const { canvas } = cropperRef.value.getResult();
-    croppedImg.value = canvas.toDataURL(fileType.value);
-    emit('croppedImg', croppedImg.value);
 
-    // console.log('Cropped Image URL:', croppedImg.value);
+    console.log('Cropped Image URL:', croppedImg.value);
+
+    try {
+      croppedImg.value = canvas.toDataURL(fileType.value);
+      emit('croppedImg', croppedImg.value);
+    } catch (error) {
+      emit('croppedImg', null);
+    }
 
     // Show the img in new Windows
     // const newTab = window.open();

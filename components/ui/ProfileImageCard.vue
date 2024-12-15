@@ -16,9 +16,15 @@ const imgUrl = ref(props.profile.attributes.photoURL || 'https://scholars.hkbu.e
 import ProfileImage from './ProfileImage.vue';
 
 const handleCroppedImg = (croppedImg) => {
-  // console.log('Capture Emit Cropped image:', croppedImg);
-  imgUrl.value = croppedImg;
-  // handle the croppedImg value as needed
+
+  // Case Reset to HKBU Scholar
+  if (croppedImg === null) {
+    imgUrl.value = props.profile.attributes.photoURL;
+  } else {
+    // console.log('Capture Emit Cropped image:', croppedImg);
+    imgUrl.value = croppedImg;
+    // handle the croppedImg value as needed
+  }
 };
 
 </script>
