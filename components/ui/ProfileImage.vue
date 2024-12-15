@@ -1,3 +1,9 @@
+/**
+ * A component for displaying a user profile image and allowing the user to upload and crop a new image.
+ * @example
+ * <profile-image img-url="https://example.com/image.jpg" />
+ */
+
 <template>
   <div>
     <nuxt-img class="position-relative rounded-circle profile-card-image" :src="props.imgUrl" alt="Card image cap" />
@@ -98,6 +104,10 @@ const fileType = ref('');
 
 const handleUpload = (event) => {
 
+  if (!event.target.files) {
+    return;
+  }
+
   const file = event.target.files[0];
   fileType.value = file.type;
 
@@ -119,12 +129,19 @@ const handleUpload = (event) => {
 const saveCroppedImage = () => {
   if (cropperRef.value) {
     const { canvas } = cropperRef.value.getResult();
-    const newTab = window.open();
-    if (newTab && canvas) {
-      newTab.document.body.innerHTML = `<img src="${canvas.toDataURL(
-        fileType.value
-      )}"></img>`;
-    }
+
+    const newImg = canvas.toDataURL(fileType.value);
+
+    console.log('Cropped Image URL:', newImg);
+
+    // Show the img in new Windows
+    // const newTab = window.open();
+    // if (newTab && canvas) {
+    //   newTab.document.body.innerHTML = `<img src="${canvas.toDataURL(
+    //     fileType.value
+    //   )}"></img>`;
+    // }
+
   }
 }
 
@@ -155,7 +172,7 @@ onMounted(() => {
   height: 40px;
 
   left: calc(75% - 70px);
-  top: calc(50% - 50px);
+  top: calc(50% + 40px);
 
   background: gray;
   border-radius: 50%;
