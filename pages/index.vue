@@ -115,10 +115,10 @@ import SearchBar from '~/components/ui/SearchBar.vue';
                 collaborator.</h3>
             </div>
 
-            <div class="col-md-11 col-lg-10 col-xl-9 mx-auto position-relative">
+            <div class="col-8 col-md-9 col-lg-9 col-xl-9 mx-auto position-relative">
               <form>
                 <div class="row">
-                  <div class="col-12 mb-2 mb-md-0">
+                  <div class="mb-2 mb-md-0">
                     <!-- <input class="form-control form-control-lg" type="email"
                       placeholder="Search By Name or Keyword" /> -->
 
