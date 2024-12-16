@@ -34,7 +34,7 @@ const formData = reactive({
   biography: props.profile?.attributes.biography || '',
 
   // SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
-  // SDG // http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png.. Fix ?
+  // SDG-link..  http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png.. Fix ?
   sdgs: props.profile?.attributes.sdgs ? props.profile.attributes.sdgs : [],
   // FCRA: props.profile?.attributes.FCRA || "", //String type
 
