@@ -441,42 +441,41 @@ onMounted(() => {
                 </div>
               </div>
 
-
               <section>
-                <o-field class="col-form-tag" label="Department">
+                <o-field class="col-form-tag" label="DEPARTMENT">
                   <o-taginput v-model="DEPTags" :options="DEPOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Add an item" expanded />
+                    icon="tag" placeholder="Select options" expanded />
                 </o-field>
               </section>
               <section>
-                <o-field class="col-form-tag" label="Strategic Research Centre">
+                <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
                   <o-taginput v-model="SRCTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Add an item" expanded />
+                    icon="tag" placeholder="Select options" expanded />
                 </o-field>
                 <!-- <p><b>FCRAS:</b> {{ fcraTags }}</p> -->
               </section>
               <section>
-                <o-field class="col-form-tag" label="Research Focus">
+                <o-field class="col-form-tag" label="RESEARCH FOCUS">
                   <o-taginput v-model="RFTags" :options="RFOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Add an item" expanded />
+                    icon="tag" placeholder="Select options" expanded />
                 </o-field>
                 <!-- <p><b>RESEARCH FOCUS:</b> {{ RSTags }}</p> -->
               </section>
               <section>
-                <o-field class="col-form-tag" label="Faculty Collaborative Research Area">
+                <o-field class="col-form-tag" label="FACULTY COLLABORATIVE RESEARCH AREA">
                   <o-taginput v-model="FCRATags" :options="FCRAOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Add an item" expanded />
+                    icon="tag" placeholder="Select options" expanded />
                 </o-field>
               </section>
               <section>
-                <o-field class="col-form-tag" label="Availability for Supervision">
+                <o-field class="col-form-tag" label="AVAILABILITY FOR SUPERVISION">
                   <o-taginput v-model="ASTags" :options="ASOptionsOrugaNew" :allow-new="allowNew"
                     :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Add an item" expanded />
+                    icon="tag" placeholder="Select options" expanded />
                 </o-field>
               </section>
 
