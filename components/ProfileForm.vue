@@ -419,7 +419,7 @@ onMounted(() => {
                     <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
                       <o-field class="sdg-field">
                         <!-- <o-tooltip :label="`SDG: ${sdg.sdgid} \n\n Slogan: ${sdg.slogan}`" multiline> -->
-                        <o-tooltip label="HTML Content" size="large" multiline>
+                        <o-tooltip label="HTML Content" size="large" variant="info" multiline>
                           <template #content>
                             <div class="sdg-info">
                               <!-- <p><strong>SDG:</strong> {{ sdg.sdgid }}</p> -->
@@ -555,8 +555,26 @@ onMounted(() => {
   text-transform: uppercase;
 }
 
-.sdg-info p {
-  margin-bottom: 1em;
+.sdg-tooltip {
+  background: #006d88;
+}
+
+.sdg-info {
+  color: aliceblue;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* Added text-shadow */
+
+  font-family: Montserrat, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  /* line-height: 24px; */
+  /* min-width: 50%; */
+  /* text-transform: uppercase; */
+
+  p {
+    margin-bottom: 1em;
+  }
 }
 
 .sdg-info strong {
