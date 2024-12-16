@@ -379,7 +379,6 @@ onMounted(() => {
 
   <div class="container-fluid px-5">
     <div class="row mt-4 mb-4">
-
       <div class="col-sm-3 col-md-3 col-lg-3 mb-2">
         <image-card :profile="profile" />
       </div>
@@ -430,7 +429,7 @@ onMounted(() => {
                           </template>
                           <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
                             <!-- <o-checkbox v-model="checkboxGroup" :native-value="sdg" :label="sdg.sdgid"> -->
-                            SDG {{ sdg.sdgid }}
+                            <p class="col-form-label-sdg"> SDG {{ sdg.sdgid }} </p>
                             <nuxt-img
                               :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
                               :alt="sdg.title" class="img-fluid checkbox-img" />
@@ -480,7 +479,6 @@ onMounted(() => {
                     icon="tag" placeholder="Add an item" expanded />
                 </o-field>
               </section>
-
 
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
@@ -542,6 +540,17 @@ onMounted(() => {
   font-weight: 600;
   letter-spacing: .6px;
   line-height: 24px;
+  min-width: 50%;
+  text-transform: uppercase;
+}
+
+.col-form-label-sdg {
+  color: #006d88;
+  font-family: Montserrat, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  /* line-height: 24px; */
   min-width: 50%;
   text-transform: uppercase;
 }
