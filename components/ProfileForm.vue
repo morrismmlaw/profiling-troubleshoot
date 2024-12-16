@@ -398,8 +398,8 @@ onMounted(() => {
         <form @submit.prevent="handleSubmit" >
           <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
             <div class="card-body">
-              <h5 class="card-title">Personal Information</h5>
-              <p class="card-text">Your academic profile information.</p>
+              <!-- <h5 class="card-title">Personal Information</h5>
+              <p class="card-text">Your academic profile information.</p> -->
 
               <!-- <div class="row">
                 <div class="col">
