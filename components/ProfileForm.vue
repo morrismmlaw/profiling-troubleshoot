@@ -38,7 +38,7 @@ const formData = reactive({
   sdgs: props.profile?.attributes.sdgs ? props.profile.attributes.sdgs : [],
   // FCRA: props.profile?.attributes.FCRA || "", //String type
 
-  fcras: props.profile?.attributes.fcras || [], //String type
+  fcras: props.profile?.attributes.fcras || [],
   research_foci: props.profile?.attributes.research_foci || [],
   research_centres: props.profile?.attributes.research_centres || [],
 
