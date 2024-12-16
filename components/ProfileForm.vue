@@ -395,7 +395,7 @@ onMounted(() => {
       </div>
 
       <div class="col-sm-10 col-md-10 col-lg-9">
-        <form @submit.prevent="handleSubmit" >
+        <form @submit.prevent="handleSubmit">
           <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
             <div class="card-body">
               <!-- <h5 class="card-title">Personal Information</h5>
@@ -446,16 +446,25 @@ onMounted(() => {
                 </div>
               </div> -->
 
-              <div class="row mb-3">
-                <label for="biography" class="col-sm-2 col-form-label">Biography</label>
-                <div class="col-sm-10">
-                  <tiptap-editor :formData="formData" field="biography" />
+              <div class="row mb-3 rounded-5 border-4">
+                <div class="row">
+                  <label for="biography" class="col col-form-label">Biography</label>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <tiptap-editor :formData="formData" field="biography" />
+                  </div>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="academicInterests" class="col-sm-2 col-form-label">Academic Interests</label>
-                <div class="col-sm-10">
-                  <tiptap-editor :formData="formData" field="research_interest" />
+
+                <div class="row">
+                  <label for="academicInterests" class="col col-form-label">Academic Interests</label>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <tiptap-editor :formData="formData" field="research_interest" />
+                  </div>
                 </div>
               </div>
 
@@ -584,8 +593,14 @@ onMounted(() => {
 }
 
 .col-form-label {
-  font-weight: bold;
-  text-decoration: underline;
+  color: #006d88;
+  font-family: Montserrat, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .6px;
+  line-height: 24px;
+  min-width: 50%;
+  text-transform: uppercase;
 }
 
 .sdg-info p {
