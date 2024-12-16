@@ -443,7 +443,7 @@ onMounted(() => {
                             SDG {{ sdg.sdgid }}
                             <nuxt-img
                               :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
-                              :alt="sdg.title" class="img-fluid" />
+                              :alt="sdg.title" class="img-fluid checkbox-img" />
                           </o-checkbox>
                         </o-tooltip>
                       </o-field>
@@ -578,5 +578,9 @@ onMounted(() => {
 
 .sdg-field:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.checkbox-img {
+  margin-left: -10px;
 }
 </style>
