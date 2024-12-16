@@ -480,7 +480,7 @@ onMounted(() => {
                 </o-field>
               </section>
 
-              <div class="d-flex justify-content-end">
+              <div class="d-flex justify-content-end mt-4">
                 <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
                   {{ profileStore.isLoading ? 'Saving...' : 'Save' }}
                 </button>
@@ -550,7 +550,7 @@ onMounted(() => {
   font-size: 13px;
   font-weight: 500;
   letter-spacing: .5px;
-  /* line-height: 24px; */
+  line-height: 24px;
   min-width: 50%;
   text-transform: uppercase;
 }
@@ -567,16 +567,16 @@ onMounted(() => {
 
 .sdg-field {
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1em;
+  padding: 0.4rem;
   transition: box-shadow 0.2s ease;
   justify-content: space-between;
-
 }
 
 .sdg-field:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 4px 8px rgba(0, 119, 255, 0.354);
 }
 
 .checkbox-img {
