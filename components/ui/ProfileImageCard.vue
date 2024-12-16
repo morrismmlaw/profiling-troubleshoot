@@ -48,12 +48,12 @@ const handleCroppedImg = (croppedImg) => {
         <hr>
       </div>
       <div class="row">
-        <div class="card-body text-center d-flex justify-content-center">
+        <div class="card-body imgcard-info">
           <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
           <a :href="props.profile.attributes.orcidURL" class="card-text profile-card-text ms-2">{{
             props.profile.attributes.orcidURL }} </a>
         </div>
-        <div class="card-body text-center d-flex justify-content-center">
+        <div class="card-body text-center d-flex justify-content-start imgcard-info">
           <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
           <a :href="props.profile.attributes.url" class="card-text profile-card-text ms-2">{{
             props.profile.attributes.url }} </a>
@@ -109,4 +109,14 @@ hr {
   background-size: 10px 1px;
   background-repeat: repeat-x;
 }
+
+.imgcard-info {
+  display: flex;
+  justify-content: start;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: fade;
+}
+
 </style>
