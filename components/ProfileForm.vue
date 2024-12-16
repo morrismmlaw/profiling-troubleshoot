@@ -387,17 +387,17 @@ onMounted(() => {
 
 <template>
 
-  <div class="container-fluid">
+  <div class="container-fluid px-5">
     <div class="row mt-4 mb-4">
 
-      <div class="col-sm-2 col-md-2 col-lg-3 mb-2">
+      <div class="col-sm-3 col-md-3 col-lg-3 mb-2">
         <image-card :profile="profile" />
       </div>
 
       <div class="col-sm-10 col-md-10 col-lg-9">
-        <form @submit.prevent="handleSubmit" class="container-fluid">
-          <div class="card ms-md-0 ms-2 shadow">
-            <div class="card-body rounded-1">
+        <form @submit.prevent="handleSubmit" >
+          <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
+            <div class="card-body">
               <h5 class="card-title">Personal Information</h5>
               <p class="card-text">Your academic profile information.</p>
 
