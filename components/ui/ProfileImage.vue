@@ -6,7 +6,7 @@
 
 <template>
   <div>
-    <nuxt-img class="position-relative rounded-circle profile-card-image" :src="props.imgUrl" alt="Card image cap" />
+    <nuxt-img class="position-relative rounded-circle profile-card-image shadow-lg" :src="props.imgUrl" alt="Card image cap" />
 
     <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute upload-icon">
       <o-tooltip label="Upload an alternative image" position="bottom" data-bs-toggle="modal"
