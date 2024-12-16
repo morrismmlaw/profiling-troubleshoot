@@ -30,7 +30,7 @@ const handleCroppedImg = (croppedImg) => {
 </script>
 
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid p-0 m-0">
     <div class="card shadow rounded-5 profile-card ms-3">
 
       <div class="row p-2 m-2">
@@ -99,5 +99,14 @@ const handleCroppedImg = (croppedImg) => {
 
 .profile-card-text {
   color: aliceblue;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: white;
+  background-image: linear-gradient(to right, transparent, white 50%, transparent);
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
 }
 </style>

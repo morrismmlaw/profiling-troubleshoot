@@ -390,11 +390,11 @@ onMounted(() => {
   <div class="container-fluid">
     <div class="row mt-4 mb-4">
 
-      <div class="col-sm-2 col-md-3 col-lg-3 mb-2">
+      <div class="col-sm-2 col-md-2 col-lg-3 mb-2">
         <image-card :profile="profile" />
       </div>
 
-      <div class="col-sm-12 col-md-11 col-lg-9">
+      <div class="col-sm-10 col-md-10 col-lg-9">
         <form @submit.prevent="handleSubmit" class="container-fluid">
           <div class="card ms-md-0 ms-2 shadow">
             <div class="card-body rounded-1">
@@ -460,10 +460,10 @@ onMounted(() => {
               </div>
 
               <div class="row">
-                <div class="col-2">
+                <div class="col-12 col-sm-12 col-md-12">
                   <h6 class="col-form-label">Sustainable Development Goals (SDGs)</h6>
                 </div>
-                <div class="col">
+                <div class="col-11 col-sm-11 col-md-12">
                   <div class="columns is-multiline">
                     <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
                       <o-field class="sdg-field">
@@ -574,6 +574,13 @@ onMounted(() => {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .columns {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 7px;
+  }
 }
 
 .col-form-label {
