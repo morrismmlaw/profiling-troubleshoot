@@ -15,7 +15,6 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   }
-
 });
 
 onMounted(() => {
@@ -213,15 +212,6 @@ const fcraOptionsOrugaSAMPLE = [
       user: { first_name: "Jesse", last_name: "Simmons" },
       date: "2016/10/15 13:43:27",
       gender: "Male",
-    },
-  },
-  {
-    label: "Tina Gilbert",
-    value: {
-      id: 3,
-      user: { first_name: "Tina", last_name: "Gilbert" },
-      date: "2016/04/26 06:26:28",
-      gender: "Female",
     },
   },
 ];
@@ -581,6 +571,6 @@ onMounted(() => {
 }
 
 .checkbox-img {
-  margin-left: -10px;
+  margin-left: -11px;
 }
 </style>

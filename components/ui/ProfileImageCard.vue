@@ -10,13 +10,12 @@ const props = defineProps({
 // ORUGA FILE SECTION
 
 const defaultImg = ref('https://scholars.hkbu.edu.hk/assets/no-portrait-473c6d005990baa1f418d9c668dcd4ec.png');
-const imgUrl = ref(props.profile.attributes.photoURL || 'https://scholars.hkbu.edu.hk/assets/no-portrait-473c6d005990baa1f418d9c668dcd4ec.png');
+const imgUrl = ref(props.profile.attributes.photoURL || defaultImg.value );
 // ORUGA FILE SECTION
 
 import ProfileImage from './ProfileImage.vue';
 
 const handleCroppedImg = (croppedImg) => {
-
   // Case Reset to HKBU Scholar
   if (croppedImg === null) {
     imgUrl.value = defaultImg.value;
@@ -38,7 +37,6 @@ const handleCroppedImg = (croppedImg) => {
           <ProfileImage :img-url="imgUrl" :has-upload="true" @cropped-img="handleCroppedImg" />
         </div>
       </div>
-
       <div class="row">
         <div class="card-body text-center">
           <h5 class="card-title profile-card-text"> {{ props.profile.attributes.post }} </h5>
