@@ -398,53 +398,6 @@ onMounted(() => {
         <form @submit.prevent="handleSubmit">
           <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
             <div class="card-body">
-              <!-- <h5 class="card-title">Personal Information</h5>
-              <p class="card-text">Your academic profile information.</p> -->
-
-              <!-- <div class="row">
-                <div class="col">
-                  <div class="row mb-3">
-                    <label class="col-form-label">Name</label>
-                    <div class="col-sm-10">
-                      <p class="form-control-plaintext">{{ profile?.attributes.name }}</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="row mb-3">
-                    <label class="col-form-label">Chinese Name</label>
-                    <div class="col-sm-10">
-                      <p class="form-control-plaintext">{{ profile?.attributes.chiname }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-
-              <!-- <div class="row">
-                <div class="col">
-                  <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Email</label>
-                    <div class="col-sm-9">
-                      <p class="form-control-plaintext">{{ profile?.attributes.email }}</p>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Department</label>
-                    <div class="col-sm-9">
-                      <p class="form-control-plaintext">{{ profile?.attributes.unit }}</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">HKBU Scholar URL</label>
-                    <div class="col-sm-10">
-                      <a :href="profile?.attributes.url" target="_blank" class="form-control-plaintext">{{
-                        profile?.attributes.url }}</a>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
 
               <div class="row mb-3 rounded-5 border-4">
                 <div class="row">
