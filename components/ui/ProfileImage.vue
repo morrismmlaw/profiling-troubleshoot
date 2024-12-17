@@ -67,11 +67,11 @@
 
 import { Cropper } from 'vue-advanced-cropper';
 import 'vue-advanced-cropper/dist/style.css';
+import type { CroppedImg } from '~/types/profileImage';
 
 const show = ref(false)
 const modal = ref(null)
 const cropperRef = ref(null)
-
 
 const props = defineProps({
   imgUrl: {
@@ -82,13 +82,21 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  profile: {
+    type: Object,
+    default: {},
+  }
 });
 
 const emit = defineEmits(['update:imgUrl', 'croppedImg']);
 
 // const img = ref('https://images.pexels.com/photos/379419/pexels-photo-379419.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
 const img = ref('')
-const croppedImg = ref('')
+const croppedImg = ref<CroppedImg>({
+  imgUrl: '',
+  strapiID: '',
+})
+
 const dropFiles = ref<File[]>([]);
 const hasUpload = ref(false);
 
@@ -130,32 +138,32 @@ const handleUpload = (event) => {
 
 const saveCroppedImage = async () => {
 
-  const filename = "TestUploadImage";
-  const client = useStrapiClient()
+  const timestamp = Math.floor(new Date().getTime() / 1000);
+  const filename = `${props.profile.attributes.keyid}_${timestamp}`
+  const client = useStrapiClient();
 
   if (cropperRef.value) {
     const { canvas } = cropperRef.value.getResult();
     // console.log('Cropped Image URL:', croppedImg.value);
+
     try {
       //UPLOAD TO STRAPI
       if (canvas) {
         const formData = new FormData();
-
         canvas.toBlob(async blob => {
           formData.append('files', blob, filename);
-
-          const uploadResponse  = await client(`/upload`, {
+          const uploadResponse = await client(`/upload`, {
             method: 'POST',
             body: formData
           })
-
           console.log('upload return data', uploadResponse);
+          croppedImg.value.strapiID = uploadResponse[0].documentId;
           // Perhaps you should add the setting appropriate file format here
         }, `${fileType.value}`);
       }
-
-      croppedImg.value = canvas.toDataURL(fileType.value);
-      emit('croppedImg', croppedImg.value);
+      //Emit new Image to Image Card
+      croppedImg.value.imgUrl = canvas.toDataURL(fileType.value);
+      emit('croppedImg', croppedImg);
     } catch (error) {
       emit('croppedImg', null);
     }

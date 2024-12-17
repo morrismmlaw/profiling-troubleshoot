@@ -7,22 +7,30 @@ const props = defineProps({
     required: true
   }
 })
+
+const emit = defineEmits(['croppedImg'])
+
 // ORUGA FILE SECTION
 
 const defaultImg = ref('https://scholars.hkbu.edu.hk/assets/no-portrait-473c6d005990baa1f418d9c668dcd4ec.png');
 const imgUrl = ref(props.profile.attributes.photoURL || defaultImg.value );
+const imgStrapiID = ref('');
 // ORUGA FILE SECTION
 
 import ProfileImage from './ProfileImage.vue';
+import type { CroppedImg } from '~/types/profileImage';
 
-const handleCroppedImg = (croppedImg) => {
+const handleCroppedImg = (croppedImg: Ref<CroppedImg>) => {
   // Case Reset to HKBU Scholar
   if (croppedImg === null) {
     imgUrl.value = defaultImg.value;
   } else {
-    console.log('Capture Emit Cropped image:', croppedImg);
-    imgUrl.value = croppedImg;
     // handle the croppedImg value as needed
+    // console.log('Capture Emit Cropped image:', croppedImg);
+    imgUrl.value = croppedImg.value.imgUrl;
+    imgStrapiID.value = croppedImg.value.strapiID;
+    console.log('Capture ProfileImgCard image:', croppedImg.value.strapiID);
+    emit('croppedImg', croppedImg);
   }
 };
 
@@ -34,7 +42,7 @@ const handleCroppedImg = (croppedImg) => {
 
       <div class="row p-2 m-2">
         <div class="d-flex justify-content-center">
-          <ProfileImage :img-url="imgUrl" :has-upload="true" @cropped-img="handleCroppedImg" />
+          <ProfileImage :img-url="imgUrl" :profile="profile" :has-upload="true" @cropped-img="handleCroppedImg" />
         </div>
       </div>
       <div class="row">

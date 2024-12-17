@@ -1,8 +1,6 @@
-
 /**
  * @typedef {import('~/types/profile').Profile} Profile
  */
-
 
 //For Get and return of Update profile (inside, not api collection.).
 let populateFields = [
@@ -56,6 +54,11 @@ async function update_departments(documentId, data) {
   return await updateRelationField(documentId, data, 'departments');
 }
 
+async function update_photoUpload(documentId, data) {
+  // Upload to STRAPI UPLOAD Endpoint - Done by ProfileImage.vue
+  // Store the retuned id to the Field in Profile.
+  // return await updateRelationField(documentId, data, 'departments');
+}
 
 export const api = {
   /**

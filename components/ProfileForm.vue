@@ -3,6 +3,7 @@ import { reactive, watch, defineEmits } from 'vue';
 import { useProfileStore } from '../composables/useProfile'; // replace with your actual path
 import TiptapEditor from './TiptapEditor.vue' // path to your Tiptap editor component
 import ImageCard from './ui/ProfileImageCard.vue';
+import type { CroppedImg } from '~/types/profileImage';
 
 const props = defineProps({
   profile: {
@@ -22,8 +23,13 @@ onMounted(() => {
   console.log("props.collections", props.collections);
 })
 
-const emit = defineEmits(['save']);
 const profileStore = useProfileStore();
+
+const emit = defineEmits(['save']);
+const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
+  console.log("Capture ProfileForm: ", croppedImg.value);
+  formData.photoURL = croppedImg.value.strapiID;
+}
 
 //Used for Reactive for ORUGA to Update..
 const formData = reactive({
@@ -44,7 +50,7 @@ const formData = reactive({
   available_supervisions: props.profile?.attributes.available_supervisions || [],
   departments: props.profile?.attributes.departments || [],
 
-  photoURL: props.profile?.attributes.photoURL || [],
+  photoURL: props.profile?.attributes.photoURL || [], //Will need to convert from ID to img Link from Strapi.
 });
 
 
@@ -61,6 +67,7 @@ const handleSubmit = () => { //Going to send back to profile.vue parent.
     available_supervisions: formData.available_supervisions,
 
     departments: formData.departments,
+    photoURL: formData.photoURL, //Save the Strapi ID of the Avatar.
 
     documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
     // FCRA: formData.FCRA, //DEBUGGING
@@ -371,8 +378,6 @@ onMounted(() => {
 })
 // ORUGA SECTION
 
-
-
 </script>
 
 <template>
@@ -380,7 +385,7 @@ onMounted(() => {
   <div class="container-fluid px-5">
     <div class="row mt-4 mb-4">
       <div class="col-sm-3 col-md-3 col-lg-3 mb-2">
-        <image-card :profile="profile" />
+        <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
       </div>
 
       <div class="col-sm-10 col-md-10 col-lg-9">
