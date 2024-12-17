@@ -30,7 +30,7 @@ const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
 
   if (croppedImg === null) {
     //Set it to Clear.
-    formData.uploadPhoto = '';
+    formData.uploadPhoto = null;
     // delete formData.uploadPhoto;
   } else {
     let imgObj = croppedImg.value;

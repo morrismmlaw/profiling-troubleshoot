@@ -72,10 +72,13 @@ async function update_uploadPhoto(documentId, data, profile) {
   console.log(profileData)
 
   const field = 'uploadPhoto';
-  const fieldIds = data[field]
 
-  if (fieldIds === "") {
+  const fieldIds = data[field]
+  console.log('fieldID,', fieldIds);
+
+  if (fieldIds === "" || fieldIds === null) {
     //Case Clear uploadPhoto
+    console.log("Remove Image from STRAPI")
     const { delete: _delete } = useStrapi();
     const delResponse =  await _delete('upload/files', profileData[field].id);
   } else {
@@ -149,7 +152,7 @@ export const api = {
     await update_departments(documentId, FormData); //Relations
 
     await update_uploadPhoto(documentId, FormData, profile); //MEDIA ID
-    delete FormData.uploadPhoto;
+    // delete FormData.uploadPhoto;
 
     return await update('profiles', documentId, FormData,
       { populate: populateFields } //Return the Populated data.
