@@ -124,37 +124,37 @@ const handleUpload = (event) => {
     };
     reader.readAsDataURL(file);
   } else {
-    alert('Invalid file type. Please select a JPG image.');
+    alert('Invalid file type. Please select a JPG / PNG image.');
   }
 }
 
 const saveCroppedImage = async () => {
 
+  const filename = "TestUploadImage";
   const client = useStrapiClient()
 
   if (cropperRef.value) {
     const { canvas } = cropperRef.value.getResult();
-    console.log('Cropped Image URL:', croppedImg.value);
-
+    // console.log('Cropped Image URL:', croppedImg.value);
     try {
-      croppedImg.value = canvas.toDataURL(fileType.value);
+      //UPLOAD TO STRAPI
       if (canvas) {
         const formData = new FormData();
 
         canvas.toBlob(async blob => {
-          formData.append('files', blob);
-          console.log(blob);
+          formData.append('files', blob, filename);
 
-          const { data } = await client(`/upload`, {
+          const uploadResponse  = await client(`/upload`, {
             method: 'POST',
             body: formData
           })
 
-          console.log('return data', data);
+          console.log('upload return data', uploadResponse);
           // Perhaps you should add the setting appropriate file format here
         }, `${fileType.value}`);
       }
 
+      croppedImg.value = canvas.toDataURL(fileType.value);
       emit('croppedImg', croppedImg.value);
     } catch (error) {
       emit('croppedImg', null);
