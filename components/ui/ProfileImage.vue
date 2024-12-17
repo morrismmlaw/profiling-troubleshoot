@@ -147,6 +147,9 @@ const handleSaveClick = async () => {
   }
 }
 
+/**
+ * Need to wrap Dat Upload In Promise -> Good Practice / else the emit's thigns will be incompleted with Strapi Value
+ */
 const saveCroppedImage = async () => {
   const timestamp = Math.floor(new Date().getTime() / 1000);
   const filename = `${props.profile.attributes.keyid}_${timestamp}`;

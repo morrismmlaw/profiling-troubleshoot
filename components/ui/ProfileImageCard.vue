@@ -11,7 +11,7 @@ const props = defineProps({
 const emit = defineEmits(['croppedImg'])
 
 const defaultImg = ref('https://scholars.hkbu.edu.hk/assets/no-portrait-473c6d005990baa1f418d9c668dcd4ec.png');
-const imgUrl = ref(props.profile.attributes.photoURL || defaultImg.value);
+const imgUrl = ref('');
 const imgStrapiID = ref('');
 
 import ProfileImage from './ProfileImage.vue';
@@ -32,6 +32,8 @@ const handleCroppedImg = (croppedImg: Ref<CroppedImg>) => {
 };
 
 const initImages = () => {
+  imgUrl.value = props.profile.attributes.photoURL || defaultImg.value;
+
   if (props.profile.attributes.uploadPhoto) {
     let customImgURL = props.profile.attributes.uploadPhoto.url;
     customImgURL = 'https://profile-cms.sci.hkbu.edu.hk' + customImgURL;
