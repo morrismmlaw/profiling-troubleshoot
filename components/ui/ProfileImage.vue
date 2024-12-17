@@ -143,6 +143,7 @@ const handleSaveClick = async () => {
     croppedImg.value.imgUrl = canvas.toDataURL(fileType.value);
     emit('croppedImg', croppedImg);
   } else {
+    console.log('Clear image');
     emit('croppedImg', null);
   }
 }

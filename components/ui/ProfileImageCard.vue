@@ -21,6 +21,7 @@ const handleCroppedImg = (croppedImg: Ref<CroppedImg>) => {
   // Case Reset to HKBU Scholar
   if (croppedImg === null) {
     imgUrl.value = defaultImg.value;
+    emit('croppedImg', null);
   } else {
     // handle the croppedImg value as needed
     // console.log('Capture Emit Cropped image:', croppedImg);

@@ -55,7 +55,15 @@ async function update_departments(documentId, data) {
   return await updateRelationField(documentId, data, 'departments');
 }
 
+/**
+ * Link the Media ID with the Profile's field, remove media Linkage if needed. 
+ * @param {*} documentId 
+ * @param {*} data 
+ * @returns 
+ */
 async function update_photoUpload(documentId, data) {
+  const { update } = useStrapi();
+
   console.log("In Update photoUpload");
   console.log(documentId)
   console.log(data)
@@ -63,7 +71,6 @@ async function update_photoUpload(documentId, data) {
   const field = 'uploadPhoto';
   // Upload to STRAPI UPLOAD Endpoint - Done by ProfileImage.vue
   // Store the retuned id to the Field in Profile.
-  const { update } = useStrapi();
   const fieldIds = data[field]
 
   console.log(`Updating ${field}`, documentId, fieldIds);
@@ -133,7 +140,7 @@ export const api = {
     await update_available_supervisions(documentId, data); //Relations
     await update_departments(documentId, data); //Relations
 
-    await update_photoUpload(documentId, data); //Relations
+    await update_photoUpload(documentId, data); //MEDIA ID
 
     return await update('profiles', documentId, data,
       { populate: populateFields } //Return the Populated data.
