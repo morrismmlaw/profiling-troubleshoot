@@ -56,13 +56,18 @@ async function update_departments(documentId, data) {
 }
 
 async function update_photoUpload(documentId, data) {
-
   console.log("In Update photoUpload");
   console.log(documentId)
   console.log(data)
+
+  const field = 'uploadPhoto';
   // Upload to STRAPI UPLOAD Endpoint - Done by ProfileImage.vue
   // Store the retuned id to the Field in Profile.
-  return await updateRelationField(documentId, data, 'uploadPhoto');
+  const { update } = useStrapi();
+  const fieldIds = data[field]
+
+  console.log(`Updating ${field}`, documentId, fieldIds);
+  return await update('profiles', documentId, { [field]: fieldIds });
 }
 
 export const api = {

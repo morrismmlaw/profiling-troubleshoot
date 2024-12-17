@@ -28,9 +28,9 @@ const profileStore = useProfileStore();
 const emit = defineEmits(['save']);
 const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
   let obj = croppedImg.value;
-  console.log("Capture ProfileForm: ", obj);
+  // console.log("Capture ProfileForm: ", obj);
   formData.uploadPhoto = obj.strapiID;
-  console.log('FormData StrapiID:', formData.uploadPhoto);
+  // console.log('FormData StrapiID:', formData.uploadPhoto);
 }
 
 //Used for Reactive for ORUGA to Update..

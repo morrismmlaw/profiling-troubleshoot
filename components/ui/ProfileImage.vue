@@ -163,8 +163,8 @@ const saveCroppedImage = async () => {
               try {
                 const uploadResponse = await client(`/upload`, { method: 'POST', body: formData });
                 console.log('upload return data', uploadResponse);
-                croppedImg.value.strapiID = uploadResponse[0].documentId;
-                console.log('Uploaded Image ID:', uploadResponse[0].documentId);
+                croppedImg.value.strapiID = uploadResponse[0].id; // HAHA need to be id, not document id for media asset linkage
+                // console.log('Uploaded Image ID:', uploadResponse[0].documentId);
                 resolve(true);
               } catch (error) {
                 console.error('Error uploading image:', error);
