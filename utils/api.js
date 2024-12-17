@@ -63,7 +63,6 @@ async function update_departments(documentId, data) {
  */
 async function update_uploadPhoto(documentId, data, profile) {
   const { update, findOne } = useStrapi();
-
   const profileData = profile.attributes;
 
   console.log("In Update uploadPhoto");
@@ -72,12 +71,11 @@ async function update_uploadPhoto(documentId, data, profile) {
   console.log(profileData)
 
   const field = 'uploadPhoto';
-
   const fieldIds = data[field]
   console.log('fieldID,', fieldIds);
 
+  //Cleanup Replacing Image
   if (fieldIds !== null && profileData[field] !== null) {
-    //Cleanup Old Image
     console.log("Remove Image from STRAPI")
     const { delete: _delete } = useStrapi();
     const delResponse = await _delete('upload/files', profileData[field].id);
