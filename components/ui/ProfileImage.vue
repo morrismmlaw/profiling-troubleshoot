@@ -6,7 +6,8 @@
 
 <template>
   <div>
-    <nuxt-img class="position-relative rounded-circle profile-card-image shadow-lg" :src="props.imgUrl" alt="Card image cap" />
+    <nuxt-img class="position-relative rounded-circle profile-card-image shadow-lg" :src="props.imgUrl"
+      alt="Card image cap" />
 
     <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute upload-icon">
       <o-tooltip label="Upload an alternative image" position="bottom" data-bs-toggle="modal"
@@ -127,14 +128,33 @@ const handleUpload = (event) => {
   }
 }
 
-const saveCroppedImage = () => {
+const saveCroppedImage = async () => {
+
+  const client = useStrapiClient()
+
   if (cropperRef.value) {
     const { canvas } = cropperRef.value.getResult();
-
     console.log('Cropped Image URL:', croppedImg.value);
 
     try {
       croppedImg.value = canvas.toDataURL(fileType.value);
+      if (canvas) {
+        const formData = new FormData();
+
+        canvas.toBlob(async blob => {
+          formData.append('files', blob);
+          console.log(blob);
+
+          const { data } = await client(`/upload`, {
+            method: 'POST',
+            body: formData
+          })
+
+          console.log('return data', data);
+          // Perhaps you should add the setting appropriate file format here
+        }, `${fileType.value}`);
+      }
+
       emit('croppedImg', croppedImg.value);
     } catch (error) {
       emit('croppedImg', null);
@@ -149,6 +169,8 @@ const saveCroppedImage = () => {
     // }
   }
 }
+
+
 
 onMounted(() => {
   const modalElement = modal.value;
