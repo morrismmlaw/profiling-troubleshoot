@@ -83,9 +83,9 @@ async function update_uploadPhoto(documentId, data, profile) {
 
   if (fieldIds === "" || fieldIds === null) {
     //Case Clear uploadPhoto
-    console.log("Remove Image from STRAPI")
-    const { delete: _delete } = useStrapi();
-    const delResponse = await _delete('upload/files', profileData[field].id);
+    // console.log("Remove Image from STRAPI")
+    // const { delete: _delete } = useStrapi();
+    // const delResponse = await _delete('upload/files', profileData[field].id);
   } else {
     console.log(`Updating ${field}`, documentId, fieldIds);
     return await update('profiles', documentId, { [field]: fieldIds });
