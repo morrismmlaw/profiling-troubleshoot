@@ -27,8 +27,11 @@ const profileStore = useProfileStore();
 
 const emit = defineEmits(['save']);
 const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
-  console.log("Capture ProfileForm: ", croppedImg.value);
-  formData.photoURL = croppedImg.value.strapiID;
+  let obj = croppedImg.value;
+  console.log("Capture ProfileForm: ", obj);
+
+  formData.uploadPhoto = obj.strapiID;
+  console.log('FormData StrapiID:', formData.uploadPhoto);
 }
 
 //Used for Reactive for ORUGA to Update..
@@ -50,7 +53,8 @@ const formData = reactive({
   available_supervisions: props.profile?.attributes.available_supervisions || [],
   departments: props.profile?.attributes.departments || [],
 
-  photoURL: props.profile?.attributes.photoURL || [], //Will need to convert from ID to img Link from Strapi.
+  photoURL: props.profile?.attributes.photoURL || [],
+  uploadPhoto: props.profile?.attributes.uploadPhoto || [],
 });
 
 
@@ -67,7 +71,9 @@ const handleSubmit = () => { //Going to send back to profile.vue parent.
     available_supervisions: formData.available_supervisions,
 
     departments: formData.departments,
-    photoURL: formData.photoURL, //Save the Strapi ID of the Avatar.
+
+    // photoURL: formData.photoURL, // NO NEED TO UPDATE// HKBU SCHOLAR DEFINED
+    uploadPhoto: formData.uploadPhoto, //Save the Strapi ID of the Avatar.
 
     documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
     // FCRA: formData.FCRA, //DEBUGGING

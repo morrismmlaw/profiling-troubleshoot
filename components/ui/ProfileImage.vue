@@ -49,7 +49,7 @@
                 <div class="input-group-sm">
                   <div class="d-flex justify-content-end">
                     <button class="btn btn-danger" @click="clearImage">Clear</button>
-                    <button class="btn btn-primary" data-bs-dismiss="modal" @click="saveCroppedImage">Save</button>
+                    <button class="btn btn-primary" data-bs-dismiss="modal" @click="handleSaveClick">Save</button>
                   </div>
                 </div>
               </div>
@@ -136,48 +136,53 @@ const handleUpload = (event) => {
   }
 }
 
-const saveCroppedImage = async () => {
-
-  const timestamp = Math.floor(new Date().getTime() / 1000);
-  const filename = `${props.profile.attributes.keyid}_${timestamp}`
-  const client = useStrapiClient();
-
-  if (cropperRef.value) {
-    const { canvas } = cropperRef.value.getResult();
-    // console.log('Cropped Image URL:', croppedImg.value);
-
-    try {
-      //UPLOAD TO STRAPI
-      if (canvas) {
-        const formData = new FormData();
-        canvas.toBlob(async blob => {
-          formData.append('files', blob, filename);
-          const uploadResponse = await client(`/upload`, {
-            method: 'POST',
-            body: formData
-          })
-          console.log('upload return data', uploadResponse);
-          croppedImg.value.strapiID = uploadResponse[0].documentId;
-          // Perhaps you should add the setting appropriate file format here
-        }, `${fileType.value}`);
-      }
-      //Emit new Image to Image Card
-      croppedImg.value.imgUrl = canvas.toDataURL(fileType.value);
-      emit('croppedImg', croppedImg);
-    } catch (error) {
-      emit('croppedImg', null);
-    }
-
-    // Show the img in new Windows
-    // const newTab = window.open();
-    // if (newTab && canvas) {
-    //   newTab.document.body.innerHTML = `<img src="${canvas.toDataURL(
-    //     fileType.value
-    //   )}"></img>`;
-    // }
+const handleSaveClick = async () => {
+  const saveResult = await saveCroppedImage();
+  if (saveResult) {
+    const { canvas } = cropperRef.value.getResult(); // Emit new Image to Image Card 
+    croppedImg.value.imgUrl = canvas.toDataURL(fileType.value);
+    emit('croppedImg', croppedImg);
+  } else {
+    emit('croppedImg', null);
   }
 }
 
+const saveCroppedImage = async () => {
+  const timestamp = Math.floor(new Date().getTime() / 1000);
+  const filename = `${props.profile.attributes.keyid}_${timestamp}`;
+  const client = useStrapiClient();
+  if (cropperRef.value) {
+    const { canvas } = cropperRef.value.getResult();
+    try {
+      if (canvas) {
+        const formData = new FormData();
+        const blobPromise = new Promise((resolve, reject) => {
+          canvas.toBlob(async blob => {
+            if (blob) {
+              formData.append('files', blob, filename);
+              try {
+                const uploadResponse = await client(`/upload`, { method: 'POST', body: formData });
+                console.log('upload return data', uploadResponse);
+                croppedImg.value.strapiID = uploadResponse[0].documentId;
+                console.log('Uploaded Image ID:', uploadResponse[0].documentId);
+                resolve(true);
+              } catch (error) {
+                console.error('Error uploading image:', error);
+                resolve(false);
+              }
+            } else { resolve(false); }
+          }, `${fileType.value}`);
+        });
+        return await blobPromise;
+      }
+    }
+    catch (error) {
+      console.error('Error during image cropping:', error);
+      return false;
+    }
+  }
+  return false;
+}
 
 
 onMounted(() => {
