@@ -10,12 +10,9 @@ const props = defineProps({
 
 const emit = defineEmits(['croppedImg'])
 
-// ORUGA FILE SECTION
-
 const defaultImg = ref('https://scholars.hkbu.edu.hk/assets/no-portrait-473c6d005990baa1f418d9c668dcd4ec.png');
-const imgUrl = ref(props.profile.attributes.photoURL || defaultImg.value );
+const imgUrl = ref(props.profile.attributes.photoURL || defaultImg.value);
 const imgStrapiID = ref('');
-// ORUGA FILE SECTION
 
 import ProfileImage from './ProfileImage.vue';
 import type { CroppedImg } from '~/types/profileImage';
@@ -33,6 +30,19 @@ const handleCroppedImg = (croppedImg: Ref<CroppedImg>) => {
     emit('croppedImg', croppedImg);
   }
 };
+
+const initImages = () => {
+  if (props.profile.attributes.uploadPhoto) {
+    let customImgURL = props.profile.attributes.uploadPhoto.url;
+    customImgURL = 'https://profile-cms.sci.hkbu.edu.hk' + customImgURL;
+    console.log(customImgURL);
+    imgUrl.value = customImgURL;
+  }
+}
+
+onMounted(() => {
+  initImages();
+})
 
 </script>
 
