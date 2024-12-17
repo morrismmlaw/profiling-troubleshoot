@@ -10,6 +10,7 @@ let populateFields = [
   'fcras',
   'available_supervisions',
   'departments',
+  'uploadPhoto',
 ]
 
 //Helper.
@@ -55,9 +56,13 @@ async function update_departments(documentId, data) {
 }
 
 async function update_photoUpload(documentId, data) {
+
+  console.log("In Update photoUpload");
+  console.log(documentId)
+  console.log(data)
   // Upload to STRAPI UPLOAD Endpoint - Done by ProfileImage.vue
   // Store the retuned id to the Field in Profile.
-  // return await updateRelationField(documentId, data, 'departments');
+  return await updateRelationField(documentId, data, 'uploadPhoto');
 }
 
 export const api = {
@@ -115,7 +120,7 @@ export const api = {
    */
   async updateProfile(documentId, data) {
     const { update } = useStrapi()
-    console.log("Updating", documentId, data);
+    console.log("Updating PROFILE API JS", documentId, data);
 
     await updateResearch_Centres(documentId, data); //Relations
     await updateResearch_Foci(documentId, data); //Relations
@@ -123,7 +128,7 @@ export const api = {
     await update_available_supervisions(documentId, data); //Relations
     await update_departments(documentId, data); //Relations
 
-    // await update_departments(documentId, data); //Relations
+    await update_photoUpload(documentId, data); //Relations
 
     return await update('profiles', documentId, data,
       { populate: populateFields } //Return the Populated data.

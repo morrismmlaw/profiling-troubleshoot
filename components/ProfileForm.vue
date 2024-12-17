@@ -29,7 +29,6 @@ const emit = defineEmits(['save']);
 const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
   let obj = croppedImg.value;
   console.log("Capture ProfileForm: ", obj);
-
   formData.uploadPhoto = obj.strapiID;
   console.log('FormData StrapiID:', formData.uploadPhoto);
 }
