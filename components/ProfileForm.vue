@@ -30,7 +30,8 @@ const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
 
   if (croppedImg === null) {
     //Set it to Clear.
-
+    formData.uploadPhoto = '';
+    // delete formData.uploadPhoto;
   } else {
     let imgObj = croppedImg.value;
     // console.log("Capture ProfileForm: ", obj);

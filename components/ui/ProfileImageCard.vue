@@ -20,7 +20,8 @@ import type { CroppedImg } from '~/types/profileImage';
 const handleCroppedImg = (croppedImg: Ref<CroppedImg>) => {
   // Case Reset to HKBU Scholar
   if (croppedImg === null) {
-    imgUrl.value = defaultImg.value;
+    // imgUrl.value = defaultImg.value;
+    imgUrl.value = props.profile.attributes.photoURL || defaultImg.value;
     emit('croppedImg', null);
   } else {
     // handle the croppedImg value as needed

@@ -61,20 +61,28 @@ async function update_departments(documentId, data) {
  * @param {*} data 
  * @returns 
  */
-async function update_photoUpload(documentId, data) {
-  const { update } = useStrapi();
+async function update_uploadPhoto(documentId, data, profile) {
+  const { update, findOne } = useStrapi();
 
-  console.log("In Update photoUpload");
+  const profileData = profile.attributes;
+
+  console.log("In Update uploadPhoto");
   console.log(documentId)
   console.log(data)
+  console.log(profileData)
 
   const field = 'uploadPhoto';
-  // Upload to STRAPI UPLOAD Endpoint - Done by ProfileImage.vue
-  // Store the retuned id to the Field in Profile.
   const fieldIds = data[field]
 
-  console.log(`Updating ${field}`, documentId, fieldIds);
-  return await update('profiles', documentId, { [field]: fieldIds });
+  if (fieldIds === "") {
+    //Case Clear uploadPhoto
+    const { delete: _delete } = useStrapi();
+    const delResponse =  await _delete('upload/files', profileData[field].id);
+  } else {
+    console.log(`Updating ${field}`, documentId, fieldIds);
+    return await update('profiles', documentId, { [field]: fieldIds });
+  }
+
 }
 
 export const api = {
@@ -127,22 +135,23 @@ export const api = {
    * Update profile // GOTTA POPULATE...
    * 
    * @param {number} documentId
-   * @param {{ academicInterests: string }} data
+   * @param {{ academicInterests: string }} FormData
    * @returns {Promise<{ data: Profile }>}
    */
-  async updateProfile(documentId, data) {
+  async updateProfile(documentId, FormData, profile) {
     const { update } = useStrapi()
-    console.log("Updating PROFILE API JS", documentId, data);
+    console.log("Updating PROFILE API JS", documentId, FormData);
 
-    await updateResearch_Centres(documentId, data); //Relations
-    await updateResearch_Foci(documentId, data); //Relations
-    await update_fcras(documentId, data); //Relations
-    await update_available_supervisions(documentId, data); //Relations
-    await update_departments(documentId, data); //Relations
+    await updateResearch_Centres(documentId, FormData); //Relations
+    await updateResearch_Foci(documentId, FormData); //Relations
+    await update_fcras(documentId, FormData); //Relations
+    await update_available_supervisions(documentId, FormData); //Relations
+    await update_departments(documentId, FormData); //Relations
 
-    await update_photoUpload(documentId, data); //MEDIA ID
+    await update_uploadPhoto(documentId, FormData, profile); //MEDIA ID
+    delete FormData.uploadPhoto;
 
-    return await update('profiles', documentId, data,
+    return await update('profiles', documentId, FormData,
       { populate: populateFields } //Return the Populated data.
     );
 

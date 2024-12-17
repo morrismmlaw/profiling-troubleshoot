@@ -7,7 +7,7 @@ const profileStore = useProfileStore()
 const router = useRouter()
 
 const handleSave = async (data) => {
-  const success = await profileStore.updateProfile(data)
+  const success = await profileStore.updateProfile(data, authStore.user)
   if (success) {
     alert('Profile updated successfully')
     // location.reload();
