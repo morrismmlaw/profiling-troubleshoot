@@ -65,26 +65,9 @@ const formData = reactive({
 
 
 const handleSubmit = () => { //Going to send back to profile.vue parent. 
-  emit('save', {
-    research_interest: formData.research_interest, //HAHA TYPO
-    biography: formData.biography,
-    sdgs: formData.sdgs,
 
-    research_centres: formData.research_centres,
-    research_foci: formData.research_foci,
-
-    fcras: formData.fcras,
-    available_supervisions: formData.available_supervisions,
-
-    departments: formData.departments,
-
-    // photoURL: formData.photoURL, // NO NEED TO UPDATE// HKBU SCHOLAR DEFINED
-    uploadPhoto: formData.uploadPhoto, //Save the Strapi ID of the Avatar.
-
-    documentId: formData.documentId, //This is the Uniquite ID of THis USER.. Profile.. - BY STRAPI Standard.
-    // FCRA: formData.FCRA, //DEBUGGING
-    // research_focus: formData.research_focus,
-  });
+  delete formData.photoURL;
+  emit('save', formData);
 };
 
 // ORUGA SECTION
@@ -108,27 +91,6 @@ const SRCOptionsOrugaNew = SRCOptions.map((option) => {
       createdAt: option.createdAt,
       updatedAt: option.updatedAt,
       publishedAt: option.publishedAt,
-    },
-  };
-});
-
-const ROOptionsOrugaNew = ROOptions.map((option) => {
-  return {
-    label: option.title,
-    value: {
-      id: option.id,
-      documentId: option.document_id,
-      recno: option.recno,
-      uoacode: option.uoacode,
-      title: option.title,
-      lastname: option.lastname,
-      othername: option.othername,
-      chiname: option.chiname,
-      dept: option.dept,
-      statement: option.statement,
-      createdAt: option.created_at,
-      updatedAt: option.updated_at,
-      publishedAt: option.published_at,
     },
   };
 });
@@ -388,6 +350,9 @@ onMounted(() => {
 
   debugTagsMsg();
 })
+
+const activeTab = ref(0);
+const showBooks = ref(false);
 // ORUGA SECTION
 
 </script>
@@ -401,109 +366,219 @@ onMounted(() => {
       </div>
 
       <div class="col-sm-10 col-md-10 col-lg-9">
-        <form @submit.prevent="handleSubmit">
-          <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
-            <div class="card-body">
-
-              <div class="row mb-3 rounded-5 border-4">
-                <div class="row">
-                  <label for="biography" class="col col-form-label">Biography</label>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <tiptap-editor :formData="formData" field="biography" />
+        <section>
+          <o-tabs v-model="activeTab" destroy-on-hide>
+            <o-tab-item :value="0" label="About me" icon="image">
+              <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
+                <div class="card-body">
+                  <section>
+                    <o-field class="col-form-tag" label="DEPARTMENT">
+                      <o-taginput v-model="DEPTags" :options="DEPOptionsOrugaNew" :allow-new="allowNew"
+                        :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
+                        :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
+                    </o-field>
+                  </section>
+                  <div class="row mb-3 rounded-5 border-4">
+                    <div class="row">
+                      <label for="biography" class="col col-form-label">Biography</label>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <tiptap-editor :formData="formData" field="biography" />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="row mb-3">
-
-                <div class="row">
-                  <label for="academicInterests" class="col col-form-label">Academic Interests</label>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <tiptap-editor :formData="formData" field="research_interest" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-12 col-sm-12 col-md-12">
-                  <h6 class="col-form-label">Sustainable Development Goals (SDGs)</h6>
-                </div>
-                <div class="col-11 col-sm-11 col-md-12">
-                  <div class="columns is-multiline">
-                    <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
-                      <o-field class="sdg-field">
-                        <!-- <o-tooltip :label="`SDG: ${sdg.sdgid} \n\n Slogan: ${sdg.slogan}`" multiline> -->
-                        <o-tooltip label="HTML Content" size="large" variant="info" multiline>
-                          <template #content>
-                            <div class="sdg-info">
-                              <!-- <p><strong>SDG:</strong> {{ sdg.sdgid }}</p> -->
-                              <p><strong>Title</strong> <br> {{ sdg.title }}</p>
-                              <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
-                            </div>
-                          </template>
-                          <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
-                            <!-- <o-checkbox v-model="checkboxGroup" :native-value="sdg" :label="sdg.sdgid"> -->
-                            <p class="col-form-label-sdg"> SDG {{ sdg.sdgid }} </p>
-                            <nuxt-img
-                              :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
-                              :alt="sdg.title" class="img-fluid checkbox-img" />
-                          </o-checkbox>
-                        </o-tooltip>
-                      </o-field>
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12">
+                      <h6 class="col-form-label">Sustainable Development Goals (SDGs)</h6>
+                    </div>
+                    <div class="col-11 col-sm-11 col-md-12">
+                      <div class="columns is-multiline">
+                        <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
+                          <o-field class="sdg-field">
+                            <!-- <o-tooltip :label="`SDG: ${sdg.sdgid} \n\n Slogan: ${sdg.slogan}`" multiline> -->
+                            <o-tooltip label="HTML Content" size="large" variant="info" multiline>
+                              <template #content>
+                                <div class="sdg-info">
+                                  <!-- <p><strong>SDG:</strong> {{ sdg.sdgid }}</p> -->
+                                  <p><strong>Title</strong> <br> {{ sdg.title }}</p>
+                                  <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
+                                </div>
+                              </template>
+                              <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
+                                <!-- <o-checkbox v-model="checkboxGroup" :native-value="sdg" :label="sdg.sdgid"> -->
+                                <p class="col-form-label-sdg"> SDG {{ sdg.sdgid }} </p>
+                                <nuxt-img
+                                  :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
+                                  :alt="sdg.title" class="img-fluid checkbox-img" />
+                              </o-checkbox>
+                            </o-tooltip>
+                          </o-field>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </o-tab-item>
 
-              <section>
-                <o-field class="col-form-tag" label="DEPARTMENT">
-                  <o-taginput v-model="DEPTags" :options="DEPOptionsOrugaNew" :allow-new="allowNew"
-                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Select options" expanded />
-                </o-field>
-              </section>
-              <section>
-                <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
-                  <o-taginput v-model="SRCTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
-                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Select options" expanded />
-                </o-field>
-                <!-- <p><b>FCRAS:</b> {{ fcraTags }}</p> -->
-              </section>
-              <section>
-                <o-field class="col-form-tag" label="RESEARCH FOCUS">
-                  <o-taginput v-model="RFTags" :options="RFOptionsOrugaNew" :allow-new="allowNew"
-                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Select options" expanded />
-                </o-field>
-                <!-- <p><b>RESEARCH FOCUS:</b> {{ RSTags }}</p> -->
-              </section>
-              <section>
-                <o-field class="col-form-tag" label="FACULTY COLLABORATIVE RESEARCH AREA">
-                  <o-taginput v-model="FCRATags" :options="FCRAOptionsOrugaNew" :allow-new="allowNew"
-                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Select options" expanded />
-                </o-field>
-              </section>
-              <section>
-                <o-field class="col-form-tag" label="AVAILABILITY FOR SUPERVISION">
-                  <o-taginput v-model="ASTags" :options="ASOptionsOrugaNew" :allow-new="allowNew"
-                    :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
-                    icon="tag" placeholder="Select options" expanded />
-                </o-field>
-              </section>
-
-              <div class="d-flex justify-content-end mt-4">
-                <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
-                  {{ profileStore.isLoading ? 'Saving...' : 'Save' }}
-                </button>
+            <o-tab-item :value="1" label="My Research" icon="pen">
+              <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
+                <div class="card-body">
+                  <div class="row mb-3">
+                    <div class="row">
+                      <label for="academicInterests" class="col col-form-label">Academic Interests</label>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <tiptap-editor :formData="formData" field="research_interest" />
+                      </div>
+                    </div>
+                  </div>
+                  <section>
+                    <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
+                      <o-taginput v-model="SRCTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
+                        :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
+                        :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
+                    </o-field>
+                    <!-- <p><b>FCRAS:</b> {{ fcraTags }}</p> -->
+                  </section>
+                  <section>
+                    <o-field class="col-form-tag" label="RESEARCH FOCUS">
+                      <o-taginput v-model="RFTags" :options="RFOptionsOrugaNew" :allow-new="allowNew"
+                        :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
+                        :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
+                    </o-field>
+                    <!-- <p><b>RESEARCH FOCUS:</b> {{ RSTags }}</p> -->
+                  </section>
+                  <section>
+                    <o-field class="col-form-tag" label="FACULTY COLLABORATIVE RESEARCH AREA">
+                      <o-taginput v-model="FCRATags" :options="FCRAOptionsOrugaNew" :allow-new="allowNew"
+                        :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
+                        :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
+                    </o-field>
+                  </section>
+                </div>
               </div>
-              <p v-if="profileStore.error" class="text-danger mt-3">{{ profileStore.error }}</p>
+            </o-tab-item>
+
+            <o-tab-item :value="2" label="Teaching and Supervision" icon="music">
+              <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
+                <div class="card-body">
+                  <section>
+                    <o-field class="col-form-tag" label="AVAILABILITY FOR SUPERVISION">
+                      <o-taginput v-model="ASTags" :options="ASOptionsOrugaNew" :allow-new="allowNew"
+                        :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
+                        :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
+                    </o-field>
+                  </section>
+                </div>
+              </div>
+            </o-tab-item>
+
+            <o-tab-item :value="3" label="Additional" icon="book">
+              What light is light, if Silvia be not seen? <br />
+              Except I be by Silvia in the night, <br />
+              There is no music in the nightingale.
+            </o-tab-item>
+
+          </o-tabs>
+        </section>
+
+        <!-- <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
+          <div class="card-body">
+            <div class="row mb-3 rounded-5 border-4">
+              <div class="row">
+                <label for="biography" class="col col-form-label">Biography</label>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <tiptap-editor :formData="formData" field="biography" />
+                </div>
+              </div>
             </div>
+            <div class="row mb-3">
+              <div class="row">
+                <label for="academicInterests" class="col col-form-label">Academic Interests</label>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <tiptap-editor :formData="formData" field="research_interest" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-12">
+                <h6 class="col-form-label">Sustainable Development Goals (SDGs)</h6>
+              </div>
+              <div class="col-11 col-sm-11 col-md-12">
+                <div class="columns is-multiline">
+                  <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
+                    <o-field class="sdg-field">
+                      <o-tooltip label="HTML Content" size="large" variant="info" multiline>
+                        <template #content>
+                          <div class="sdg-info">
+                            <p><strong>Title</strong> <br> {{ sdg.title }}</p>
+                            <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
+                          </div>
+                        </template>
+                        <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
+                          <p class="col-form-label-sdg"> SDG {{ sdg.sdgid }} </p>
+                          <nuxt-img
+                            :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
+                            :alt="sdg.title" class="img-fluid checkbox-img" />
+                        </o-checkbox>
+                      </o-tooltip>
+                    </o-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <section>
+              <o-field class="col-form-tag" label="DEPARTMENT">
+                <o-taginput v-model="DEPTags" :options="DEPOptionsOrugaNew" :allow-new="allowNew"
+                  :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                  icon="tag" placeholder="Select options" expanded />
+              </o-field>
+            </section>
+            <section>
+              <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
+                <o-taginput v-model="SRCTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
+                  :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                  icon="tag" placeholder="Select options" expanded />
+              </o-field>
+            </section>
+            <section>
+              <o-field class="col-form-tag" label="RESEARCH FOCUS">
+                <o-taginput v-model="RFTags" :options="RFOptionsOrugaNew" :allow-new="allowNew"
+                  :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                  icon="tag" placeholder="Select options" expanded />
+              </o-field>
+            </section>
+            <section>
+              <o-field class="col-form-tag" label="FACULTY COLLABORATIVE RESEARCH AREA">
+                <o-taginput v-model="FCRATags" :options="FCRAOptionsOrugaNew" :allow-new="allowNew"
+                  :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                  icon="tag" placeholder="Select options" expanded />
+              </o-field>
+            </section>
+            <section>
+              <o-field class="col-form-tag" label="AVAILABILITY FOR SUPERVISION">
+                <o-taginput v-model="ASTags" :options="ASOptionsOrugaNew" :allow-new="allowNew"
+                  :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst"
+                  icon="tag" placeholder="Select options" expanded />
+              </o-field>
+            </section>
           </div>
+        </div> -->
+
+        <form @submit.prevent="handleSubmit">
+          <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
+              {{ profileStore.isLoading ? 'Saving...' : 'Save' }}
+            </button>
+          </div>
+          <p v-if="profileStore.error" class="text-danger mt-3">{{ profileStore.error }}</p>
         </form>
       </div>
 
