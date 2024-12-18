@@ -470,8 +470,7 @@ const showBooks = ref(false);
                 </div>
               </div>
             </o-tab-item>
-
-            <o-tab-item :value="3" label="Additional" icon="book">
+            <o-tab-item :value="3" :visible="false" label="Additional" icon="book">
               What light is light, if Silvia be not seen? <br />
               Except I be by Silvia in the night, <br />
               There is no music in the nightingale.
