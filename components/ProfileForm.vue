@@ -612,10 +612,11 @@ const showBooks = ref(false);
 .profile-form-container {
   display: flex;
   flex-direction: row;
+  margin-top: 5px;
 }
 
 .profile-form-card {
-  width: 280px;
+  width: 300px;
 }
 
 @media (max-width: 900px) {
