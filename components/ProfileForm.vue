@@ -360,12 +360,11 @@ const showBooks = ref(false);
 <template>
 
   <div class="container-fluid px-5">
-    <div class="row mt-4 mb-4">
-      <div class="col-sm-3 col-md-3 col-lg-3 mb-2">
+    <div class="d-flex justify-content-center  profile-form-container">
+      <div class="mb-2 me-4 profile-form-card">
         <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
       </div>
-
-      <div class="col-sm-10 col-md-10 col-lg-9">
+      <div class="">
         <section>
           <o-tabs v-model="activeTab" destroy-on-hide>
             <o-tab-item :value="0" label="About me" icon="image">
@@ -488,8 +487,8 @@ const showBooks = ref(false);
           <p v-if="profileStore.error" class="text-danger mt-3">{{ profileStore.error }}</p>
         </form>
       </div>
-
     </div>
+
   </div>
 
 </template>
@@ -610,5 +609,22 @@ const showBooks = ref(false);
   margin-left: -11px;
 }
 
+.profile-form-container {
+  display: flex;
+  flex-direction: row;
+}
 
+.profile-form-card {
+  width: 280px;
+}
+
+@media (max-width: 900px) {
+  .profile-form-container {
+    flex-direction: column;
+  }
+
+  .profile-form-card {
+    width: 100%;
+  }
+}
 </style>
