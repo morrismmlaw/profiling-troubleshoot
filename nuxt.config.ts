@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
     '@oruga-ui/theme-bootstrap/dist/bootstrap.css',
+    '/assets/css/oruga-custom.scss',
     'bootstrap-icons/font/bootstrap-icons.min.css',
 
     '@fortawesome/fontawesome-free/css/all.min.css',
@@ -68,5 +69,16 @@ export default defineNuxtConfig({
     }
   },
 
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // see: https://vite.dev/config/shared-options.html#css-preprocessoroptions
+          api: 'modern',
+        }
+      }
+    }
+  },
+
   ssr: false, //Fix for Firefox...
-})
+  })

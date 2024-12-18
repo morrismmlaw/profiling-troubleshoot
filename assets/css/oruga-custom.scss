@@ -1,0 +1,41 @@
+// Option B: Include the Oruga theme and Bootstrap separately
+
+// 1. Include Bootstrap functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "/node_modules/bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+// ...
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@import "/node_modules/bootstrap/scss/variables";
+@import "/node_modules/bootstrap/scss/variables-dark";
+
+// 4. Include the Oruga Bootstrap theme variables
+@import "/node_modules/@oruga-ui/theme-bootstrap/dist/scss/utils/variables";
+
+// 5. Include any default map overrides here
+// ...
+
+// 6. Include the remaining parts or full Bootstrap
+@import "/node_modules/bootstrap/scss/bootstrap";
+
+// 7. Include the Oruga Bootstrap theme components styles
+@import "/node_modules/@oruga-ui/theme-bootstrap/dist/scss/bootstrap";
+
+// 8. Add additional custom code here
+// ...
+
+
+// For ProileForm tabs bg;
+.tabs {
+    .nav {
+
+        &-underline,
+        &-toggle {
+            .nav-link.active {
+                background-color: transparent;
+                border-bottom-color: var(--#{$prefix}nav-underline-link-active-border-color);
+            }
+        }
+    }
+}

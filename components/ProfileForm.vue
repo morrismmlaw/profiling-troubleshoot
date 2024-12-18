@@ -495,7 +495,7 @@ const showBooks = ref(false);
 
 </template>
 
-<style>
+<style lang="scss">
 :root {
   --white: #FFF;
   --black: #2E2B29;
@@ -518,7 +518,7 @@ const showBooks = ref(false);
 }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
 .columns {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -610,4 +610,6 @@ const showBooks = ref(false);
 .checkbox-img {
   margin-left: -11px;
 }
+
+
 </style>
