@@ -68,15 +68,19 @@ onMounted(() => {
         <hr>
       </div>
       <div class="row">
-        <div class="card-body imgcard-info">
-          <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
-          <a :href="props.profile.attributes.orcidURL" class="card-text profile-card-text ms-2">{{
-            props.profile.attributes.orcidURL }} </a>
+        <div class="card-body">
+          <div class="imgcard-info">
+            <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
+            <a :href="props.profile.attributes.orcidURL" class="card-text profile-card-text ms-2">{{
+              props.profile.attributes.orcidURL }} </a>
+          </div>
         </div>
-        <div class="card-body d-flex justify-content-start imgcard-info">
-          <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
-          <a :href="props.profile.attributes.url" class="card-text profile-card-text ms-2">{{
-            props.profile.attributes.url }} </a>
+        <div class="card-body">
+          <div class="imgcard-info">
+            <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
+            <a :href="props.profile.attributes.url" class="card-text profile-card-text ms-2">{{
+              props.profile.attributes.url }} </a>
+          </div>
         </div>
         <hr>
       </div>
@@ -121,6 +125,10 @@ onMounted(() => {
 
 .profile-card-text {
   color: aliceblue;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 hr {
@@ -135,9 +143,5 @@ hr {
 .imgcard-info {
   display: flex;
   justify-content: start;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: fade;
 }
 </style>
