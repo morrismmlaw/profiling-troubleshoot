@@ -64,13 +64,13 @@ watch(checkedForm, (newVal) => {
               We appreciate your help in updating the rest of the content as needed.
             </p>
 
-            <div class="form-check">
+            <!-- <div class="form-check">
               <input @click="handleCheck" class="form-check-input" type="checkbox" :value="checkedForm"
                 id="flexCheckDefault">
               <label class="form-check-label" for="flexCheckDefault">
                 Don't show again
               </label>
-            </div>
+            </div> -->
 
           </div>
           <div class="modal-footer">
