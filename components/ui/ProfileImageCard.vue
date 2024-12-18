@@ -68,20 +68,24 @@ onMounted(() => {
         <hr>
       </div>
       <div class="row">
-        <div class="card-body">
-          <div class="imgcard-info">
-            <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
-            <a :href="props.profile.attributes.orcidURL" class="card-text profile-card-text ms-2">{{
-              props.profile.attributes.orcidURL }} </a>
+        <o-tooltip :label="`${props.profile.attributes.orcidURL}`" multiline>
+          <div class="card-body">
+            <div class="imgcard-info">
+              <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
+              <a :href="props.profile.attributes.orcidURL" class="card-text profile-card-text-row ms-2">{{
+                props.profile.attributes.orcidURL }} </a>
+            </div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="imgcard-info">
-            <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
-            <a :href="props.profile.attributes.url" class="card-text profile-card-text ms-2">{{
-              props.profile.attributes.url }} </a>
+        </o-tooltip>
+        <o-tooltip :label="`${props.profile.attributes.url}`" multiline>
+          <div class="card-body">
+            <div class="imgcard-info">
+              <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
+              <a :href="props.profile.attributes.url" class="card-text profile-card-text-row ms-2 ">{{
+                props.profile.attributes.url }} </a>
+            </div>
           </div>
-        </div>
+        </o-tooltip>
         <hr>
       </div>
       <div class="row">
@@ -126,6 +130,13 @@ onMounted(() => {
 .profile-card-text {
   color: aliceblue;
 
+}
+
+.profile-card-text-row {
+  color: aliceblue;
+
+  max-width: calc(85%);
+  /* width: calc(80%); */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
