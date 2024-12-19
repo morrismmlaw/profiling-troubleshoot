@@ -4,12 +4,12 @@
     style="position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
     <div class="container-fluid">
 
-      <div class="d-flex">
+      <div v-if="isSearch" class="d-flex">
         <NuxtLink class="navbar-brand" to="/">
-          <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img-1 ms-4" />
+          <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img-1 ms-4" />
         </NuxtLink>
         <NuxtLink class="navbar-brand" to="/">
-          <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img-2" />
+          <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
         </NuxtLink>
 
         <div v-if="$route.path === '/profile'" class="d-flex align-items-center ms-1">
@@ -18,14 +18,14 @@
         </div>
       </div>
 
-      <!-- <div v-else class="d-flex">
+      <div v-else class="d-flex">
         <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img-1 ms-4" />
         </NuxtLink>
         <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img-2" />
         </NuxtLink>
-      </div> -->
+      </div>
 
       <button class="navbar-toggler bg-body-secondary semi-transparent" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
