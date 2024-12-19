@@ -353,6 +353,13 @@ onMounted(() => {
 
 const activeTab = ref(0);
 const showBooks = ref(false);
+
+const checkBeforeAdd = (e) => {
+
+  console.log(e);
+
+}
+
 // ORUGA SECTION
 
 </script>
@@ -372,7 +379,7 @@ const showBooks = ref(false);
                 <div class="card-body">
                   <section>
                     <o-field class="col-form-tag" label="DEPARTMENT">
-                      <o-taginput v-model="DEPTags" :options="DEPOptionsOrugaNew" :allow-new="allowNew"
+                      <o-taginput :validateItem="checkBeforeAdd" v-model="DEPTags" :options="DEPOptionsOrugaNew" :allow-new="allowNew"
                         :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
                         :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
                     </o-field>
