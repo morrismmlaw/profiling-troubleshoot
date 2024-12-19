@@ -4,7 +4,7 @@
     style="position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
     <div class="container-fluid">
 
-      <div v-if="isSearch" class="d-flex">
+      <div v-if="!isHome" class="d-flex">
         <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img-1 ms-4" />
         </NuxtLink>
@@ -101,8 +101,9 @@ const handleLogout = () => {
 }
 
 const isLoggedIn = computed(() => authStore.isAuthenticated);
-
 const isSearch = computed(() => route.path === '/search');
+const isProfile = computed(() => route.path === '/profile');
+const isHome = computed(() => route.path === '/');
 
 const logout = () => {
   authStore.logout();
