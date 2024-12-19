@@ -33,6 +33,20 @@ onMounted(() => {
   }
 })
 
+//OAUTH
+const SSO_AUTH_SERVER = 'issuat.hkbu.edu.hk/buam/buam2/sign_in';
+const CLIENT_ID = 'OAUTH_CLIENT';
+const REDIRECT_URI = 'https://uat-web.hkbu.edu.hk/sso/callback/';
+// const STATE = 'TWzvyGoU2jrkCe5_v1s_TKhmOZvbPkw58yp9bLj917o=';
+const STATE = '';
+const urlUATD = 'https://issuat.hkbu.edu.hk/buam/buam2/err/bad_request.seam;jsessionid=QY7c6JbL1wW62ID3Mz4xf7Fz_DldaVHgIZG1_9TTh-JQ-xkPamDr!-1533894255?cid=21';
+
+const urlAcaProfile = 'https://issuat.hkbu.edu.hk/buam/Auth?client_id=SCI%2DPROFILE&redirect_uri=https%3A%2F%2Fprofile%2Ddev.sci.hkbu.edu.hk%2Flogin%2Dredirect&response_type=code&scope=get_user_portfolio';
+
+const redirectOAuth = async () => {
+  window.location.href = urlAcaProfile;
+}
+
 
 </script>
 
@@ -79,6 +93,10 @@ onMounted(() => {
                     </button>
                     <p class="text-muted">Forgot your password?</p>
                   </form>
+
+                  <div class="btn btn-primary" @click="redirectOAuth">
+                    Login with SSOID
+                  </div>
                 </div>
               </div>
             </div>
