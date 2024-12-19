@@ -1,12 +1,12 @@
 <template>
   <div class="container-fluid nav-offset">
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="centered-heading shadow">
         <h1 class="heading-text-style m-1" aria-describedby="headingDescription">EXPERTS SEARCH<span
             id="headingDescription" hidden="">Find researchers at Hong kong Baptist University.</span></h1>
       </div>
-    </div>
+    </div> -->
 
     <div class="row"
       style="background-image: url(&quot;/img/bottom.8ea92c85.jpg&quot;); background-size: cover; background-repeat: repeat; background-position: top;">
