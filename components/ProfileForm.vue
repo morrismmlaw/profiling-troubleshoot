@@ -443,21 +443,21 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                   </div>
                   <section>
                     <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
-                      <o-taginput v-model="SRCTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
+                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags" :options="SRCOptionsOrugaNew" :allow-new="allowNew"
                         :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
                         :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
                     </o-field>
                   </section>
                   <section>
                     <o-field class="col-form-tag" label="RESEARCH FOCUS">
-                      <o-taginput v-model="RFTags" :options="RFOptionsOrugaNew" :allow-new="allowNew"
+                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, RFTags)" v-model="RFTags" :options="RFOptionsOrugaNew" :allow-new="allowNew"
                         :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
                         :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
                     </o-field>
                   </section>
                   <section>
                     <o-field class="col-form-tag" label="FACULTY COLLABORATIVE RESEARCH AREA">
-                      <o-taginput v-model="FCRATags" :options="FCRAOptionsOrugaNew" :allow-new="allowNew"
+                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, FCRATags)" v-model="FCRATags" :options="FCRAOptionsOrugaNew" :allow-new="allowNew"
                         :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
                         :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
                     </o-field>
@@ -471,7 +471,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                 <div class="card-body">
                   <section>
                     <o-field class="col-form-tag" label="AVAILABILITY FOR SUPERVISION">
-                      <o-taginput v-model="ASTags" :options="ASOptionsOrugaNew" :allow-new="allowNew"
+                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, ASTags)" v-model="ASTags" :options="ASOptionsOrugaNew" :allow-new="allowNew"
                         :allow-duplicates="false" :open-on-focus="openOnFocus" :keep-open="false"
                         :keep-first="keepFirst" icon="tag" placeholder="Select options" expanded />
                     </o-field>
