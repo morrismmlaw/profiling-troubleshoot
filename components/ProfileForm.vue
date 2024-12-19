@@ -466,7 +466,13 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
               </div>
             </o-tab-item>
 
-            <o-tab-item :value="2" label="Teaching and Supervision" icon="music">
+            <o-tab-item :value="2" label="SDGs" icon="book">
+              What light is light, if Silvia be not seen? <br />
+              Except I be by Silvia in the night, <br />
+              There is no music in the nightingale.
+            </o-tab-item>
+
+            <o-tab-item :value="3" label="Teaching and Supervision" icon="music">
               <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
                 <div class="card-body">
                   <section>
