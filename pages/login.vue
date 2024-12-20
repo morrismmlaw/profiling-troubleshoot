@@ -34,7 +34,7 @@ onMounted(() => {
 })
 
 //OAUTH
-const urlAcaProfile = 'https://issuat.hkbu.edu.hk/buam/Auth?client_id=SCI%2DPROFILE&redirect_uri=https%3A%2F%2Fprofile%2Ddev.sci.hkbu.edu.hk%2Flogin%2Dredirect&response_type=code&scope=get_user_portfolio';
+const SSOIDRedirect_ITO = 'https://issuat.hkbu.edu.hk/buam/Auth?client_id=SCI%2DPROFILE&redirect_uri=https%3A%2F%2Fprofile%2Ddev.sci.hkbu.edu.hk%2Flogin%2Dredirect&response_type=code&scope=get_user_portfolio';
 // const urlUATD = 'https://issuat.hkbu.edu.hk/buam/buam2/err/bad_request.seam;jsessionid=QY7c6JbL1wW62ID3Mz4xf7Fz_DldaVHgIZG1_9TTh-JQ-xkPamDr!-1533894255?cid=21';
 
 //Refractored URL: 
@@ -44,8 +44,12 @@ const REDIRECT_URI = 'https%3A%2F%2Fprofile%2Ddev.sci.hkbu.edu.hk%2Flogin%2Dredi
 const STATE = ''; // Usually, the state is a random string used to prevent CSRF attacks. However, it's not present in your URL.
 // const SSOIDRequestURL = `https://${SSO_AUTH_SERVER}/buam/Auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=get_user_portfolio&state=${STATE}`;
 
+const SSOIDRedirect_Dev = 'https://issuat.hkbu.edu.hk/buam/Auth?client_id=SCI%2DPROFILE&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin-redirect&response_type=code&scope=get_user_portfolio';
+
 const redirectOAuth = async () => {
-  window.location.href = SSOIDRequestURL;
+  // window.location.href = SSOIDRequestURL;
+  // window.location.href = SSOIDRedirect_ITO;
+  window.location.href = SSOIDRedirect_Dev;
 }
 
 </script>

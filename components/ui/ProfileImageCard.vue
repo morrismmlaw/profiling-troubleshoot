@@ -61,7 +61,7 @@ onMounted(() => {
       </div>
       <div class="row">
         <div class="card-body text-center">
-          <h5 class="card-title profile-card-text"> {{ props.profile.attributes.post }} </h5>
+          <!-- <h5 class="card-title profile-card-text"> {{ props.profile.attributes.post }} </h5> -->
           <p class="card-text profile-card-text">{{ props.profile.attributes.name }} </p>
           <p class="card-text profile-card-text">{{ props.profile.attributes.chiname }} </p>
         </div>
