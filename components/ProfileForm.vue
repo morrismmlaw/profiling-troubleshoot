@@ -422,14 +422,6 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
               <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
                 <div class="card-body">
                   <section>
-                    <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
-                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags"
-                        :options="SRCOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
-                        :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                        placeholder="Select options" expanded />
-                    </o-field>
-                  </section>
-                  <section>
                     <o-field class="col-form-tag" label="RESEARCH FOCUS">
                       <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, RFTags)" v-model="RFTags"
                         :options="RFOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
@@ -441,6 +433,14 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                     <o-field class="col-form-tag" label="FACULTY COLLABORATIVE RESEARCH AREA">
                       <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, FCRATags)" v-model="FCRATags"
                         :options="FCRAOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                        :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                        placeholder="Select options" expanded />
+                    </o-field>
+                  </section>
+                  <section>
+                    <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
+                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags"
+                        :options="SRCOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                         :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
                         placeholder="Select options" expanded />
                     </o-field>
