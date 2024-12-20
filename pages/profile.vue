@@ -42,9 +42,7 @@ watch(checkedForm, (newVal) => {
 
 <template>
 
-
   <div class="container-fluid bg-light min-vh-100 custom-background nav-offset">
-
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">

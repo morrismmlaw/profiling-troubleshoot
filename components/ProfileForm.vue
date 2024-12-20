@@ -5,6 +5,8 @@ import TiptapEditor from './TiptapEditor.vue' // path to your Tiptap editor comp
 import ImageCard from './ui/ProfileImageCard.vue';
 import type { CroppedImg } from '~/types/profileImage';
 
+import ProfileSave from './ui/ProfileSave.vue';
+
 const props = defineProps({
   profile: {
     type: Object,
@@ -501,18 +503,22 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
               Except I be by Silvia in the night, <br />
               There is no music in the nightingale.
             </o-tab-item>
-
           </o-tabs>
         </section>
 
-        <form @submit.prevent="handleSubmit">
-          <div class="d-flex justify-content-end mt-4">
-            <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
-              {{ profileStore.isLoading ? 'Saving...' : 'Save' }}
-            </button>
-          </div>
-          <p v-if="profileStore.error" class="text-danger mt-3">{{ profileStore.error }}</p>
-        </form>
+        <!-- <div class="mb-4">
+          <form @submit.prevent="handleSubmit">
+            <div class="d-flex justify-content-end mt-4">
+              <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
+                {{ profileStore.isLoading ? 'Saving...' : 'Save' }}
+              </button>
+              <p v-if="profileStore.error" class="text-danger mt-3">{{ profileStore.error }}</p>
+            </div>
+          </form>
+        </div> -->
+
+        <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
+
       </div>
     </div>
 
@@ -659,5 +665,4 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 .card-body {
   width: 60vw;
 }
-
 </style>
