@@ -46,6 +46,6 @@
 }
 
 .bg-semi-transparent {
-  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(0, 140, 255, 0.34));
+  background-image: linear-gradient(to right, rgb(227 142 176 / 13%), rgb(10 0 46 / 69%));
   background-color: rgba(255, 255, 255, 0.15);
 }

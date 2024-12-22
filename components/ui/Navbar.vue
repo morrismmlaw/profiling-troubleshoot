@@ -129,9 +129,11 @@ const navbarStylePerRoute = computed(() => {
     // return { backgroundColor: 'rgba(37, 150, 190, 0.9)' }; //Light Blue
     return { backgroundColor: 'white' };
   } else if (route.path === '/login' || route.path === '/login-redirect') {
-    return { backgroundColor: 'rgba(43 ,123, 130, 0.55)' }; //Light Blue
+    // return { backgroundColor: 'rgba(43 ,123, 130, 0.55)' }; //Light Blue
+    return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
   } else {
-    return { backgroundColor: 'transparent' };
+    // return { backgroundColor: 'transparent' };
+    return { backgroundColor: 'rgba(0 , 0, 0, 0.1)' };
   }
 });
 
