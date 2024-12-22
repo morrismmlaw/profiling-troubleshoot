@@ -9,6 +9,8 @@ import { defineStore } from 'pinia'
 import { storage } from '~/utils/storage'
 import { api } from '~/utils/api'
 
+// const { login } = useStrapiAuth();
+
 const collectionNames = [
   'departments',
   'research-centres',
@@ -38,6 +40,15 @@ async function findCollection(collectionName) {
   }
 }
 
+// const StrapiLogin = async (ssoid, pw) => {
+//   try {
+//     await login({ identifier: ssoid, password: pw })
+//     return true;
+//   } catch (e) {
+//     return false;
+//    }
+// }
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
@@ -49,6 +60,12 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     async login(ssoid) {
+
+      //NEED LOGIN LOGIC.
+      // if (!StrapiLogin) {
+      //   return false;
+      // }
+
       console.log("Loggin in")
       this.isLoading = true
       this.error = null
