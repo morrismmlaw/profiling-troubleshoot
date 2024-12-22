@@ -104,9 +104,9 @@ const OAuthDiscord = async () => {
                     <p class="text-muted">Forgot your password?</p>
                   </form>
 
-                  <div class="btn btn-primary" @click="OAuthHKBU">
+                  <!-- <div class="btn btn-primary" @click="OAuthHKBU">
                     Login with SSOID
-                  </div>
+                  </div> -->
 
                   <div class="btn btn-info" @click="OAuthDiscord">
                     Login with SSO Provider Example
