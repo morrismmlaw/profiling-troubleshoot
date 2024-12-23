@@ -27,6 +27,7 @@
     "D": "^1.0.0",
     "defu": "^6.1.4",
     "font-awesome": "^4.7.0",
+    "lucide-vue-next": "^0.469.0",
     "nitropack": "^2.9.7",
     "nuxt": "^3.14.1592",
     "nuxt-bootstrap-icons": "^2.1.0",

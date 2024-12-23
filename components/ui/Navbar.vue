@@ -5,12 +5,20 @@
     <div class="container-fluid">
 
       <div v-if="!isHome" class="d-flex">
+
         <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img-1 ms-4" />
+        </NuxtLink>
+        <NuxtLink class="navbar-brand" to="/">
+          <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img-2" />
+        </NuxtLink>
+
+        <!-- <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img-1 ms-4" />
         </NuxtLink>
         <NuxtLink class="navbar-brand" to="/">
           <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
-        </NuxtLink>
+        </NuxtLink> -->
 
         <div v-if="$route.path === '/profile'" class="d-flex align-items-center ms-1">
           {{ console.log("is in profile") }}
@@ -121,9 +129,11 @@ const navbarStylePerRoute = computed(() => {
     // return { backgroundColor: 'rgba(37, 150, 190, 0.9)' }; //Light Blue
     return { backgroundColor: 'white' };
   } else if (route.path === '/login' || route.path === '/login-redirect') {
-    return { backgroundColor: 'rgba(83 ,183, 209, 0.55)' }; //Light Blue
+    // return { backgroundColor: 'rgba(43 ,123, 130, 0.55)' }; //Light Blue
+    return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
   } else {
-    return { backgroundColor: 'transparent' };
+    // return { backgroundColor: 'transparent' };
+    return { backgroundColor: 'rgba(0 , 0, 0, 0.1)' };
   }
 });
 
