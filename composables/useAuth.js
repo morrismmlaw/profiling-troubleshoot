@@ -52,6 +52,8 @@ async function findCollection(collectionName) {
 //SSO SECTION
 export const backendURL_Local = 'http://localhost:1337';
 export const backendURL_ITO = 'https://profile-cms.sci.hkbu.edu.hk';
+export const STRAPI_SSODiscordUrl_Local = `${backendURL_Local}/api/connect/discord`;
+export const STRAPI_SSODiscordUrl_ITO = `${backendURL_ITO}/api/connect/discord`;
 
 //SSO SECTION
 

@@ -50,21 +50,16 @@ const SSOIDRedirect_DISCORD_ITO = 'https://discord.com/oauth2/authorize?client_i
 const SSOIDRedirect_DISCORD_LOCAL = 'https://discord.com/oauth2/authorize?client_id=1319869342611144784&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A1337%2Fapi%2Fconnect%2Fdiscord%2Fcallback&scope=identify+email+connections';
 
 import { backendURL_ITO, backendURL_Local } from '@/composables/useAuth';
+import { STRAPI_SSODiscordUrl_ITO, STRAPI_SSODiscordUrl_Local } from '../composables/useAuth';
 
-const SSODiscordUrl_Local = `${backendURL_Local}/api/connect/discord`;
-const SSODiscordUrl_ITO = `${backendURL_ITO}/api/connect/discord`;
 
 const OAuthHKBU = async () => {
-  // window.location.href = SSOIDRequestURL;
+  // TBD by ITO Custom Provider.
   // window.location.href = SSOIDRedirect_ITO;
-  window.location.href = SSOIDRedirect_ITO;
 }
 
 const OAuthDiscord = async () => {
-  // window.location.href = SSOIDRequestURL;
-  // window.location.href = SSOIDRedirect_ITO;
-  // window.location.href = 'https://discord.com/oauth2/authorize?client_id=1319869342611144784&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A1337%2Fapi%2Fconnect%2Fdiscord%2Fcallback&scope=email+identify';
-  window.location.href = SSODiscordUrl_ITO;
+  window.location.href = STRAPI_SSODiscordUrl_ITO;
 }
 
 </script>
