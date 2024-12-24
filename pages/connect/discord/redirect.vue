@@ -10,9 +10,8 @@
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
-// const backendUrl = 'https://profile-cms.sci.hkbu.edu.hk';
-const backendURL_Local = 'http://localhost:1337';
-const backendURL_ITO = 'https://profile-cms.sci.hkbu.edu.hk';
+import { backendURL_ITO, backendURL_Local } from '@/composables/useAuth';
+
 
 const text = ref('Loading...');
 const route = useRoute();

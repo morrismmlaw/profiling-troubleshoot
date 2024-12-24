@@ -49,8 +49,7 @@ const SSOIDRedirect_ITO = 'https://issuat.hkbu.edu.hk/buam/Auth?client_id=SCI%2D
 const SSOIDRedirect_DISCORD_ITO = 'https://discord.com/oauth2/authorize?client_id=1319869342611144784&response_type=code&redirect_uri=https%3A%2F%2Fprofile-cms.sci.hkbu.edu.hk%2Fapi%2Fconnect%2Fdiscord%2Fcallback&scope=identify+email+connections';
 const SSOIDRedirect_DISCORD_LOCAL = 'https://discord.com/oauth2/authorize?client_id=1319869342611144784&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A1337%2Fapi%2Fconnect%2Fdiscord%2Fcallback&scope=identify+email+connections';
 
-const backendURL_Local = 'http://localhost:1337';
-const backendURL_ITO = 'https://profile-cms.sci.hkbu.edu.hk';
+import { backendURL_ITO, backendURL_Local } from '@/composables/useAuth';
 
 const SSODiscordUrl_Local = `${backendURL_Local}/api/connect/discord`;
 const SSODiscordUrl_ITO = `${backendURL_ITO}/api/connect/discord`;

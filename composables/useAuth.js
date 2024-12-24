@@ -49,6 +49,12 @@ async function findCollection(collectionName) {
 //    }
 // }
 
+//SSO SECTION
+export const backendURL_Local = 'http://localhost:1337';
+export const backendURL_ITO = 'https://profile-cms.sci.hkbu.edu.hk';
+
+//SSO SECTION
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
