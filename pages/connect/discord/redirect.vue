@@ -23,9 +23,7 @@ onMounted(async () => {
 
   console.log(search);
 
-  const URL = `${backendUrl}/api/connect/${providerName}/callback?${search}`;
-
-  await fetch(`${backendUrl}/api/connect/${providerName}/callback?${search}`)
+  await fetch(`${backendUrl}/api/auth/${providerName}/callback?${search}`)
     .then(res => {
       if (res.status !== 200) {
         throw new Error(`Couldn't login to Strapi. Status: ${res.status}`);
