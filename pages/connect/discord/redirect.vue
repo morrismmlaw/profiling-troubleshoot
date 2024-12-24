@@ -11,7 +11,8 @@ import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 // const backendUrl = 'https://profile-cms.sci.hkbu.edu.hk';
-const backendUrl = 'http://localhost:1337';
+const backendURL_Local = 'http://localhost:1337';
+const backendURL_ITO = 'https://profile-cms.sci.hkbu.edu.hk';
 
 const text = ref('Loading...');
 const route = useRoute();
@@ -23,7 +24,7 @@ onMounted(async () => {
 
   console.log(search);
 
-  await fetch(`${backendUrl}/api/auth/${providerName}/callback?${search}`)
+  await fetch(`${backendURL_ITO}/api/auth/${providerName}/callback?${search}`)
     .then(res => {
       if (res.status !== 200) {
         throw new Error(`Couldn't login to Strapi. Status: ${res.status}`);
@@ -39,7 +40,7 @@ onMounted(async () => {
       localStorage.setItem('jwt', res.jwt);
       localStorage.setItem('username', res.user.username);
       text.value = 'You have been successfully logged in. You will be redirected in a few seconds...';
-      setTimeout(() => router.push('/'), 3000); // Redirect to homepage after 3 sec
+      setTimeout(() => router.push('/'), 9000); // Redirect to homepage after 3 sec
     })
     .catch(err => {
       console.log(err);
