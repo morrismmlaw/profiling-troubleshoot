@@ -74,6 +74,12 @@
             </li>
             <li v-if="isLoggedIn" class="nav-item custom-nav-item">
               <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
+                <i class="bi bi-people-fill me-3"></i>
+                <NuxtLink class="nav-link" to="/profile"> View All Profiles</NuxtLink>
+              </span>
+            </li>
+            <li v-if="isLoggedIn" class="nav-item custom-nav-item">
+              <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class=" bi bi-box-arrow-left me-3"></i>
                 <NuxtLink @click="logout" class="nav-link" to="/"> Logout</NuxtLink>
               </span>
