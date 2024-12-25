@@ -63,7 +63,12 @@ export const useAuthStore = defineStore('auth', {
     collections: null, //Get All Other Strapi Collections - SDGS, FCRA.. etc.
     isAuthenticated: false,
     isLoading: false,
-    error: null
+    error: null,
+
+    sso: { //Store SSO getback things.
+      jwt: null,
+      username: null,
+    }
   }),
 
   actions: {

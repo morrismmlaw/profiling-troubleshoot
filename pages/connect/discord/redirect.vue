@@ -12,10 +12,11 @@ import { useRouter, useRoute } from 'vue-router';
 
 import { backendURL_ITO, backendURL_Local } from '@/composables/useAuth';
 
-
 const text = ref('Loading...');
 const route = useRoute();
 const router = useRouter();
+
+const authStore = useAuthStore();
 
 onMounted(async () => {
   const providerName = 'discord';
@@ -36,10 +37,13 @@ onMounted(async () => {
     .then(res => {
       // Successfully logged in with Strapi
       // Now saving the jwt to use it for future authenticated requests to Strapi
+      console.log(res);
+      authStore.sso.jwt = res.jwt;
+      authStore.sso.username = res.user.username;
       localStorage.setItem('jwt', res.jwt);
       localStorage.setItem('username', res.user.username);
       text.value = 'You have been successfully logged in. You will be redirected in a few seconds...';
-      setTimeout(() => router.push('/'), 9000); // Redirect to homepage after 3 sec
+      setTimeout(() => router.push('/'), 5000); // Redirect to homepage after 3 sec
     })
     .catch(err => {
       console.log(err);
