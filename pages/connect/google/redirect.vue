@@ -94,6 +94,7 @@ onMounted(async () => {
       // Successfully logged in with Strapi
       // Now saving the jwt to use it for future authenticated requests to Strapi
       console.log(res);
+      store.sso.provider = providerName;
       store.sso.jwt = res.jwt;
       store.sso.username = res.user.username;
       store.isAuthenticated = true;
