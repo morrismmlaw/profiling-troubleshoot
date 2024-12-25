@@ -55,6 +55,8 @@ export const backendURL_ITO = 'https://profile-cms.sci.hkbu.edu.hk';
 export const STRAPI_SSODiscordUrl_Local = `${backendURL_Local}/api/connect/discord`;
 export const STRAPI_SSODiscordUrl_ITO = `${backendURL_ITO}/api/connect/discord`;
 
+export const STRAPI_SSOGoogleUrl_ITO = `${backendURL_ITO}/api/connect/google`;
+
 //SSO SECTION
 
 export const useAuthStore = defineStore('auth', {

@@ -62,6 +62,10 @@ const OAuthDiscord = async () => {
   window.location.href = STRAPI_SSODiscordUrl_ITO;
 }
 
+const OAuthGoogle = async () => {
+  window.location.href = STRAPI_SSOGoogleUrl_ITO;
+}
+
 </script>
 
 <template>
@@ -105,19 +109,29 @@ const OAuthDiscord = async () => {
                     <button type="submit" class="btn btn-primary btn-block w-100" :disabled="authStore.isLoading">
                       {{ authStore.isLoading ? 'Logging in...' : 'Login' }}
                     </button>
+
+                    <div class="d-flex inline mt-1">
+                      <!-- <div class="btn btn-primary" @click="OAuthHKBU">
+                      Login with SSOID
+                      </div> -->
+                      <div class="btn btn-info" @click="OAuthGoogle">
+                        Login with GOOGLE
+                      </div>
+                      <div class="btn btn-info" @click="OAuthDiscord">
+                        Login with DISCORD
+                      </div>
+                    </div>
+
                     <p class="text-muted">Forgot your password?</p>
                   </form>
 
-                  <!-- <div class="btn btn-primary" @click="OAuthHKBU">
-                    Login with SSOID
-                  </div> -->
-
-                  <div class="btn btn-info" @click="OAuthDiscord">
-                    Login with SSO Provider Example
-                  </div>
                 </div>
               </div>
+
+
+
             </div>
+
           </div>
         </div>
       </section>

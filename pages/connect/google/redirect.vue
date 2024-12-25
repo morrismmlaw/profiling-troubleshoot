@@ -16,7 +16,7 @@ const text = ref('Loading...');
 const route = useRoute();
 const router = useRouter();
 
-const providerName = 'discord';
+const providerName = 'google';
 const authStore = useAuthStore();
 
 onMounted(async () => {
