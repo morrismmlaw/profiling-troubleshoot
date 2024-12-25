@@ -133,7 +133,8 @@ const navbarStylePerRoute = computed(() => {
     return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
   } else {
     // return { backgroundColor: 'transparent' };
-    return { backgroundColor: 'rgba(0 , 0, 0, 0.1)' };
+    // return { backgroundColor: 'rgba(0 , 0, 0, 0.1)' };
+    return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
   }
 });
 
