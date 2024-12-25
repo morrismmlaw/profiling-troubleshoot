@@ -65,6 +65,7 @@
                 <NuxtLink class="nav-link" to="/login">Staff Login</NuxtLink>
               </span>
             </li>
+            <!-- Need to Check if the current User has Academic Profile / is Not an Admin -->
             <li v-if="isLoggedIn" class="nav-item custom-nav-item">
               <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-person-circle me-3"></i>
