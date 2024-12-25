@@ -68,6 +68,7 @@ export const useAuthStore = defineStore('auth', {
     error: null,
 
     sso: { //Store SSO getback things.
+      provider: null,
       jwt: null,
       username: null,
     }
@@ -119,6 +120,16 @@ export const useAuthStore = defineStore('auth', {
     logout() {
       this.user = null
       this.isAuthenticated = false
+
+      if (this.sso.provider === 'google') {
+        //Logout of google Service in this site.
+      }
+
+      localStorage.removeItem('jwt', res.jwt);
+      localStorage.removeItem('username', res.user.username);
+
+      this.sso = {}
+
       storage.setUser(null)
     },
 
