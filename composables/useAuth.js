@@ -67,6 +67,8 @@ export const useAuthStore = defineStore('auth', {
     isLoading: false,
     error: null,
 
+    //Shall check if this account is academic staff or admin user.
+
     sso: { //Store SSO getback things.
       provider: null,
       jwt: null,
