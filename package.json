@@ -31,6 +31,7 @@
     "nitropack": "^2.9.7",
     "nuxt": "^3.14.1592",
     "nuxt-bootstrap-icons": "^2.1.0",
+    "nuxt-meilisearch": "^1.3.10",
     "nuxt-tiptap-editor": "^2.1.0",
     "pinia": "^2.2.7",
     "sass": "^1.83.0",
