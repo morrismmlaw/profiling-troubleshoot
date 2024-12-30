@@ -50,12 +50,12 @@ const SSOIDRedirect_DISCORD_ITO = 'https://discord.com/oauth2/authorize?client_i
 const SSOIDRedirect_DISCORD_LOCAL = 'https://discord.com/oauth2/authorize?client_id=1319869342611144784&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A1337%2Fapi%2Fconnect%2Fdiscord%2Fcallback&scope=identify+email+connections';
 
 import { backendURL_ITO, backendURL_Local } from '@/composables/useAuth';
-import { STRAPI_SSODiscordUrl_ITO, STRAPI_SSODiscordUrl_Local } from '../composables/useAuth';
+import { STRAPI_SSODiscordUrl_ITO, STRAPI_SSODiscordUrl_Local, STRAPI_SSOHKBUUrl_ITO } from '../composables/useAuth';
 
 
 const OAuthHKBU = async () => {
   // TBD by ITO Custom Provider.
-  // window.location.href = SSOIDRedirect_ITO;
+  window.location.href = STRAPI_SSOHKBUUrl_ITO;
 }
 
 const OAuthDiscord = async () => {
@@ -111,9 +111,9 @@ const OAuthGoogle = async () => {
                     </button>
 
                     <div class="d-flex inline mt-1">
-                      <!-- <div class="btn btn-primary" @click="OAuthHKBU">
-                      Login with SSOID
-                      </div> -->
+                      <div class="btn btn-info" @click="OAuthHKBU">
+                        Login with SSOID
+                      </div>
                       <div class="btn btn-info" @click="OAuthGoogle">
                         Login with GOOGLE
                       </div>
