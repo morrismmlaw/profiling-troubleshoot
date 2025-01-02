@@ -66,6 +66,21 @@ const OAuthGoogle = async () => {
   window.location.href = STRAPI_SSOGoogleUrl_ITO;
 }
 
+const signInWith = (str) => {
+
+  switch (str) {
+    case ('hkbu'):
+      window.location.href = STRAPI_SSOHKBUUrl_ITO;
+      break;
+    case ('google'):
+      window.location.href = STRAPI_SSOGoogleUrl_ITO;
+      break;
+    case ('discord'):
+      window.location.href = STRAPI_SSODiscordUrl_ITO;
+      break;
+  }
+}
+
 </script>
 
 <template>
@@ -95,7 +110,7 @@ const OAuthGoogle = async () => {
                       </path>
                     </svg></div>
 
-                  <form @submit.prevent="handleSubmit">
+                  <!-- <form @submit.prevent="handleSubmit">
                     <div class="form-group">
                       <label for="ssoid">SSOID</label>
                       <input id="ssoid" v-model="ssoid" class="form-control" type="text" required
@@ -123,7 +138,34 @@ const OAuthGoogle = async () => {
                     </div>
 
                     <p class="text-muted">Forgot your password?</p>
-                  </form>
+                  </form> -->
+
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <div class="col">
+                        <div class="card border-0">
+                          <div class="card-body">
+                            <h2 class="card-title text-center mb-4">Single Sign-On</h2>
+                            <div class="d-grid gap-3">
+                              <button @click="signInWith('hkbu')" class="btn btn-success sso-btn">
+                                <i class="bi bi-mortarboard-fill me-2"></i> Sign in with SSOID
+                              </button>
+                              <button @click="signInWith('google')" class="btn btn-danger sso-btn">
+                                <i class="bi bi-google me-2"></i> Sign in with Google
+                              </button>
+                              <button @click="signInWith('discord')" class="btn btn-primary sso-btn">
+                                <i class="bi bi-discord me-2"></i> Sign in with Discord
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+
 
                 </div>
               </div>
@@ -146,4 +188,8 @@ const OAuthGoogle = async () => {
 /* @import url('/assets/bootstrap/css/bootstrap.min.css'); */
 @import url('/assets/css/animate.min.css');
 @import url('/assets/css/Login-Form-Basic-icons.css');
+
+.sso-btn {
+  width: 100%;
+}
 </style>
