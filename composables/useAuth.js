@@ -129,12 +129,13 @@ export const useAuthStore = defineStore('auth', {
         //Logout of google Service in this site.
       }
 
-      localStorage.removeItem('jwt', res.jwt);
-      localStorage.removeItem('username', res.user.username);
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('username');
 
       this.sso = {}
-
       storage.setUser(null)
+
+      // location.reload();
     },
 
     initializeFromStorage() {
