@@ -66,6 +66,7 @@ export const useAuthStore = defineStore('auth', {
     user: null,
     collections: null, //Get All Other Strapi Collections - SDGS, FCRA.. etc.
     isAuthenticated: false,
+    isAdmin: false, //I need to retrieve this from STRAPI.
     isLoading: false,
     error: null,
 
@@ -79,7 +80,13 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+    // Need to implement auth Logic.
+    // First -> SSO-JWT -> 
+
     async login(ssoid) {
+      //ASSUME SSOID is the string before @.
+
+      //Check with STRAPI User status..
 
       //NEED LOGIN LOGIC.
       // if (!StrapiLogin) {
