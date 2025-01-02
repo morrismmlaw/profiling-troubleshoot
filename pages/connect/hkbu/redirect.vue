@@ -41,8 +41,8 @@
 
                     <h1 class="card-title">{{ message }}</h1>
                     <p v-if="error" class="card-text">{{ error }}</p>
-                    <p v-if="!isLoggedIn" class="card-text">Redirecting to login page in {{ countdown }} seconds...</p>
-                    <p v-else class="card-text">Redirecting to home page in {{ countdown }} seconds...</p>
+                    <p v-if="!isLoggedIn" class="card-text">Redirecting to login page in {{ countdown / 1000 }} seconds...</p>
+                    <p v-else class="card-text">Redirecting to home page in {{ countdown / 1000 }} seconds...</p>
                   </div>
                 </div>
               </div>
@@ -75,6 +75,8 @@ const error = ref(route.query.error)
 
 const isLoggedIn = computed(() => store.isAuthenticated)
 
+const countdown = ref(3000);
+
 onMounted(async () => {
   const search = route.fullPath.split('?')[1];
 
@@ -99,11 +101,12 @@ onMounted(async () => {
       store.sso.username = res.user.username;
       store.sso.email = res.user.email;
       store.isAuthenticated = true;
+
       localStorage.setItem('jwt', res.jwt);
       localStorage.setItem('username', res.user.username);
       
       text.value = 'You have been successfully logged in. You will be redirected in a few seconds...';
-      setTimeout(() => router.push('/'), 5000); // Redirect to homepage after 3 sec
+      setTimeout(() => router.push('/'), countdown.value); // Redirect to homepage after 3 sec
     })
     .catch(err => {
       console.log(err);
