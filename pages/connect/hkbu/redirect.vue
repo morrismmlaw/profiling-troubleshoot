@@ -111,7 +111,14 @@ onMounted(async () => {
       //Need to check with STRAPI, to get User status, and User profile is valid -> Admin / User ?
       const ssoid = res.user.email.split('@')[0];
       try {
-        const success = await authStore.login(ssoid);
+        console.log(ssoid);
+
+        authStore.login(res.user.username, res.jwt);
+
+        const user = useStrapiUser();
+        console.log(user.value);
+
+        const success = await authStore.getProfile(ssoid);
         console.log(success);
       } catch {
       }

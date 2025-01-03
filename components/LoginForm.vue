@@ -11,7 +11,7 @@ const emit = defineEmits(['success', 'error']);
 
 const handleSubmit = async () => {
   console.log("Login Form doing the Login")
-  const success = await authStore.login(ssoid.value);
+  const success = await authStore.getProfile(ssoid.value);
   if (success) {
     emit('success');
   } else {

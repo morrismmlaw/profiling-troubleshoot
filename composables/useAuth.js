@@ -82,18 +82,24 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     // Need to implement auth Logic.
     // First -> SSO-JWT -> 
+    async login() {
 
-    async login(ssoid) {
+      //Get the user isAdmin or not..
+
+    },
+
+    async getProfile(ssoid) {
       //ASSUME SSOID is the string before @.
 
       //Check with STRAPI User status..
+      //If is admin / if is academic staff.
 
       //NEED LOGIN LOGIC.
       // if (!StrapiLogin) {
       //   return false;
       // }
 
-      console.log("Loggin in")
+      console.log("Loggin in", ssoid)
       this.isLoading = true
       this.error = null
 
