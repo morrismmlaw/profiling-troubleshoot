@@ -136,7 +136,12 @@ const navbarStylePerRoute = computed(() => {
     // return { backgroundColor: 'rgb(177, 177, 177, 0.9)' };
     // return { backgroundColor: 'rgba(37, 150, 190, 0.9)' }; //Light Blue
     return { backgroundColor: 'white' };
-  } else if (route.path === '/login' || route.path === '/login-redirect') {
+  } else if (route.path === '/searchR3') {
+    // return { backgroundColor: 'rgb(177, 177, 177, 0.9)' };
+    // return { backgroundColor: 'rgba(37, 150, 190, 0.9)' }; //Light Blue
+    return { backgroundColor: '#1f384a' }; //Light Blue
+  }
+  else if (route.path === '/login' || route.path === '/login-redirect') {
     // return { backgroundColor: 'rgba(43 ,123, 130, 0.55)' }; //Light Blue
     return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
   } else {

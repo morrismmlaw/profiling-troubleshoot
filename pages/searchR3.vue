@@ -78,6 +78,27 @@
                   <h4 class="text-white m-0">
                     {{ filteredExperts.length }} Experts Found
                   </h4>
+
+                  <!-- Pagination -->
+                  <nav class="mt-3">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item disabled">
+                        <a class="page-link bg-dark/30 border-light/10 text-light" href="#">Previous</a>
+                      </li>
+                      <li class="page-item active">
+                        <a class="page-link bg-purple border-purple text-white" href="#">1</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link bg-dark/30 border-light/10 text-light" href="#">2</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link bg-dark/30 border-light/10 text-light" href="#">3</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link bg-dark/30 border-light/10 text-light" href="#">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
                   <div class="d-flex gap-3 align-items-center">
                     <label class="text-light">Sort by:</label>
                     <select class="form-select form-select-sm bg-dark/50 text-white border-light/10 w-auto">
@@ -96,7 +117,7 @@
                         <div class="row g-4">
                           <div class="col-auto">
                             <div class="position-relative">
-                              <img :src="expert.avatar" :alt="expert.name" class="rounded-circle expert-avatar"
+                              <img :src="`https://cdn-icons-png.freepik.com/512/11498/11498793.png`" :alt="expert.name" class="rounded-circle expert-avatar"
                                 width="100" height="100" />
                               <span v-if="expert.isSupervising" class="supervision-badge">
                                 <i class="bi bi-mortarboard-fill"></i>
@@ -128,26 +149,6 @@
                   </div>
                 </div>
 
-                <!-- Pagination -->
-                <nav class="mt-5">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link bg-dark/30 border-light/10 text-light" href="#">Previous</a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link bg-purple border-purple text-white" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link bg-dark/30 border-light/10 text-light" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link bg-dark/30 border-light/10 text-light" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link bg-dark/30 border-light/10 text-light" href="#">Next</a>
-                    </li>
-                  </ul>
-                </nav>
               </div>
             </div>
           </div>
@@ -217,7 +218,8 @@ const handleSearch = () => {
 
 <style scoped>
 .bg-gradient {
-  background: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 100%);
+  /* background: linear-gradient(to right, #1a1a2e 0%, #2d1b69 100%); */
+  background: #051e30;
 }
 
 .bg-dark\/30 {
