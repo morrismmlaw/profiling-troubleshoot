@@ -65,8 +65,8 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
     collections: null, //Get All Other Strapi Collections - SDGS, FCRA.. etc.
-    isAuthenticated: false,
-    isAdmin: false, //I need to retrieve this from STRAPI.
+    isAuthenticated: false, //Retrieved User Role from STRAPI.
+    isAdmin: false, //Retrieved User Role from STRAPI.
     isLoading: false,
     error: null,
 
@@ -82,6 +82,10 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     // Need to implement auth Logic.
     // First -> SSO-JWT -> 
+
+    /**
+     * Need to Enable Users-permissions in Admin Panel.
+     */
     async getUser() {
       //Get the user isAdmin or not..
 
@@ -99,6 +103,7 @@ export const useAuthStore = defineStore('auth', {
           console.log('response: ', res);
 
           this.isAdmin = (res.role.type === 'admin');
+          this.isAuthenticated = (res.role.type === 'authenticated');
         })
         .catch(error => {
           // Handle error.
@@ -136,7 +141,6 @@ export const useAuthStore = defineStore('auth', {
             this.collections[name] = await findCollection(name);
           }
 
-          this.isAuthenticated = true
           console.log("Got the User", this.user);
           console.log("Got the Collections", this.collections);
           storage.setUser(this.user)
