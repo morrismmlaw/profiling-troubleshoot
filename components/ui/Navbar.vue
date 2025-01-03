@@ -63,13 +63,13 @@
               </span>
             </li>
             <!-- Need to Check if the current User has Academic Profile / is Not an Admin -->
-            <li v-if="isLoggedIn" class="nav-item custom-nav-item">
+            <li v-if="isLoggedIn && isAuthenticated" class="nav-item custom-nav-item">
               <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-person-circle me-3"></i>
                 <NuxtLink class="nav-link" to="/profile"> Your Profile</NuxtLink>
               </span>
             </li>
-            <li v-if="isAdmin" class="nav-item custom-nav-item">
+            <li v-if="isLoggedIn && isAdmin" class="nav-item custom-nav-item">
               <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-people-fill me-3"></i>
                 <NuxtLink class="nav-link" to="/profile"> View All Profiles</NuxtLink>
@@ -112,7 +112,8 @@ const handleLogout = () => {
   router.push('/');
 }
 
-const isLoggedIn = computed(() => authStore.isAuthenticated);
+const isLoggedIn = computed(() => authStore.isLogin);
+const isAuthenticated = computed(() => authStore.isAuthenticated);
 const isAdmin = computed(() => authStore.isAdmin);
 
 
