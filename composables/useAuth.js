@@ -65,6 +65,9 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
     collections: null, //Get All Other Strapi Collections - SDGS, FCRA.. etc.
+    
+    isLogin: false,
+
     isAuthenticated: false, //Retrieved User Role from STRAPI.
     isAdmin: false, //Retrieved User Role from STRAPI.
     isLoading: false,
@@ -104,6 +107,8 @@ export const useAuthStore = defineStore('auth', {
 
           this.isAdmin = (res.role.type === 'admin');
           this.isAuthenticated = (res.role.type === 'authenticated');
+
+          this.isLogin = true;
         })
         .catch(error => {
           // Handle error.
@@ -159,8 +164,10 @@ export const useAuthStore = defineStore('auth', {
 
     logout() {
       this.user = null
+
       this.isAuthenticated = false
       this.isAdmin = false
+      this.isLogin = false;
 
       if (this.sso.provider === 'google') {
         //Logout of google Service in this site.
@@ -180,7 +187,7 @@ export const useAuthStore = defineStore('auth', {
       // console.log(storedUser)
       if (storedUser) {
         this.user = storedUser
-        this.isAuthenticated = true
+        this.isLogin = true
       }
 
       const storedCollection = storage.getCollection()
