@@ -82,9 +82,28 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     // Need to implement auth Logic.
     // First -> SSO-JWT -> 
-    async login() {
-
+    async getUser() {
       //Get the user isAdmin or not..
+
+      console.log(this.sso.jwt);
+
+      // Request API.
+      await fetch(`${backendURL_ITO}/api/users/me?populate=role`, {
+        headers: {
+          Authorization: `Bearer ${this.sso.jwt}`,
+        },
+      })
+        .then(async response => {
+          // Handle success.
+          const res = await response.json();
+          console.log('response: ', res);
+
+          this.isAdmin = (res.role.type === 'admin');
+        })
+        .catch(error => {
+          // Handle error.
+          console.log('An error occurred:', error.response);
+        });
 
     },
 

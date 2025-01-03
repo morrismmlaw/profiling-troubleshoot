@@ -112,11 +112,7 @@ onMounted(async () => {
       const ssoid = res.user.email.split('@')[0];
       try {
         console.log(ssoid);
-
-        authStore.login(res.user.username, res.jwt);
-
-        const user = useStrapiUser();
-        console.log(user.value);
+        authStore.getUser();
 
         const success = await authStore.getProfile(ssoid);
         console.log(success);
