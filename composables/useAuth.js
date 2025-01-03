@@ -160,6 +160,7 @@ export const useAuthStore = defineStore('auth', {
     logout() {
       this.user = null
       this.isAuthenticated = false
+      this.isAdmin = false
 
       if (this.sso.provider === 'google') {
         //Logout of google Service in this site.

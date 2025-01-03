@@ -78,7 +78,15 @@ async function update_uploadPhoto(documentId, data, profile) {
   if (fieldIds !== null && profileData[field] !== null) {
     console.log("Remove Image from STRAPI")
     const { delete: _delete } = useStrapi();
-    const delResponse = await _delete('upload/files', profileData[field].id);
+
+    console.log(profileData[field].id);
+
+    try {
+      const delResponse = await _delete('upload/files', profileData[field].id);
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   if (fieldIds === "" || fieldIds === null) {

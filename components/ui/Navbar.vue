@@ -67,7 +67,7 @@
                 <NuxtLink class="nav-link" to="/profile"> Your Profile</NuxtLink>
               </span>
             </li>
-            <li v-if="isLoggedIn" class="nav-item custom-nav-item">
+            <li v-if="isAdmin" class="nav-item custom-nav-item">
               <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                 <i class="bi bi-people-fill me-3"></i>
                 <NuxtLink class="nav-link" to="/profile"> View All Profiles</NuxtLink>
@@ -111,6 +111,9 @@ const handleLogout = () => {
 }
 
 const isLoggedIn = computed(() => authStore.isAuthenticated);
+const isAdmin = computed(() => authStore.isAdmin);
+
+
 const isSearch = computed(() => route.path === '/search');
 const isProfile = computed(() => route.path === '/profile');
 const isHome = computed(() => route.path === '/');
