@@ -81,6 +81,7 @@ async function update_uploadPhoto(documentId, data, profile) {
 
     console.log(profileData[field].id);
 
+    //Need to check if no image replaced -> No action.
     try {
       const delResponse = await _delete('upload/files', profileData[field].id);
     } catch (error) {
