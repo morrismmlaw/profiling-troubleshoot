@@ -46,7 +46,7 @@ async function updateRelationField(documentId, data, field) {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     },
-    body: { fieldIds },
+    body: { [field]: fieldIds },
   })
     .then(response => {
       // Handle success.
