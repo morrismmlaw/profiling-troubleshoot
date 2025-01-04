@@ -2,7 +2,7 @@
  * @typedef {import('~/types/profile').Profile} Profile
  */
 
-import { backendURL_ITO } from '~/composables/useAuth';
+import { backendURL_ITO, useAuthStore } from '~/composables/useAuth';
 
 //For Get and return of Update profile (inside, not api collection.).
 let populateFields = [
@@ -28,6 +28,10 @@ let populateFields = [
  * @returns {Promise<Object>} A promise that resolves with the updated profile document.
  */
 async function updateRelationFieldJWT(documentId, data, field) {
+
+  const authStore = useAuthStore();
+  const token = authStore.sso.jwt;
+
   const fieldIds = data[field].map((item) => item.id);
   delete data[field];
   console.log(`Updating ${field}`, documentId, fieldIds);
