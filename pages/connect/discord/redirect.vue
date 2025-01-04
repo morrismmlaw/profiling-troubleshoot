@@ -112,9 +112,9 @@ onMounted(async () => {
       const ssoid = res.user.email.split('@')[0];
       try {
         console.log(ssoid);
-        authStore.getUser();
+        authStore.setUser();
 
-        const success = await authStore.getProfile(ssoid);
+        const success = await authStore.setProfile(ssoid);
         console.log(success);
       } catch {
       }

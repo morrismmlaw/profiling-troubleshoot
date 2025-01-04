@@ -2,9 +2,6 @@
  * @typedef {import('~/types/profile').Profile} Profile
  */
 
-const authStore = useAuthStore();
-const token = authStore.sso.jwt;
-
 import { backendURL_ITO } from '~/composables/useAuth';
 
 //For Get and return of Update profile (inside, not api collection.).
@@ -31,12 +28,11 @@ let populateFields = [
  * @returns {Promise<Object>} A promise that resolves with the updated profile document.
  */
 async function updateRelationField(documentId, data, field) {
-  const { update } = useStrapi();
   const fieldIds = data[field].map((item) => item.id);
   delete data[field];
-
   console.log(`Updating ${field}`, documentId, fieldIds);
 
+  // const { update } = useStrapi();
   // return await update('profiles', documentId, { [field]: fieldIds });
 
   // Request API.
@@ -202,5 +198,30 @@ export const api = {
     // return await update('profiles', documentId, { //No need to wrap, as it is already an Object.
     //   data
     // })
+  },
+
+
+  /**
+   * Fetches the current user's data from the backend API.
+   * @param {string} token - The JWT token of the current user.
+   * @returns {Promise<Object>} A promise that resolves to the user data fetched from the API.
+   */
+  async getUserJWT(token) {
+    // Request API.
+    return await fetch(`${backendURL_ITO}/api/users/me?populate=role`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(async response => {
+        // Handle success.
+        return await response.json();
+      })
+      .catch(error => {
+        // Handle error.
+        console.error('An error occurred:', error.response);
+        throw error;
+      });
   }
+
 }

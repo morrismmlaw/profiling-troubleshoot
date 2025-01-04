@@ -9,7 +9,7 @@ const emit = defineEmits(['success', 'error']);
 
 const handleSubmit = async () => {
   console.log("Login Form doing the Login")
-  const success = await authStore.getProfile(ssoid.value);
+  const success = await authStore.setProfile(ssoid.value);
 
   if (success) {
     router.push('/login-redirect');

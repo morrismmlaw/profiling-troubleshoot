@@ -65,7 +65,7 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
     collections: null, //Get All Other Strapi Collections - SDGS, FCRA.. etc.
-    
+
     isLogin: false,
 
     isAuthenticated: false, //Retrieved User Role from STRAPI.
@@ -89,35 +89,21 @@ export const useAuthStore = defineStore('auth', {
     /**
      * Need to Enable Users-permissions in Admin Panel.
      */
-    async getUser() {
+    async setUser() {
       //Get the user isAdmin or not..
+      // console.log(this.sso.jwt);
 
-      console.log(this.sso.jwt);
+      const user = await api.getUserJWT(this.sso.jwt);
 
-      // Request API.
-      await fetch(`${backendURL_ITO}/api/users/me?populate=role`, {
-        headers: {
-          Authorization: `Bearer ${this.sso.jwt}`,
-        },
-      })
-        .then(async response => {
-          // Handle success.
-          const res = await response.json();
-          console.log('response: ', res);
+      console.log(user);
 
-          this.isAdmin = (res.role.type === 'admin');
-          this.isAuthenticated = (res.role.type === 'authenticated');
-
-          this.isLogin = true;
-        })
-        .catch(error => {
-          // Handle error.
-          console.log('An error occurred:', error.response);
-        });
+      this.isAdmin = (user.role.type === 'admin');
+      this.isAuthenticated = (user.role.type === 'authenticated');
+      this.isLogin = true;
 
     },
 
-    async getProfile(ssoid) {
+    async setProfile(ssoid) {
       //ASSUME SSOID is the string before @.
 
       //Check with STRAPI User status..
