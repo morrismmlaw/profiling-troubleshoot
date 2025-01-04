@@ -2,6 +2,11 @@
  * @typedef {import('~/types/profile').Profile} Profile
  */
 
+const authStore = useAuthStore();
+const token = authStore.sso.jwt;
+
+import { backendURL_ITO } from '~/composables/useAuth';
+
 //For Get and return of Update profile (inside, not api collection.).
 let populateFields = [
   'sdgs', // Populate the 'sdgs' field with the related data
@@ -32,7 +37,26 @@ async function updateRelationField(documentId, data, field) {
 
   console.log(`Updating ${field}`, documentId, fieldIds);
 
-  return await update('profiles', documentId, { [field]: fieldIds });
+  // return await update('profiles', documentId, { [field]: fieldIds });
+
+  // Request API.
+  fetch(`${backendURL_ITO}/api/profiles/${documentId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: { fieldIds },
+  })
+    .then(response => {
+      // Handle success.
+      console.log('Response: ', response);
+    })
+    .catch(error => {
+      // Handle error.
+      console.log('An error occurred:', error.response);
+    });
+
 }
 
 async function updateResearch_Centres(documentId, data) {
