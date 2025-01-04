@@ -27,7 +27,7 @@ let populateFields = [
  * @param {string} field - The name of the relation field in FORMData to update.
  * @returns {Promise<Object>} A promise that resolves with the updated profile document.
  */
-async function updateRelationField(documentId, data, field) {
+async function updateRelationFieldJWT(documentId, data, field) {
   const fieldIds = data[field].map((item) => item.id);
   delete data[field];
   console.log(`Updating ${field}`, documentId, fieldIds);
@@ -56,23 +56,23 @@ async function updateRelationField(documentId, data, field) {
 }
 
 async function updateResearch_Centres(documentId, data) {
-  return await updateRelationField(documentId, data, 'research_centres');
+  return await updateRelationFieldJWT(documentId, data, 'research_centres');
 }
 
 async function updateResearch_Foci(documentId, data) {
-  return await updateRelationField(documentId, data, 'research_foci');
+  return await updateRelationFieldJWT(documentId, data, 'research_foci');
 }
 
 async function update_fcras(documentId, data) {
-  return await updateRelationField(documentId, data, 'fcras');
+  return await updateRelationFieldJWT(documentId, data, 'fcras');
 }
 
 async function update_available_supervisions(documentId, data) {
-  return await updateRelationField(documentId, data, 'available_supervisions');
+  return await updateRelationFieldJWT(documentId, data, 'available_supervisions');
 }
 
 async function update_departments(documentId, data) {
-  return await updateRelationField(documentId, data, 'departments');
+  return await updateRelationFieldJWT(documentId, data, 'departments');
 }
 
 /**
