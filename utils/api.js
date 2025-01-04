@@ -189,6 +189,8 @@ export const api = {
     await update_available_supervisions(documentId, FormData); //Relations
     await update_departments(documentId, FormData); //Relations
 
+    //Check if There is a new Photo
+    //Yes Run Below..
     await update_uploadPhoto(documentId, FormData, profile); //MEDIA ID
     // delete FormData.uploadPhoto;
 

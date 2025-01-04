@@ -64,19 +64,17 @@ import { backendURL_ITO, backendURL_Local } from '@/composables/useAuth';
 
 import ParticlesBackground from '~/components/ui/ParticlesBackground.vue';
 
-const authStore = useAuthStore();
-
 const text = ref('Loading...');
 const route = useRoute();
 const router = useRouter();
 
 const providerName = 'discord';
-const store = useAuthStore();
+const authStore = useAuthStore();
 
 const message = computed(() => isLoggedIn.value ? `Login successful!` : 'Login failed.')
 const error = ref(route.query.error)
 
-const isLoggedIn = computed(() => store.isAuthenticated)
+const isLoggedIn = computed(() => authStore.isAuthenticated)
 
 const countdown = ref(3000);
 
@@ -99,14 +97,18 @@ onMounted(async () => {
       // Successfully logged in with Strapi
       // Now saving the jwt to use it for future authenticated requests to Strapi
       console.log(res);
-      store.sso.provider = res.user.provider;
-      store.sso.jwt = res.jwt;
-      store.sso.username = res.user.username;
-      store.sso.email = res.user.email;
-      store.isAuthenticated = true;
+      authStore.sso.provider = res.user.provider;
+      authStore.sso.jwt = res.jwt;
+      authStore.sso.username = res.user.username;
+      authStore.sso.email = res.user.email;
+      authStore.isAuthenticated = true;
 
       localStorage.setItem('jwt', res.jwt);
       localStorage.setItem('username', res.user.username);
+
+      if (res.user.provider === 'hkbu') {
+        authStore.sso.ssoid = res.user.email.split('@')[0];
+      }
 
       //Need to check with STRAPI, to get User status, and User profile is valid -> Admin / User ?
       const ssoid = res.user.email.split('@')[0];

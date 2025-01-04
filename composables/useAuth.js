@@ -137,6 +137,8 @@ export const useAuthStore = defineStore('auth', {
             this.collections[name] = await findCollection(name);
           }
 
+          //Update Pinia
+
           console.log("Got the state", this.$state);
           console.log("Got the User", this.user);
           console.log("Got the Collections", this.collections);
