@@ -114,7 +114,8 @@ export const useAuthStore = defineStore('auth', {
       //   return false;
       // }
 
-      console.log("Loggin in", ssoid)
+      // console.log("Loggin in", ssoid)
+
       this.isLoading = true
       this.error = null
 
@@ -132,8 +133,10 @@ export const useAuthStore = defineStore('auth', {
             this.collections[name] = await findCollection(name);
           }
 
+          console.log("Got the state", this.$state);
           console.log("Got the User", this.user);
           console.log("Got the Collections", this.collections);
+          storage.setState(this.$state)
           storage.setUser(this.user)
           storage.setCollection(this.collections)
           return true
@@ -149,11 +152,13 @@ export const useAuthStore = defineStore('auth', {
     },
 
     logout() {
-      this.user = null
+      this.$reset();
 
+      this.user = null
       this.isAuthenticated = false
       this.isAdmin = false
       this.isLogin = false;
+      this.sso = {}
 
       if (this.sso.provider === 'google') {
         //Logout of google Service in this site.
@@ -162,24 +167,29 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
 
-      this.sso = {}
+
       storage.setUser(null)
+      storage.setState(null)
+      storage.setCollection(null)
 
       // location.reload();
     },
 
     initializeFromStorage() {
-      const storedUser = storage.getUser()
-      // console.log(storedUser)
-      if (storedUser) {
-        this.user = storedUser
-        this.isLogin = true
-      }
+      const storedState = storage.getState();
+      this.$state = storedState;
 
-      const storedCollection = storage.getCollection()
-      if (storedCollection) {
-        this.collections = storedCollection
-      }
+      // const storedUser = storage.getUser();
+      // console.log(storedUser)
+      // if (storedUser) {
+      //   this.user = storedUser
+      //   this.isLogin = true
+      // }
+
+      // const storedCollection = storage.getCollection()
+      // if (storedCollection) {
+      //   this.collections = storedCollection
+      // }
 
     }
   }

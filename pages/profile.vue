@@ -81,7 +81,7 @@ watch(checkedForm, (newVal) => {
 
     <div class="row justify-content-center py-6">
       <div class="col-12">
-        <div v-if="authStore.isAuthenticated">
+        <div v-if="authStore.isAuthenticated || authStore.isAdmin">
           <!-- <h2 class="text-center mb-4">Academic Profile</h2> -->
           <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
         </div>
