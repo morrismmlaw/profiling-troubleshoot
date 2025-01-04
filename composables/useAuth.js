@@ -2,7 +2,7 @@
  * @file composables/useAuth.js
  * @description This file contains the Pinia store for handling authentication and data fetching.
  * @author Chan Hok Ting
- * @date 2022-03-15
+ * @date 2024-12-15
  */
 
 import { defineStore } from 'pinia'
