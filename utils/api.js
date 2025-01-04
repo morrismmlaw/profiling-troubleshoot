@@ -40,7 +40,7 @@ async function updateRelationField(documentId, data, field) {
   // return await update('profiles', documentId, { [field]: fieldIds });
 
   // Request API.
-  fetch(`${backendURL_ITO}/api/profiles/${documentId}`, {
+  return await fetch(`${backendURL_ITO}/api/profiles/${documentId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
