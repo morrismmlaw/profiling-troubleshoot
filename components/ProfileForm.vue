@@ -377,7 +377,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
       </div>
       <div class="">
         <section>
-          <o-tabs v-model="activeTab" destroy-on-hide>
+          <o-tabs v-model="activeTab" destroy-on-hide :animated="false" >
             <o-tab-item :value="0" label="About me" icon="image">
               <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
                 <div class="card-body">
