@@ -101,6 +101,10 @@ export const useAuthStore = defineStore('auth', {
       this.isAuthenticated = (user.role.type === 'authenticated');
       this.isLogin = true;
 
+      if (user.provider === 'hkbu') {
+        this.sso.ssoid = user.email.split('@')[0];
+      }
+
     },
 
     async setProfile(ssoid) {
@@ -165,7 +169,7 @@ export const useAuthStore = defineStore('auth', {
       storage.setState(null)
       storage.setCollection(null)
 
-      window.location.reload('/');
+      window.location.href('/');
     },
 
     initializeFromStorage() {
