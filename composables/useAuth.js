@@ -154,12 +154,6 @@ export const useAuthStore = defineStore('auth', {
     logout() {
       this.$reset();
 
-      this.user = null
-      this.isAuthenticated = false
-      this.isAdmin = false
-      this.isLogin = false;
-      this.sso = {}
-
       if (this.sso.provider === 'google') {
         //Logout of google Service in this site.
       }
@@ -167,12 +161,11 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
 
-
       storage.setUser(null)
       storage.setState(null)
       storage.setCollection(null)
 
-      // location.reload();
+      window.location.reload('/');
     },
 
     initializeFromStorage() {
