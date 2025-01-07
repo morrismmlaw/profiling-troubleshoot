@@ -375,7 +375,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
       <div class="mb-2 me-4 profile-form-card">
         <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
       </div>
-      <div class="">
+      <div class="mt-2">
         <section>
           <o-tabs v-model="activeTab" destroy-on-hide :animated="false" >
             <o-tab-item :value="0" label="About me" icon="image">
