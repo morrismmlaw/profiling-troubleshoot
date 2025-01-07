@@ -370,8 +370,8 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 
 <template>
 
-  <div class="container-fluid px-5">
-    <div class="d-flex justify-content-center  profile-form-container">
+  <div>
+    <div class="d-flex justify-content-center profile-form-container">
       <div class="mb-2 me-4 profile-form-card">
         <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
       </div>
@@ -645,7 +645,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 .profile-form-container {
   display: flex;
   flex-direction: row;
-  margin-top: 5px;
+  margin-top: -7px;
 }
 
 .profile-form-card {
