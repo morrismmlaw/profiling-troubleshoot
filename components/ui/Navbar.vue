@@ -13,7 +13,6 @@
           <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img-2" />
         </NuxtLink>
 
-
       </div>
 
       <div v-else class="d-flex">
@@ -166,7 +165,7 @@ const navbarStylePerRoute = computed(() => {
 .logo-img-1 {
   height: 45px;
   /* Adjust the height as needed */
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .logo-img-2 {
