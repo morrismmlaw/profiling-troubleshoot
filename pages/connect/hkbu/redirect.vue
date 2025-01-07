@@ -76,7 +76,7 @@ const store = useAuthStore();
 const message = computed(() => isLoggedIn.value ? `Login successful!` : 'Login failed.')
 const error = ref(route.query.error)
 
-const isLoggedIn = computed(() => store.isAuthenticated)
+const isLoggedIn = computed(() => store.isAuthenticated || store.isAdmin)
 
 const countdown = ref(3000);
 
@@ -103,7 +103,7 @@ onMounted(async () => {
       store.sso.jwt = res.jwt;
       store.sso.username = res.user.username;
       store.sso.email = res.user.email;
-      store.isAuthenticated = true;
+      // store.isAuthenticated = true;
 
       localStorage.setItem('jwt', res.jwt);
       localStorage.setItem('username', res.user.username);
