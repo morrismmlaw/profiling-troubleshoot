@@ -150,13 +150,14 @@ const signInWith = (str) => {
                               <button @click="signInWith('hkbu')" class="btn btn-primary sso-btn">
                                 <i class="bi bi-mortarboard-fill me-2"></i> Sign in with SSOID
                               </button>
-                              <button @click="signInWith('google')" class="btn btn-danger sso-btn">
+                              <!-- <button @click="signInWith('google')" class="btn btn-danger sso-btn">
                                 <i class="bi bi-google me-2"></i> Sign in with Google
                               </button>
                               <button @click="signInWith('discord')" class="btn btn-success sso-btn">
                                 <i class="bi bi-discord me-2"></i> Sign in with Discord
-                              </button>
+                              </button> -->
                             </div>
+                            <p class="text-muted text-center mt-3">Forgot your password?</p>
                           </div>
                         </div>
                       </div>
