@@ -71,7 +71,8 @@
               <li v-if="isLoggedIn && isAuthenticated" class="nav-item custom-nav-item">
                 <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                   <i class="bi bi-person-circle me-3"></i>
-                  <NuxtLink class="nav-link" to="/profile"> Your Profile</NuxtLink>
+                  <NuxtLink class="nav-link" :to="{ path: '/profile', query: { from: 'Navbar' } }"
+                    @click.native="handleUATClick"> Your Profile</NuxtLink>
                 </span>
               </li>
               <li v-if="isLoggedIn && isAdmin" class="nav-item custom-nav-item">
@@ -116,6 +117,11 @@ const handleLoginError = () => {
 const handleLogout = () => {
   authStore.logout();
   router.push('/');
+}
+
+const handleUATClick = () => {
+  router.go(0);
+  authStore.setProfile(authStore.sso.ssoid);
 }
 
 const isLoggedIn = computed(() => authStore.isLogin);

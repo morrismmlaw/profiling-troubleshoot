@@ -312,9 +312,9 @@ const loadFormDataToORUGA = () => {
     });
   }
 
-  if (formData.departments) {
-    DEPTags.value = formData.departments.map((rs) => {
-      const matchingOption = DEPOptionsOrugaNew.find((option) => {
+  if (formData.tech_offers) {
+    KTTags.value = formData.tech_offers.map((rs) => {
+      const matchingOption = KTOptionsOrugaNew.find((option) => {
         return option.label === rs.name
       });
       return matchingOption ? matchingOption.value : [];
@@ -345,7 +345,7 @@ const syncCheckboxToFormData = () => {
   })
 }
 
-//Got 5 Tags to Sync! 
+//Got 6 ORUGA Tags to Sync to FormData! 
 const syncTagsFormData = () => {
   formData.research_centres = SRCTags.value;
   formData.research_foci = RFTags.value;
@@ -354,6 +354,7 @@ const syncTagsFormData = () => {
   formData.available_supervisions = ASTags.value;
 
   formData.departments = DEPTags.value;
+  formData.tech_offers = KTTags.value;
 }
 
 const imgCardStyle = computed(() => {
@@ -380,7 +381,7 @@ watch(checkboxGroup, (newVal, oldVal) => {
 })
 
 // Load Tags Input group to FormData when modified
-watch([SRCTags, ROTags, RFTags, FCRATags, ASTags, DEPTags], (newVal, oldVal) => {
+watch([SRCTags, ROTags, RFTags, FCRATags, ASTags, DEPTags, KTTags], (newVal, oldVal) => {
   try {
     syncTagsFormData();
     console.log('FormData Changed', formData)

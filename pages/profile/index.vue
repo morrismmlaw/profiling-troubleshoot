@@ -1,20 +1,24 @@
 <script setup>
 
 import Modal from 'bootstrap/js/dist/modal';
-
 import Notification from '~/components/ui/Notification.vue';
 
 const authStore = useAuthStore()
 const profileStore = useProfileStore()
 const router = useRouter()
-
+const route = useRoute()
 const hasChangedImage = ref(false);
 
-const handleSave = async (emitData) => {
+const from = route.query.from
 
+const UATMode = () => {
+  return from === 'UATlogin';
+}
+
+const handleSave = async (emitData) => {
   console.log('handleSave', emitData);
 
-  const {formData, hasChangedImage} = emitData;
+  const { formData, hasChangedImage } = emitData;
   const data = formData;
 
   const success = await profileStore.updateProfile(data, authStore.user)
@@ -29,7 +33,21 @@ const handleSave = async (emitData) => {
   }
 }
 
+const componentKey = ref(0);
+
 onMounted(() => {
+
+  console.log(from);
+
+  if (UATMode()) {
+    console.log('IN UAT MODE')
+  } else {
+    console.log('NOT IN UAT MODE')
+    //Force load this user's info - from sso;
+    authStore.setProfile(authStore.sso.ssoid);
+    componentKey.value++;
+  }
+
   // if (!authStore.isAuthenticated) {
   //   router.push('/')
   // }
@@ -90,7 +108,7 @@ watch(checkedForm, (newVal) => {
         <div class="row justify-content-center">
           <div class="col-12">
             <div v-if="authStore.isAuthenticated || authStore.isAdmin">
-              <div class="mt-3">
+              <div class="mt-3" :key="componentKey">
                 <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
               </div>
             </div>
@@ -114,7 +132,7 @@ watch(checkedForm, (newVal) => {
 <style scoped>
 .custom-background {
   background-image: url('https://play.tailwindcss.com/img/beams.jpg');
-  background-size: cover ;
+  background-size: cover;
   /* background-position: center; */
 
   min-height: calc(100vh - var(--margin-offset));

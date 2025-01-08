@@ -14,7 +14,10 @@ const handleSubmit = async () => {
   const success = await authStore.setProfile(ssoid.value);
 
   if (success) {
-    router.push('/profile');
+    router.push({
+      path: '/profile',
+      query: { from: 'UATlogin' }
+    })
     // emit('success');
   } else {
     router.push({

@@ -80,6 +80,10 @@ async function update_departments(documentId, data) {
   return await updateRelationFieldJWT(documentId, data, 'departments');
 }
 
+async function update_tech_offers(documentId, data) {
+  return await updateRelationFieldJWT(documentId, data, 'tech_offers');
+}
+
 /**
  * Link the Media ID with the Profile's field, remove media Linkage if needed. 
  * @param {*} documentId 
@@ -190,6 +194,8 @@ export const api = {
     await update_fcras(documentId, FormData); //Relations
     await update_available_supervisions(documentId, FormData); //Relations
     await update_departments(documentId, FormData); //Relations
+
+    await update_tech_offers(documentId, FormData); //Relations
 
     //Check if There is a new Photo
     //Yes Run Below..
