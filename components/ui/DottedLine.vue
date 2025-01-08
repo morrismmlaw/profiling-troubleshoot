@@ -10,11 +10,11 @@
 
 <style>
 .dotted {
-  background-image: linear-gradient(90deg, hsla(0, 0%, 100%, .55) 1px, transparent 0);
+  background-image: linear-gradient(50deg, hsla(0, 0%, 100%, .65) 1px, transparent 0);
   background-position-y: center;
   background-repeat: repeat-x;
-  background-size: 6px 1px;
+  background-size: 8px 2px;
   flex: none;
-  height: 1px;
+  height: 5px;
 }
 </style>
