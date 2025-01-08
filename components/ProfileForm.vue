@@ -7,6 +7,14 @@ import type { CroppedImg } from '~/types/profileImage';
 
 import ProfileSave from './ui/ProfileSave.vue';
 
+/**
+ * Record Whether Image has been Changed -> Don't want to upload the Image,
+ * after These is a Custom Image, and Other Tags Field Changed at Save
+ * 
+ * The Point is on UploadPhoto, if current id unchanged -> turn false;
+ */
+const hasChangedImage = ref(false);
+
 const props = defineProps({
   profile: {
     type: Object,
@@ -34,11 +42,15 @@ const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
     //Set it to Clear.
     formData.uploadPhoto = null;
     // delete formData.uploadPhoto;
+
+    hasChangedImage.value = true;
   } else {
     let imgObj = croppedImg.value;
     // console.log("Capture ProfileForm: ", obj);
     formData.uploadPhoto = imgObj.strapiID;
     // console.log('FormData StrapiID:', formData.uploadPhoto);
+
+    hasChangedImage.value = true;
   }
 }
 
@@ -67,9 +79,12 @@ const formData = reactive({
 
 
 const handleSubmit = () => { //Going to send back to profile.vue parent. 
-
   delete formData.photoURL;
-  emit('save', formData);
+
+  emit('save', {
+    formData: formData,
+    hasChangedImage: hasChangedImage.value
+  });
 };
 
 // ORUGA SECTION

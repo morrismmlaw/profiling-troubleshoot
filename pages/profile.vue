@@ -8,7 +8,15 @@ const authStore = useAuthStore()
 const profileStore = useProfileStore()
 const router = useRouter()
 
-const handleSave = async (data) => {
+const hasChangedImage = ref(false);
+
+const handleSave = async (emitData) => {
+
+  console.log('handleSave', emitData);
+
+  const {formData, hasChangedImage} = emitData;
+  const data = formData;
+
   const success = await profileStore.updateProfile(data, authStore.user)
   if (success) {
     alert('Profile updated successfully')
