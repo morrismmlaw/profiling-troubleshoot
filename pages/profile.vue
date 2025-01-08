@@ -2,6 +2,8 @@
 
 import Modal from 'bootstrap/js/dist/modal';
 
+import Notification from '~/components/ui/Notification.vue';
+
 const authStore = useAuthStore()
 const profileStore = useProfileStore()
 const router = useRouter()
@@ -74,6 +76,8 @@ watch(checkedForm, (newVal) => {
             </div>
           </div>
         </div>
+
+        <!-- <Notification/> -->
 
         <div class="row justify-content-center">
           <div class="col-12">
