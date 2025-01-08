@@ -12,6 +12,7 @@ const hasChangedImage = ref(false);
 const from = route.query.from
 
 const UATMode = () => {
+  console.log(from);
   return from === 'UATlogin';
 }
 
@@ -22,18 +23,34 @@ const handleSave = async (emitData) => {
   const data = formData;
 
   const success = await profileStore.updateProfile(data, authStore.user)
-  if (success) {
-    alert('Profile updated successfully')
-    //download new Data.
-    authStore.setProfile(authStore.sso.ssoid);
-    // location.reload();
+
+  if (UATMode()) {
+    console.log('IN UAT MODE')
+    if (success) {
+      alert('Profile updated successfully')
+      //download new Data.
+      authStore.setProfile(authStore.user.attributes.ssoid);
+      // location.reload();
+    } else {
+      alert('Failed to update profile')
+      authStore.setProfile(authStore.user.attributes.ssoid);
+    }
   } else {
-    alert('Failed to update profile')
-    authStore.setProfile(authStore.sso.ssoid);
+    if (success) {
+      alert('Profile updated successfully')
+      //download new Data.
+      authStore.setProfile(authStore.sso.ssoid);
+      // location.reload();
+    } else {
+      alert('Failed to update profile')
+      authStore.setProfile(authStore.sso.ssoid);
+    }
   }
+
 }
 
 const componentKey = ref(0);
+// location.reload(0);
 
 onMounted(() => {
 
@@ -108,7 +125,7 @@ watch(checkedForm, (newVal) => {
         <div class="row justify-content-center">
           <div class="col-12">
             <div v-if="authStore.isAuthenticated || authStore.isAdmin">
-              <div class="mt-3" :key="componentKey">
+              <div class="mt-3">
                 <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
               </div>
             </div>

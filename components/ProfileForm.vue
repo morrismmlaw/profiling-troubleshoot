@@ -418,17 +418,18 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
   <div class="container-fluid p-0 m-0">
     <div class="d-flex justify-content-center profile-form-container">
 
-      <div class="row">
+      <div class="row" :key="profile.attributes.ssoid">
 
         <div class="col">
           <div class="me-1 profile-form-card">
-            <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
+            <!-- {{ console.log('profile', profile) }} -->
+            <image-card :key="profile.attributes.ssoid" :profile="profile" @cropped-img="handleUploadPhoto" />
           </div>
         </div>
 
         <div class="col mb-5">
           <section>
-            <o-tabs v-model="activeTab" destroy-on-hide :animated="false">
+            <o-tabs v-model="activeTab" destroy-on-hide :animated="false" :key="profile.attributes.ssoid">
               <div class="card ms-md-0 ms-2 shadow rounded-5 border-0 p-2">
                 <o-tab-item :value="0" label="About me" icon="image">
                   <div class="card-body">
