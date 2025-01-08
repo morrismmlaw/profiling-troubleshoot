@@ -121,10 +121,14 @@ const isSearch = computed(() => route.path === '/search');
 const isProfile = computed(() => route.path === '/profile');
 const isHome = computed(() => route.path === '/');
 
-const logout = () => {
-  authStore.logout();
-  // window.location.reload(); // Fix Dat bad Search dropdown.. after logout
-  router.push('/');
+const logout = async () => {
+  try {
+    authStore.logout();
+    router.push('/');
+  } catch (error) {
+    console.error('Error logging out:', error);
+    // Handle the error appropriately for your application
+  }
 };
 
 const navbarStylePerRoute = computed(() => {
