@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import DottedLine from './DottedLine.vue';
 
 const props = defineProps({
   profile: {
@@ -66,7 +67,9 @@ onMounted(() => {
           <p class="profile-card-text name">{{ props.profile.attributes.chiname }} </p>
         </div>
       </div>
-      <hr>
+      <!-- <hr class="dotted-line"> -->
+      <!-- <div class="dotted"></div> -->
+      <DottedLine />
       <div class="row">
         <o-tooltip :label="`${props.profile.attributes.orcidURL}`" multiline>
           <div class="card-body">
@@ -86,8 +89,8 @@ onMounted(() => {
             </div>
           </div>
         </o-tooltip>
-        <hr>
       </div>
+      <DottedLine />
       <div class="row">
         <div class="row">
           <div class="text-center d-flex justify-content-center text-white">
@@ -103,8 +106,9 @@ onMounted(() => {
         <div class="row">
           <p class="d-flex justify-content-center  text-white"> {{ props.profile.attributes.unit }} </p>
         </div>
-        <hr>
       </div>
+      <!-- <div class="dotted"></div> -->
+      <DottedLine />
       <div class="row">
         <div class="card-body text-center d-flex justify-content-center text-white">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -115,7 +119,6 @@ onMounted(() => {
           <a :href="props.profile.attributes.email" class="card-text profile-card-text ms-2">{{
             props.profile.attributes.email }} </a>
         </div>
-        <hr>
       </div>
 
     </div>

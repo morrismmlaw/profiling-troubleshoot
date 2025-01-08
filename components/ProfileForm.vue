@@ -502,7 +502,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                   There is no music in the nightingale.
                 </o-tab-item>
 
-                <div class="me-2">
+                <div class="me-3">
                   <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
                 </div>
               </div>
