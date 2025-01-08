@@ -210,6 +210,7 @@ onMounted(() => {
   height: var(--profile-image-size);
 }
 
+//POSITION CSS!
 .upload-icon {
   color: white;
   width: 40px;
@@ -217,8 +218,8 @@ onMounted(() => {
 
   position: absolute;
 
-  left: calc(75% - 50px);
-  top: calc(40% - 60px);
+  left: calc(50% + 30px);
+  top: calc(50% - 70px);
 
   background: gray;
   border-radius: 50%;
