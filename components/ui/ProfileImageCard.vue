@@ -69,7 +69,7 @@ onMounted(() => {
       </div>
       <!-- <hr class="dotted-line"> -->
       <!-- <div class="dotted"></div> -->
-      <DottedLine />
+       <DottedLine/>
       <div class="row">
         <o-tooltip :label="`${props.profile.attributes.orcidURL}`" multiline>
           <div class="card-body">
@@ -90,9 +90,9 @@ onMounted(() => {
           </div>
         </o-tooltip>
       </div>
-      <DottedLine />
+      <DottedLine/>
       <div class="row">
-        <div class="row">
+        <div class="row mt-2">
           <div class="text-center d-flex justify-content-center text-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-person-badge me-2 mt-1" viewBox="0 0 16 16">
@@ -100,15 +100,15 @@ onMounted(() => {
               <path
                 d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492z" />
             </svg>
-            <p>Departments</p>
+            <p class="profile-card-text">Departments</p>
           </div>
         </div>
         <div class="row">
-          <p class="d-flex justify-content-center  text-white"> {{ props.profile.attributes.unit }} </p>
+          <p class="d-flex justify-content-center text-white profile-card-text"> {{ props.profile.attributes.unit }} </p>
         </div>
       </div>
       <!-- <div class="dotted"></div> -->
-      <DottedLine />
+       <DottedLine/>
       <div class="row">
         <div class="card-body text-center d-flex justify-content-center text-white">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -119,6 +119,7 @@ onMounted(() => {
           <a :href="props.profile.attributes.email" class="card-text profile-card-text ms-2">{{
             props.profile.attributes.email }} </a>
         </div>
+        <hr>
       </div>
 
     </div>
@@ -178,4 +179,5 @@ hr {
   display: flex;
   justify-content: start;
 }
+
 </style>
