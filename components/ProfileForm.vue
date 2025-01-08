@@ -451,10 +451,10 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 
               <o-tab-item :value="2" label="SDGs" icon="book">
                 <div class="card-body">
-                  <div class="col-12 col-sm-12 col-md-12">
+                  <div class="">
                     <h6 class="col-form-tag">SUSTAINABLE DEVELOPMENT GOALS (SDGs)</h6>
                   </div>
-                  <div class="col-11 col-sm-11 col-md-12">
+                  <div class="">
                     <div class="columns is-multiline">
                       <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
                         <o-field class="sdg-field">

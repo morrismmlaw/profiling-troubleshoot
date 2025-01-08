@@ -49,3 +49,26 @@
   background-image: linear-gradient(to right, rgb(227 142 176 / 13%), rgb(10 0 46 / 69%));
   background-color: rgba(255, 255, 255, 0.15);
 }
+
+/* Custom Scroll bar */
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+
+  /* display: none; */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -46,8 +46,8 @@ watch(checkedForm, (newVal) => {
 <template>
 
   <div class="nav-offset">
-    <div class="container-fluid">
-      <div class="bg-light custom-background">
+    <div class="bg-light custom-background">
+      <div class="container-fluid">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -67,19 +67,9 @@ watch(checkedForm, (newVal) => {
                   <br>
                   We appreciate your help in updating the rest of the content as needed.
                 </p>
-
-                <!-- <div class="form-check">
-              <input @click="handleCheck" class="form-check-input" type="checkbox" :value="checkedForm"
-                id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                Don't show again
-              </label>
-            </div> -->
-
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
               </div>
             </div>
           </div>
@@ -88,7 +78,6 @@ watch(checkedForm, (newVal) => {
         <div class="row justify-content-center">
           <div class="col-12">
             <div v-if="authStore.isAuthenticated || authStore.isAdmin">
-              <!-- <h2 class="text-center mb-4">Academic Profile</h2> -->
               <div class="mt-3">
                 <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
               </div>
@@ -104,7 +93,6 @@ watch(checkedForm, (newVal) => {
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -114,11 +102,10 @@ watch(checkedForm, (newVal) => {
 <style scoped>
 .custom-background {
   background-image: url('https://play.tailwindcss.com/img/beams.jpg');
-  background-size: cover;
-  background-position: center;
+  background-size: cover ;
+  /* background-position: center; */
 
   min-height: calc(100vh - var(--margin-offset));
-
 }
 
 .message {
