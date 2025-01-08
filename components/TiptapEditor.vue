@@ -22,7 +22,7 @@ onMounted(() => {
   editor.value = new Editor({
     editorProps: {
       attributes: {
-        class: 'border border-gray-400 p-4 rounded ',
+        class: 'border border-gray-400 px-3 py-2 rounded ',
       },
     },
     extensions: [TiptapStarterKit],
@@ -41,39 +41,43 @@ onBeforeUnmount(() => {
 
 <template>
 
-  <div v-if="editor">
+  <div class="container-fluid p-0 m-0">
 
-    <bubble-menu class="bubble-menu" :tippy-options="{ duration: 100 }" :editor="editor">
-      <button @click.prevent="editor.chain().focus().toggleBold().run()"
-        :class="{ 'is-active': editor.isActive('bold') }">
-        Bold
-      </button>
-      <button @click.prevent="editor.chain().focus().toggleItalic().run()"
-        :class="{ 'is-active': editor.isActive('italic') }">
-        Italic
-      </button>
-      <button @click.prevent="editor.chain().focus().toggleStrike().run()"
-        :class="{ 'is-active': editor.isActive('strike') }">
-        Strike
-      </button>
-    </bubble-menu>
+    <div v-if="editor">
 
-    <floating-menu class="floating-menu" :tippy-options="{ duration: 100 }" :editor="editor">
-      <button @click.prevent="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-        :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }">
-        H1
-      </button>
-      <button @click.prevent="editor.chain().focus().toggleHeading({ level: 2 }).run()"
-        :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }">
-        H2
-      </button>
-      <button @click.prevent="editor.chain().focus().toggleBulletList().run()"
-        :class="{ 'is-active': editor.isActive('bulletList') }">
-        Bullet list
-      </button>
-    </floating-menu>
+      <bubble-menu class="bubble-menu" :tippy-options="{ duration: 100 }" :editor="editor">
+        <button @click.prevent="editor.chain().focus().toggleBold().run()"
+          :class="{ 'is-active': editor.isActive('bold') }">
+          Bold
+        </button>
+        <button @click.prevent="editor.chain().focus().toggleItalic().run()"
+          :class="{ 'is-active': editor.isActive('italic') }">
+          Italic
+        </button>
+        <button @click.prevent="editor.chain().focus().toggleStrike().run()"
+          :class="{ 'is-active': editor.isActive('strike') }">
+          Strike
+        </button>
+      </bubble-menu>
 
-    <editor-content :editor="editor" />
+      <floating-menu class="floating-menu" :tippy-options="{ duration: 100 }" :editor="editor">
+        <button @click.prevent="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+          :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }">
+          H1
+        </button>
+        <button @click.prevent="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+          :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }">
+          H2
+        </button>
+        <button @click.prevent="editor.chain().focus().toggleBulletList().run()"
+          :class="{ 'is-active': editor.isActive('bulletList') }">
+          Bullet list
+        </button>
+      </floating-menu>
+
+      <editor-content :editor="editor" />
+
+    </div>
 
   </div>
 
