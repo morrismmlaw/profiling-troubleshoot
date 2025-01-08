@@ -12,7 +12,7 @@ const handleSubmit = async () => {
   const success = await authStore.setProfile(ssoid.value);
 
   if (success) {
-    router.push('/login-redirect');
+    router.push('/profile');
     // emit('success');
   } else {
     router.push({
@@ -93,9 +93,9 @@ const signInWith = (str) => {
         <div class="container col-md-6 col-xl-4 bg-semi-transparent rounded-3 p-5 shadow-sm login-box">
           <div class="row">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
-              <h1 class="login-text">Log in</h1>
+              <h1 class="login-text">UAT</h1>
               <br>
-              <p class="w-lg-90 login-text">Login With SSOID <br> Academic Staff</p>
+              <p class="w-lg-90 login-text">UAT View Profile </p>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
@@ -118,22 +118,16 @@ const signInWith = (str) => {
                           <div class="form-group">
                             <label for="ssoid">SSOID</label>
                             <input id="ssoid" v-model="ssoid" class="form-control" type="text" required
-                              placeholder="Enter your SSOID">
-                            <small class="form-text text-muted">Integrate SSOID with HKBU...</small>
+                              placeholder="Enter SSOID">
+                            <!-- <small class="form-text text-muted">Integrate SSOID with HKBU...</small> -->
+                            <br>
                           </div>
                           <p v-if="authStore.error" class="text-danger mt-2">{{ authStore.error }}</p>
                           <button type="submit" class="btn btn-primary btn-block w-100">
-                            {{ authStore.isLoading ? 'Logging in...' : 'Login' }}
+                            View Profile
                           </button>
                           <p class="text-muted">Forgot your password?</p>
                         </form>
-                        <div class="card border-0">
-
-                          <div class="card-body">
-
-                            <p class="text-muted text-center mt-3">Forgot your password?</p>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
