@@ -36,26 +36,26 @@ async function updateRelationFieldJWT(documentId, data, field) {
   delete data[field];
   console.log(`Updating ${field}`, documentId, fieldIds);
 
-  // const { update } = useStrapi();
-  // return await update('profiles', documentId, { [field]: fieldIds });
+  const { update } = useStrapi();
+  return await update('profiles', documentId, { [field]: fieldIds });
 
-  // Request API.
-  return await fetch(`${backendURL_ITO}/api/profiles/${documentId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-    body: { [field]: fieldIds },
-  })
-    .then(response => {
-      // Handle success.
-      console.log('Response: ', response);
-    })
-    .catch(error => {
-      // Handle error.
-      console.log('An error occurred:', error.response);
-    });
+  // JWT Request API.
+  // return await fetch(`${backendURL_ITO}/api/profiles/${documentId}`, {
+  //   method: 'PUT',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': `Bearer ${token}`,
+  //   },
+  //   body: { [field]: fieldIds },
+  // })
+  //   .then(response => {
+  //     // Handle success.
+  //     console.log('Response: ', response);
+  //   })
+  //   .catch(error => {
+  //     // Handle error.
+  //     console.log('An error occurred:', error.response);
+  //   });
 
 }
 
