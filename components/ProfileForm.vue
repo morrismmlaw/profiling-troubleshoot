@@ -370,7 +370,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 
 <template>
 
-  <div>
+  <div class="container-fluid p-0 m-0">
     <div class="d-flex justify-content-center profile-form-container">
 
       <div class="row">
@@ -406,8 +406,8 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                       <div class="row">
                         <label for="biography" class="col col-form-label">Biography</label>
                       </div>
-                      <div class="row">
-                        <div class="col">
+                      <div class="row pe-0">
+                        <div class="col pe-0">
                           <tiptap-editor :formData="formData" field="biography" />
                         </div>
                       </div>
@@ -416,8 +416,8 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                       <div class="row">
                         <label for="academicInterests" class="col col-form-label">Academic Interests</label>
                       </div>
-                      <div class="row">
-                        <div class="col">
+                      <div class="row pe-0">
+                        <div class="col pe-0">
                           <tiptap-editor :formData="formData" field="research_interest" />
                         </div>
                       </div>
@@ -502,7 +502,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                   There is no music in the nightingale.
                 </o-tab-item>
 
-                <div class="card-body">
+                <div class="me-2">
                   <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
                 </div>
               </div>
