@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import { useAuthStore } from '../composables/useAuth'; // replace with your actual path
 
 const authStore = useAuthStore();
+const profileStore = useProfileStore();
+
 const ssoid = ref('');
 const router = useRouter();
 const emit = defineEmits(['success', 'error']);

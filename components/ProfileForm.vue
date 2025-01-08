@@ -75,6 +75,8 @@ const formData = reactive({
 
   photoURL: props.profile?.attributes.photoURL || [],
   uploadPhoto: props.profile?.attributes.uploadPhoto || [],
+
+  tech_offers: props.profile?.attributes.tech_offers || [],
 });
 
 
@@ -95,6 +97,7 @@ const RFOptions = props.collections['research-foci'];
 const FCRAOptions = props.collections['fcras'];
 const ASOptions = props.collections['available-supervisions'];
 const DEPOptions = props.collections['departments'];
+const KTOptions = props.collections['tech-offers'];
 
 // Map SRCOptions into the ORUGA TagInput format
 const SRCOptionsOrugaNew = SRCOptions.map((option) => {
@@ -173,12 +176,28 @@ const DEPOptionsOrugaNew = DEPOptions.map((option) => {
   };
 });
 
+const KTOptionsOrugaNew = KTOptions.map((option) => {
+  return {
+    label: option.name,
+    value: {
+      id: option.id,
+      documentId: option.documentId,
+      name: option.name,
+      createdAt: option.createdAt,
+      updatedAt: option.updatedAt,
+      publishedAt: option.publishedAt,
+    }
+  };
+});
+
 const sortTagOptions = () => {
   DEPOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
   // ASOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
   FCRAOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
   RFOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
   SRCOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
+
+  KTOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
 }
 
 sortTagOptions();
@@ -221,6 +240,7 @@ const RFTags = ref([]);
 const ASTags = ref([]);
 const FCRATags = ref([]);
 const DEPTags = ref([]);
+const KTTags = ref([]);
 
 const allowNew = ref(false);
 const allowDuplicates = ref(false);
@@ -277,6 +297,15 @@ const loadFormDataToORUGA = () => {
   if (formData.available_supervisions) {
     ASTags.value = formData.available_supervisions.map((rs) => {
       const matchingOption = ASOptionsOrugaNew.find((option) => {
+        return option.label === rs.name
+      });
+      return matchingOption ? matchingOption.value : [];
+    });
+  }
+
+  if (formData.departments) {
+    DEPTags.value = formData.departments.map((rs) => {
+      const matchingOption = DEPOptionsOrugaNew.find((option) => {
         return option.label === rs.name
       });
       return matchingOption ? matchingOption.value : [];
@@ -509,8 +538,18 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                           placeholder="Select options" expanded />
                       </o-field>
                     </section>
+
+                    <section>
+                      <o-field class="col-form-tag" label="KNOWLEDGE TRANSFER">
+                        <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, KTTags)" v-model="KTTags"
+                          :options="KTOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                          :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                          placeholder="Select options" expanded />
+                      </o-field>
+                    </section>
                   </div>
                 </o-tab-item>
+
                 <o-tab-item :value="3" :visible="false" label="Additional" icon="book">
                   What light is light, if Silvia be not seen? <br />
                   Except I be by Silvia in the night, <br />

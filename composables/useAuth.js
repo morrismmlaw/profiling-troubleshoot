@@ -19,6 +19,7 @@ const collectionNames = [
   'sdgs',
   'fcras',
   'available-supervisions',
+  'tech-offers'
 ];
 
 // Function to get all other collections type from Strapi

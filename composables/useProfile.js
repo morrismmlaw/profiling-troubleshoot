@@ -6,6 +6,7 @@ import { useAuthStore } from './useAuth'
 export const useProfileStore = defineStore('profile', {
   state: () => ({
     profile: null,
+    UATprofile: null,
     isLoading: false,
     error: null
   }),

@@ -97,8 +97,6 @@ import SearchBar from '~/components/ui/SearchBar.vue';
         <span class="visually-hidden">Next</span>
       </button>
 
-
-
       <div class="carousel-text">
         <div class="container">
           <div class="row">

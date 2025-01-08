@@ -13,6 +13,7 @@ let populateFields = [
   'available_supervisions',
   'departments',
   'uploadPhoto',
+  // 'techOffers',
 ]
 
 //Helper.
@@ -127,6 +128,7 @@ async function update_uploadPhoto(documentId, data, profile) {
 }
 
 export const api = {
+
   /**
    * Find profile by SSOID
    * @param {string} ssoid
