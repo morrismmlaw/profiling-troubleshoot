@@ -64,8 +64,8 @@ onMounted(() => {
           <p class="card-text profile-card-text">{{ props.profile.attributes.name }} </p>
           <p class="card-text profile-card-text">{{ props.profile.attributes.chiname }} </p>
         </div>
-        <hr>
       </div>
+      <hr>
       <div class="row">
         <o-tooltip :label="`${props.profile.attributes.orcidURL}`" multiline>
           <div class="card-body">
@@ -89,7 +89,7 @@ onMounted(() => {
       </div>
       <div class="row">
         <div class="row">
-          <div class="card-body text-center d-flex justify-content-center text-white">
+          <div class="text-center d-flex justify-content-center text-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-person-badge me-2 mt-1" viewBox="0 0 16 16">
               <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -106,8 +106,8 @@ onMounted(() => {
       </div>
       <div class="row">
         <div class="card-body text-center d-flex justify-content-center text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill mt-1"
-            viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-envelope-fill mt-1" viewBox="0 0 16 16">
             <path
               d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
           </svg>
