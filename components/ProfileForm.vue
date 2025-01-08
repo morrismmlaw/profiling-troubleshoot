@@ -372,138 +372,142 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 
   <div>
     <div class="d-flex justify-content-center profile-form-container">
-      <div class="me-5 profile-form-card">
-        <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
-      </div>
-      <div>
 
-        <section>
-          <o-tabs v-model="activeTab" destroy-on-hide :animated="false">
-            <div class="card ms-md-0 ms-2 shadow rounded-5 border-0 p-2">
-              <o-tab-item :value="0" label="About me" icon="image">
-                <div class="card-body">
-                  <section>
-                    <o-field class="col-form-tag" label="DEPARTMENT">
-                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
-                        :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
-                        :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                        placeholder="Select options" expanded />
-                    </o-field>
-                  </section>
-                  <div class="row mb-3 rounded-5 border-4">
-                    <div class="row">
-                      <o-field label="POST TITLE" class="col-form-label">
-                        <o-input :placeholder="`${props.profile.attributes.post}`" disabled />
+      <div class="row">
+
+        <div class="col">
+          <div class="me-1 profile-form-card">
+            <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
+          </div>
+        </div>
+
+        <div class="col mb-5">
+          <section>
+            <o-tabs v-model="activeTab" destroy-on-hide :animated="false">
+              <div class="card ms-md-0 ms-2 shadow rounded-5 border-0 p-2">
+                <o-tab-item :value="0" label="About me" icon="image">
+                  <div class="card-body">
+                    <section>
+                      <o-field class="col-form-tag" label="DEPARTMENT">
+                        <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
+                          :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                          :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                          placeholder="Select options" expanded />
                       </o-field>
-                    </div>
-                  </div>
-                  <div class="row mb-3 rounded-5 border-4">
-                    <div class="row">
-                      <label for="biography" class="col col-form-label">Biography</label>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <tiptap-editor :formData="formData" field="biography" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="row">
-                      <label for="academicInterests" class="col col-form-label">Academic Interests</label>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <tiptap-editor :formData="formData" field="research_interest" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </o-tab-item>
-
-              <o-tab-item :value="1" label="My Research" icon="pen">
-                <div class="card-body">
-                  <section>
-                    <o-field class="col-form-tag" label="RESEARCH FOCUS">
-                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, RFTags)" v-model="RFTags"
-                        :options="RFOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
-                        :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                        placeholder="Select options" expanded />
-                    </o-field>
-                  </section>
-                  <section>
-                    <o-field class="col-form-tag" label="FACULTY COLLABORATIVE RESEARCH AREA">
-                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, FCRATags)" v-model="FCRATags"
-                        :options="FCRAOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
-                        :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                        placeholder="Select options" expanded />
-                    </o-field>
-                  </section>
-                  <section>
-                    <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
-                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags"
-                        :options="SRCOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
-                        :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                        placeholder="Select options" expanded />
-                    </o-field>
-                  </section>
-                </div>
-              </o-tab-item>
-
-              <o-tab-item :value="2" label="SDGs" icon="book">
-                <div class="card-body">
-                  <div class="">
-                    <h6 class="col-form-tag">SUSTAINABLE DEVELOPMENT GOALS (SDGs)</h6>
-                  </div>
-                  <div class="">
-                    <div class="columns is-multiline">
-                      <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
-                        <o-field class="sdg-field">
-                          <o-tooltip label="HTML Content" size="large" variant="info" multiline>
-                            <template #content>
-                              <div class="sdg-info">
-                                <p><strong>Title</strong> <br> {{ sdg.title }}</p>
-                                <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
-                              </div>
-                            </template>
-                            <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
-                              <p class="col-form-label-sdg"> SDG {{ sdg.sdgid }} </p>
-                              <nuxt-img
-                                :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
-                                :alt="sdg.title" class="img-fluid checkbox-img" />
-                            </o-checkbox>
-                          </o-tooltip>
+                    </section>
+                    <div class="row mb-3 rounded-5 border-4">
+                      <div class="row">
+                        <o-field label="POST TITLE" class="col-form-label">
+                          <o-input :placeholder="`${props.profile.attributes.post}`" disabled />
                         </o-field>
                       </div>
                     </div>
+                    <div class="row mb-3 rounded-5 border-4">
+                      <div class="row">
+                        <label for="biography" class="col col-form-label">Biography</label>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <tiptap-editor :formData="formData" field="biography" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="row">
+                        <label for="academicInterests" class="col col-form-label">Academic Interests</label>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <tiptap-editor :formData="formData" field="research_interest" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </o-tab-item>
+                </o-tab-item>
 
-              <o-tab-item :value="3" label="Teaching and Supervision" icon="music">
-                <div class="card-body">
-                  <section>
-                    <o-field class="col-form-tag" label="AVAILABILITY FOR SUPERVISION">
-                      <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, ASTags)" v-model="ASTags"
-                        :options="ASOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
-                        :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                        placeholder="Select options" expanded />
-                    </o-field>
-                  </section>
-                </div>
-              </o-tab-item>
-              <o-tab-item :value="3" :visible="false" label="Additional" icon="book">
-                What light is light, if Silvia be not seen? <br />
-                Except I be by Silvia in the night, <br />
-                There is no music in the nightingale.
-              </o-tab-item>
-              <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
-            </div>
-          </o-tabs>
-        </section>
+                <o-tab-item :value="1" label="My Research" icon="pen">
+                  <div class="card-body">
+                    <section>
+                      <o-field class="col-form-tag" label="RESEARCH FOCUS">
+                        <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, RFTags)" v-model="RFTags"
+                          :options="RFOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                          :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                          placeholder="Select options" expanded />
+                      </o-field>
+                    </section>
+                    <section>
+                      <o-field class="col-form-tag" label="FACULTY COLLABORATIVE RESEARCH AREA">
+                        <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, FCRATags)" v-model="FCRATags"
+                          :options="FCRAOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                          :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                          placeholder="Select options" expanded />
+                      </o-field>
+                    </section>
+                    <section>
+                      <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
+                        <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags"
+                          :options="SRCOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                          :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                          placeholder="Select options" expanded />
+                      </o-field>
+                    </section>
+                  </div>
+                </o-tab-item>
+
+                <o-tab-item :value="2" label="SDGs" icon="book">
+                  <div class="card-body">
+                    <div class="">
+                      <h6 class="col-form-tag">SUSTAINABLE DEVELOPMENT GOALS (SDGs)</h6>
+                    </div>
+                    <div class="">
+                      <div class="columns is-multiline">
+                        <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
+                          <o-field class="sdg-field">
+                            <o-tooltip label="HTML Content" size="large" variant="info" multiline>
+                              <template #content>
+                                <div class="sdg-info">
+                                  <p><strong>Title</strong> <br> {{ sdg.title }}</p>
+                                  <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
+                                </div>
+                              </template>
+                              <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
+                                <p class="col-form-label-sdg"> SDG {{ sdg.sdgid }} </p>
+                                <nuxt-img
+                                  :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
+                                  :alt="sdg.title" class="img-fluid checkbox-img" />
+                              </o-checkbox>
+                            </o-tooltip>
+                          </o-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </o-tab-item>
+
+                <o-tab-item :value="3" label="Teaching and Supervision" icon="music">
+                  <div class="card-body">
+                    <section>
+                      <o-field class="col-form-tag" label="AVAILABILITY FOR SUPERVISION">
+                        <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, ASTags)" v-model="ASTags"
+                          :options="ASOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                          :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                          placeholder="Select options" expanded />
+                      </o-field>
+                    </section>
+                  </div>
+                </o-tab-item>
+                <o-tab-item :value="3" :visible="false" label="Additional" icon="book">
+                  What light is light, if Silvia be not seen? <br />
+                  Except I be by Silvia in the night, <br />
+                  There is no music in the nightingale.
+                </o-tab-item>
+                <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
+              </div>
+            </o-tabs>
+          </section>
+        </div>
       </div>
-
     </div>
-
   </div>
 
 </template>

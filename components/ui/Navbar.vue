@@ -161,6 +161,14 @@ const navbarStylePerRoute = computed(() => {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+.nav-link {
+  font-family: var(--font-family);
+}
+
+.offcanvas-title {
+  font-family: var(--font-family);
+}
+
 /* Add this CSS to style the logo image */
 .logo-img-1 {
   height: 45px;
@@ -175,17 +183,17 @@ const navbarStylePerRoute = computed(() => {
 }
 
 .custom-text {
-  font-family: system-ui;
+  font-family: var(--font-family);
   font-weight: 400;
   font-style: normal;
   font-size: 1.2rem;
 }
 
 .custom-text-bar {
-  font-family: system-ui;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.2rem;
+  font-family: var(--font-family);
+  font-weight: 550;
+  /* font-style: normal; */
+  font-size: 1.3rem;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -193,6 +201,11 @@ const navbarStylePerRoute = computed(() => {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  /* Adjust the size as needed */
+  color: #004898;
+  letter-spacing: 1px;
+  /* Adjust spacing between letters if needed */
 }
 
 .bi {

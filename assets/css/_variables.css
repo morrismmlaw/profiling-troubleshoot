@@ -5,6 +5,8 @@
 
   --margin-offset: 71px;
   --profile-image-size: 240px;
+
+  --font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 .login-box {
