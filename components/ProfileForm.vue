@@ -376,10 +376,11 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
         <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
       </div>
       <div>
+
         <section>
-          <o-tabs v-model="activeTab" destroy-on-hide :animated="false" >
-            <o-tab-item :value="0" label="About me" icon="image">
-              <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
+          <o-tabs v-model="activeTab" destroy-on-hide :animated="false">
+            <div class="card ms-md-0 ms-2 shadow rounded-5 border-0 p-2">
+              <o-tab-item :value="0" label="About me" icon="image">
                 <div class="card-body">
                   <section>
                     <o-field class="col-form-tag" label="DEPARTMENT">
@@ -417,11 +418,9 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </o-tab-item>
+              </o-tab-item>
 
-            <o-tab-item :value="1" label="My Research" icon="pen">
-              <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
+              <o-tab-item :value="1" label="My Research" icon="pen">
                 <div class="card-body">
                   <section>
                     <o-field class="col-form-tag" label="RESEARCH FOCUS">
@@ -448,15 +447,12 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                     </o-field>
                   </section>
                 </div>
-              </div>
-            </o-tab-item>
+              </o-tab-item>
 
-            <o-tab-item :value="2" label="SDGs" icon="book">
-
-              <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
+              <o-tab-item :value="2" label="SDGs" icon="book">
                 <div class="card-body">
                   <div class="col-12 col-sm-12 col-md-12">
-                    <h6 class="col-form-label">Sustainable Development Goals (SDGs)</h6>
+                    <h6 class="col-form-tag">SUSTAINABLE DEVELOPMENT GOALS (SDGs)</h6>
                   </div>
                   <div class="col-11 col-sm-11 col-md-12">
                     <div class="columns is-multiline">
@@ -481,11 +477,9 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </o-tab-item>
+              </o-tab-item>
 
-            <o-tab-item :value="3" label="Teaching and Supervision" icon="music">
-              <div class="card ms-md-0 ms-2 shadow rounded-5 border-0">
+              <o-tab-item :value="3" label="Teaching and Supervision" icon="music">
                 <div class="card-body">
                   <section>
                     <o-field class="col-form-tag" label="AVAILABILITY FOR SUPERVISION">
@@ -496,30 +490,18 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                     </o-field>
                   </section>
                 </div>
-              </div>
-            </o-tab-item>
-            <o-tab-item :value="3" :visible="false" label="Additional" icon="book">
-              What light is light, if Silvia be not seen? <br />
-              Except I be by Silvia in the night, <br />
-              There is no music in the nightingale.
-            </o-tab-item>
+              </o-tab-item>
+              <o-tab-item :value="3" :visible="false" label="Additional" icon="book">
+                What light is light, if Silvia be not seen? <br />
+                Except I be by Silvia in the night, <br />
+                There is no music in the nightingale.
+              </o-tab-item>
+              <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
+            </div>
           </o-tabs>
         </section>
-
-        <!-- <div class="mb-4">
-          <form @submit.prevent="handleSubmit">
-            <div class="d-flex justify-content-end mt-4">
-              <button type="submit" class="btn btn-primary" :disabled="profileStore.isLoading">
-                {{ profileStore.isLoading ? 'Saving...' : 'Save' }}
-              </button>
-              <p v-if="profileStore.error" class="text-danger mt-3">{{ profileStore.error }}</p>
-            </div>
-          </form>
-        </div> -->
-
-        <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
-
       </div>
+
     </div>
 
   </div>
