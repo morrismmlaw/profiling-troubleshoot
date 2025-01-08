@@ -13,7 +13,7 @@ let populateFields = [
   'available_supervisions',
   'departments',
   'uploadPhoto',
-  // 'techOffers',
+  'tech_offers',
 ]
 
 //Helper.
