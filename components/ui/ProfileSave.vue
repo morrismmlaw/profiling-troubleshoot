@@ -29,7 +29,7 @@ defineProps({
     required: true
   },
   profileStore: {
-    type: useProfileStore,
+    type: Object,
     required: true
   }
 })
