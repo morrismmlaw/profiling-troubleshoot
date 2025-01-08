@@ -87,7 +87,9 @@ watch(checkedForm, (newVal) => {
         <div class="col-12">
           <div v-if="authStore.isAuthenticated || authStore.isAdmin">
             <!-- <h2 class="text-center mb-4">Academic Profile</h2> -->
-            <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
+            <div class="mt-3">
+              <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
+            </div>
           </div>
           <div v-else>
             <p class="text-center text-danger pt-4">Please login to view your profile.</p>

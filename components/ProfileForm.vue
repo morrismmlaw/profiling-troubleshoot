@@ -372,10 +372,10 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 
   <div>
     <div class="d-flex justify-content-center profile-form-container">
-      <div class="mb-2 me-4 profile-form-card">
+      <div class="me-5 profile-form-card">
         <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
       </div>
-      <div class="mt-2">
+      <div>
         <section>
           <o-tabs v-model="activeTab" destroy-on-hide :animated="false" >
             <o-tab-item :value="0" label="About me" icon="image">
@@ -645,7 +645,6 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 .profile-form-container {
   display: flex;
   flex-direction: row;
-  margin-top: -7px;
 }
 
 .profile-form-card {

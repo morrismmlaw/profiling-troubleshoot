@@ -51,10 +51,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container-fluid p-0 mt-3">
+  <div class="container-fluid p-0">
     <div class="card shadow rounded-5 profile-card">
-
-      <div class="row p-2 m-2">
+      <div class="row p-1 m-1">
         <div class="d-flex justify-content-center">
           <ProfileImage :img-url="imgUrl" :profile="profile" :has-upload="true" @cropped-img="handleCroppedImg" />
         </div>
