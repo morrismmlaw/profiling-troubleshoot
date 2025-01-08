@@ -6,10 +6,10 @@
 
       <div v-if="!isSearch && !isProfile">
         <div class="d-flex">
-          <NuxtLink class="navbar-brand" to="/">
+          <NuxtLink class="navbar-brand" to="https://www.hkbu.edu.hk/">
             <NuxtImg src="\img\bu-logo-white.f7871964.png" alt="Logo" class="logo-img-1 ms-4" />
           </NuxtLink>
-          <NuxtLink class="navbar-brand" to="/">
+          <NuxtLink class="navbar-brand" to="https://www.sci.hkbu.edu.hk/">
             <NuxtImg src="\img\scilogo_v3_White_1012ver.e2d2cba4.png" alt="Logo" class="logo-img-2" />
           </NuxtLink>
         </div>
@@ -17,10 +17,10 @@
 
       <div v-else>
         <div class="d-flex">
-          <NuxtLink class="navbar-brand" to="/">
+          <NuxtLink class="navbar-brand" to="https://www.hkbu.edu.hk/">
             <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img-1 ms-4" />
           </NuxtLink>
-          <NuxtLink class="navbar-brand" to="/">
+          <NuxtLink class="navbar-brand" to="https://www.sci.hkbu.edu.hk/">
             <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
           </NuxtLink>
         </div>
