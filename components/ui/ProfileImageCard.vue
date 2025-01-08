@@ -69,7 +69,7 @@ onMounted(() => {
       </div>
       <!-- <hr class="dotted-line"> -->
       <!-- <div class="dotted"></div> -->
-       <DottedLine/>
+      <DottedLine />
       <div class="row">
         <o-tooltip :label="`${props.profile.attributes.orcidURL}`" multiline>
           <div class="card-body">
@@ -90,7 +90,7 @@ onMounted(() => {
           </div>
         </o-tooltip>
       </div>
-      <DottedLine/>
+      <DottedLine />
       <div class="row">
         <div class="row mt-2">
           <div class="text-center d-flex justify-content-center text-white">
@@ -104,11 +104,12 @@ onMounted(() => {
           </div>
         </div>
         <div class="row">
-          <p class="d-flex justify-content-center text-white profile-card-text"> {{ props.profile.attributes.unit }} </p>
+          <p class="d-flex justify-content-center text-white profile-card-text"> {{ props.profile.attributes.unit }}
+          </p>
         </div>
       </div>
       <!-- <div class="dotted"></div> -->
-       <DottedLine/>
+      <DottedLine />
       <div class="row">
         <div class="card-body text-center d-flex justify-content-center text-white">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -119,9 +120,7 @@ onMounted(() => {
           <a :href="props.profile.attributes.email" class="card-text profile-card-text ms-2">{{
             props.profile.attributes.email }} </a>
         </div>
-        <hr>
       </div>
-
     </div>
   </div>
 </template>
@@ -133,10 +132,10 @@ onMounted(() => {
 
 .profile-card-text {
   font-family: var(--font-family);
-  font-weight: 100;
+  font-weight: 200;
+  font-size: 0.9rem;
 
   color: aliceblue;
-
   margin-bottom: 5px;
 
   &.salute {
@@ -179,5 +178,4 @@ hr {
   display: flex;
   justify-content: start;
 }
-
 </style>
