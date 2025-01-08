@@ -501,7 +501,10 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                   Except I be by Silvia in the night, <br />
                   There is no music in the nightingale.
                 </o-tab-item>
-                <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
+
+                <div class="card-body">
+                  <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
+                </div>
               </div>
             </o-tabs>
           </section>

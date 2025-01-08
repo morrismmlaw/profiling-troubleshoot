@@ -192,7 +192,7 @@ const navbarStylePerRoute = computed(() => {
 
 .custom-text-bar {
   font-family: var(--font-family);
-  font-weight: 550;
+  font-weight: 500;
   /* font-style: normal; */
   font-size: 1.3rem;
 

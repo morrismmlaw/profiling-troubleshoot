@@ -56,7 +56,7 @@ watch(checkedForm, (newVal) => {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <p class="message">
+                <p class="profile-modal-message">
                   <br>
                   Your name, Chinese name, email, HKBU Scholar URL, and department have been imported from HKBU
                   Scholars.
@@ -108,9 +108,17 @@ watch(checkedForm, (newVal) => {
   min-height: calc(100vh - var(--margin-offset));
 }
 
-.message {
+.modal-title {
+  font-family: var(--font-family);
   font-style: italic;
-  font-size: 1.2rem;
-  line-height: 1.6;
+  font-size: 1.4rem;
+  line-height: 1.8;
+}
+
+.profile-modal-message {
+  font-family: var(--font-family);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 </style>

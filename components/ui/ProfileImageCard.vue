@@ -59,10 +59,11 @@ onMounted(() => {
         </div>
       </div>
       <div class="row">
-        <div class="card-body text-center">
+        <div class="text-center mb-0">
           <!-- <h5 class="card-title profile-card-text"> {{ props.profile.attributes.post }} </h5> -->
-          <p class="card-text profile-card-text">{{ props.profile.attributes.name }} </p>
-          <p class="card-text profile-card-text">{{ props.profile.attributes.chiname }} </p>
+          <p class="profile-card-text salute">{{ props.profile.attributes.salute }} </p>
+          <p class="profile-card-text name">{{ props.profile.attributes.name }} </p>
+          <p class="profile-card-text name">{{ props.profile.attributes.chiname }} </p>
         </div>
       </div>
       <hr>
@@ -121,15 +122,35 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .profile-card {
   background-color: #17769b;
 }
 
 .profile-card-text {
+  font-family: var(--font-family);
+  font-weight: 100;
+
   color: aliceblue;
 
+  margin-bottom: 5px;
+
+  &.salute {
+    font-weight: 10;
+    font-style: italic;
+
+    color: lightgrey;
+    text-shadow: #070a0b;
+  }
+
+  &.name {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.21rem;
+  }
+
 }
+
 
 .profile-card-text-row {
   color: aliceblue;
