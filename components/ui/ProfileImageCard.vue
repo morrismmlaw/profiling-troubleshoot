@@ -127,7 +127,9 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .profile-card {
-  background-color: #17769b;
+  // background-color: #14688a;
+  background-image: linear-gradient(295deg, #14688a, #409db5);
+
 }
 
 .profile-card-text {
