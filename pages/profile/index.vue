@@ -10,9 +10,12 @@ const route = useRoute()
 const hasChangedImage = ref(false);
 
 const from = route.query.from
+const ssoid = route.params.ssoid
 
 const UATMode = () => {
   console.log(from);
+
+  console.log(ssoid);
   return from === 'UATlogin';
 }
 

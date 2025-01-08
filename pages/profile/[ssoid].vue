@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <profile />
+    <profile :ssoid="ssoid" />
     
   </div>
 </template>
