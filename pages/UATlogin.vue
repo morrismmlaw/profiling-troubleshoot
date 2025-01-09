@@ -15,8 +15,8 @@ const handleSubmit = async () => {
 
   if (success) {
     router.push({
-      path: '/profile',
-      query: { from: 'UATlogin' }
+      path: `/profile/${ssoid.value}`,
+      // query: { from: 'UATlogin' }
     })
     // emit('success');
   } else {

@@ -71,7 +71,7 @@
               <li v-if="isLoggedIn && isAuthenticated" class="nav-item custom-nav-item">
                 <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                   <i class="bi bi-person-circle me-3"></i>
-                  <NuxtLink class="nav-link" :to="{ path: '/profile', query: { from: 'Navbar' } }"
+                  <NuxtLink class="nav-link" :to="{ path: `/profile/${authStore.sso.ssoid}`}"
                     @click.native="handleUATClick()"> Your Profile</NuxtLink>
                 </span>
               </li>

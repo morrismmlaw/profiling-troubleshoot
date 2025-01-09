@@ -106,6 +106,11 @@ onMounted(async () => {
       store.sso.jwt = res.jwt;
       store.sso.username = res.user.username;
       store.sso.email = res.user.email;
+
+      if (providerName === 'discord') {
+        store.sso.ssoid = res.user.username;
+      }
+
       // store.isAuthenticated = true;
 
       localStorage.setItem('jwt', res.jwt);
@@ -117,7 +122,13 @@ onMounted(async () => {
         console.log(ssoid);
         authStore.setUser();
 
-        const success = await authStore.setProfile(ssoid);
+        let success = {};
+
+        if (providerName === 'discord') {
+          success = await authStore.setProfile(res.user.username);
+        }
+        success = await authStore.setProfile(ssoid);
+
         console.log(success);
       } catch {
       }

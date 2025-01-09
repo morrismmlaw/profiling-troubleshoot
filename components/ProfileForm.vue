@@ -398,6 +398,13 @@ onMounted(() => {
   debugTagsMsg();
 })
 
+watch(() => props.profile.attributes.ssoid, (newVal, oldVal) => {
+  // Do something when profile.attributes.ssoid changes
+  console.log(`SSOID changed from ${oldVal} to ${newVal}`);
+  loadFormDataToORUGA();
+  syncCheckboxToFormData();
+})
+
 const activeTab = ref(0);
 const showBooks = ref(false);
 
