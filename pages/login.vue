@@ -50,7 +50,7 @@ const SSOIDRedirect_DISCORD_ITO = 'https://discord.com/oauth2/authorize?client_i
 const SSOIDRedirect_DISCORD_LOCAL = 'https://discord.com/oauth2/authorize?client_id=1319869342611144784&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A1337%2Fapi%2Fconnect%2Fdiscord%2Fcallback&scope=identify+email+connections';
 
 import { backendURL_ITO, backendURL_Local } from '@/composables/useAuth';
-import { STRAPI_SSODiscordUrl_ITO, STRAPI_SSODiscordUrl_Local, STRAPI_SSOHKBUUrl_ITO } from '../composables/useAuth';
+import { STRAPI_SSODiscordUrl_ITO, STRAPI_SSODiscordUrl_Local, STRAPI_SSOHKBUUrl_ITO, STRAPI_SSOHKBU_UAT_Url_ITO } from '../composables/useAuth';
 
 
 const OAuthHKBU = async () => {
@@ -66,11 +66,15 @@ const OAuthGoogle = async () => {
   window.location.href = STRAPI_SSOGoogleUrl_ITO;
 }
 
-const signInWith = (str) => {
+const { getProviderAuthenticationUrl } = useStrapiAuth()
 
+const signInWith = (str) => {
   switch (str) {
     case ('hkbu'):
       window.location.href = STRAPI_SSOHKBUUrl_ITO;
+      break;
+    case ('hkbu-uat'):
+      window.location.href = STRAPI_SSOHKBU_UAT_Url_ITO;
       break;
     case ('google'):
       window.location.href = STRAPI_SSOGoogleUrl_ITO;

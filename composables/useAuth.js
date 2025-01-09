@@ -60,6 +60,8 @@ export const STRAPI_SSOGoogleUrl_ITO = `${backendURL_ITO}/api/connect/google`;
 export const STRAPI_SSOHKBUUrl_Local = `${backendURL_Local}/api/connect/hkbu`;
 export const STRAPI_SSOHKBUUrl_ITO = `${backendURL_ITO}/api/connect/hkbu`;
 
+export const STRAPI_SSOHKBU_UAT_Url_ITO = `${backendURL_ITO}/api/connect/hkbu-uat`;
+
 //SSO SECTION
 
 export const useAuthStore = defineStore('auth', {
