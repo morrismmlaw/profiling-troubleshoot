@@ -33,7 +33,8 @@ onMounted(async () => {
   // bgM.value = '/img/bg-inno.jpg'
   // bgM.value = '/img/bg-scifac-2.jpg'
   bgM.value = '/img/bg-scifac-2-4k.jpeg'
-  bgM1.value = '/img/bg-pergamon-4k.jpeg'
+  // bgM1.value = '/img/bg-pergamon-4k.jpeg'
+  bgM1.value = '/img/bg-scifac-1.webp'
 
   const img = new Image();
   img.onload = () => {
