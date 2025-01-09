@@ -157,13 +157,16 @@ const signInWith = (str) => {
                               <!-- <button @click="signInWith('google')" class="btn btn-danger sso-btn">
                                 <i class="bi bi-google me-2"></i> Sign in with Google
                               </button> -->
-                              <button @click="signInWith('discord')" class="btn btn-success sso-btn">
+                              <!-- <button @click="signInWith('discord')" class="btn btn-success sso-btn">
                                 <i class="bi bi-discord me-2"></i> Sign in with Discord
-                              </button>
+                              </button> -->
                             </div>
                             <p class="text-muted text-center mt-3">Forgot your password?</p>
                             <NuxtLink @click="signInWith('hkbu-uat')" class="btn">
                               <i class="bi bi-mortarboard-fill me-2"></i> Sign in with SSOID-DEVELOPMENT
+                            </NuxtLink>
+                            <NuxtLink @click="signInWith('discord')" class="btn">
+                              <i class="bi bi-discord me-2"></i> Sign in with Discord-DEVELOPMENT
                             </NuxtLink>
                           </div>
                         </div>
