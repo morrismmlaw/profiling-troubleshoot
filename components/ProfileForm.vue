@@ -479,6 +479,17 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                         </div>
                       </div>
                     </div>
+                    <div class="row mb-3">
+                      <div class="row">
+                        <label for="academicInterests" class="col col-form-label">Research Awards and Achivements
+                          (Optional)</label>
+                      </div>
+                      <div class="row pe-0">
+                        <div class="col pe-0">
+                          <tiptap-editor :formData="formData" field="research_interest" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </o-tab-item>
 
@@ -551,7 +562,11 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                           placeholder="Select options" expanded />
                       </o-field>
                     </section>
+                  </div>
+                </o-tab-item>
 
+                <o-tab-item :value="4" label="Knowledge Transfer" icon="book">
+                  <div class="card-body">
                     <section>
                       <o-field class="col-form-tag" label="KNOWLEDGE TRANSFER">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, KTTags)" v-model="KTTags"
@@ -563,7 +578,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                   </div>
                 </o-tab-item>
 
-                <o-tab-item :value="3" :visible="false" label="Additional" icon="book">
+                <o-tab-item :value="5" :visible="false" label="Additional" icon="book">
                   What light is light, if Silvia be not seen? <br />
                   Except I be by Silvia in the night, <br />
                   There is no music in the nightingale.
