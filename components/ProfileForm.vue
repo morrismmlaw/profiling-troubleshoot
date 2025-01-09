@@ -481,7 +481,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
                     </div>
                     <div class="row mb-3">
                       <div class="row">
-                        <label for="academicInterests" class="col col-form-label">Research Awards and Achivements
+                        <label for="academicInterests" class="col col-form-label">Research Awards / Achievements
                           (Optional)</label>
                       </div>
                       <div class="row pe-0">
