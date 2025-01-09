@@ -399,10 +399,14 @@ onMounted(() => {
 })
 
 watch(() => props.profile.attributes.ssoid, (newVal, oldVal) => {
-  // Do something when profile.attributes.ssoid changes
-  console.log(`SSOID changed from ${oldVal} to ${newVal}`);
-  loadFormDataToORUGA();
-  syncCheckboxToFormData();
+  console.log(`SSOID changed from ${oldVal} to ${newVal}`)
+  try {
+    loadFormDataToORUGA()
+    syncCheckboxToFormData()
+  } catch (error) {
+    console.error('Error in watcher callback:', error)
+    // Handle the error appropriately
+  }
 })
 
 const activeTab = ref(0);
