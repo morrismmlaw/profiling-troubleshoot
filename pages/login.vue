@@ -158,29 +158,21 @@ const signInWith = (str) => {
                               </button> -->
                             </div>
                             <p class="text-muted text-center mt-3">Forgot your password?</p>
+                            <NuxtLink @click="signInWith('hkbu-uat')" class="btn">
+                              <i class="bi bi-mortarboard-fill me-2"></i> Sign in with SSOID-DEVELOPMENT
+                            </NuxtLink>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                <div>
-
-
-                </div>
               </div>
-
-
-
             </div>
-
           </div>
         </div>
       </section>
-
     </div>
-
   </div>
 
 </template>
