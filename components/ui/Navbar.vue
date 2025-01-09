@@ -71,7 +71,7 @@
               <li v-if="isLoggedIn && isAuthenticated" class="nav-item custom-nav-item">
                 <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                   <i class="bi bi-person-circle me-3"></i>
-                  <NuxtLink class="nav-link" :to="{ path: `/profile/${authStore.sso.ssoid}`}"
+                  <NuxtLink class="nav-link" :to="{ path: `/profile/${authStore.sso.ssoid}` }"
                     @click.native="handleUATClick()"> Your Profile</NuxtLink>
                 </span>
               </li>
@@ -131,7 +131,7 @@ const isAdmin = computed(() => authStore.isAdmin);
 
 
 const isSearch = computed(() => route.path === '/search');
-const isProfile = computed(() => route.path === '/profile');
+const isProfile = computed(() => route.path.startsWith('/profile'));
 const isHome = computed(() => route.path === '/');
 
 const logout = async () => {
@@ -145,7 +145,7 @@ const logout = async () => {
 };
 
 const navbarStylePerRoute = computed(() => {
-  if (route.path === '/profile') {
+  if (route.path.startsWith('/profile')) {
     // return { backgroundColor: 'rgba(37, 150, 190, 0.7)' }; //Marine Blue
     return { backgroundColor: 'white' };
     // return { backgroundColor: 'transparent' };
