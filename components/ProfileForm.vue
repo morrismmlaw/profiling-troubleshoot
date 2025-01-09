@@ -402,7 +402,7 @@ watch(() => props.profile.attributes.ssoid, (newVal, oldVal) => {
   console.log(`SSOID changed from ${oldVal} to ${newVal}`)
   try {
     loadFormDataToORUGA()
-    syncCheckboxToFormData()
+    // syncCheckboxToFormData()
   } catch (error) {
     console.error('Error in watcher callback:', error)
     // Handle the error appropriately
