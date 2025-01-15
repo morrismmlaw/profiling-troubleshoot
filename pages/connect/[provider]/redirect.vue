@@ -82,26 +82,25 @@ const countdown = ref(3000);
 
 onMounted(async () => {
   const search = route.fullPath.split('?')[1];
-
-  console.log(search);
-
   const provider = route.params.provider;
-  console.log(provider);
+  // console.log(search);
+  // console.log(provider);
 
   await fetch(`${backendURL_ITO}/api/auth/${providerName}/callback?${search}`)
     .then(res => {
       if (res.status !== 200) {
         throw new Error(`Couldn't login to Strapi. Status: ${res.status}`);
       }
-      console.log(res)
       const response = res.json();
-      console.log(response);
+
+      // console.log(res)
+      // console.log(response);
       return response;
     })
     .then(async res => {
       // Successfully logged in with Strapi
       // Now saving the jwt to use it for future authenticated requests to Strapi
-      console.log(res);
+      // console.log(res);
       store.sso.provider = res.user.provider;
       store.sso.jwt = res.jwt;
       store.sso.username = res.user.username;
@@ -111,25 +110,18 @@ onMounted(async () => {
         store.sso.ssoid = res.user.username;
       }
 
-      // store.isAuthenticated = true;
-
       localStorage.setItem('jwt', res.jwt);
       localStorage.setItem('username', res.user.username);
 
       //Need to check with STRAPI, to get User status, and User profile is valid -> Admin / User ?
       const ssoid = res.user.email.split('@')[0];
       try {
-        console.log(ssoid);
         authStore.setUser();
-
         let success = {};
-
         if (providerName === 'discord') {
           success = await authStore.setProfile(res.user.username);
         }
         success = await authStore.setProfile(ssoid);
-
-        console.log(success);
       } catch {
       }
 

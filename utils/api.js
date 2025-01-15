@@ -169,7 +169,7 @@ export const api = {
     const { find } = useStrapi()
 
     if (name === 'sdgs') {
-      console.log('POPULATE sdgs - Media Link');
+      // console.log('POPULATE sdgs - Media Link');
       return await find(name, {
         populate: ['iconweb']
       });
