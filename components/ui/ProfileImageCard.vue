@@ -71,7 +71,12 @@ onMounted(() => {
       <!-- <div class="dotted"></div> -->
       <DottedLine />
       <div class="row">
-        <o-tooltip :label="`${props.profile.attributes.orcidURL}`" multiline>
+        <o-tooltip variant="info" :label="`${props.profile.attributes.orcidURL}`" multiline>
+          <template #content>
+            <div class="sdg-info">
+              <p><strong>ORCID</strong> <br> {{ props.profile.attributes.orcidURL }}</p>
+            </div>
+          </template>
           <div class="card-body">
             <div class="imgcard-info">
               <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">
@@ -80,7 +85,12 @@ onMounted(() => {
             </div>
           </div>
         </o-tooltip>
-        <o-tooltip :label="`${props.profile.attributes.url}`" multiline>
+        <o-tooltip variant="info" :label="`${props.profile.attributes.url}`" multiline>
+          <template #content>
+            <div class="sdg-info">
+              <p><strong>HKBU Scholar</strong> <br> {{ props.profile.attributes.url }}</p>
+            </div>
+          </template>
           <div class="card-body">
             <div class="imgcard-info">
               <img src="/img/orcid.logo.icon.svg" alt="orcid logo" class="orcid-logo" style="width: 1.2rem;">

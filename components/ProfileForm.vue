@@ -616,35 +616,6 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
   }
 }
 
-
-.sdg-tooltip {
-  background: #006d88;
-}
-
-.sdg-info {
-  color: aliceblue;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  /* Added text-shadow */
-
-  font-family: Montserrat, sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: .5px;
-  /* line-height: 24px; */
-  /* min-width: 50%; */
-  /* text-transform: uppercase; */
-
-  p {
-    margin-bottom: 1em;
-  }
-}
-
-.sdg-info strong {
-  display: inline-block;
-  width: 100px;
-  font-weight: bold;
-}
-
 .sdg-field {
   border: 1px solid #ddd;
   border-radius: 10px;
