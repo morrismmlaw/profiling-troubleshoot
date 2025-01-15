@@ -30,6 +30,7 @@ const handleSave = async (emitData) => {
   if (UATMode()) {
     console.log('IN UAT MODE')
     if (success) {
+      //Update that Individual..
       alert('Profile updated successfully')
       //download new Data.
       await authStore.setProfile(authStore.user.attributes.ssoid);
@@ -40,6 +41,7 @@ const handleSave = async (emitData) => {
     }
   } else {
     if (success) {
+      //Update Self Profile..
       alert('Profile updated successfully')
       //download new Data.
       await authStore.setProfile(authStore.sso.ssoid);
