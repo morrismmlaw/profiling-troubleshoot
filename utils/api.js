@@ -88,9 +88,10 @@ async function update_tech_offers(documentId, data) {
  * Link the Media ID with the Profile's field, remove media Linkage if needed. 
  * @param {*} documentId 
  * @param {*} data 
+ * @param {*} hasChangedImage -> Determin If this Image has not changed -> no need to delete. 
  * @returns 
  */
-async function update_uploadPhoto(documentId, data, profile) {
+async function update_uploadPhoto(documentId, data, profile, hasChangedImage) {
   const { update, findOne } = useStrapi();
   const profileData = profile.attributes;
 
@@ -111,12 +112,13 @@ async function update_uploadPhoto(documentId, data, profile) {
     console.log(profileData[field].id);
 
     //Need to check if no image replaced -> No action.
-    try {
-      const delResponse = await _delete('upload/files', profileData[field].id);
-    } catch (error) {
-      console.log(error)
+    if (hasChangedImage === true) { //IF changed
+      try {
+        const delResponse = await _delete('upload/files', profileData[field].id);
+      } catch (error) {
+        console.log(error)
+      }
     }
-
   }
 
   if (fieldIds === "" || fieldIds === null) {
@@ -185,7 +187,7 @@ export const api = {
    * @param {{ academicInterests: string }} FormData
    * @returns {Promise<{ data: Profile }>}
    */
-  async updateProfile(documentId, FormData, profile) {
+  async updateProfile(documentId, FormData, profile, hasChangedImage) {
     const { update } = useStrapi()
     console.log("Updating PROFILE API JS", documentId, FormData);
 
@@ -199,7 +201,7 @@ export const api = {
 
     //Check if There is a new Photo
     //Yes Run Below..
-    await update_uploadPhoto(documentId, FormData, profile); //MEDIA ID
+    await update_uploadPhoto(documentId, FormData, profile, hasChangedImage); //MEDIA ID
     // delete FormData.uploadPhoto;
 
     return await update('profiles', documentId, FormData,

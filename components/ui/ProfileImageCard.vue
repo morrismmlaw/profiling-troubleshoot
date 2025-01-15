@@ -19,19 +19,24 @@ import ProfileImage from './ProfileImage.vue';
 import type { CroppedImg } from '~/types/profileImage';
 
 const handleCroppedImg = (croppedImg: Ref<CroppedImg>) => {
-  // Case Reset to HKBU Scholar
-  if (croppedImg === null) {
-    // imgUrl.value = defaultImg.value;
-    imgUrl.value = props.profile.attributes.photoURL || defaultImg.value;
-    emit('croppedImg', null);
-  } else {
-    // handle the croppedImg value as needed
-    // console.log('Capture Emit Cropped image:', croppedImg);
-    imgUrl.value = croppedImg.value.imgUrl;
-    imgStrapiID.value = croppedImg.value.strapiID;
-    console.log('Capture ProfileImgCard image:', croppedImg.value.strapiID);
-    emit('croppedImg', croppedImg);
+  try {
+    // Case Reset to HKBU Scholar
+    if (croppedImg === null) {
+      // imgUrl.value = defaultImg.value;
+      imgUrl.value = props.profile.attributes.photoURL || defaultImg.value;
+      emit('croppedImg', null);
+    } else {
+      // handle the croppedImg value as needed
+      // console.log('Capture Emit Cropped image:', croppedImg);
+      imgUrl.value = croppedImg.value.imgUrl;
+      imgStrapiID.value = croppedImg.value.strapiID;
+      console.log('Capture ProfileImgCard image:', croppedImg.value.strapiID);
+      emit('croppedImg', croppedImg);
+    }
+  } catch (error) {
+    console.log(error);
   }
+
 };
 
 const initImages = () => {

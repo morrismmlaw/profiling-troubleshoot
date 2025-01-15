@@ -19,4 +19,9 @@ export interface CroppedImg {
    Denote if The Image has been Changed. 
   */
   hasChangedImage: boolean;
+
+  /*
+  Say if it is cleared
+  */
+  clear: boolean;
 }

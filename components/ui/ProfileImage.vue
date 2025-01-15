@@ -98,6 +98,7 @@ const croppedImg = ref<CroppedImg>({
   imgUrl: '',
   strapiID: '',
   hasChangedImage: false,
+  clear: false,
 })
 
 const dropFiles = ref<File[]>([]);
@@ -139,17 +140,22 @@ const handleUpload = (event) => {
 }
 
 const handleSaveClick = async () => {
-  const saveResult = await saveCroppedImage();
-  if (saveResult) {
-    const { canvas } = cropperRef.value.getResult(); // Emit new Image to Image Card 
-    croppedImg.value.imgUrl = canvas.toDataURL(fileType.value);
-    croppedImg.value.hasChangedImage = true;
-    emit('croppedImg', croppedImg);
-    emit('hasChangedImage', true);
-  } else {
-    console.log('Clear image');
-    emit('croppedImg', null);
-    emit('hasChangedImage', true);
+
+  try {
+    const saveResult = await saveCroppedImage();
+    if (saveResult) {
+      const { canvas } = cropperRef.value.getResult(); // Emit new Image to Image Card 
+      croppedImg.value.imgUrl = canvas.toDataURL(fileType.value);
+      croppedImg.value.hasChangedImage = true;
+      emit('croppedImg', croppedImg);
+    } else {
+      console.log('Clear image');
+      croppedImg.value.clear = true;
+      croppedImg.value.hasChangedImage = true;
+      emit('croppedImg', croppedImg);
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
 

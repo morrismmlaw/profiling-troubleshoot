@@ -25,7 +25,15 @@ const handleSave = async (emitData) => {
   const { formData, hasChangedImage } = emitData;
   const data = formData;
 
-  const success = await profileStore.updateProfile(data, authStore.user)
+  let success = false;
+
+  if (hasChangedImage) {
+    success = await profileStore.updateProfile(data, authStore.user, hasChangedImage)
+  } else {
+    //Skip The Update Photo Code here:
+      const { uploadPhoto, ...restData } = data;
+    success = await profileStore.updateProfile(restData, authStore.user, hasChangedImage)
+  }
 
   if (UATMode()) {
     console.log('IN UAT MODE')
@@ -146,7 +154,8 @@ watch(checkedForm, (newVal) => {
           <div class="col-12">
             <div v-if="authStore.isAuthenticated || authStore.isAdmin">
               <div class="mt-3">
-                <ProfileForm :key="componentKey" v-if="!isLoading" :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
+                <ProfileForm :key="componentKey" v-if="!isLoading" :profile="authStore.user"
+                  :collections="authStore.collections" @save="handleSave" />
               </div>
             </div>
             <div v-else>

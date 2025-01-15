@@ -51,10 +51,11 @@ const profileStore = useProfileStore();
 const emit = defineEmits(['save']);
 const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
   if (croppedImg.value.hasChangedImage) {
-    if (croppedImg === null) {
+    if (croppedImg.value.clear === true) {
       //Set it to Clear.
       formData.uploadPhoto = null;
       // delete formData.uploadPhoto;
+      hasChangedImage.value = true;
     } else {
       let oldID = formData.uploadPhoto;
       let imgObj = croppedImg.value;
