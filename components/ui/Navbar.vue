@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div v-if="$route.path === '/profile'" class="d-flex justify-content-end ms-auto me-3">
+      <div v-if="$route.path.includes('/profile')" class="d-flex justify-content-end ms-auto me-3">
         <div class="custom-text-bar"> Academic Profile</div>
       </div>
 
