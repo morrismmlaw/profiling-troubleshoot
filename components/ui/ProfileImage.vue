@@ -88,13 +88,16 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:imgUrl', 'croppedImg']);
+const hasChanged = ref(false);
+
+const emit = defineEmits(['update:imgUrl', 'croppedImg', 'hasChangedImage']);
 
 // const img = ref('https://images.pexels.com/photos/379419/pexels-photo-379419.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
 const img = ref('')
 const croppedImg = ref<CroppedImg>({
   imgUrl: '',
   strapiID: '',
+  hasChangedImage: false,
 })
 
 const dropFiles = ref<File[]>([]);
@@ -104,7 +107,6 @@ const clearImage = () => {
   img.value = ('');
   hasUpload.value = false;
 }
-
 
 const change = ({ coordinates, canvas }) => {
   console.log(coordinates, canvas);
@@ -141,10 +143,13 @@ const handleSaveClick = async () => {
   if (saveResult) {
     const { canvas } = cropperRef.value.getResult(); // Emit new Image to Image Card 
     croppedImg.value.imgUrl = canvas.toDataURL(fileType.value);
+    croppedImg.value.hasChangedImage = true;
     emit('croppedImg', croppedImg);
+    emit('hasChangedImage', true);
   } else {
     console.log('Clear image');
     emit('croppedImg', null);
+    emit('hasChangedImage', true);
   }
 }
 

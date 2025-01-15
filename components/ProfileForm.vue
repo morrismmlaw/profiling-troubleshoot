@@ -15,6 +15,19 @@ import ProfileSave from './ui/ProfileSave.vue';
  */
 const hasChangedImage = ref(false);
 
+// Watch the hasChangedImage state
+watch(hasChangedImage, (newValue, oldValue) => {
+  console.log(`hasChangedImage changed from ${oldValue} to ${newValue}`);
+  // Add any additional logic you need to handle the change
+  if (newValue) {
+    // Perform actions when the image has changed
+    console.log('Image has changed!');
+  } else {
+    // Perform actions when the image has not changed
+    console.log('Image has not changed.');
+  }
+});
+
 const props = defineProps({
   profile: {
     type: Object,
@@ -37,20 +50,21 @@ const profileStore = useProfileStore();
 
 const emit = defineEmits(['save']);
 const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
-
-  if (croppedImg === null) {
-    //Set it to Clear.
-    formData.uploadPhoto = null;
-    // delete formData.uploadPhoto;
-
-    hasChangedImage.value = true;
+  if (croppedImg.value.hasChangedImage) {
+    if (croppedImg === null) {
+      //Set it to Clear.
+      formData.uploadPhoto = null;
+      // delete formData.uploadPhoto;
+    } else {
+      let oldID = formData.uploadPhoto;
+      let imgObj = croppedImg.value;
+      // console.log("Capture ProfileForm: ", obj);
+      formData.uploadPhoto = imgObj.strapiID;
+      // console.log('FormData StrapiID:', formData.uploadPhoto);
+      hasChangedImage.value = true;
+    }
   } else {
-    let imgObj = croppedImg.value;
-    // console.log("Capture ProfileForm: ", obj);
-    formData.uploadPhoto = imgObj.strapiID;
-    // console.log('FormData StrapiID:', formData.uploadPhoto);
-
-    hasChangedImage.value = true;
+    hasChangedImage.value = false;
   }
 }
 
@@ -318,9 +332,7 @@ const loadFormDataToORUGA = () => {
       return matchingOption ? matchingOption.value : [];
     });
   }
-
 }
-
 
 /**
  * This function takes a sdgid as a parameter and returns the corresponding SDG object from the collections prop, after removing the 'documentId' and 'iconweb.documentId' properties.
@@ -389,16 +401,6 @@ watch([SRCTags, ROTags, RFTags, FCRATags, ASTags, DEPTags, KTTags], (newVal, old
   }
 })
 
-onMounted(() => {
-  loadFormDataToORUGA();
-  syncCheckboxToFormData();
-
-  sortTagOptions();
-  debugTagsMsg();
-
-  console.log("Current FormData", formData);
-})
-
 watch(() => props.profile.attributes.ssoid, (newVal, oldVal) => {
   console.log(`SSOID changed from ${oldVal} to ${newVal}`)
   try {
@@ -420,8 +422,31 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
   const eventExists = tags.some(tag => tag.id === event.id);
   return !eventExists;
 }
-
 // ORUGA SECTION
+
+onMounted(() => {
+  loadFormDataToORUGA();
+  syncCheckboxToFormData();
+
+  sortTagOptions();
+  debugTagsMsg();
+
+  console.log("Current FormData", formData);
+})
+
+
+const handleHasChange = (e) => {
+
+  console.log('Has Image been changed?', e);
+
+  if (e === true) {
+    hasChangedImage.value = true;
+  } else {
+    hasChangedImage.value = false;
+  }
+
+  console.log('Has Image been changed?', hasChangedImage.value);
+}
 
 </script>
 
@@ -435,7 +460,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
         <div class="col">
           <div class="me-1 profile-form-card">
             <!-- {{ console.log('profile', profile) }} -->
-            <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
+            <image-card :profile="profile" @cropped-img="handleUploadPhoto" @has-changed-image="handleHasChange" />
           </div>
         </div>
 

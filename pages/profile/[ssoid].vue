@@ -51,7 +51,7 @@ const handleSave = async (emitData) => {
       await authStore.setProfile(authStore.sso.ssoid);
     }
   }
-
+  componentKey.value += 1;
 }
 
 const componentKey = ref(0);
@@ -82,7 +82,7 @@ onMounted(async () => {
       isLoading.value = false;
     }
 
-    componentKey.value++;
+    componentKey.value += 1;
   }
 
   // if (!authStore.isAuthenticated) {
@@ -146,7 +146,7 @@ watch(checkedForm, (newVal) => {
           <div class="col-12">
             <div v-if="authStore.isAuthenticated || authStore.isAdmin">
               <div class="mt-3">
-                <ProfileForm v-if="!isLoading" :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
+                <ProfileForm :key="componentKey" v-if="!isLoading" :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
               </div>
             </div>
             <div v-else>

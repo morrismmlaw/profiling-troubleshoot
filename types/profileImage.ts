@@ -14,4 +14,9 @@ export interface CroppedImg {
    * @type {string}
    */
   strapiID: string;
+
+  /*
+   Denote if The Image has been Changed. 
+  */
+  hasChangedImage: boolean;
 }
