@@ -622,7 +622,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 }
 </style>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .columns {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
