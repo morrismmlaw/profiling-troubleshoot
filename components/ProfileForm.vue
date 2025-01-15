@@ -396,6 +396,8 @@ onMounted(() => {
   syncCheckboxToFormData();
 
   debugTagsMsg();
+
+  console.log("Current FormData", formData);
 })
 
 watch(() => props.profile.attributes.ssoid, (newVal, oldVal) => {
@@ -434,13 +436,13 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
         <div class="col">
           <div class="me-1 profile-form-card">
             <!-- {{ console.log('profile', profile) }} -->
-            <image-card :key="profile.attributes.ssoid" :profile="profile" @cropped-img="handleUploadPhoto" />
+            <image-card :profile="profile" @cropped-img="handleUploadPhoto" />
           </div>
         </div>
 
         <div class="col mb-5">
           <section>
-            <o-tabs v-model="activeTab" destroy-on-hide :animated="false" :key="profile.attributes.ssoid">
+            <o-tabs v-model="activeTab" destroy-on-hide :animated="false">
               <div class="card ms-md-0 ms-2 shadow rounded-5 border-0 p-2">
                 <o-tab-item :value="0" label="About me" icon="image">
                   <div class="card-body">

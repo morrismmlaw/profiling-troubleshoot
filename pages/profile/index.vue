@@ -33,21 +33,21 @@ const handleSave = async (emitData) => {
     if (success) {
       alert('Profile updated successfully')
       //download new Data.
-      authStore.setProfile(authStore.user.attributes.ssoid);
+      await authStore.setProfile(authStore.user.attributes.ssoid);
       // location.reload();
     } else {
       alert('Failed to update profile')
-      authStore.setProfile(authStore.user.attributes.ssoid);
+      await authStore.setProfile(authStore.user.attributes.ssoid);
     }
   } else {
     if (success) {
       alert('Profile updated successfully')
       //download new Data.
-      authStore.setProfile(authStore.sso.ssoid);
+      await authStore.setProfile(authStore.sso.ssoid);
       // location.reload();
     } else {
       alert('Failed to update profile')
-      authStore.setProfile(authStore.sso.ssoid);
+      await authStore.setProfile(authStore.sso.ssoid);
     }
   }
 
@@ -55,8 +55,9 @@ const handleSave = async (emitData) => {
 
 const componentKey = ref(0);
 // location.reload(0);
+const loading = ref(true);
 
-onMounted(() => {
+onMounted(async () => {
 
   console.log(from);
 
@@ -65,7 +66,12 @@ onMounted(() => {
   } else {
     console.log('NOT IN UAT MODE')
     //Force load this user's info - from sso;
-    authStore.setProfile(authStore.sso.ssoid);
+    const sucess = await authStore.setProfile(authStore.sso.ssoid);
+
+    if (sucess) {
+      loading.value = false;
+    }
+
     componentKey.value++;
   }
 
@@ -130,7 +136,7 @@ watch(checkedForm, (newVal) => {
           <div class="col-12">
             <div v-if="authStore.isAuthenticated || authStore.isAdmin">
               <div class="mt-3">
-                <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
+                <ProfileForm v-if="!loading" :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
               </div>
             </div>
             <div v-else>

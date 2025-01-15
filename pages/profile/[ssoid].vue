@@ -32,21 +32,21 @@ const handleSave = async (emitData) => {
     if (success) {
       alert('Profile updated successfully')
       //download new Data.
-      authStore.setProfile(authStore.user.attributes.ssoid);
+      await authStore.setProfile(authStore.user.attributes.ssoid);
       // location.reload();
     } else {
       alert('Failed to update profile')
-      authStore.setProfile(authStore.user.attributes.ssoid);
+      await authStore.setProfile(authStore.user.attributes.ssoid);
     }
   } else {
     if (success) {
       alert('Profile updated successfully')
       //download new Data.
-      authStore.setProfile(authStore.sso.ssoid);
+      await authStore.setProfile(authStore.sso.ssoid);
       // location.reload();
     } else {
       alert('Failed to update profile')
-      authStore.setProfile(authStore.sso.ssoid);
+      await authStore.setProfile(authStore.sso.ssoid);
     }
   }
 
@@ -55,7 +55,7 @@ const handleSave = async (emitData) => {
 const componentKey = ref(0);
 // location.reload(0);
 
-onMounted(() => {
+onMounted(async () => {
 
   console.log('SSOID', ssoid)
   console.log(from);
@@ -65,7 +65,7 @@ onMounted(() => {
   } else {
     console.log('NOT IN UAT MODE')
     //Force load this user's info - from sso;
-    authStore.setProfile(authStore.sso.ssoid);
+    await authStore.setProfile(authStore.sso.ssoid);
     componentKey.value++;
   }
 
