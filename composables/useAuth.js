@@ -89,22 +89,16 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
-
-
     // Need to implement auth Logic.
     // First -> SSO-JWT -> 
-
     /**
      * Need to Enable Users-permissions in Admin Panel.
      */
     async setUser() {
       //Get the user isAdmin or not..
       // console.log(this.sso.jwt);
-
       const user = await api.getUserJWT(this.sso.jwt);
-
-      console.log(user);
-
+      // console.log(user);
       this.isAdmin = (user.role.type === 'admin');
       this.isAuthenticated = (user.role.type === 'authenticated');
       this.isLogin = true;
@@ -112,16 +106,11 @@ export const useAuthStore = defineStore('auth', {
       if (user.provider === 'hkbu') {
         this.sso.ssoid = user.email.split('@')[0];
       }
-
     },
 
     async setProfile(ssoid) {
-
-
       const profileStore = useProfileStore();
-
       //ASSUME SSOID is the string before @.
-
       //Check with STRAPI User status..
       //If is admin / if is academic staff.
 
@@ -129,12 +118,10 @@ export const useAuthStore = defineStore('auth', {
       // if (!StrapiLogin) {
       //   return false;
       // }
-
       // console.log("Loggin in", ssoid)
 
       this.isLoading = true
       this.error = null
-
       try {
         //Get the Profile Data
         const response = await api.findProfileBySSoid(ssoid)
@@ -156,7 +143,6 @@ export const useAuthStore = defineStore('auth', {
           }
 
           //Update Pinia
-
           console.log("Got the state", this.$state);
           console.log("Got the User", this.user);
           console.log("Got the Collections", this.collections);
@@ -195,19 +181,6 @@ export const useAuthStore = defineStore('auth', {
     initializeFromStorage() {
       const storedState = storage.getState();
       this.$state = storedState;
-
-      // const storedUser = storage.getUser();
-      // console.log(storedUser)
-      // if (storedUser) {
-      //   this.user = storedUser
-      //   this.isLogin = true
-      // }
-
-      // const storedCollection = storage.getCollection()
-      // if (storedCollection) {
-      //   this.collections = storedCollection
-      // }
-
     }
   }
 })
