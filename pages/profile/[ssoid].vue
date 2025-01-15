@@ -56,6 +56,7 @@ const handleSave = async (emitData) => {
 
 const componentKey = ref(0);
 // location.reload(0);
+const isLoading = ref(true);
 
 onMounted(async () => {
 
@@ -64,10 +65,23 @@ onMounted(async () => {
 
   if (UATMode()) {
     console.log('IN UAT MODE')
+
+    const sucess = await authStore.setProfile(authStore.user.attributes.ssoid);
+
+    //Wait data loading then load the form component.
+    if (sucess) {
+      isLoading.value = false;
+    }
   } else {
     console.log('NOT IN UAT MODE')
     //Force load this user's info - from sso;
-    await authStore.setProfile(authStore.sso.ssoid);
+    const sucess = await authStore.setProfile(authStore.sso.ssoid);
+
+    //Wait data loading then load the form component.
+    if (sucess) {
+      isLoading.value = false;
+    }
+
     componentKey.value++;
   }
 
@@ -132,7 +146,7 @@ watch(checkedForm, (newVal) => {
           <div class="col-12">
             <div v-if="authStore.isAuthenticated || authStore.isAdmin">
               <div class="mt-3">
-                <ProfileForm :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
+                <ProfileForm v-if="!isLoading" :profile="authStore.user" :collections="authStore.collections" @save="handleSave" />
               </div>
             </div>
             <div v-else>
