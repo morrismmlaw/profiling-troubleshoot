@@ -8,6 +8,8 @@
 import { defineStore } from 'pinia'
 import { storage } from '~/utils/storage'
 import { api } from '~/utils/api'
+import { useProfileStore } from './useProfile';
+import ProfileSave from '~/components/ui/ProfileSave.vue';
 
 // const { login } = useStrapiAuth();
 
@@ -65,6 +67,7 @@ export const STRAPI_SSOHKBU_UAT_Url_ITO = `${backendURL_ITO}/api/connect/hkbu-ua
 //SSO SECTION
 
 export const useAuthStore = defineStore('auth', {
+
   state: () => ({
     user: null,
     collections: null, //Get All Other Strapi Collections - SDGS, FCRA.. etc.
@@ -86,6 +89,8 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+
+
     // Need to implement auth Logic.
     // First -> SSO-JWT -> 
 
@@ -111,6 +116,10 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async setProfile(ssoid) {
+
+
+      const profileStore = useProfileStore();
+
       //ASSUME SSOID is the string before @.
 
       //Check with STRAPI User status..
@@ -131,8 +140,14 @@ export const useAuthStore = defineStore('auth', {
         const response = await api.findProfileBySSoid(ssoid)
         if (response.data.length > 0) {
           console.log('Got the Profile from API', response);
+
+          //Set auth State
           this.user = {}; //Init the Object
           this.user.attributes = { ...response.data[0] }; // Lets store em here
+
+          //Set profile State
+          profileStore.profile = {}
+          profileStore.profile.attributes = { ...response.data[0] }; // Lets store em here
 
           this.collections = {};
 
