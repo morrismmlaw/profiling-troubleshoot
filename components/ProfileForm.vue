@@ -28,10 +28,10 @@ const props = defineProps({
   }
 });
 
-onMounted(() => {
-  console.log("props.profile", props.profile);
-  console.log("props.collections", props.collections);
-})
+// onMounted(() => {
+//   console.log("props.profile", props.profile);
+//   console.log("props.collections", props.collections);
+// })
 
 const profileStore = useProfileStore();
 
@@ -199,8 +199,6 @@ const sortTagOptions = () => {
 
   KTOptionsOrugaNew.sort((a, b) => a.label.localeCompare(b.label));
 }
-
-sortTagOptions();
 
 const debugTagsMsg = () => {
 
@@ -395,6 +393,7 @@ onMounted(() => {
   loadFormDataToORUGA();
   syncCheckboxToFormData();
 
+  sortTagOptions();
   debugTagsMsg();
 
   console.log("Current FormData", formData);
@@ -599,8 +598,7 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 
 </template>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <style lang="scss" scoped>
 .columns {
