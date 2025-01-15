@@ -620,21 +620,6 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
   --red-light: #FFEBE5;
   --shadow: 0px 12px 33px 0px rgba(0, 0, 0, .06), 0px 3.618px 9.949px 0px rgba(0, 0, 0, .04)
 }
-</style>
-
-<style lang="scss">
-.columns {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 8px;
-}
-
-@media (max-width: 600px) {
-  .columns {
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 7px;
-  }
-}
 
 .col-form-label {
   color: #006d88;
@@ -668,6 +653,25 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
   min-width: 50%;
   text-transform: uppercase;
 }
+
+</style>
+
+
+
+<style lang="scss" scoped>
+.columns {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .columns {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 7px;
+  }
+}
+
 
 .sdg-tooltip {
   background: #006d88;
