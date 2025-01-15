@@ -42,7 +42,6 @@ async function findCollection(collectionName) {
   } finally {
   }
 }
-
 // const StrapiLogin = async (ssoid, pw) => {
 //   try {
 //     await login({ identifier: ssoid, password: pw })
@@ -55,23 +54,23 @@ async function findCollection(collectionName) {
 //SSO SECTION
 export const backendURL_Local = 'http://localhost:1337';
 export const backendURL_ITO = 'https://profile-cms.sci.hkbu.edu.hk';
+
 export const STRAPI_SSODiscordUrl_Local = `${backendURL_Local}/api/connect/discord`;
 export const STRAPI_SSODiscordUrl_ITO = `${backendURL_ITO}/api/connect/discord`;
 export const STRAPI_SSOGoogleUrl_ITO = `${backendURL_ITO}/api/connect/google`;
 
 export const STRAPI_SSOHKBUUrl_Local = `${backendURL_Local}/api/connect/hkbu`;
 export const STRAPI_SSOHKBUUrl_ITO = `${backendURL_ITO}/api/connect/hkbu`;
-
 export const STRAPI_SSOHKBU_UAT_Url_ITO = `${backendURL_ITO}/api/connect/hkbu-uat`;
 
 //SSO SECTION
 
 export const useAuthStore = defineStore('auth', {
-
   state: () => ({
     user: null,
-    collections: null, //Get All Other Strapi Collections - SDGS, FCRA.. etc.
+    UATuser: null,
 
+    collections: null, //Get All Other Strapi Collections - SDGS, FCRA.. etc.
     isLogin: false,
 
     isAuthenticated: false, //Retrieved User Role from STRAPI.
@@ -80,7 +79,6 @@ export const useAuthStore = defineStore('auth', {
     error: null,
 
     //Shall check if this account is academic staff or admin user.
-
     sso: { //Store SSO getback things.
       provider: null,
       jwt: null,
@@ -109,7 +107,6 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async setProfile(ssoid) {
-      const profileStore = useProfileStore();
       //ASSUME SSOID is the string before @.
       //Check with STRAPI User status..
       //If is admin / if is academic staff.
@@ -131,10 +128,6 @@ export const useAuthStore = defineStore('auth', {
           //Set auth State
           this.user = {}; //Init the Object
           this.user.attributes = { ...response.data[0] }; // Lets store em here
-
-          //Set profile State
-          profileStore.profile = {}
-          profileStore.profile.attributes = { ...response.data[0] }; // Lets store em here
 
           this.collections = {};
 
