@@ -136,6 +136,23 @@ async function update_uploadPhoto(documentId, data, profile, hasChangedImage) {
 export const api = {
 
   /**
+   * Find profiles with Pagination
+   * @param {string} ssoid
+   * @returns {Promise<{ data: Profile[] }>}
+   */
+  async findProfiles(page, perPage) {
+    const { find } = useStrapi()
+
+    return await find('profiles', { //Need to use Populate to fetch relationship && Media Type Data.
+      pagination: {
+        page: page,
+        pageSize: perPage
+      },
+      populate: populateFields
+    })
+  },
+
+  /**
    * Find profile by SSOID
    * @param {string} ssoid
    * @returns {Promise<{ data: Profile[] }>}

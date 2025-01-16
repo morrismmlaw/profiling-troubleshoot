@@ -154,8 +154,13 @@ const searchInput = ref('')
 const router = useRouter()
 
 import SearchBar from '~/components/ui/SearchBar.vue';
-
 import ExpertCard from '~/components/ui/ExpertCard.vue';
+
+const profileStore = useProfileStore();
+
+onMounted(async () => {
+  profileStore.fetchProfiles(1, 5);
+})
 
 </script>
 

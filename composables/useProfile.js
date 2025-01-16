@@ -7,6 +7,8 @@ export const useProfileStore = defineStore('profile', {
   state: () => ({
     profile: null,
     UATprofile: null,
+
+    profiles: null,
     isLoading: false,
     error: null
   }),
@@ -40,6 +42,20 @@ export const useProfileStore = defineStore('profile', {
       } finally {
         this.isLoading = false
       }
+    },
+
+    async fetchProfiles(page, perPage) {
+      // let perPage = 5;
+      console.log('Getting all the Profiles');
+
+      const response = await api.findProfiles(page, perPage);
+
+      if (response.data) {
+        console.log(response.data);
+        this.profiles = response.data;
+      }
+
     }
+
   }
 })

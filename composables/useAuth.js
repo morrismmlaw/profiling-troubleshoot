@@ -70,6 +70,8 @@ export const useAuthStore = defineStore('auth', {
     user: null,
     UATuser: null,
 
+    profiles: null, //Store the fetched Profiles From STRAPI -> Meilisearch need Morris's work. 
+
     collections: null, //Get All Other Strapi Collections - SDGS, FCRA.. etc.
     isLogin: false,
 
