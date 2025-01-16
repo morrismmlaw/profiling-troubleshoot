@@ -54,8 +54,8 @@
           </div>
         </div>
         <div class="col" style="text-align: right;"><small class="form-text"
-            style="color: var(--bs-black);font-size: 20px;font-family: Lato, sans-serif;font-weight: bold;text-decoration:">1
-            out of 81</small></div>
+            style="color: var(--bs-black);font-size: 20px;font-family: Lato, sans-serif;font-weight: bold;">1 out of
+            81</small></div>
       </div>
       <div class="row" style="margin-top: 0;">
         <div class="col-md-6 col-xl-3 col-xxl-4">
@@ -63,12 +63,14 @@
             <div class="accordion-item">
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="false"
-                  aria-controls="accordion-1 .item-1">Research Strengths</button></h2>
+                  aria-controls="accordion-1 .item-1">Research Focus</button></h2>
               <div class="accordion-collapse collapse item-1" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
                   <div>
                     <div class="form-check"><input id="formCheck-1" class="form-check-input" type="checkbox" /><label
-                        class="form-check-label" for="formCheck-1">Label</label></div>
+                        class="form-check-label" for="formCheck-1">Data Science and Statistics</label></div>
+                    <div class="form-check"><input id="formCheck-7" class="form-check-input" type="checkbox" /><label
+                        class="form-check-label" for="formCheck-7">Foundations in AI</label></div>
                   </div>
                   <p class="mb-0">Show All Options</p>
                 </div>
@@ -77,26 +79,28 @@
             <div class="accordion-item">
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-2" aria-expanded="false"
-                  aria-controls="accordion-1 .item-2">Field of Research</button></h2>
+                  aria-controls="accordion-1 .item-2">Faculty Collaborative Research Area</button></h2>
               <div class="accordion-collapse collapse item-2" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
                   <div>
                     <div class="form-check"><input id="formCheck-2" class="form-check-input" type="checkbox" /><label
-                        class="form-check-label" for="formCheck-2">Label</label></div>
+                        class="form-check-label" for="formCheck-2">Chemical Biology &amp; Molecular Modelling</label>
+                    </div>
                     <p class="mb-0">Show All Options</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
-              <h2 class="accordion-header" role="tab"><button class="accordion-button" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-3" aria-expanded="true"
-                  aria-controls="accordion-1 .item-3">Availability for Supervision</button></h2>
-              <div class="accordion-collapse collapse show item-3" role="tabpanel" data-bs-parent="#accordion-1">
+              <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-3" aria-expanded="false"
+                  aria-controls="accordion-1 .item-3">Strategic Research Centre</button></h2>
+              <div class="accordion-collapse collapse item-3" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
                   <div>
                     <div class="form-check"><input id="formCheck-3" class="form-check-input" type="checkbox" /><label
-                        class="form-check-label" for="formCheck-3">Label</label></div>
+                        class="form-check-label" for="formCheck-3">HKBU-RCEES Joint Institute of Environmental
+                        Sciences</label></div>
                     <p class="mb-0">Show All Options</p>
                   </div>
                 </div>
@@ -105,40 +109,26 @@
             <div class="accordion-item">
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-4" aria-expanded="false"
-                  aria-controls="accordion-1 .item-4">Area / Faculty</button></h2>
+                  aria-controls="accordion-1 .item-4">Availability for Supervision</button></h2>
               <div class="accordion-collapse collapse item-4" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
                   <div>
                     <div class="form-check"><input id="formCheck-4" class="form-check-input" type="checkbox" /><label
-                        class="form-check-label" for="formCheck-4">Label</label></div>
+                        class="form-check-label" for="formCheck-4">Summer Research Programme</label></div>
                     <p class="mb-0">Show All Options</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
-              <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-5" aria-expanded="false"
-                  aria-controls="accordion-1 .item-5">Department / School / Institute</button></h2>
-              <div class="accordion-collapse collapse item-5" role="tabpanel" data-bs-parent="#accordion-1">
+              <h2 class="accordion-header" role="tab"><button class="accordion-button" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-5" aria-expanded="true"
+                  aria-controls="accordion-1 .item-5">Knowledge Transfer</button></h2>
+              <div class="accordion-collapse collapse show item-5" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
                   <div>
                     <div class="form-check"><input id="formCheck-5" class="form-check-input" type="checkbox" /><label
-                        class="form-check-label" for="formCheck-5">Label</label></div>
-                    <p class="mb-0">Show All Options</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-6" aria-expanded="false"
-                  aria-controls="accordion-1 .item-6">Strategic  Research and innovation Centre</button></h2>
-              <div class="accordion-collapse collapse item-6" role="tabpanel" data-bs-parent="#accordion-1">
-                <div class="accordion-body">
-                  <div>
-                    <div class="form-check"><input id="formCheck-6" class="form-check-input" type="checkbox" /><label
-                        class="form-check-label" for="formCheck-6">Label</label></div>
+                        class="form-check-label" for="formCheck-5">Healthcare - Diagnostics</label></div>
                     <p class="mb-0">Show All Options</p>
                   </div>
                 </div>
@@ -148,6 +138,7 @@
         </div>
         <div class="col-md-6 col-xl-8"></div>
       </div>
+
 
     </div>
   </div>
