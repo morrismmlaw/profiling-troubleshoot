@@ -138,8 +138,17 @@
         </div>
         <div class="col-md-8 col-xl-8">
 
-          <div>
-            <ExpertCard />
+          <div v-if="!hasLoadedProfiles">
+            Loading ...
+          </div>
+          <div v-else>
+
+            <div v-for="x in profileStore.profiles" :key="x">
+
+              {{ x }}
+
+            </div>
+
           </div>
 
         </div>
@@ -157,6 +166,8 @@ import SearchBar from '~/components/ui/SearchBar.vue';
 import ExpertCard from '~/components/ui/ExpertCard.vue';
 
 const profileStore = useProfileStore();
+
+const hasLoadedProfiles = computed(() => profileStore.profiles.length > 0);
 
 onMounted(async () => {
   profileStore.fetchProfiles(1, 5);
