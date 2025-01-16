@@ -143,14 +143,12 @@ const props = defineProps({
 </script>
 
 <style>
+
 .expert-card-image {
-  width: 100px;
-  height: 100px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
 
   object-fit: cover;
-  width: var(--profile-image-size);
-  height: var(--profile-image-size);
-
 }
 </style>
