@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="container-fluid m-1 p-1">
+    <div class="container-fluid m-0 p-0">
       {{ console.log(`You searched for: ${$route.query.q}`) }}
       <!-- <h1>Search Results</h1> -->
       <!-- <p>You searched for: {{ $route.query.q }}</p> -->
@@ -58,7 +58,7 @@
             81</small></div>
       </div>
       <div class="row" style="margin-top: 0;">
-        <div class="col-md-6 col-xl-3 col-xxl-4">
+        <div class="col-md-6 col-xl-3 col-xxl-3">
           <div id="accordion-1" class="accordion" role="tablist" style="width: 281px;margin-left: 10px;">
             <div class="accordion-item">
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
@@ -136,9 +136,14 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-xl-8"></div>
-      </div>
+        <div class="col-md-8 col-xl-8">
 
+          <div>
+            <ExpertCard />
+          </div>
+
+        </div>
+      </div>
 
     </div>
   </div>
@@ -149,6 +154,8 @@ const searchInput = ref('')
 const router = useRouter()
 
 import SearchBar from '~/components/ui/SearchBar.vue';
+
+import ExpertCard from '~/components/ui/ExpertCard.vue';
 
 </script>
 
