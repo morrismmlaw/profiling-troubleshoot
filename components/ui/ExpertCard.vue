@@ -6,7 +6,13 @@
         <div class="container">
           <div class="row" style="margin-top: 5px;">
             <div class="col-md-3 col-lg-3 col-xxl-3" style="padding-top: 29px;">
-              <div style="padding: 30px;padding-top: 0px;margin-right: 0px;margin-top: 10px;margin-left: -20px;"><svg
+              <div style="padding: 30px;padding-top: 0px;margin-right: 0px;margin-top: 10px;margin-left: -20px;">
+
+                <div class="profile-card">
+                  <NuxtImg :src="props.profile.photoURL" class="expert-card-image"></NuxtImg>
+                </div>
+
+                <!-- <svg
                   xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
                   style="font-size: 180px;border-radius: 80px;">
                   <path fill-rule="evenodd" clip-rule="evenodd"
@@ -15,14 +21,19 @@
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645 14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z"
                     fill="currentColor"></path>
-                </svg><label class="form-label" style="padding-left: 35px;padding-top: 7px;"><svg
-                    class="bi bi-hdd-network" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                    fill="currentColor" viewBox="0 0 16 16" style="font-size: 20px;margin-right: 5px;">
+                </svg> -->
+
+                <label class="form-label" style="padding-left: 35px;padding-top: 7px;"><svg class="bi bi-hdd-network"
+                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
+                    style="font-size: 20px;margin-right: 5px;">
                     <path d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1M3 4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"></path>
                     <path
                       d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8.5v3a1.5 1.5 0 0 1 1.5 1.5h5.5a.5.5 0 0 1 0 1H10A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5H.5a.5.5 0 0 1 0-1H6A1.5 1.5 0 0 1 7.5 10V7H2a2 2 0 0 1-2-2zm1 0v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1m6 7.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5">
                     </path>
-                  </svg><a href="#" style="padding: 4px;font-weight: bold;font-size: 12px;">View Network</a></label>
+                  </svg>
+                  <a href="#" style="padding: 4px;font-weight: bold;font-size: 12px;">View Network</a>
+                </label>
+
               </div>
             </div>
             <div class="col-md-8">
@@ -30,7 +41,7 @@
                 <div class="row">
                   <div class="col">
                     <div>
-                      <h1 style="font-size: 16px;line-height: 25.8px;">Mr John Smith</h1>
+                      <h1 style="font-size: 16px;line-height: 25.8px;"> {{ props.profile.name }} </h1>
                       <div><label class="form-label" style="margin-right: 5px;"><svg class="bi bi-book"
                             xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                             viewBox="0 0 16 16"
@@ -56,7 +67,8 @@
                 <div class="row">
                   <div class="col">
                     <div>
-                      <div style="padding-bottom: 5px;"><sub style="font-size: 11px;">Biography</sub></div>
+                      <div style="padding-bottom: 5px;"><sub style="font-size: 11px;">Biography: {{
+                        props.profile.biography }}</sub></div>
                     </div>
                   </div>
                 </div>
@@ -65,23 +77,28 @@
                     <div>
                       <div class="row">
                         <div class="col"><label class="col-form-label"
-                            style="font-weight: bold;font-size: 12px;">Research Focus:</label></div>
+                            style="font-weight: bold;font-size: 12px;">Research Focus: {{ props.profile.research_foci
+                            }}</label></div>
                       </div>
                       <div class="row">
                         <div class="col"><label class="col-form-label"
-                            style="font-weight: bold;font-size: 12px;">Strategic Research Centre:</label></div>
+                            style="font-weight: bold;font-size: 12px;">Strategic Research Centre: {{
+                              props.profile.research_centres }}</label></div>
                       </div>
                       <div class="row">
                         <div class="col"><label class="col-form-label"
-                            style="font-weight: bold;font-size: 12px;">Department:</label></div>
+                            style="font-weight: bold;font-size: 12px;">Department: {{ props.profile.departments
+                            }}</label></div>
                       </div>
                       <div class="row">
                         <div class="col"><label class="col-form-label"
-                            style="font-weight: bold;font-size: 12px;">Strategic Research Centre:</label></div>
+                            style="font-weight: bold;font-size: 12px;">Availiability for Supervision: {{
+                              props.profile.available_supervisions }}</label></div>
                       </div>
                       <div class="row">
                         <div class="col"><label class="col-form-label"
-                            style="font-weight: bold;font-size: 12px;">Faculty Collaborative Research Area:</label>
+                            style="font-weight: bold;font-size: 12px;">Faculty Collaborative Research Area: {{
+                              props.profile.fcras }}</label>
                         </div>
                       </div>
                     </div>
@@ -116,7 +133,7 @@
 
 <script lang="ts" setup>
 
-defineProps({
+const props = defineProps({
   profile: {
     type: Object,
     required: true
@@ -125,4 +142,15 @@ defineProps({
 
 </script>
 
-<style></style>
+<style>
+.expert-card-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+
+  object-fit: cover;
+  width: var(--profile-image-size);
+  height: var(--profile-image-size);
+
+}
+</style>
