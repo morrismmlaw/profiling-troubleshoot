@@ -137,19 +137,15 @@
           </div>
         </div>
         <div class="col-md-8 col-xl-8">
-
           <div v-if="!hasLoadedProfiles">
             Loading ...
           </div>
           <div v-else>
-
-            <div v-for="x in profileStore.profiles" :key="x">
+            <div v-for="profile in profileStore.profiles" :key="profile">
               <!-- {{ x }} -->
-              <ExpertCard :profile="x" />
+              <ExpertCard :profile="profile" />
             </div>
-
           </div>
-
         </div>
       </div>
 
@@ -163,6 +159,7 @@ const router = useRouter()
 
 import SearchBar from '~/components/ui/SearchBar.vue';
 import ExpertCard from '~/components/ui/ExpertCard.vue';
+import DottedLine from '~/components/ui/DottedLine.vue';
 
 const profileStore = useProfileStore();
 
