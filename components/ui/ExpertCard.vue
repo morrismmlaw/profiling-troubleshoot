@@ -6,7 +6,7 @@
         <div class="container">
           <div class="row" style="margin-top: 5px;">
             <div class="col-md-3 col-lg-3 col-xxl-3" style="padding-top: 29px;">
-              <div style="padding: 30px;padding-top: 0px;margin-right: 0px;margin-top: 0px;margin-left: -20px;"><svg
+              <div style="padding: 30px;padding-top: 0px;margin-right: 0px;margin-top: 10px;margin-left: -20px;"><svg
                   xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
                   style="font-size: 180px;border-radius: 80px;">
                   <path fill-rule="evenodd" clip-rule="evenodd"
@@ -64,20 +64,24 @@
                   <div class="col">
                     <div>
                       <div class="row">
-                        <div class="col"><label class="col-form-label" style="font-weight: bold;font-size: 12px;">Field
-                            of Research:</label></div>
-                      </div>
-                      <div class="row">
-                        <div class="col"><label class="col-form-label" style="font-weight: bold;font-size: 12px;">Area /
-                            Faculty:</label></div>
+                        <div class="col"><label class="col-form-label"
+                            style="font-weight: bold;font-size: 12px;">Research Focus:</label></div>
                       </div>
                       <div class="row">
                         <div class="col"><label class="col-form-label"
-                            style="font-weight: bold;font-size: 12px;">Department / School:</label></div>
+                            style="font-weight: bold;font-size: 12px;">Strategic Research Centre:</label></div>
                       </div>
                       <div class="row">
                         <div class="col"><label class="col-form-label"
-                            style="font-weight: bold;font-size: 12px;">Strategic Research and innovation Centre:</label>
+                            style="font-weight: bold;font-size: 12px;">Department:</label></div>
+                      </div>
+                      <div class="row">
+                        <div class="col"><label class="col-form-label"
+                            style="font-weight: bold;font-size: 12px;">Strategic Research Centre:</label></div>
+                      </div>
+                      <div class="row">
+                        <div class="col"><label class="col-form-label"
+                            style="font-weight: bold;font-size: 12px;">Faculty Collaborative Research Area:</label>
                         </div>
                       </div>
                     </div>
@@ -111,6 +115,13 @@
 </template>
 
 <script lang="ts" setup>
+
+defineProps({
+  profile: {
+    type: Object,
+    required: true
+  }
+});
 
 </script>
 
