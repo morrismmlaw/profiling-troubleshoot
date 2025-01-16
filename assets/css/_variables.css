@@ -97,7 +97,7 @@
   --shadow: 0px 12px 33px 0px rgba(0, 0, 0, .06), 0px 3.618px 9.949px 0px rgba(0, 0, 0, .04)
 }
 
-.col-form-label {
+.col-form-label-profile {
   color: #006d88;
   font-family: Montserrat, sans-serif;
   font-size: 15px;
@@ -108,7 +108,7 @@
   text-transform: uppercase;
 }
 
-.col-form-tag {
+.col-form-tag-profile {
   color: #006d88;
   font-family: Montserrat, sans-serif;
   font-size: 15px;

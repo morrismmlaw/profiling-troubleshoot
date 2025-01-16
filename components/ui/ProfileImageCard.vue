@@ -24,7 +24,7 @@ const handleCroppedImg = (croppedImg: Ref<CroppedImg>) => {
     if (croppedImg.value.clear === true) {
       // imgUrl.value = defaultImg.value;
       imgUrl.value = props.profile.attributes.photoURL || defaultImg.value;
-      emit('croppedImg', null);
+      emit('croppedImg', croppedImg);
     } else {
       // handle the croppedImg value as needed
       // console.log('Capture Emit Cropped image:', croppedImg);

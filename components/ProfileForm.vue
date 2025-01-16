@@ -472,7 +472,7 @@ const handleHasChange = (e) => {
                 <o-tab-item :value="0" label="About me" icon="image">
                   <div class="card-body">
                     <section>
-                      <o-field class="col-form-tag" label="DEPARTMENT">
+                      <o-field class="col-form-tag-profile" label="DEPARTMENT">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
                           :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
@@ -481,14 +481,14 @@ const handleHasChange = (e) => {
                     </section>
                     <div class="row mb-3 rounded-5 border-4">
                       <div class="row">
-                        <o-field label="POST TITLE" class="col-form-label">
+                        <o-field label="POST TITLE" class="col-form-label-profile">
                           <o-input :placeholder="`${props.profile.attributes.post}`" disabled />
                         </o-field>
                       </div>
                     </div>
                     <div class="row mb-3 rounded-5 border-4">
                       <div class="row">
-                        <label for="biography" class="col col-form-label">Biography</label>
+                        <label for="biography" class="col col-form-label-profile">Biography</label>
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
@@ -498,7 +498,7 @@ const handleHasChange = (e) => {
                     </div>
                     <div class="row mb-3">
                       <div class="row">
-                        <label for="academicInterests" class="col col-form-label">Academic Interests</label>
+                        <label for="academicInterests" class="col col-form-label-profile">Academic Interests</label>
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
@@ -508,7 +508,7 @@ const handleHasChange = (e) => {
                     </div>
                     <div class="row mb-3">
                       <div class="row">
-                        <label for="academicInterests" class="col col-form-label">Research Awards / Achievements
+                        <label for="academicInterests" class="col col-form-label-profile">Research Awards / Achievements
                           (Optional)</label>
                       </div>
                       <div class="row pe-0">
@@ -523,7 +523,7 @@ const handleHasChange = (e) => {
                 <o-tab-item :value="1" label="My Research" icon="pen">
                   <div class="card-body">
                     <section>
-                      <o-field class="col-form-tag" label="RESEARCH FOCUS">
+                      <o-field class="col-form-tag-profile" label="RESEARCH FOCUS">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, RFTags)" v-model="RFTags"
                           :options="RFOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
@@ -531,7 +531,7 @@ const handleHasChange = (e) => {
                       </o-field>
                     </section>
                     <section>
-                      <o-field class="col-form-tag" label="FACULTY COLLABORATIVE RESEARCH AREA">
+                      <o-field class="col-form-tag-profile" label="FACULTY COLLABORATIVE RESEARCH AREA">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, FCRATags)" v-model="FCRATags"
                           :options="FCRAOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
@@ -539,7 +539,7 @@ const handleHasChange = (e) => {
                       </o-field>
                     </section>
                     <section>
-                      <o-field class="col-form-tag" label="STRATEGIC RESEARCH CENTRE">
+                      <o-field class="col-form-tag-profile" label="STRATEGIC RESEARCH CENTRE">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags"
                           :options="SRCOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
@@ -552,7 +552,7 @@ const handleHasChange = (e) => {
                 <o-tab-item :value="2" label="SDGs" icon="book">
                   <div class="card-body">
                     <div class="">
-                      <h6 class="col-form-tag">SUSTAINABLE DEVELOPMENT GOALS (SDGs)</h6>
+                      <h6 class="col-form-tag-profile">SUSTAINABLE DEVELOPMENT GOALS (SDGs)</h6>
                     </div>
                     <div class="">
                       <div class="columns is-multiline">
@@ -566,7 +566,7 @@ const handleHasChange = (e) => {
                                 </div>
                               </template>
                               <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
-                                <p class="col-form-label-sdg"> SDG {{ sdg.sdgid }} </p>
+                                <p class="col-form-label-profile-sdg"> SDG {{ sdg.sdgid }} </p>
                                 <nuxt-img
                                   :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
                                   :alt="sdg.title" class="img-fluid checkbox-img" />
@@ -582,7 +582,7 @@ const handleHasChange = (e) => {
                 <o-tab-item :value="3" label="Teaching and Supervision" icon="music">
                   <div class="card-body">
                     <section>
-                      <o-field class="col-form-tag" label="AVAILABILITY FOR SUPERVISION">
+                      <o-field class="col-form-tag-profile" label="AVAILABILITY FOR SUPERVISION">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, ASTags)" v-model="ASTags"
                           :options="ASOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
@@ -595,7 +595,7 @@ const handleHasChange = (e) => {
                 <o-tab-item :value="4" label="Knowledge Transfer" icon="book">
                   <div class="card-body">
                     <section>
-                      <o-field class="col-form-tag" label="KNOWLEDGE TRANSFER">
+                      <o-field class="col-form-tag-profile" label="KNOWLEDGE TRANSFER">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, KTTags)" v-model="KTTags"
                           :options="KTOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
