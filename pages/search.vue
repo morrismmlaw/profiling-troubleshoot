@@ -18,8 +18,9 @@
     </div>
 
     <div class="container-fluid m-1 p-1">
+      {{ console.log(`You searched for: ${$route.query.q}`) }}
       <!-- <h1>Search Results</h1> -->
-      <p>You searched for: {{ $route.query.q }}</p>
+      <!-- <p>You searched for: {{ $route.query.q }}</p> -->
 
       <div class="row" style="margin-top: 27px;margin-bottom: 10px;">
         <div class="col"><small class="form-text"
