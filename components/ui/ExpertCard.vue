@@ -3,7 +3,7 @@
 
     <div>
       <div class="container">
-        <div class="row" style="margin-top: 5px;">
+        <div class="row shadow-sm mb-2 rounded" style="margin-top: 5px;">
           <div class="col-md-3 col-lg-3 col-xxl-3" style="padding-top: 29px;">
             <div style="padding: 30px;padding-top: 0px;margin-right: 0px;margin-top: 10px;margin-left: -20px;">
 
