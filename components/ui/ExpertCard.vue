@@ -86,7 +86,7 @@
               <div class="row">
                 <div class="col">
                   <div>
-                    <div class="row">
+                    <div v-if="props.profile.research_foci.length > 0" class="row">
                       <div class="col"><label class="col-form-label" style="font-size: 12px;">
                           <b>Research Focus: </b>
                           <!-- {{ props.profile.research_foci }} -->
@@ -95,7 +95,7 @@
                         </label>
                       </div>
                     </div>
-                    <div class="row">
+                    <div v-if="props.profile.research_centres.length > 0" class="row">
                       <div class="col"><label class="col-form-label" style="font-size: 12px;">
                           <b> Strategic Research Centre: </b>
                           <!-- {{ props.profile.research_centres }} -->
@@ -104,7 +104,7 @@
                         </label>
                       </div>
                     </div>
-                    <div class="row">
+                    <div v-if="props.profile.departments.length > 0" class="row">
                       <div class="col"><label class="col-form-label" style="font-size: 12px;">
                           <b>Department: </b>
                           <!-- {{ props.profile.departments }} -->
@@ -113,7 +113,7 @@
                         </label>
                       </div>
                     </div>
-                    <div class="row">
+                    <div v-if="props.profile.available_supervisions.length > 0" class="row">
                       <div class="col"><label class="col-form-label" style="font-size: 12px;">
                           <b>Availiability for Supervision: </b>
                           <!-- {{ props.profile.available_supervisions }} -->
@@ -123,7 +123,7 @@
                         </label>
                       </div>
                     </div>
-                    <div class="row">
+                    <div v-if="props.profile.fcras.length > 0" class="row">
                       <div class="col"><label class="col-form-label" style="font-size: 12px">
                           <b>Faculty Collaborative Research Area: </b>
                           <!-- {{ props.profile.fcras }} -->
