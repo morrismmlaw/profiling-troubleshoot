@@ -32,7 +32,7 @@
               <div class="dropdown show" style="width: 15vw;"><button class="btn btn-primary dropdown-toggle"
                   aria-expanded="true" data-bs-toggle="dropdown" type="button"
                   style="background: rgb(59,119,184);border-radius: 2px;width: 15vw;">Sort by:</button>
-                <div class="dropdown-menu show" data-bs-popper="none"><a class="dropdown-item" href="#">Relevance</a><a
+                <div class="dropdown-menu" data-bs-popper="none"><a class="dropdown-item" href="#">Relevance</a><a
                     class="dropdown-item" href="#">Name</a><a class="dropdown-item" href="#">Department</a></div>
               </div>
             </div>

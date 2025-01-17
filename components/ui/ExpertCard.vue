@@ -87,29 +87,49 @@
                 <div class="col">
                   <div>
                     <div class="row">
-                      <div class="col"><label class="col-form-label" style="font-weight: bold;font-size: 12px;">Research
-                          Focus: {{ props.profile.research_foci
-                          }}</label></div>
+                      <div class="col"><label class="col-form-label" style="font-size: 12px;">
+                          <b>Research Focus: </b>
+                          <!-- {{ props.profile.research_foci }} -->
+                          <span v-for="(focus, index) in props.profile.research_foci" :key="focus.id">
+                            {{ focus.name }}{{ index < props.profile.research_foci.length - 1 ? ', ' : '' }} </span>
+                        </label>
+                      </div>
                     </div>
                     <div class="row">
-                      <div class="col"><label class="col-form-label"
-                          style="font-weight: bold;font-size: 12px;">Strategic Research Centre: {{
-                            props.profile.research_centres }}</label></div>
+                      <div class="col"><label class="col-form-label" style="font-size: 12px;">
+                          <b> Strategic Research Centre: </b>
+                          <!-- {{ props.profile.research_centres }} -->
+                          <span v-for="(focus, index) in props.profile.research_centres" :key="focus.id">
+                            {{ focus.name }}{{ index < props.profile.research_centres.length - 1 ? ', ' : '' }} </span>
+                        </label>
+                      </div>
                     </div>
                     <div class="row">
-                      <div class="col"><label class="col-form-label"
-                          style="font-weight: bold;font-size: 12px;">Department: {{ props.profile.departments
-                          }}</label></div>
+                      <div class="col"><label class="col-form-label" style="font-size: 12px;">
+                          <b>Department: </b>
+                          <!-- {{ props.profile.departments }} -->
+                          <span v-for="(focus, index) in props.profile.departments" :key="focus.id">
+                            {{ focus.name }}{{ index < props.profile.departments.length - 1 ? ', ' : '' }} </span>
+                        </label>
+                      </div>
                     </div>
                     <div class="row">
-                      <div class="col"><label class="col-form-label"
-                          style="font-weight: bold;font-size: 12px;">Availiability for Supervision: {{
-                            props.profile.available_supervisions }}</label></div>
+                      <div class="col"><label class="col-form-label" style="font-size: 12px;">
+                          <b>Availiability for Supervision: </b>
+                          <!-- {{ props.profile.available_supervisions }} -->
+                          <span v-for="(focus, index) in props.profile.available_supervisions" :key="focus.id">
+                            {{ focus.name }}{{ index < props.profile.available_supervisions.length - 1 ? ', ' : ''
+                              }}</span>
+                        </label>
+                      </div>
                     </div>
                     <div class="row">
-                      <div class="col"><label class="col-form-label" style="font-weight: bold;font-size: 12px;">Faculty
-                          Collaborative Research Area: {{
-                            props.profile.fcras }}</label>
+                      <div class="col"><label class="col-form-label" style="font-size: 12px">
+                          <b>Faculty Collaborative Research Area: </b>
+                          <!-- {{ props.profile.fcras }} -->
+                          <span v-for="(focus, index) in props.profile.fcras" :key="focus.id">
+                            {{ focus.name }}{{ index < props.profile.fcras.length - 1 ? ', ' : '' }}</span>
+                        </label>
                       </div>
                     </div>
                   </div>
