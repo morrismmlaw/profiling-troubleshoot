@@ -27,7 +27,7 @@
               <div class="row">
                 <div class="col" style="margin-top: 5px">
                   <div>
-                    <h1 style="font-size: 19px;line-height: 20px;"> {{ props.profile.name }} </h1>
+                    <h1 class="clickable-header" @click="navigateToProfile"> {{ props.profile.name }} </h1>
                     <div class="row">
                       <div class="col-auto">
                         <label class="form-label" style="margin-right: 5px;"><svg class="bi bi-book"
@@ -68,8 +68,8 @@
                     <div style="padding-bottom: 5px;">
                       <!-- <b> Biography: </b> -->
                       <div v-html="truncatedBiography"></div>
-                       <!-- <tiptap-viewer :text="props.profile.biography" /> -->
-                       <!-- <tiptap-viewer :text="truncatedBiography" /> -->
+                      <!-- <tiptap-viewer :text="props.profile.biography" /> -->
+                      <!-- <tiptap-viewer :text="truncatedBiography" /> -->
                       <!-- <sub style="font-size: 11px;">
                         {{ props.profile.biography }}
                       </sub> -->
@@ -158,6 +158,8 @@
 
 <script lang="ts" setup>
 
+const router = useRouter();
+
 const props = defineProps({
   profile: {
     type: Object,
@@ -173,6 +175,10 @@ const truncatedBiography = computed(() => {
   return props.profile.biography;
 });
 
+const navigateToProfile = () => {
+  router.push(`/${props.profile.ssoid}`);
+};
+
 import TiptapViewer from '../TiptapViewer.vue';
 
 </script>
@@ -184,5 +190,26 @@ import TiptapViewer from '../TiptapViewer.vue';
   border-radius: 50%;
 
   object-fit: cover;
+  cursor: pointer;
+}
+
+.expert-card-image:hover {
+  transition: filter 0.5s ease, opacity 0.5s ease; 
+  filter: brightness(0.8);
+  position: relative;
+}
+
+
+.clickable-header {
+  font-size: 19px;
+  line-height: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  /* Remove underline by default */
+}
+
+.clickable-header:hover {
+  text-decoration: underline;
+  /* Add underline on hover */
 }
 </style>
