@@ -7,7 +7,7 @@
           <div class="col-md-3 col-lg-3 col-xxl-3" style="padding-top: 29px;">
             <div style="padding: 30px;padding-top: 0px;margin-right: 0px;margin-top: 10px;margin-left: -20px;">
               <div class="profile-card">
-                <NuxtImg :src="props.profile.photoURL" class="expert-card-image"></NuxtImg>
+                <NuxtImg :src="props.profile.photoURL" class="expert-card-image" @click="navigateToProfile"></NuxtImg>
               </div>
               <label class="form-label" style="padding-left: 35px;padding-top: 7px;"><svg class="bi bi-hdd-network"
                   xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
@@ -176,7 +176,10 @@ const truncatedBiography = computed(() => {
 });
 
 const navigateToProfile = () => {
-  router.push(`/${props.profile.ssoid}`);
+    router.push({
+      path: `/profile/${props.profile.ssoid}`,
+      query: { from: 'search'}
+    })
 };
 
 import TiptapViewer from '../TiptapViewer.vue';

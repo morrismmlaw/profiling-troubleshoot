@@ -14,9 +14,14 @@ const ssoid = route.params.ssoid
 
 const UATMode = () => {
   console.log(from);
-
   console.log(ssoid);
   return from === 'UATlogin';
+}
+
+const searchMode = () => {
+  console.log(from);
+  console.log(ssoid);
+  return from === 'search';
 }
 
 const handleSave = async (emitData) => {
@@ -31,11 +36,25 @@ const handleSave = async (emitData) => {
     success = await profileStore.updateProfile(data, authStore.user, hasChangedImage)
   } else {
     //Skip The Update Photo Code here:
-      const { uploadPhoto, ...restData } = data;
+    const { uploadPhoto, ...restData } = data;
     success = await profileStore.updateProfile(restData, authStore.user, hasChangedImage)
   }
 
-  if (UATMode()) {
+  console.log('From: ', from);
+
+  if (searchMode()) {
+    console.log('IN Search MODE')
+    if (success) {
+      //Update that Individual..
+      alert('Profile updated successfully')
+      //download new Data.
+      await authStore.setProfile(authStore.user.attributes.ssoid);
+      // location.reload();
+    } else {
+      alert('Failed to update profile')
+      await authStore.setProfile(authStore.user.attributes.ssoid);
+    }
+  } else if (UATMode()) {
     console.log('IN UAT MODE')
     if (success) {
       //Update that Individual..
@@ -71,7 +90,16 @@ onMounted(async () => {
   console.log('SSOID', ssoid)
   console.log(from);
 
-  if (UATMode()) {
+  if (searchMode()) {
+    console.log('IN Search MODE')
+
+    const sucess = await authStore.setProfile(ssoid);
+
+    //Wait data loading then load the form component.
+    if (sucess) {
+      isLoading.value = false;
+    }
+  } else if (UATMode()) {
     console.log('IN UAT MODE')
 
     const sucess = await authStore.setProfile(authStore.user.attributes.ssoid);
