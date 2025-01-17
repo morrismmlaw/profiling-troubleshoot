@@ -163,7 +163,9 @@ import DottedLine from '~/components/ui/DottedLine.vue';
 
 const profileStore = useProfileStore();
 
-const hasLoadedProfiles = computed(() => profileStore.profiles.length > 0);
+const hasLoadedProfiles = computed(() => {
+  return profileStore && profileStore.profiles && profileStore.profiles.length > 0;
+});
 
 onMounted(async () => {
   await profileStore.fetchProfiles(1, 5);
