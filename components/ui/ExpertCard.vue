@@ -76,16 +76,19 @@
                     <div style="padding-bottom: 5px;"><sub style="font-size: 11px;">Biography: {{
                       props.profile.biography }}</sub></div>
                   </div> -->
+
                   <div>
                     <div style="padding-bottom: 5px;">
-                      <b> Biography: </b>
-                      <div v-html="truncatedBiography">
-                      </div>
-                      <sub style="font-size: 11px;">
-                        <!-- {{ props.profile.biography }} -->
-                      </sub>
+                      <!-- <b> Biography: </b> -->
+                      <div v-html="truncatedBiography"></div>
+                       <!-- <tiptap-viewer :text="props.profile.biography" /> -->
+                       <!-- <tiptap-viewer :text="truncatedBiography" /> -->
+                      <!-- <sub style="font-size: 11px;">
+                        {{ props.profile.biography }}
+                      </sub> -->
                     </div>
                   </div>
+
                 </div>
               </div>
               <div class="row">
