@@ -32,7 +32,7 @@
               <div class="dropdown show" style="width: 15vw;"><button class="btn btn-primary dropdown-toggle"
                   aria-expanded="true" data-bs-toggle="dropdown" type="button"
                   style="background: rgb(59,119,184);border-radius: 2px;width: 15vw;">Sort by:</button>
-                <div class="dropdown-menu" data-bs-popper="none"><a class="dropdown-item" href="#">Relevance</a><a
+                <div class="dropdown-menu show" data-bs-popper="none"><a class="dropdown-item" href="#">Relevance</a><a
                     class="dropdown-item" href="#">Name</a><a class="dropdown-item" href="#">Department</a></div>
               </div>
             </div>
@@ -58,9 +58,9 @@
             81</small></div>
       </div>
       <div class="row" style="margin-top: 0;">
-        <div class="col-md-6 col-xl-3 col-xxl-3">
+        <div class="col-md-6 col-xl-3 col-xxl-3" style="flex: 0 0 auto !important; width: 351.875px !important;">
           <div id="accordion-1" class="accordion" role="tablist" style="width: 281px;margin-left: 10px;">
-            <div class="accordion-item">
+            <div class="accordion-item" style="width: 324px;">
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="false"
                   aria-controls="accordion-1 .item-1">Research Focus</button></h2>
@@ -76,7 +76,7 @@
                 </div>
               </div>
             </div>
-            <div class="accordion-item">
+            <div class="accordion-item" style="width: 324px;">
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-2" aria-expanded="false"
                   aria-controls="accordion-1 .item-2">Faculty Collaborative Research Area</button></h2>
@@ -91,7 +91,7 @@
                 </div>
               </div>
             </div>
-            <div class="accordion-item">
+            <div class="accordion-item" style="width: 324px;">
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-3" aria-expanded="false"
                   aria-controls="accordion-1 .item-3">Strategic Research Centre</button></h2>
@@ -106,7 +106,7 @@
                 </div>
               </div>
             </div>
-            <div class="accordion-item">
+            <div class="accordion-item" style="width: 324px;">
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-4" aria-expanded="false"
                   aria-controls="accordion-1 .item-4">Availability for Supervision</button></h2>
@@ -120,11 +120,11 @@
                 </div>
               </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" role="tab"><button class="accordion-button" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-5" aria-expanded="true"
+            <div class="accordion-item" style="width: 324px;">
+              <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-5" aria-expanded="false"
                   aria-controls="accordion-1 .item-5">Knowledge Transfer</button></h2>
-              <div class="accordion-collapse collapse show item-5" role="tabpanel" data-bs-parent="#accordion-1">
+              <div class="accordion-collapse collapse item-5" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
                   <div>
                     <div class="form-check"><input id="formCheck-5" class="form-check-input" type="checkbox" /><label
@@ -142,16 +142,32 @@
           </div>
           <div v-else>
             <div v-for="profile in profileStore.profiles" :key="profile">
-              <!-- {{ x }} -->
               <ExpertCard :profile="profile" />
             </div>
           </div>
         </div>
+
       </div>
+
 
     </div>
   </div>
+
+  <!-- This is Expert Card Section -->
+  <!-- <div class="col-md-8 col-xl-8">
+    <div v-if="!hasLoadedProfiles">
+      Loading ...
+    </div>
+    <div v-else>
+      <div v-for="profile in profileStore.profiles" :key="profile">
+        <ExpertCard :profile="profile" />
+      </div>
+    </div>
+  </div> -->
+
 </template>
+
+
 
 <script lang="ts" setup>
 const searchInput = ref('')

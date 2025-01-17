@@ -38,9 +38,9 @@
           <div class="col-md-8">
             <div>
               <div class="row">
-                <div class="col">
+                <div class="col" style="margin-top: 5px">
                   <div>
-                    <h1 style="font-size: 16px;line-height: 25.8px;"> {{ props.profile.name }} </h1>
+                    <h1 style="font-size: 19px;line-height: 20px;"> {{ props.profile.name }} </h1>
                     <div class="row">
                       <div class="col-auto">
                         <label class="form-label" style="margin-right: 5px;"><svg class="bi bi-book"
@@ -72,9 +72,14 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <div>
+                  <!-- <div>
                     <div style="padding-bottom: 5px;"><sub style="font-size: 11px;">Biography: {{
                       props.profile.biography }}</sub></div>
+                  </div> -->
+                  <div>
+                    <div style="padding-bottom: 5px;"><sub style="font-size: 11px;">Biography:
+                        {{ props.profile.biography }}</sub>
+                    </div>
                   </div>
                 </div>
               </div>
