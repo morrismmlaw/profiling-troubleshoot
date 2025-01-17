@@ -71,14 +71,19 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col">
+                <div class="col" style="height: fit-content;">
                   <!-- <div>
                     <div style="padding-bottom: 5px;"><sub style="font-size: 11px;">Biography: {{
                       props.profile.biography }}</sub></div>
                   </div> -->
                   <div>
-                    <div style="padding-bottom: 5px;"><sub style="font-size: 11px;">Biography:
-                        {{ props.profile.biography }}</sub>
+                    <div style="padding-bottom: 5px;">
+                      <b> Biography: </b>
+                      <div v-html="truncatedBiography">
+                      </div>
+                      <sub style="font-size: 11px;">
+                        <!-- {{ props.profile.biography }} -->
+                      </sub>
                     </div>
                   </div>
                 </div>
@@ -169,6 +174,16 @@ const props = defineProps({
     required: true
   }
 });
+
+const truncatedBiography = computed(() => {
+  const words = props.profile.biography.split(' ');
+  if (words.length > 50) {
+    return words.slice(0, 50).join(' ') + '...';
+  }
+  return props.profile.biography;
+});
+
+import TiptapViewer from '../TiptapViewer.vue';
 
 </script>
 
