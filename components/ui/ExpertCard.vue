@@ -9,16 +9,16 @@
               <div class="profile-card">
                 <NuxtImg :src="props.profile.photoURL" class="expert-card-image" @click="navigateToProfile"></NuxtImg>
               </div>
-              <label class="form-label" style="padding-left: 35px;padding-top: 7px;"><svg class="bi bi-hdd-network"
+              <!-- <label class="form-label" style="padding-left: 35px;padding-top: 7px;"><svg class="bi bi-hdd-network"
                   xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
                   style="font-size: 20px;margin-right: 5px;">
                   <path d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1M3 4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"></path>
                   <path
                     d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8.5v3a1.5 1.5 0 0 1 1.5 1.5h5.5a.5.5 0 0 1 0 1H10A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5H.5a.5.5 0 0 1 0-1H6A1.5 1.5 0 0 1 7.5 10V7H2a2 2 0 0 1-2-2zm1 0v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1m6 7.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5">
                   </path>
-                </svg>
-                <a href="#" style="padding: 4px;font-weight: bold;font-size: 12px;">View Network</a>
-              </label>
+                </svg> -->
+                <!-- <a href="#" style="padding: 4px;font-weight: bold;font-size: 12px;">View Network</a> -->
+              <!-- </label> -->
 
             </div>
           </div>
@@ -43,7 +43,7 @@
                       </div>
                       <div class="col">
                         <label class="form-label"><svg class="bi bi-star-fill" xmlns="http://www.w3.org/2000/svg"
-                            width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
+                            width="0.5em" height="0.5em" fill="currentColor" viewBox="0 0 16 16"
                             style="font-size: 22px;margin: 0px;margin-right: 5px;width: 20px;height: 20px;">
                             <path
                               d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
