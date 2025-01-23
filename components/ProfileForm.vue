@@ -263,77 +263,51 @@ const keepOpen = ref(true);
 
 const checkboxGroup = ref([]);
 
+/**
+ * Loads form data into the ORUGA form.
+ * @throws {Error} If formData is not available.
+ */
 const loadFormDataToORUGA = () => {
   if (!formData) {
     throw new Error("No Form Data!");
   }
 
+  const loadTags = (data, options, tags) => {
+    tags.value = data.map((item) => {
+      const matchingOption = options.find((option) => option.label === item.name);
+      return matchingOption ? matchingOption.value : [];
+    });
+  };
+
   // Load default SDG data into checkbox group.
   if (formData.sdgs) {
-    // Map the SDG objects to their IDs
-    // console.log("Loading checkbox");
-    // checkboxGroup.value = formData.sdgs.map((sdg) => sdg);
     checkboxGroup.value = formData.sdgs.map((sdg) => sdg.sdgid);
   }
 
   if (formData.research_foci) {
-    // console.log('load research_foci', formData.research_foci);
-    // console.log('load RSOptionsOrugaNew', ROOptionsOrugaNew);
-    RFTags.value = formData.research_foci.map((rs) => {
-      const matchingOption = RFOptionsOrugaNew.find((option) => {
-        // console.log("Checking", option.label, rs.name);
-        return option.label === rs.name
-      });
-      // console.log("Match Research focus:", matchingOption);
-      return matchingOption ? matchingOption.value : [];
-    });
+    loadTags(formData.research_foci, RFOptionsOrugaNew, RFTags);
   }
 
   if (formData.research_centres) {
-    SRCTags.value = formData.research_centres.map((rs) => {
-      const matchingOption = SRCOptionsOrugaNew.find((option) => {
-        return option.label === rs.name
-      });
-      return matchingOption ? matchingOption.value : [];
-    });
+    loadTags(formData.research_centres, SRCOptionsOrugaNew, SRCTags);
   }
 
   if (formData.fcras) {
-    FCRATags.value = formData.fcras.map((rs) => {
-      const matchingOption = FCRAOptionsOrugaNew.find((option) => {
-        return option.label === rs.name
-      });
-      return matchingOption ? matchingOption.value : [];
-    });
+    loadTags(formData.fcras, FCRAOptionsOrugaNew, FCRATags);
   }
 
   if (formData.available_supervisions) {
-    ASTags.value = formData.available_supervisions.map((rs) => {
-      const matchingOption = ASOptionsOrugaNew.find((option) => {
-        return option.label === rs.name
-      });
-      return matchingOption ? matchingOption.value : [];
-    });
+    loadTags(formData.available_supervisions, ASOptionsOrugaNew, ASTags);
   }
 
   if (formData.departments) {
-    DEPTags.value = formData.departments.map((rs) => {
-      const matchingOption = DEPOptionsOrugaNew.find((option) => {
-        return option.label === rs.name
-      });
-      return matchingOption ? matchingOption.value : [];
-    });
+    loadTags(formData.departments, DEPOptionsOrugaNew, DEPTags);
   }
 
   if (formData.tech_offers) {
-    KTTags.value = formData.tech_offers.map((rs) => {
-      const matchingOption = KTOptionsOrugaNew.find((option) => {
-        return option.label === rs.name
-      });
-      return matchingOption ? matchingOption.value : [];
-    });
+    loadTags(formData.tech_offers, KTOptionsOrugaNew, KTTags);
   }
-}
+};
 
 /**
  * This function takes a sdgid as a parameter and returns the corresponding SDG object from the collections prop, after removing the 'documentId' and 'iconweb.documentId' properties.
@@ -432,13 +406,12 @@ onMounted(() => {
   sortTagOptions();
   debugTagsMsg();
 
-  console.log("Current FormData", formData);
+  // console.log("Current FormData", formData);
 })
 
 
 const handleHasChange = (e) => {
-
-  console.log('Has Image been changed?', e);
+  // console.log('Has Image been changed?', e);
 
   if (e === true) {
     hasChangedImage.value = true;
@@ -446,7 +419,7 @@ const handleHasChange = (e) => {
     hasChangedImage.value = false;
   }
 
-  console.log('Has Image been changed?', hasChangedImage.value);
+  // console.log('Has Image been changed?', hasChangedImage.value);
 }
 
 </script>
