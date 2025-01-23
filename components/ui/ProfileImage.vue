@@ -11,7 +11,7 @@
 
     <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute image-icon upload-icon">
       <o-tooltip label="Upload an alternative image" position="bottom" data-bs-toggle="modal"
-        data-bs-target="#modal-cropper">
+        data-bs-target="#modal-cropper" variant="secondary">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-upload"
           viewBox="0 0 16 16">
           <path
@@ -24,7 +24,7 @@
 
 
     <button @click="" class="position-absolute image-icon close-icon">
-      <o-tooltip label="Clear Image" position="bottom" data-bs-toggle="modal" data-bs-target="#modal-cropper">
+      <o-tooltip label="Clear Image" position="bottom" data-bs-toggle="modal" data-bs-target="#modal-cropper" variant="danger">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg"
           viewBox="0 0 16 16">
           <path
@@ -251,6 +251,9 @@ onMounted(() => {
   border: none;
   opacity: 0.9;
 
+  left: calc(50% + 30px);
+  top: calc(50% - 70px);
+
   :hover {
     opacity: 1;
     // background-color: rgb(161, 161, 161, 0.3);
@@ -263,13 +266,13 @@ onMounted(() => {
 
 //POSITION CSS!
 .upload-icon {
-  left: calc(50% + 30px);
-  top: calc(50% - 70px);
+  left: calc(50% + 35px);
 }
 
 
 .close-icon {
-  left: calc(50% + 80px);
-  top: calc(50% - 70px);
+  left: calc(50% + 85px);
+
+  background: rgba(255, 61, 61, 0.721);
 }
 </style>
