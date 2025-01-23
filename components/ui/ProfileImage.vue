@@ -9,7 +9,7 @@
     <nuxt-img class="position-relative rounded-circle profile-card-image shadow-lg" :src="props.imgUrl"
       alt="Card image cap" />
 
-    <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute upload-icon">
+    <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute image-icon upload-icon">
       <o-tooltip label="Upload an alternative image" position="bottom" data-bs-toggle="modal"
         data-bs-target="#modal-cropper">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-upload"
@@ -18,6 +18,17 @@
             d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
           <path
             d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" />
+        </svg>
+      </o-tooltip>
+    </button>
+
+
+    <button @click="" class="position-absolute image-icon close-icon">
+      <o-tooltip label="Clear Image" position="bottom" data-bs-toggle="modal" data-bs-target="#modal-cropper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg"
+          viewBox="0 0 16 16">
+          <path
+            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
         </svg>
       </o-tooltip>
     </button>
@@ -105,7 +116,9 @@ const dropFiles = ref<File[]>([]);
 const hasUpload = ref(false);
 
 const clearImage = () => {
-  img.value = ('');
+  fileType.value = '';
+  img.value = '';
+  // img.value = ('');
   hasUpload.value = false;
 }
 
@@ -117,6 +130,8 @@ const validImageTypes = ['image/jpeg', 'image/png'];
 const fileType = ref('');
 
 const handleUpload = (event) => {
+
+  console.log(event);
 
   if (!event.target.files) {
     return;
@@ -143,6 +158,9 @@ const handleSaveClick = async () => {
 
   try {
     const saveResult = await saveCroppedImage();
+
+    console.log(saveResult);
+
     if (saveResult) {
       const { canvas } = cropperRef.value.getResult(); // Emit new Image to Image Card 
       croppedImg.value.imgUrl = canvas.toDataURL(fileType.value);
@@ -221,21 +239,16 @@ onMounted(() => {
   height: var(--profile-image-size);
 }
 
-//POSITION CSS!
-.upload-icon {
+.image-icon {
   color: white;
   width: 40px;
   height: 40px;
-
   position: absolute;
 
-  left: calc(50% + 30px);
-  top: calc(50% - 70px);
 
   background: gray;
   border-radius: 50%;
   border: none;
-
   opacity: 0.9;
 
   :hover {
@@ -246,5 +259,17 @@ onMounted(() => {
     transition: transform 0.1s ease-in-out;
   }
 
+}
+
+//POSITION CSS!
+.upload-icon {
+  left: calc(50% + 30px);
+  top: calc(50% - 70px);
+}
+
+
+.close-icon {
+  left: calc(50% + 80px);
+  top: calc(50% - 70px);
 }
 </style>
