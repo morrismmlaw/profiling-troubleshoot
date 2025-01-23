@@ -570,9 +570,9 @@ const handleHasChange = (e) => {
                     <section>
                       <o-field class="col-form-tag-profile" label="KNOWLEDGE TRANSFER">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, KTTags)" v-model="KTTags"
-                          :options="KTOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                          :options="KTOptionsOrugaNew" :allow-new="true" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="Select options / Custom options" expanded />
                       </o-field>
                     </section>
                   </div>
