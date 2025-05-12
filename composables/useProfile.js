@@ -9,6 +9,7 @@ export const useProfileStore = defineStore('profile', {
     UATprofile: null,
 
     profiles: null,
+    totalProfiles: 0,
     isLoading: false,
     error: null
   }),
@@ -45,17 +46,22 @@ export const useProfileStore = defineStore('profile', {
     },
 
     async fetchProfiles(page, perPage) {
-      // let perPage = 5;
-      console.log('Getting all the Profiles');
-
-      const response = await api.findProfiles(page, perPage);
-
-      if (response.data) {
-        console.log(response.data);
-        this.profiles = response.data;
+      this.isLoading = true;
+      try {
+        console.log('Getting all the Profiles');
+        const response = await api.findProfiles(page, perPage);
+        
+        if (response.data) {
+          console.log(response.data, 'fetchProfiles');
+          this.profiles = response.data;
+          this.totalProfiles = response.meta?.pagination?.total || 0;
+        }
+      } catch (error) {
+        console.error('Fetch profiles error:', error);
+        this.error = 'Failed to fetch profiles. Please try again.';
+      } finally {
+        this.isLoading = false;
       }
-
     }
-
   }
 })
