@@ -87,8 +87,21 @@ export const useAuthStore = defineStore('auth', {
       username: null,
     }
   }),
-
   actions: {
+    async setCollections() {
+      try {
+        this.collections = {};
+        for (const name of collectionNames) {
+          this.collections[name] = await findCollection(name);
+        }
+        storage.setCollection(this.collections);
+        return true;
+      } catch (error) {
+        console.error('Error setting collections:', error);
+        return false;
+      }
+    },
+
     // Need to implement auth Logic.
     // First -> SSO-JWT -> 
     /**
