@@ -168,6 +168,9 @@ const props = defineProps({
 });
 
 const truncatedBiography = computed(() => {
+  if (!props.profile.biography) {
+    return ''; // Return an empty string if biography is null or undefined
+  }
   const words = props.profile.biography.split(' ');
   if (words.length > 50) {
     return words.slice(0, 50).join(' ') + '...';
