@@ -232,7 +232,7 @@ import TiptapViewer from '../TiptapViewer.vue';
 .profile-wrapper {
   padding: 30px;
   padding-top: 0;
-  margin: 10px 0 0 -20px;
+  margin: 10px 0 0 -40px;
 }
 
 .icon-label-wrapper {
