@@ -57,13 +57,20 @@
                   aria-controls="accordion-1 .item-1">Research Focus</button></h2>
               <div class="accordion-collapse collapse item-1" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
-                  <div>
+
+                  <!-- <div>
                     <div class="form-check"><input id="formCheck-1" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-1">Data Science and Statistics</label></div>
                     <div class="form-check"><input id="formCheck-7" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-7">Foundations in AI</label></div>
+                  </div> -->
+
+                  <div v-for="(focus, index) in accordionItems[0]" :key="index" class="form-check">
+                    <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
+                    <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                   </div>
-                  <p class="mb-0">Show All Options</p>
+
+                  <!-- <p class="mb-0">Show All Options</p> -->
                 </div>
               </div>
             </div>
@@ -74,10 +81,15 @@
               <div class="accordion-collapse collapse item-2" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
                   <div>
-                    <div class="form-check"><input id="formCheck-2" class="form-check-input" type="checkbox" /><label
+                    <!-- <div class="form-check"><input id="formCheck-2" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-2">Chemical Biology &amp; Molecular Modelling</label>
+                    </div> -->
+                    <div v-for="(focus, index) in accordionItems[1]" :key="index" class="form-check">
+                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
+                      <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                     </div>
-                    <p class="mb-0">Show All Options</p>
+
+                    <!-- <p class="mb-0">Show All Options</p> -->
                   </div>
                 </div>
               </div>
@@ -89,10 +101,15 @@
               <div class="accordion-collapse collapse item-3" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
                   <div>
-                    <div class="form-check"><input id="formCheck-3" class="form-check-input" type="checkbox" /><label
+                    <!-- <div class="form-check"><input id="formCheck-3" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-3">HKBU-RCEES Joint Institute of Environmental
-                        Sciences</label></div>
-                    <p class="mb-0">Show All Options</p>
+                        Sciences</label></div> -->
+
+                    <div v-for="(focus, index) in accordionItems[2]" :key="index" class="form-check">
+                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
+                      <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                    </div>
+                    <!-- <p class="mb-0">Show All Options</p> -->
                   </div>
                 </div>
               </div>
@@ -106,7 +123,6 @@
                   <div>
                     <!-- <div class="form-check"><input id="formCheck-4" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-4">Summer Research Programme</label></div> -->
-                    
                     <div v-for="(focus, index) in accordionItems[3]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
@@ -123,10 +139,8 @@
               <div class="accordion-collapse collapse item-5" role="tabpanel" data-bs-parent="#accordion-1">
                 <div class="accordion-body">
                   <div>
-
                     <!-- <div class="form-check"><input id="formCheck-5" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-5">Healthcare - Diagnostics</label></div> -->
-
                     <div v-for="(focus, index) in accordionItems[4]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
@@ -169,10 +183,10 @@ const isLoading = ref(true);
 
 const accordionItems = computed(() => {
   return authStore.collections ? [
-    authStore.collections.researchFoci ?? [],
-    authStore.collections.fcras ?? [],
-    authStore.collections.srcs ?? [],
-    authStore.collections.supervisions ?? [],
+    authStore.collections['research-foci'] ?? [],
+    authStore.collections['fcras'] ?? [],
+    authStore.collections['research-centres'] ?? [],
+    authStore.collections['available-supervisions'] ?? [],
     authStore.collections['tech-offers'] ?? [],
   ] : [[], [], [], [], []];
 });
@@ -185,15 +199,15 @@ onMounted(async () => {
   try {
     // Initialize from storage first
     authStore.initializeFromStorage();
-    
+
     // If collections are not loaded, try to initialize them
     if (!authStore.collections) {
       console.log('Collections not found in storage, fetching...');
       await authStore.setCollections();
     }
-    
+
     await profileStore.fetchProfiles(1, 5);
-    
+
     console.log(authStore.collections, 'Loaded Collections from Auth');
     console.log(accordionItems.value, 'Loaded accordionItems from Auth');
   } catch (error) {
