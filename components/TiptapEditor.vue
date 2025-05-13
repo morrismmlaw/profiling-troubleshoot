@@ -13,6 +13,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  editable: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const editor = ref(null)
@@ -27,6 +31,7 @@ onMounted(() => {
     },
     extensions: [TiptapStarterKit],
     content: props.formData[props.field],
+    editable: props.editable,
     onUpdate: ({ editor }) => {
       props.formData[props.field] = editor.getHTML();
       // console.log('Tiptap Updated: ', props.formData[props.field]);

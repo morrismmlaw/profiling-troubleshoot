@@ -5,28 +5,12 @@ import TiptapEditor from './TiptapEditor.vue' // path to your Tiptap editor comp
 import ImageCard from './ui/ProfileImageCard.vue';
 import type { CroppedImg } from '~/types/profileImage';
 
-import ProfileSave from './ui/ProfileSave.vue';
-
 /**
  * Record Whether Image has been Changed -> Don't want to upload the Image,
  * after These is a Custom Image, and Other Tags Field Changed at Save
  * 
  * The Point is on UploadPhoto, if current id unchanged -> turn false;
  */
-const hasChangedImage = ref(false);
-
-// Watch the hasChangedImage state
-watch(hasChangedImage, (newValue, oldValue) => {
-  console.log(`hasChangedImage changed from ${oldValue} to ${newValue}`);
-  // Add any additional logic you need to handle the change
-  if (newValue) {
-    // Perform actions when the image has changed
-    console.log('Image has changed!');
-  } else {
-    // Perform actions when the image has not changed
-    console.log('Image has not changed.');
-  }
-});
 
 const props = defineProps({
   profile: {
@@ -49,25 +33,6 @@ const props = defineProps({
 const profileStore = useProfileStore();
 
 const emit = defineEmits(['save']);
-const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
-  if (croppedImg.value.hasChangedImage) {
-    if (croppedImg.value.clear === true) {
-      //Set it to Clear.
-      formData.uploadPhoto = null;
-      // delete formData.uploadPhoto;
-      hasChangedImage.value = true;
-    } else {
-      let oldID = formData.uploadPhoto;
-      let imgObj = croppedImg.value;
-      // console.log("Capture ProfileForm: ", obj);
-      formData.uploadPhoto = imgObj.strapiID;
-      // console.log('FormData StrapiID:', formData.uploadPhoto);
-      hasChangedImage.value = true;
-    }
-  } else {
-    hasChangedImage.value = false;
-  }
-}
 
 //Used for Reactive for ORUGA to Update..
 const formData = reactive({
@@ -93,16 +58,6 @@ const formData = reactive({
 
   tech_offers: props.profile?.attributes.tech_offers || [],
 });
-
-
-const handleSubmit = () => { //Going to send back to profile.vue parent. 
-  delete formData.photoURL;
-
-  emit('save', {
-    formData: formData,
-    hasChangedImage: hasChangedImage.value
-  });
-};
 
 // ORUGA SECTION
 const ROOptions = props.collections['research-outputs']; //HTHIS IS FOR DA SEARCH ENGINE.
@@ -216,21 +171,6 @@ const sortTagOptions = () => {
 }
 
 const debugTagsMsg = () => {
-
-  // console.log('SRC Options', SRCOptions);
-  // console.log('RF Options', RFOptions);
-  // console.log('FCRA Options', FCRAOptions);
-  // console.log('AS Options', ASOptions);
-  // console.log('DEP Options', DEPOptions);
-
-  // console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
-  // console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
-  // console.log("FCRA OPTIONS ORUGA2", FCRAOptionsOrugaNew);
-  // console.log("AS OPTIONS ORUGA2", ASOptionsOrugaNew);
-  // console.log("DEP OPTIONS ORUGA2", DEPOptionsOrugaNew);
-
-  // console.log('SDG FORMDATA', formData.SDG);
-  // console.log('sdgs FORMDATA', formData.sdgs);
 }
 
 //FCRA Search
@@ -350,31 +290,6 @@ const imgCardStyle = computed(() => {
   }
 })
 
-// Load checkbox group to FormData when checkbox group is modified
-watch(checkboxGroup, (newVal, oldVal) => {
-  try {
-    formData.sdgs = [];
-    console.log('Checkbox Changed', formData)
-    formData.sdgs = newVal.map((sdgId) => {
-      return getSdgObject(sdgId)
-    })
-
-  } catch (error) {
-    console.error(error)
-    // handle the error appropriately
-  }
-})
-
-// Load Tags Input group to FormData when modified
-watch([SRCTags, ROTags, RFTags, FCRATags, ASTags, DEPTags, KTTags], (newVal, oldVal) => {
-  try {
-    syncTagsFormData();
-    console.log('FormData Changed', formData)
-  } catch (error) {
-    console.error(error)
-    // handle the error appropriately
-  }
-})
 
 watch(() => props.profile.attributes.ssoid, (newVal, oldVal) => {
   console.log(`SSOID changed from ${oldVal} to ${newVal}`)
@@ -402,25 +317,10 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 onMounted(() => {
   loadFormDataToORUGA();
   syncCheckboxToFormData();
-
   sortTagOptions();
   debugTagsMsg();
-
   // console.log("Current FormData", formData);
 })
-
-
-const handleHasChange = (e) => {
-  // console.log('Has Image been changed?', e);
-
-  if (e === true) {
-    hasChangedImage.value = true;
-  } else {
-    hasChangedImage.value = false;
-  }
-
-  // console.log('Has Image been changed?', hasChangedImage.value);
-}
 
 </script>
 
@@ -434,7 +334,7 @@ const handleHasChange = (e) => {
         <div class="col">
           <div class="me-1 profile-form-card">
             <!-- {{ console.log('profile', profile) }} -->
-            <image-card :profile="profile" @cropped-img="handleUploadPhoto" @has-changed-image="handleHasChange" />
+            <image-card :profile="profile"/>
           </div>
         </div>
 
@@ -465,7 +365,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="biography" />
+                          <tiptap-editor :formData="formData" field="biography" :editable=false />
                         </div>
                       </div>
                     </div>
@@ -475,7 +375,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_interest" />
+                          <tiptap-editor :formData="formData" field="research_interest" :editable="false"/>
                         </div>
                       </div>
                     </div>
@@ -486,7 +386,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_interest" />
+                          <tiptap-editor :formData="formData" field="research_interest" :editable="false"/>
                         </div>
                       </div>
                     </div>

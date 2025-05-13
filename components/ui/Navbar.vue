@@ -162,7 +162,7 @@ const navbarStylePerRoute = computed(() => {
     // return { backgroundColor: 'rgba(37, 150, 190, 0.7)' }; //Marine Blue
     return { backgroundColor: 'white' };
     // return { backgroundColor: 'transparent' };
-  } else if (route.path === '/search') {
+  } else if (route.path === '/search' || route.params.ssoid) {
     // return { backgroundColor: 'rgb(177, 177, 177, 0.9)' };
     // return { backgroundColor: 'rgba(37, 150, 190, 0.9)' }; //Light Blue
     return { backgroundColor: 'white' };
@@ -178,7 +178,8 @@ const navbarStylePerRoute = computed(() => {
     // return { backgroundColor: 'transparent' };
     // return { backgroundColor: 'rgba(0 , 0, 0, 0.1)' };
     // return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
-    return { backgroundColor: 'white' };
+    // return { backgroundColor: 'white' };
+    return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
   }
 });
 
