@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     'nuxt-tiptap-editor', '@vesp/nuxt-fontawesome',
     '@nuxt/image', '@hypernym/nuxt-gsap',
     'nuxt-particles', 'nuxt-bootstrap-icons',
-    '@nuxt/fonts', '@bootstrap-vue-next/nuxt'],
+    '@nuxt/fonts', '@bootstrap-vue-next/nuxt', 'nuxt-meilisearch'],
 
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
@@ -60,6 +60,14 @@ export default defineNuxtConfig({
     strict: false
   },
 
+  meilisearch: {
+    hostUrl: 'http://158.182.151.62:7700', //required
+    searchApiKey: 'e5e806a91bca2b6b58ed2aebba3a6a873bfddcf834cbf1c3dcc7418785f36dac', // required
+    adminApiKey: '<admin_api_key>', // optional
+    serverSideUsage: true // default: false
+    //bearer token: 'Strd8oz_m6pgKbml-ivcANsCHfz55IyJD9S-L6pJiCY';
+  },
+
   compatibilityDate: '2024-11-01',
   devtools: {
     enabled: true,
@@ -81,4 +89,4 @@ export default defineNuxtConfig({
   },
 
   ssr: false, //Fix for Firefox...
-  })
+})

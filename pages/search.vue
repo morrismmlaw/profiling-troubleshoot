@@ -158,12 +158,17 @@
           </div>
         </div>
         <div class="col-md-8 col-xl-8">
-          <div v-if="!hasLoadedProfiles">
+          <div v-if="isLoading">
             Loading ...
           </div>
           <div v-else>
-            <div v-for="profile in profileStore.profiles" :key="profile">
-              <ExpertCard :profile="profile" />
+            <div v-if="profiles.length === 0">
+              <p>No profiles found.</p>
+            </div>
+            <div v-else>
+              <div v-for="profile in profiles" :key="profile.id">
+                <ExpertCard :profile="profile" />
+              </div>
             </div>
           </div>
         </div>
@@ -175,6 +180,8 @@
 </template>
 
 <script lang="ts" setup>
+import { MeiliSearch } from 'meilisearch';
+
 const searchInput = ref('')
 const router = useRouter()
 const route = useRoute()
@@ -187,24 +194,46 @@ const profileStore = useProfileStore();
 const authStore = useAuthStore();
 const isLoading = ref(true);
 
-const accordionItems = computed(() => {
-  return authStore.collections ? [
-    authStore.collections['research-foci'] ?? [],
-    authStore.collections['fcras'] ?? [],
-    authStore.collections['research-centres'] ?? [],
-    authStore.collections['available-supervisions'] ?? [],
-    authStore.collections['tech-offers'] ?? [],
-  ] : [[], [], [], [], []];
+// Meilisearch client setup
+const meiliClient = new MeiliSearch({
+  host: 'http://localhost:7700', // Change to your Meilisearch host
+  // apiKey: 'your_meilisearch_api_key', // Uncomment if you use an API key
 });
+const meiliIndex = meiliClient.index('profile');
 
-const currentCnt = computed(() => {
-  return profileStore && profileStore.profiles ? profileStore.profiles.length : 0;
-});
-
+const profiles = ref([]);
+const totalProfiles = ref(0);
 const pageSize = 5;
 const currentPage = ref(Number(route.query.page) || 1);
-const totalProfiles = computed(() => profileStore && profileStore.totalProfiles ? profileStore.totalProfiles : 0);
-const totalPages = computed(() => Math.ceil(totalProfiles.value / pageSize));
+
+const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) => {
+  isLoading.value = true;
+  try {
+    const offset = (page - 1) * limit;
+    const result = await meiliIndex.search(query, {
+      offset,
+      limit,
+    });
+    profiles.value = result.hits;
+    totalProfiles.value = result.estimatedTotalHits || 0;
+  } catch (error) {
+    console.error('Meilisearch fetch error:', error);
+    profiles.value = [];
+    totalProfiles.value = 0;
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+watch(
+  [() => route.query.page, searchInput],
+  async ([newPage, newQuery]) => {
+    const pageNum = Number(newPage) || 1;
+    currentPage.value = pageNum;
+    await fetchProfilesFromMeili(newQuery, pageNum, pageSize);
+  },
+  { immediate: true }
+);
 
 const goToPage = (pageNum: number) => {
   if (pageNum < 1 || pageNum > totalPages.value) return;
@@ -212,16 +241,13 @@ const goToPage = (pageNum: number) => {
   router.push({ query: { ...route.query, page: pageNum } });
 };
 
-const hasLoadedProfiles = computed(() => {
-  return profileStore && profileStore.profiles && profileStore.profiles.length > 0;
-});
-
+const totalPages = computed(() => Math.ceil(totalProfiles.value / pageSize));
+const hasLoadedProfiles = computed(() => profiles.value.length > 0);
 const paginationNumbers = computed(() => {
   const pages = [];
   if (totalPages.value <= 5) {
     for (let i = 1; i <= totalPages.value; i++) pages.push(i);
   } else {
-    // Always show first and last
     pages.push(1);
     let left = currentPage.value - 1;
     let right = currentPage.value + 1;
@@ -242,38 +268,29 @@ const paginationNumbers = computed(() => {
   }
   return pages;
 });
-
 const currentRangeStart = computed(() => (currentPage.value - 1) * pageSize + 1);
 const currentRangeEnd = computed(() => {
   const end = currentPage.value * pageSize;
   return end > totalProfiles.value ? totalProfiles.value : end;
 });
 
-watch(
-  () => route.query.page,
-  async (newPage) => {
-    const pageNum = Number(newPage) || 1;
-    currentPage.value = pageNum;
-    await profileStore.fetchProfiles(pageNum, pageSize);
-  },
-  { immediate: true }
-);
+const accordionItems = computed(() => {
+  return authStore.collections ? [
+    authStore.collections['research-foci'] ?? [],
+    authStore.collections['fcras'] ?? [],
+    authStore.collections['research-centres'] ?? [],
+    authStore.collections['available-supervisions'] ?? [],
+    authStore.collections['tech-offers'] ?? [],
+  ] : [[], [], [], [], []];
+});
 
 onMounted(async () => {
   try {
-    // Initialize from storage first
     authStore.initializeFromStorage();
-
-    // If collections are not loaded, try to initialize them
     if (!authStore.collections) {
-      console.log('Collections not found in storage, fetching...');
       await authStore.setCollections();
     }
-
-    await profileStore.fetchProfiles(currentPage.value, pageSize);
-
-    console.log(authStore.collections, 'Loaded Collections from Auth');
-    console.log(accordionItems.value, 'Loaded accordionItems from Auth');
+    await fetchProfilesFromMeili(searchInput.value, currentPage.value, pageSize);
   } catch (error) {
     console.error('Failed to initialize:', error);
   } finally {
