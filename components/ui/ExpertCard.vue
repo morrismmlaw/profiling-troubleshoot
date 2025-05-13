@@ -164,8 +164,8 @@ const truncatedBiography = computed(() => {
 
 const navigateToProfile = () => {
     router.push({
-      path: `/profile/${props.profile.ssoid}`,
-      query: { from: 'search'}
+      path: `/${props.profile.ssoid}`,
+      // query: { from: 'search'}
     })
 };
 

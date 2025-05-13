@@ -587,10 +587,9 @@ const handleHasChange = (e) => {
               </div>
             </o-tabs>
 
-            <!-- <div class="me-3">
+            <div class="me-3">
               <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
-            </div> -->
-            
+            </div>
           </section>
         </div>
       </div>

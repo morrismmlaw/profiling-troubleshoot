@@ -71,7 +71,9 @@
               <li v-if="isLoggedIn && isAuthenticated" class="nav-item custom-nav-item">
                 <span class="d-flex align-items-center flex-nowrap" data-bs-dismiss="offcanvas">
                   <i class="bi bi-person-circle me-3"></i>
-                  <NuxtLink class="nav-link" :to="{ path: `/profile/${authStore.sso.ssoid}`, query: { from: 'Navbar' } }"> Your Profile</NuxtLink>
+                  <NuxtLink class="nav-link"
+                    :to="{ path: `/profile/${authStore.sso.ssoid}`, query: { from: 'Navbar' } }"> Your Profile
+                  </NuxtLink>
                   <!-- <NuxtLink class="nav-link" :to="{ path: `/profile/${authStore.sso.ssoid}`, query: { from: 'Navbar' } }"
                     @click.native="handleUATClick()"> Your Profile</NuxtLink> -->
                   <!-- <NuxtLink class="nav-link" to="/profile"> Your Profile</NuxtLink> -->
@@ -132,7 +134,12 @@ const isAuthenticated = computed(() => authStore.isAuthenticated);
 const isAdmin = computed(() => authStore.isAdmin);
 
 
-const isSearch = computed(() => route.path === '/search');
+// const isSearch = computed(() => route.path === '/search' || route.path === '/');
+
+const isSearch = computed(() => {
+  return route.path === '/search' || route.params.ssoid;
+});
+
 const isProfile = computed(() => route.path.startsWith('/profile'));
 const isHome = computed(() => route.path === '/');
 
@@ -147,7 +154,11 @@ const logout = async () => {
 };
 
 const navbarStylePerRoute = computed(() => {
-  if (route.path.startsWith('/profile')) {
+  if (route.path === '/' || route.path === '/index') {
+    // return { backgroundColor: 'your-desired-color' }; // Set your desired background color here
+    return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
+  }
+  else if (route.path.startsWith('/profile')) {
     // return { backgroundColor: 'rgba(37, 150, 190, 0.7)' }; //Marine Blue
     return { backgroundColor: 'white' };
     // return { backgroundColor: 'transparent' };
@@ -166,7 +177,8 @@ const navbarStylePerRoute = computed(() => {
   } else {
     // return { backgroundColor: 'transparent' };
     // return { backgroundColor: 'rgba(0 , 0, 0, 0.1)' };
-    return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
+    // return { backgroundColor: 'rgba(0 , 0 , 0 , 0.25)' }; //Light Blue
+    return { backgroundColor: 'white' };
   }
 });
 

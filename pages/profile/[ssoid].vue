@@ -182,7 +182,7 @@ watch(checkedForm, (newVal) => {
           <div class="col-12">
             <div v-if="authStore.isAuthenticated || authStore.isAdmin">
               <div class="mt-3">
-                <ProfileForm :key="componentKey" v-if="!isLoading" :profile="authStore.user"
+                <ProfileFormEdit :key="componentKey" v-if="!isLoading" :profile="authStore.user"
                   :collections="authStore.collections" @save="handleSave" />
               </div>
             </div>
