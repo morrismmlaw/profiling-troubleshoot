@@ -121,6 +121,16 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
+    async setSSO() {
+      //Update Pinia
+      console.log("Got the state", this.$state);
+      console.log("Got the User", this.user);
+      console.log("Got the Collections", this.collections);
+      storage.setState(this.$state)
+      storage.setUser(this.user)
+      storage.setCollection(this.collections)
+    },
+
     async setProfile(ssoid) {
       //ASSUME SSOID is the string before @.
       //Check with STRAPI User status..
@@ -150,13 +160,6 @@ export const useAuthStore = defineStore('auth', {
             this.collections[name] = await findCollection(name);
           }
 
-          //Update Pinia
-          console.log("Got the state", this.$state);
-          console.log("Got the User", this.user);
-          console.log("Got the Collections", this.collections);
-          storage.setState(this.$state)
-          storage.setUser(this.user)
-          storage.setCollection(this.collections)
           return true
         }
         return false
@@ -187,6 +190,7 @@ export const useAuthStore = defineStore('auth', {
     },
 
     initializeFromStorage() {
+      console.log('Initializing from storage...');
       const storedState = storage.getState();
       this.$state = storedState;
     }

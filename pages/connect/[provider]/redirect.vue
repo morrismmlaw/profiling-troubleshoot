@@ -64,19 +64,17 @@ import { backendURL_ITO, backendURL_Local } from '@/composables/useAuth';
 
 import ParticlesBackground from '~/components/ui/ParticlesBackground.vue';
 
-const authStore = useAuthStore();
-
 const text = ref('Loading...');
 const route = useRoute();
 const router = useRouter();
 
 const providerName = route.params.provider;
-const store = useAuthStore();
+const authStore = useAuthStore();
 
 const message = computed(() => isLoggedIn.value ? `Login successful!` : 'Login failed.')
 const error = ref(route.query.error)
 
-const isLoggedIn = computed(() => store.isAuthenticated || store.isAdmin)
+const isLoggedIn = computed(() => authStore.isAuthenticated || authStore.isAdmin)
 
 const countdown = ref(3000);
 
@@ -100,14 +98,15 @@ onMounted(async () => {
     .then(async res => {
       // Successfully logged in with Strapi
       // Now saving the jwt to use it for future authenticated requests to Strapi
-      // console.log(res);
-      store.sso.provider = res.user.provider;
-      store.sso.jwt = res.jwt;
-      store.sso.username = res.user.username;
-      store.sso.email = res.user.email;
+
+      console.log(res);
+      authStore.sso.provider = res.user.provider;
+      authStore.sso.jwt = res.jwt;
+      authStore.sso.username = res.user.username;
+      authStore.sso.email = res.user.email;
 
       if (providerName === 'discord') {
-        store.sso.ssoid = res.user.username;
+        authStore.sso.ssoid = res.user.username;
       }
 
       localStorage.setItem('jwt', res.jwt);
@@ -122,6 +121,9 @@ onMounted(async () => {
           success = await authStore.setProfile(res.user.username);
         }
         success = await authStore.setProfile(ssoid);
+
+        authStore.setSSO();
+
       } catch {
       }
 
