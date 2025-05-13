@@ -196,8 +196,8 @@ const isLoading = ref(true);
 
 // Meilisearch client setup
 const meiliClient = new MeiliSearch({
-  host: 'http://localhost:7700', // Change to your Meilisearch host
-  // apiKey: 'your_meilisearch_api_key', // Uncomment if you use an API key
+  host: 'http://158.182.151.62:7700', // Change to your Meilisearch host
+  apiKey: 'e5e806a91bca2b6b58ed2aebba3a6a873bfddcf834cbf1c3dcc7418785f36dac', // Uncomment if you use an API key
 });
 const meiliIndex = meiliClient.index('profile');
 
