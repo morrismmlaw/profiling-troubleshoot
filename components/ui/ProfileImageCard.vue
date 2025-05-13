@@ -6,6 +6,10 @@ const props = defineProps({
   profile: {
     type: Object,
     required: true
+  },
+  editable: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -61,7 +65,7 @@ onMounted(() => {
     <div class="card shadow rounded-5 profile-card">
       <div class="row p-1 m-1">
         <div class="d-flex justify-content-center">
-          <ProfileImage :img-url="imgUrl" :profile="profile" :has-upload="true" @cropped-img="handleCroppedImg" />
+          <ProfileImage :img-url="imgUrl" :profile="profile" :has-upload="true" @cropped-img="handleCroppedImg" :editable="props.editable"/>
         </div>
       </div>
       <div class="row">

@@ -9,62 +9,62 @@
     <nuxt-img class="position-relative rounded-circle profile-card-image shadow-lg" :src="props.imgUrl"
       alt="Card image cap" />
 
-    <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute image-icon upload-icon">
-      <o-tooltip label="Upload an alternative image" position="bottom" data-bs-toggle="modal"
-        data-bs-target="#modal-cropper" variant="secondary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-upload"
-          viewBox="0 0 16 16">
-          <path
-            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
-          <path
-            d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" />
-        </svg>
-      </o-tooltip>
-    </button>
-
-
-    <button @click="" class="position-absolute image-icon close-icon">
-      <o-tooltip label="Clear Image" position="bottom" data-bs-toggle="modal" data-bs-target="#modal-cropper" variant="danger">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg"
-          viewBox="0 0 16 16">
-          <path
-            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-        </svg>
-      </o-tooltip>
-    </button>
-
-    <div ref="modal" class="modal fade" id="modal-cropper" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded shadow border-0 mx-5">
-          <div class="modal-header">
-            <h5 class="modal-title">Upload and Crop Image</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body mt-2">
-            <div class="text-center">
-              <div>
-                <cropper ref="cropperRef" class="cropper" :src="img" :stencil-props="{ aspectRatio: 1 / 1 }"
-                  @change="change" />
-                <o-field @change="handleUpload" v-show="!hasUpload">
-                  <o-upload v-model="dropFiles" drag-drop>
-                    <div style="text-align: center">
-                      <p>
-                        <o-icon icon="upload" size="is-large" />
-                      </p>
-                      <p>Drop your JPG / PNG Image here or click to upload</p>
+    <div v-if="props.editable">
+      <button @click="handleUpload" v-if="props.hasUpload" class="position-absolute image-icon upload-icon">
+        <o-tooltip label="Upload an alternative image" position="bottom" data-bs-toggle="modal"
+          data-bs-target="#modal-cropper" variant="secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-upload"
+            viewBox="0 0 16 16">
+            <path
+              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+            <path
+              d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" />
+          </svg>
+        </o-tooltip>
+      </button>
+      <button @click="" class="position-absolute image-icon close-icon">
+        <o-tooltip label="Clear Image" position="bottom" data-bs-toggle="modal" data-bs-target="#modal-cropper"
+          variant="danger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg"
+            viewBox="0 0 16 16">
+            <path
+              d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+          </svg>
+        </o-tooltip>
+      </button>
+      <div ref="modal" class="modal fade" id="modal-cropper" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content rounded shadow border-0 mx-5">
+            <div class="modal-header">
+              <h5 class="modal-title">Upload and Crop Image</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body mt-2">
+              <div class="text-center">
+                <div>
+                  <cropper ref="cropperRef" class="cropper" :src="img" :stencil-props="{ aspectRatio: 1 / 1 }"
+                    @change="change" />
+                  <o-field @change="handleUpload" v-show="!hasUpload">
+                    <o-upload v-model="dropFiles" drag-drop>
+                      <div style="text-align: center">
+                        <p>
+                          <o-icon icon="upload" size="is-large" />
+                        </p>
+                        <p>Drop your JPG / PNG Image here or click to upload</p>
+                      </div>
+                    </o-upload>
+                  </o-field>
+                </div>
+                <div class="pt-2 mt-2">
+                  <div class="input-group-sm">
+                    <div class="d-flex justify-content-end">
+                      <button class="btn btn-danger" @click="clearImage">Clear</button>
+                      <button class="btn btn-primary" data-bs-dismiss="modal" @click="handleSaveClick">Save</button>
                     </div>
-                  </o-upload>
-                </o-field>
-              </div>
-              <div class="pt-2 mt-2">
-                <div class="input-group-sm">
-                  <div class="d-flex justify-content-end">
-                    <button class="btn btn-danger" @click="clearImage">Clear</button>
-                    <button class="btn btn-primary" data-bs-dismiss="modal" @click="handleSaveClick">Save</button>
                   </div>
                 </div>
-              </div>
 
+              </div>
             </div>
           </div>
         </div>
@@ -96,7 +96,11 @@ const props = defineProps({
   profile: {
     type: Object,
     default: {},
-  }
+  },
+  editable: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const hasChanged = ref(false);

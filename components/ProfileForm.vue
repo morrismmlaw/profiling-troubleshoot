@@ -334,7 +334,7 @@ onMounted(() => {
         <div class="col">
           <div class="me-1 profile-form-card">
             <!-- {{ console.log('profile', profile) }} -->
-            <image-card :profile="profile"/>
+            <image-card :profile="profile" :editable="false"/>
           </div>
         </div>
 
