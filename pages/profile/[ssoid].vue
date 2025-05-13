@@ -103,6 +103,7 @@ onMounted(async () => {
     console.log('IN UAT MODE')
 
     const sucess = await authStore.setProfile(authStore.user.attributes.ssoid);
+    console.log('UAT Mode success?', sucess);
 
     //Wait data loading then load the form component.
     if (sucess) {

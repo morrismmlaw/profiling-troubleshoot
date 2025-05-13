@@ -349,7 +349,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
                           :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded disabled />
                       </o-field>
                     </section>
                     <div class="row mb-3 rounded-5 border-4">
@@ -400,7 +400,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, RFTags)" v-model="RFTags"
                           :options="RFOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded disabled />
                       </o-field>
                     </section>
                     <section>
@@ -408,7 +408,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, FCRATags)" v-model="FCRATags"
                           :options="FCRAOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded disabled />
                       </o-field>
                     </section>
                     <section>
@@ -416,7 +416,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags"
                           :options="SRCOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded disabled />
                       </o-field>
                     </section>
                   </div>
@@ -438,7 +438,7 @@ onMounted(() => {
                                   <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
                                 </div>
                               </template>
-                              <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
+                              <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid" disabled>
                                 <p class="col-form-label-profile-sdg"> SDG {{ sdg.sdgid }} </p>
                                 <nuxt-img
                                   :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
@@ -459,7 +459,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, ASTags)" v-model="ASTags"
                           :options="ASOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded />
                       </o-field>
                     </section>
                   </div>
@@ -472,7 +472,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, KTTags)" v-model="KTTags"
                           :options="KTOptionsOrugaNew" :allow-new="true" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options / Custom options" expanded />
+                          placeholder="" expanded disabled />
                       </o-field>
                     </section>
                   </div>

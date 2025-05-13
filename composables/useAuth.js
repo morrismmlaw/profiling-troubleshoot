@@ -160,6 +160,8 @@ export const useAuthStore = defineStore('auth', {
             this.collections[name] = await findCollection(name);
           }
 
+          this.setSSO();
+
           return true
         }
         return false
