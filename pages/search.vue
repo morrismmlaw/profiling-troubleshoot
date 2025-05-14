@@ -71,7 +71,10 @@
                   </div> -->
 
                   <div v-for="(focus, index) in accordionItems[0]" :key="index" class="form-check">
-                    <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
+                    <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                      :value="focus['name']"
+                      v-model="selectedFilters[0]"
+                    />
                     <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                   </div>
 
@@ -90,7 +93,10 @@
                         class="form-check-label" for="formCheck-2">Chemical Biology &amp; Molecular Modelling</label>
                     </div> -->
                     <div v-for="(focus, index) in accordionItems[1]" :key="index" class="form-check">
-                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
+                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                        :value="focus['name']"
+                        v-model="selectedFilters[1]"
+                      />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                     </div>
 
@@ -111,7 +117,10 @@
                         Sciences</label></div> -->
 
                     <div v-for="(focus, index) in accordionItems[2]" :key="index" class="form-check">
-                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
+                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                        :value="focus['name']"
+                        v-model="selectedFilters[2]"
+                      />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -129,7 +138,10 @@
                     <!-- <div class="form-check"><input id="formCheck-4" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-4">Summer Research Programme</label></div> -->
                     <div v-for="(focus, index) in accordionItems[3]" :key="index" class="form-check">
-                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
+                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                        :value="focus['name']"
+                        v-model="selectedFilters[3]"
+                      />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -147,7 +159,10 @@
                     <!-- <div class="form-check"><input id="formCheck-5" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-5">Healthcare - Diagnostics</label></div> -->
                     <div v-for="(focus, index) in accordionItems[4]" :key="index" class="form-check">
-                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox" />
+                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                        :value="focus['name']"
+                        v-model="selectedFilters[4]"
+                      />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -205,15 +220,37 @@ const profiles = ref([]);
 const totalProfiles = ref(0);
 const pageSize = 5;
 const currentPage = ref(Number(route.query.page) || 1);
+const selectedFilters = ref([[], [], [], [], []]); // Track selected options for each accordion section
 
 const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) => {
   isLoading.value = true;
   try {
     const offset = (page - 1) * limit;
-    const result = await meiliIndex.search(query, {
+    // Build Meilisearch filter string from selectedFilters
+    let filters = [];
+    // Map accordion index to Meilisearch field names
+    const filterFields = [
+      'research_foci',
+      'fcras',
+      'research_centres',
+      'available_supervisions',
+      'tech_offers',
+    ];
+    selectedFilters.value.forEach((arr, idx) => {
+      if (arr.length > 0) {
+        // Each filter: field = value1 OR value2 ...
+        const orFilter = arr.map(val => `${filterFields[idx]} = \"${val}\"`).join(' OR ');
+        if (orFilter) filters.push(`(${orFilter})`);
+      }
+    });
+    const filterString = filters.join(' AND ');
+    const searchOptions = {
       offset,
       limit,
-    });
+    };
+    if (filterString) (searchOptions as any).filter = filterString;
+    // Search by name, biography, and other fields (Meilisearch will search all searchable fields by default)
+    const result = await meiliIndex.search(query, searchOptions);
     profiles.value = result.hits;
     totalProfiles.value = result.estimatedTotalHits || 0;
   } catch (error) {
@@ -226,13 +263,13 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
 };
 
 watch(
-  [() => route.query.page, searchInput],
+  [() => route.query.page, searchInput, selectedFilters],
   async ([newPage, newQuery]) => {
     const pageNum = Number(newPage) || 1;
     currentPage.value = pageNum;
     await fetchProfilesFromMeili(newQuery, pageNum, pageSize);
   },
-  { immediate: true }
+  { immediate: true, deep: true }
 );
 
 const goToPage = (pageNum: number) => {

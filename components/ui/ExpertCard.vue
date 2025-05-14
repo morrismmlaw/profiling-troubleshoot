@@ -9,7 +9,7 @@
               <div class="profile-image-container">
 
                 <div v-if="props.profile.uploadPhoto">
-                  {{ console.log(props.profile.uploadPhoto) }}
+                  <!-- {{ console.log(props.profile.uploadPhoto) }} -->
                   <NuxtImg :src="customPhotoURL" class="expert-card-image" @click="navigateToProfile"></NuxtImg>
 
                 </div>
@@ -190,8 +190,7 @@ const customPhotoURL = computed(() => {
 
 // let customPhotoURL = 'https://profile-cms.sci.hkbu.edu.hk' + props.profile.uploadPhoto;
 if (props.profile.uploadPhoto) {
-
-  console.log('TESTING Custom Photo', customPhotoURL.value);
+  // console.log('TESTING Custom Photo', customPhotoURL.value);
 } else {
   // customPhotoURL = props.profile.photoURL;
 }
