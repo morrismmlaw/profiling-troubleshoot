@@ -349,13 +349,13 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
                           :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="" expanded disabled />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                     <div class="row mb-3 rounded-5 border-4">
                       <div class="row">
                         <o-field label="POST TITLE" class="col-form-label-profile">
-                          <o-input :placeholder="`${props.profile.attributes.post}`" disabled />
+                          <o-input :placeholder="`${props.profile.attributes.post}`" disabled :closable="false" />
                         </o-field>
                       </div>
                     </div>
@@ -400,7 +400,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, RFTags)" v-model="RFTags"
                           :options="RFOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="" expanded disabled />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                     <section>
@@ -408,7 +408,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, FCRATags)" v-model="FCRATags"
                           :options="FCRAOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="" expanded disabled />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                     <section>
@@ -416,7 +416,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags"
                           :options="SRCOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="" expanded disabled />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                   </div>
@@ -459,7 +459,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, ASTags)" v-model="ASTags"
                           :options="ASOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="" expanded />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                   </div>
@@ -472,7 +472,7 @@ onMounted(() => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, KTTags)" v-model="KTTags"
                           :options="KTOptionsOrugaNew" :allow-new="true" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="" expanded disabled />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                   </div>
