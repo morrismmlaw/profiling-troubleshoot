@@ -7,7 +7,16 @@
           <div class="col-md-3 col-lg-3 col-xxl-3 profile-col">
             <div class="profile-wrapper">
               <div class="profile-image-container">
-                <NuxtImg :src="props.profile.photoURL" class="expert-card-image" @click="navigateToProfile"></NuxtImg>
+
+                <div v-if="props.profile.uploadPhoto">
+                  {{ console.log(props.profile.uploadPhoto) }}
+                  <NuxtImg :src="customPhotoURL" class="expert-card-image" @click="navigateToProfile"></NuxtImg>
+
+                </div>
+                <div v-else>
+                  <NuxtImg :src="props.profile.photoURL" class="expert-card-image" @click="navigateToProfile"></NuxtImg>
+                </div>
+
               </div>
 
             </div>
@@ -86,7 +95,7 @@
                           <b>Availability for Supervision: </b>
                           <span v-for="(focus, index) in props.profile.available_supervisions" :key="focus.id">
                             {{ focus.name }}{{ index < props.profile.available_supervisions.length - 1 ? ', ' : ''
-                              }}</span>
+                            }}</span>
                         </label>
                       </div>
                     </div>
@@ -103,8 +112,9 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <div class="publication-match"><label class="form-label publication-label"><small class="form-text"><svg
-                          class="publication-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" fill="none">
+                  <div class="publication-match"><label class="form-label publication-label"><small
+                        class="form-text"><svg class="publication-icon" xmlns="http://www.w3.org/2000/svg" width="1em"
+                          height="1em" viewBox="0 0 20 20" fill="none">
                           <path
                             d="M4 4C4 2.89543 4.89543 2 6 2H10.5858C11.1162 2 11.6249 2.21071 12 2.58579L15.4142 6C15.7893 6.37507 16 6.88378 16 7.41421V16C16 17.1046 15.1046 18 14 18H12.4722C13.4223 16.9385 14 15.5367 14 14C14 10.6863 11.3137 8 8 8C6.46329 8 5.06151 8.57771 4 9.52779V4Z"
                             fill="currentColor"></path>
@@ -137,6 +147,7 @@ interface Profile {
   post: string;
   unit: string;
   photoURL: string;
+  uploadPhoto: Object;
   biography?: string;
   research_foci: ResearchItem[];
   research_centres: ResearchItem[];
@@ -163,13 +174,28 @@ const truncatedBiography = computed(() => {
 });
 
 const navigateToProfile = () => {
-    router.push({
-      path: `/${props.profile.ssoid}`,
-      // query: { from: 'search'}
-    })
+  router.push({
+    path: `/${props.profile.ssoid}`,
+    // query: { from: 'search'}
+  })
 };
 
-import TiptapViewer from '../TiptapViewer.vue';
+const customPhotoURL = computed(() => {
+  if (props.profile.uploadPhoto) {
+    return 'https://profile-cms.sci.hkbu.edu.hk' + props.profile.uploadPhoto['url'];
+  } else {
+    return props.profile.photoURL;
+  }
+});
+
+// let customPhotoURL = 'https://profile-cms.sci.hkbu.edu.hk' + props.profile.uploadPhoto;
+if (props.profile.uploadPhoto) {
+
+  console.log('TESTING Custom Photo', customPhotoURL.value);
+} else {
+  // customPhotoURL = props.profile.photoURL;
+}
+
 
 </script>
 
