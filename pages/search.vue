@@ -16,15 +16,26 @@
       <div class="row" style="margin-top: 27px;margin-bottom: 10px;">
         <div class="col"><small class="form-text"
             style="color: var(--bs-black);font-size: 20px;font-family: Lato, sans-serif;font-weight: bold;margin-top: 0px;padding: 15px;padding-top: 0px;height: 0px;">Filter
-            by</small></div>
+            by</small>
+          <!-- Clear All Filters Button -->
+          <button class="btn btn-outline-secondary btn-sm ms-2" style="margin-left: 10px; margin-bottom: 5px;"
+            :disabled="selectedFilters.every(arr => arr.length === 0)" @click="clearAllFilters">
+            Clear All Filters
+          </button>
+        </div>
         <div class="col-xl-6">
           <div class="row">
             <div class="col">
               <div class="dropdown show" style="width: 15vw;"><button class="btn btn-primary dropdown-toggle"
                   aria-expanded="true" data-bs-toggle="dropdown" type="button"
-                  style="background: rgb(59,119,184);border-radius: 2px;width: 15vw;">Sort by:</button>
-                <div class="dropdown-menu" data-bs-popper="none"><a class="dropdown-item" href="#">Relevance</a><a
-                    class="dropdown-item" href="#">Name</a><a class="dropdown-item" href="#">Department</a></div>
+                  style="background: rgb(59,119,184);border-radius: 2px;width: 15vw;">Sort by:
+                  {{sortOptions.find(opt => opt.value === sortBy)?.label || 'Relevance'}}</button>
+                <div class="dropdown-menu" data-bs-popper="none">
+                  <a v-for="option in sortOptions" :key="option.value" class="dropdown-item" href="#"
+                    @click.prevent="handleSortChange(option)">
+                    {{ option.label }}
+                  </a>
+                </div>
               </div>
             </div>
             <div class="col">
@@ -213,6 +224,13 @@ const totalProfiles = ref(0);
 const pageSize = 5;
 const currentPage = ref(Number(route.query.page) || 1);
 const selectedFilters = ref([[], [], [], [], []]); // Track selected options for each accordion section
+const sortBy = ref('relevance'); // 'relevance', 'name', 'department'
+
+const sortOptions = [
+  { label: 'Relevance', value: 'relevance' },
+  { label: 'Name', value: 'name' },
+  { label: 'Department', value: 'department' },
+];
 
 watch(
   selectedFilters,
@@ -222,23 +240,37 @@ watch(
   { deep: true }
 );
 
+const handleSortChange = (option) => {
+  sortBy.value = option.value;
+  fetchProfilesFromMeili(searchInput.value, currentPage.value, pageSize);
+};
+
+const filterFields = [
+  'research_foci',
+  'fcras',
+  'research_centres',
+  'available_supervisions',
+  'tech_offers',
+  'name',
+  'department',
+];
+
 const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) => {
   isLoading.value = true;
   try {
     const offset = (page - 1) * limit;
-    // Build Meilisearch filter string from selectedFilters
     let filters = [];
-    // Map accordion index to Meilisearch field names
-    const filterFields = [
-      'research_foci',
-      'fcras',
-      'research_centres',
-      'available_supervisions',
-      'tech_offers',
-    ];
+    // const filterFields = [
+    //   'research_foci',
+    //   'fcras',
+    //   'research_centres',
+    //   'available_supervisions',
+    //   'tech_offers',
+    //   'name',
+    //   'department',
+    // ];
     selectedFilters.value.forEach((arr, idx) => {
       if (arr.length > 0) {
-        // Each filter: field.name = value1 OR value2 ...
         const orFilter = arr.map(val => `${filterFields[idx]}.name = \"${val}\"`).join(' OR ');
         if (orFilter) filters.push(`(${orFilter})`);
       }
@@ -249,6 +281,12 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
       limit,
     };
     if (filterString) (searchOptions as any).filter = filterString;
+    // Add sort option
+    if (sortBy.value === 'name') {
+      (searchOptions as any).sort = ['name:asc'];
+    } else if (sortBy.value === 'department') {
+      (searchOptions as any).sort = ['department:asc'];
+    }
     // Debug logs
     console.log('Meilisearch filter string:', filterString);
     console.log('Meilisearch search options:', searchOptions);
@@ -330,16 +368,11 @@ const accordionItems = computed(() => {
 
 const setupMeiliFilterableAttributes = async () => {
   try {
-    await meiliIndex.updateFilterableAttributes([
-      'research_foci',
-      'fcras',
-      'research_centres',
-      'available_supervisions',
-      'tech_offers',
-    ]);
-    console.log('Meilisearch filterable attributes set.');
+    await meiliIndex.updateFilterableAttributes(filterFields);
+    await meiliIndex.updateSortableAttributes(['name', 'department']);
+    console.log('Meilisearch filterable and sortable attributes set.');
   } catch (error) {
-    console.error('Failed to set filterable attributes:', error);
+    console.error('Failed to set filterable/sortable attributes:', error);
   }
 };
 
@@ -366,6 +399,10 @@ onMounted(async () => {
     isLoading.value = false;
   }
 })
+
+const clearAllFilters = () => {
+  selectedFilters.value = selectedFilters.value.map(() => []);
+};
 
 </script>
 
