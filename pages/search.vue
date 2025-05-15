@@ -85,9 +85,9 @@
                   </div> -->
 
                   <div v-for="(focus, index) in accordionItems[0]" :key="index" class="form-check">
-                    <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                    <input :id="'formCheck-0-' + index" class="form-check-input" type="checkbox"
                       :value="focus['name']" v-model="selectedFilters[0]" />
-                    <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                    <label :for="'formCheck-0-' + index" class="form-check-label">{{ focus['name'] }}</label>
                   </div>
 
                   <!-- <p class="mb-0">Show All Options</p> -->
@@ -105,9 +105,9 @@
                         class="form-check-label" for="formCheck-2">Chemical Biology &amp; Molecular Modelling</label>
                     </div> -->
                     <div v-for="(focus, index) in accordionItems[1]" :key="index" class="form-check">
-                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                      <input :id="'formCheck-1-' + index" class="form-check-input" type="checkbox"
                         :value="focus['name']" v-model="selectedFilters[1]">
-                      <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                      <label :for="'formCheck-1-' + index" class="form-check-label">{{ focus['name'] }}</label>
                       </input>
                     </div>
 
@@ -128,9 +128,9 @@
                         Sciences</label></div> -->
 
                     <div v-for="(focus, index) in accordionItems[2]" :key="index" class="form-check">
-                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                      <input :id="'formCheck-2-' + index" class="form-check-input" type="checkbox"
                         :value="focus['name']" v-model="selectedFilters[2]">
-                      <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                      <label :for="'formCheck-2-' + index" class="form-check-label">{{ focus['name'] }}</label>
                       </input>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -148,9 +148,9 @@
                     <!-- <div class="form-check"><input id="formCheck-4" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-4">Summer Research Programme</label></div> -->
                     <div v-for="(focus, index) in accordionItems[3]" :key="index" class="form-check">
-                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                      <input :id="'formCheck-3-' + index" class="form-check-input" type="checkbox"
                         :value="focus['name']" v-model="selectedFilters[3]">
-                      <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                      <label :for="'formCheck-3-' + index" class="form-check-label">{{ focus['name'] }}</label>
                       </input>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -168,9 +168,9 @@
                     <!-- <div class="form-check"><input id="formCheck-5" class="form-check-input" type="checkbox" /><label
                         class="form-check-label" for="formCheck-5">Healthcare - Diagnostics</label></div> -->
                     <div v-for="(focus, index) in accordionItems[4]" :key="index" class="form-check">
-                      <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
+                      <input :id="'formCheck-4-' + index" class="form-check-input" type="checkbox"
                         :value="focus['name']" v-model="selectedFilters[4]">
-                      <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                      <label :for="'formCheck-4-' + index" class="form-check-label">{{ focus['name'] }}</label>
                       </input>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -186,9 +186,9 @@
                 <div class="accordion-body">
                   <div>
                     <div v-for="(focus, index) in accordionItems[5]" :key="index" class="form-check">
-                      <input :id="'formCheck-dept-' + index" class="form-check-input" type="checkbox"
+                      <input :id="'formCheck-5-' + index" class="form-check-input" type="checkbox"
                         :value="focus['name']" v-model="selectedFilters[5]">
-                      <label :for="'formCheck-dept-' + index" class="form-check-label">{{ focus['name'] }}</label>
+                      <label :for="'formCheck-5-' + index" class="form-check-label">{{ focus['name'] }}</label>
                       </input>
                     </div>
                   </div>
