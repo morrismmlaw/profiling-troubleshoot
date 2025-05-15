@@ -26,10 +26,11 @@
         <div class="col-xl-6">
           <div class="row">
             <div class="col">
-              <div class="dropdown show" style="width: 15vw;"><button class="btn btn-primary dropdown-toggle"
-                  aria-expanded="true" data-bs-toggle="dropdown" type="button"
-                  style="background: rgb(59,119,184);border-radius: 2px;width: 15vw;">Sort by:
-                  {{sortOptions.find(opt => opt.value === sortBy)?.label || 'Relevance'}}</button>
+              <div class="dropdown show sort-dropdown-wrapper">
+                <button class="btn sort-by-btn dropdown-toggle"
+                  aria-expanded="true" data-bs-toggle="dropdown" type="button">
+                  Sort by: {{sortOptions.find(opt => opt.value === sortBy)?.label || 'Relevance'}}
+                </button>
                 <div class="dropdown-menu" data-bs-popper="none">
                   <a v-for="option in sortOptions" :key="option.value" class="dropdown-item" href="#"
                     @click.prevent="handleSortChange(option)">
@@ -40,29 +41,28 @@
             </div>
             <div class="col">
               <nav>
-                <ul class="pagination">
+                <ul class="pagination simple-pagination">
                   <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                    <a class="page-link" aria-label="Previous" href="#" @click.prevent="goToPage(currentPage - 1)"><span
-                        aria-hidden="true">«</span></a>
+                    <button class="page-link simple-page-btn" :disabled="currentPage === 1" @click.prevent="goToPage(currentPage - 1)">«</button>
                   </li>
                   <li v-for="pageNum in paginationNumbers" :key="pageNum + '-' + currentPage" class="page-item"
                     :class="{ active: currentPage === pageNum, disabled: pageNum === '...' }">
-                    <span v-if="pageNum === '...'" class="page-link">...</span>
-                    <a v-else class="page-link" href="#" @click.prevent="goToPage(pageNum)">{{ pageNum }}</a>
+                    <span v-if="pageNum === '...'" class="page-link simple-page-btn dots">...</span>
+                    <button v-else class="page-link simple-page-btn" :class="{ 'active-btn': currentPage === pageNum }" @click.prevent="goToPage(pageNum)">{{ pageNum }}</button>
                   </li>
                   <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-                    <a class="page-link" aria-label="Next" href="#" @click.prevent="goToPage(currentPage + 1)"><span
-                        aria-hidden="true">»</span></a>
+                    <button class="page-link simple-page-btn" :disabled="currentPage === totalPages" @click.prevent="goToPage(currentPage + 1)">»</button>
                   </li>
                 </ul>
               </nav>
             </div>
           </div>
         </div>
-        <div class="col" style="text-align: right;"><small class="form-text"
-            style="color: var(--bs-black);font-size: 20px;font-family: Lato, sans-serif;font-weight: bold;">
-            {{ currentRangeStart }}-{{ currentRangeEnd }} out of {{ totalProfiles }}
-          </small></div>
+        <div class="col" style="text-align: right;">
+          <small class="record-range-text">
+            {{ currentRangeStart }}-{{ currentRangeEnd }} of {{ totalProfiles }}
+          </small>
+        </div>
       </div>
       <div v-if="authStore" class="row" style="margin-top: 0;">
         <div class="col-md-6 col-xl-3 col-xxl-3" style="flex: 0 0 auto !important; width: 351.875px !important;">
@@ -442,5 +442,92 @@ const onSearchBarEnter = (val: string) => {
   line-height: 45px;
 
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.simple-pagination {
+  display: flex;
+  gap: 2px;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+}
+.simple-page-btn {
+  border: none;
+  background: transparent;
+  color: #3b77b8;
+  border-radius: 6px;
+  min-width: 32px;
+  min-height: 32px;
+  font-size: 1rem;
+  margin: 0 2px;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.simple-page-btn:hover:not(:disabled), .simple-page-btn.active-btn {
+  background: #e6f0fa;
+  color: #17406a;
+}
+.simple-page-btn:disabled {
+  color: #b0b0b0;
+  background: none;
+  cursor: not-allowed;
+}
+.simple-page-btn.dots {
+  cursor: default;
+  color: #b0b0b0;
+  background: none;
+}
+.record-range-text {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 400;
+  background: none;
+  padding: 0 4px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+.sort-dropdown-wrapper {
+  width: 13vw;
+  min-width: 120px;
+}
+.sort-by-btn {
+  background: #f5faff;
+  color: #3b77b8;
+  border: 1px solid #c6e0f7;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 4px 16px 4px 10px;
+  min-height: 32px;
+  min-width: 100px;
+  box-shadow: none;
+  transition: background 0.15s, color 0.15s, border 0.15s;
+}
+.sort-by-btn:hover, .sort-by-btn:focus {
+  background: #e6f0fa;
+  color: #17406a;
+  border-color: #3b77b8;
+}
+.sort-by-btn:active {
+  background: #d2e6f7;
+  color: #17406a;
+}
+.dropdown-menu {
+  font-size: 0.95rem;
+  border-radius: 6px;
+  min-width: 120px;
+  box-shadow: 0 2px 8px rgba(59,119,184,0.08);
+  border: 1px solid #e6f0fa;
+}
+.dropdown-item {
+  color: #3b77b8;
+  padding: 6px 16px;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+.dropdown-item:hover, .dropdown-item:focus {
+  background: #e6f0fa;
+  color: #17406a;
 }
 </style>
