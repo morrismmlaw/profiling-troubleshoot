@@ -27,8 +27,8 @@
           <div class="row">
             <div class="col">
               <div class="dropdown show sort-dropdown-wrapper">
-                <button class="btn sort-by-btn dropdown-toggle"
-                  aria-expanded="true" data-bs-toggle="dropdown" type="button">
+                <button class="btn sort-by-btn dropdown-toggle" aria-expanded="true" data-bs-toggle="dropdown"
+                  type="button">
                   Sort by: {{sortOptions.find(opt => opt.value === sortBy)?.label || 'Relevance'}}
                 </button>
                 <div class="dropdown-menu" data-bs-popper="none">
@@ -43,15 +43,18 @@
               <nav>
                 <ul class="pagination simple-pagination">
                   <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                    <button class="page-link simple-page-btn" :disabled="currentPage === 1" @click.prevent="goToPage(currentPage - 1)">«</button>
+                    <button class="page-link simple-page-btn" :disabled="currentPage === 1"
+                      @click.prevent="goToPage(currentPage - 1)">«</button>
                   </li>
                   <li v-for="pageNum in paginationNumbers" :key="pageNum + '-' + currentPage" class="page-item"
                     :class="{ active: currentPage === pageNum, disabled: pageNum === '...' }">
                     <span v-if="pageNum === '...'" class="page-link simple-page-btn dots">...</span>
-                    <button v-else class="page-link simple-page-btn" :class="{ 'active-btn': currentPage === pageNum }" @click.prevent="goToPage(pageNum)">{{ pageNum }}</button>
+                    <button v-else class="page-link simple-page-btn" :class="{ 'active-btn': currentPage === pageNum }"
+                      @click.prevent="goToPage(pageNum)">{{ pageNum }}</button>
                   </li>
                   <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-                    <button class="page-link simple-page-btn" :disabled="currentPage === totalPages" @click.prevent="goToPage(currentPage + 1)">»</button>
+                    <button class="page-link simple-page-btn" :disabled="currentPage === totalPages"
+                      @click.prevent="goToPage(currentPage + 1)">»</button>
                   </li>
                 </ul>
               </nav>
@@ -103,8 +106,9 @@
                     </div> -->
                     <div v-for="(focus, index) in accordionItems[1]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
-                        :value="focus['name']" v-model="selectedFilters[1]" />
+                        :value="focus['name']" v-model="selectedFilters[1]">
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                      </input>
                     </div>
 
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -125,8 +129,9 @@
 
                     <div v-for="(focus, index) in accordionItems[2]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
-                        :value="focus['name']" v-model="selectedFilters[2]" />
+                        :value="focus['name']" v-model="selectedFilters[2]">
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                      </input>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
                   </div>
@@ -144,8 +149,9 @@
                         class="form-check-label" for="formCheck-4">Summer Research Programme</label></div> -->
                     <div v-for="(focus, index) in accordionItems[3]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
-                        :value="focus['name']" v-model="selectedFilters[3]" />
+                        :value="focus['name']" v-model="selectedFilters[3]">
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                      </input>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
                   </div>
@@ -163,8 +169,9 @@
                         class="form-check-label" for="formCheck-5">Healthcare - Diagnostics</label></div> -->
                     <div v-for="(focus, index) in accordionItems[4]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
-                        :value="focus['name']" v-model="selectedFilters[4]" />
+                        :value="focus['name']" v-model="selectedFilters[4]">
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
+                      </input>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
                   </div>
@@ -180,8 +187,9 @@
                   <div>
                     <div v-for="(focus, index) in accordionItems[5]" :key="index" class="form-check">
                       <input :id="'formCheck-dept-' + index" class="form-check-input" type="checkbox"
-                        :value="focus['name']" v-model="selectedFilters[5]" />
+                        :value="focus['name']" v-model="selectedFilters[5]">
                       <label :for="'formCheck-dept-' + index" class="form-check-label">{{ focus['name'] }}</label>
+                      </input>
                     </div>
                   </div>
                 </div>
@@ -452,6 +460,7 @@ const onSearchBarEnter = (val: string) => {
   background: none;
   border: none;
 }
+
 .simple-page-btn {
   border: none;
   background: transparent;
@@ -464,20 +473,25 @@ const onSearchBarEnter = (val: string) => {
   transition: background 0.15s, color 0.15s;
   cursor: pointer;
 }
-.simple-page-btn:hover:not(:disabled), .simple-page-btn.active-btn {
+
+.simple-page-btn:hover:not(:disabled),
+.simple-page-btn.active-btn {
   background: #e6f0fa;
   color: #17406a;
 }
+
 .simple-page-btn:disabled {
   color: #b0b0b0;
   background: none;
   cursor: not-allowed;
 }
+
 .simple-page-btn.dots {
   cursor: default;
   color: #b0b0b0;
   background: none;
 }
+
 .record-range-text {
   color: #666;
   font-size: 1rem;
@@ -487,10 +501,12 @@ const onSearchBarEnter = (val: string) => {
   border-radius: 4px;
   letter-spacing: 0.02em;
 }
+
 .sort-dropdown-wrapper {
   width: 13vw;
   min-width: 120px;
 }
+
 .sort-by-btn {
   background: #f5faff;
   color: #3b77b8;
@@ -504,29 +520,36 @@ const onSearchBarEnter = (val: string) => {
   box-shadow: none;
   transition: background 0.15s, color 0.15s, border 0.15s;
 }
-.sort-by-btn:hover, .sort-by-btn:focus {
+
+.sort-by-btn:hover,
+.sort-by-btn:focus {
   background: #e6f0fa;
   color: #17406a;
   border-color: #3b77b8;
 }
+
 .sort-by-btn:active {
   background: #d2e6f7;
   color: #17406a;
 }
+
 .dropdown-menu {
   font-size: 0.95rem;
   border-radius: 6px;
   min-width: 120px;
-  box-shadow: 0 2px 8px rgba(59,119,184,0.08);
+  box-shadow: 0 2px 8px rgba(59, 119, 184, 0.08);
   border: 1px solid #e6f0fa;
 }
+
 .dropdown-item {
   color: #3b77b8;
   padding: 6px 16px;
   border-radius: 4px;
   transition: background 0.15s, color 0.15s;
 }
-.dropdown-item:hover, .dropdown-item:focus {
+
+.dropdown-item:hover,
+.dropdown-item:focus {
   background: #e6f0fa;
   color: #17406a;
 }
