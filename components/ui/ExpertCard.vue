@@ -115,7 +115,7 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <div class="publication-match"><label class="form-label publication-label"><small
+                  <div v-if="matchedFields.length" class="publication-match"><label class="form-label publication-label"><small
                         class="form-text"><svg class="publication-icon" xmlns="http://www.w3.org/2000/svg" width="1em"
                           height="1em" viewBox="0 0 20 20" fill="none">
                           <path
@@ -124,7 +124,9 @@
                           <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M8 10C5.79086 10 4 11.7909 4 14C4 14.7414 4.20229 15.4364 4.55397 16.0318L3.29289 17.2929C2.90237 17.6834 2.90237 18.3166 3.29289 18.7071C3.68342 19.0976 4.31658 19.0976 4.70711 18.7071L5.96818 17.446C6.56362 17.7977 7.25862 18 8 18C10.2091 18 12 16.2091 12 14C12 11.7909 10.2091 10 8 10ZM6 14C6 12.8954 6.89543 12 8 12C9.10457 12 10 12.8954 10 14C10 15.1046 9.10457 16 8 16C7.44744 16 6.94881 15.7772 6.58579 15.4142C6.22276 15.0512 6 14.5526 6 14Z"
                             fill="currentColor"></path>
-                        </svg>Your search matched against this person&#39;s {{ matchedFieldsName }}.</small></label>
+                        </svg>
+                        <!-- Your search matched against this person&#39;s {{ matchedFieldsName }}. -->
+                      </small></label>
                   </div>
                 </div>
               </div>
@@ -134,12 +136,12 @@
       </div>
     </div>
 
-    <div v-if="matchedFields.length">
+    <!-- <div v-if="matchedFields.length">
       <div v-for="item in matchedFields" :key="item.field">
         <span class="matched-field"><strong>Matched in {{ item.field }}:</strong> <span
             v-html="item.value"></span></span>
       </div>
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -206,15 +208,57 @@ const matchedFields = computed(() => {
   console.log('OG Profiles', props.profile);
   console.log('Matched Fields:', props.highlight);
   let result = Object.entries(props.highlight)
-    .filter(([field, value]) => value && value !== (props.profile as any)[field])
-    .map(([field, value]) => ({ field, value }));
+    .filter(([field, value]) => {
+      // Custom SDG/sdgs logic
+      if (field.toLowerCase() === 'sdg' || field.toLowerCase() === 'sdgs') {
+        const highlightArr = Array.isArray(value)
+          ? value.map(String).map(v => v.trim()).filter(Boolean)
+          : String(value).split(',').map(v => v.trim()).filter(Boolean);
+        const profileVal = (props.profile as any)[field] || (props.profile as any)[field.toLowerCase()];
+        const profileArr = Array.isArray(profileVal)
+          ? profileVal.map(String).map(v => v.trim()).filter(Boolean)
+          : String(profileVal).split(',').map(v => v.trim()).filter(Boolean);
+        if (highlightArr.length === 0 && profileArr.length === 0) return false;
+        if (highlightArr.length === profileArr.length && highlightArr.sort().join(',') === profileArr.sort().join(',')) {
+          return false;
+        }
+        return true;
+      }
+      // Custom logic for array-of-object fields
+      const arrayObjectFields = [
+        'research_centres', 'fcras', 'research_foci', 'available_supervisions', 'departments', 'tech_offers'
+      ];
+      if (arrayObjectFields.includes(field)) {
+        const highlightArr = Array.isArray(value) ? value : [];
+        const profileArr = Array.isArray((props.profile as any)[field]) ? (props.profile as any)[field] : [];
+        // Compare by id or name
+        const getIdsOrNames = (arr: any[]) => arr.map(obj => obj?.id || obj?.name || '').filter(Boolean).sort();
+        const highlightIds = getIdsOrNames(highlightArr);
+        const profileIds = getIdsOrNames(profileArr);
+        if (highlightIds.length === 0 && profileIds.length === 0) return false;
+        if (highlightIds.length === profileIds.length && highlightIds.join(',') === profileIds.join(',')) {
+          return false;
+        }
+        return true;
+      }
+      // Default logic for other fields
+      return value && value !== (props.profile as any)[field];
+    })
+    .map(([field, value]) => {
+      // For array-of-object fields, display as comma-separated names
+      const arrayObjectFields = [
+        'research_centres', 'fcras', 'research_foci', 'available_supervisions', 'departments', 'tech_offers'
+      ];
+      if (arrayObjectFields.includes(field) && Array.isArray(value)) {
+        const names = value.map((obj: any) => obj?.name || obj?.id || '').filter(Boolean).join(', ');
+        return { field, value: names };
+      }
+      return { field, value };
+    });
 
   result = result.filter(item => !Array.isArray(item.value) || item.value.length > 0);
-
-  // Add a filter to remove the field 'id'
-  result = result.filter(item =>
-    item.field !== 'id'
-  );
+  result = result.filter(item => item.field !== 'id');
+  result = result.filter(item => item.field !== 'uploadPhoto');
 
   console.log('Cleaned Matched Fields:', result);
 

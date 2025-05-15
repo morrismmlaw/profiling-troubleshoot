@@ -207,7 +207,7 @@
             </div>
             <div v-else>
               <div v-for="profile in profiles" :key="profile.id">
-                <ExpertCard :profile="profile" :highlight="profile._formatted" />
+                <ExpertCard :profile="profile" :highlight="profile._formatted" :matchesInfo="profile._matchesInfo" />
               </div>
             </div>
           </div>
@@ -420,7 +420,7 @@ onMounted(async () => {
     if (!authStore.collections) {
       await authStore.setCollections();
     }
-    await fetchProfilesFromMeili(searchInput.value, currentPage.value, pageSize);
+    await fetchProfilesFromMeili(searchInput.value, currentPage.value,
   } catch (error) {
     console.error('Failed to initialize:', error);
   } finally {
