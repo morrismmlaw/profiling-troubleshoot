@@ -207,7 +207,7 @@
             </div>
             <div v-else>
               <div v-for="profile in profiles" :key="profile.id">
-                <ExpertCard :profile="profile" :highlight="profile._formatted" :matchesInfo="profile._matchesInfo" />
+                <ExpertCard :profile="profile" :highlight="profile._formatted" />
               </div>
             </div>
           </div>
@@ -332,11 +332,14 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
 };
 
 watch(
-  [() => route.query.page, searchInput, selectedFilters],
+  [() => route.query.page, () => route.query.q, selectedFilters],
   async ([newPage, newQuery]) => {
     const pageNum = Number(newPage) || 1;
     currentPage.value = pageNum;
-    await fetchProfilesFromMeili(newQuery, pageNum, pageSize);
+    // Use route.query.q as the source of truth for the keyword
+    const keyword = typeof newQuery === 'string' ? newQuery : '';
+    searchInput.value = keyword;
+    await fetchProfilesFromMeili(keyword, pageNum, pageSize);
   },
   { immediate: true, deep: true }
 );
@@ -418,7 +421,7 @@ onMounted(async () => {
     if (!authStore.collections) {
       await authStore.setCollections();
     }
-    await fetchProfilesFromMeili(searchInput.value, currentPage.value,
+    await fetchProfilesFromMeili(searchInput.value, currentPage.value, pageSize);
   } catch (error) {
     console.error('Failed to initialize:', error);
   } finally {
@@ -431,9 +434,11 @@ const clearAllFilters = () => {
 };
 
 const onSearchBarEnter = (val: string) => {
-  fetchProfilesFromMeili(val, 1, pageSize);
+  // Always reset to page 1 and update the route with the new keyword
+  searchInput.value = val;
   currentPage.value = 1;
   router.push({ query: { ...route.query, q: val, page: 1 } });
+  fetchProfilesFromMeili(val, 1, pageSize);
 };
 
 </script>
