@@ -57,10 +57,10 @@ const searchInput = ref('')
 const handleSearch = () => {
   console.log("Clicked Search:", searchInput.value)
   emit('search', searchInput.value); // Emit search event
-  router.push({
-    path: '/search',
-    query: { q: searchInput.value }
-  })
+  // router.push({
+  //   path: '/search',
+  //   query: { q: searchInput.value }
+  // })
 }
 </script>
 
