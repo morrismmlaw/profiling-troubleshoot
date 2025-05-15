@@ -5,7 +5,7 @@
       style="background-image: url(&quot;/img/bottom.8ea92c85.jpg&quot;); background-size: cover; background-repeat: repeat; background-position: top;">
       <div class="col-md-11 col-lg-10 col-xl-9 mx-auto position-relative">
         <div class="container-fluid p-3 m-3">
-          <SearchBar />
+          <SearchBar v-model="searchInput" @search="onSearchBarEnter" />
         </div>
       </div>
     </div>
@@ -254,6 +254,7 @@ const filterFields = [
   'tech_offers',
   'name',
   'department',
+  'biography', // Added biography for keyword search
 ];
 
 const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) => {
@@ -364,9 +365,10 @@ const setupMeiliFilterableAttributes = async () => {
   try {
     await meiliIndex.updateFilterableAttributes(filterFields);
     await meiliIndex.updateSortableAttributes(['name', 'lastname']); // Ensure both are sortable
-    console.log('Meilisearch filterable and sortable attributes set.');
+    await meiliIndex.updateSearchableAttributes(['name', 'lastname', 'department', 'biography']); // Add biography as searchable
+    console.log('Meilisearch filterable, sortable, and searchable attributes set.');
   } catch (error) {
-    console.error('Failed to set filterable/sortable attributes:', error);
+    console.error('Failed to set filterable/sortable/searchable attributes:', error);
   }
 };
 
@@ -396,6 +398,12 @@ onMounted(async () => {
 
 const clearAllFilters = () => {
   selectedFilters.value = selectedFilters.value.map(() => []);
+};
+
+const onSearchBarEnter = (val: string) => {
+  fetchProfilesFromMeili(val, 1, pageSize);
+  currentPage.value = 1;
+  router.push({ query: { ...route.query, q: val, page: 1 } });
 };
 
 </script>

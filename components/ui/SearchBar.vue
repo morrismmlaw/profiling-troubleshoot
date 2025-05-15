@@ -50,11 +50,13 @@
 
 <script lang="ts" setup>
 
+const emit = defineEmits(['update:modelValue', 'search']);
 const router = useRouter()
 const searchInput = ref('')
 
 const handleSearch = () => {
   console.log("Clicked Search:", searchInput.value)
+  emit('search', searchInput.value); // Emit search event
   router.push({
     path: '/search',
     query: { q: searchInput.value }
