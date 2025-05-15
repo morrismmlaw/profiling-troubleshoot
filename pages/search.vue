@@ -228,8 +228,9 @@ const sortBy = ref('relevance'); // 'relevance', 'name', 'department'
 
 const sortOptions = [
   { label: 'Relevance', value: 'relevance' },
-  { label: 'Name', value: 'name' },
-  { label: 'Department', value: 'department' },
+  { label: 'Name (A-Z)', value: 'name' },
+  { label: 'Last Name (A-Z)', value: 'lastname_asc' },
+  { label: 'Last Name (Z-A)', value: 'lastname_desc' },
 ];
 
 watch(
@@ -260,18 +261,9 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
   try {
     const offset = (page - 1) * limit;
     let filters = [];
-    // const filterFields = [
-    //   'research_foci',
-    //   'fcras',
-    //   'research_centres',
-    //   'available_supervisions',
-    //   'tech_offers',
-    //   'name',
-    //   'department',
-    // ];
     selectedFilters.value.forEach((arr, idx) => {
       if (arr.length > 0) {
-        const orFilter = arr.map(val => `${filterFields[idx]}.name = \"${val}\"`).join(' OR ');
+        const orFilter = arr.map(val => `${filterFields[idx]}.name = "${val}"`).join(' OR ');
         if (orFilter) filters.push(`(${orFilter})`);
       }
     });
@@ -284,8 +276,10 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
     // Add sort option
     if (sortBy.value === 'name') {
       (searchOptions as any).sort = ['name:asc'];
-    } else if (sortBy.value === 'department') {
-      (searchOptions as any).sort = ['department:asc'];
+    } else if (sortBy.value === 'lastname_asc') {
+      (searchOptions as any).sort = ['lastname:asc'];
+    } else if (sortBy.value === 'lastname_desc') {
+      (searchOptions as any).sort = ['lastname:desc'];
     }
     // Debug logs
     console.log('Meilisearch filter string:', filterString);
@@ -369,7 +363,7 @@ const accordionItems = computed(() => {
 const setupMeiliFilterableAttributes = async () => {
   try {
     await meiliIndex.updateFilterableAttributes(filterFields);
-    await meiliIndex.updateSortableAttributes(['name', 'department']);
+    await meiliIndex.updateSortableAttributes(['name', 'lastname']); // Ensure both are sortable
     console.log('Meilisearch filterable and sortable attributes set.');
   } catch (error) {
     console.error('Failed to set filterable/sortable attributes:', error);
