@@ -63,9 +63,16 @@ export default defineNuxtConfig({
   meilisearch: {
     hostUrl: 'http://158.182.151.62:7700', //required
     searchApiKey: 'e5e806a91bca2b6b58ed2aebba3a6a873bfddcf834cbf1c3dcc7418785f36dac', // required
-    adminApiKey: '<admin_api_key>', // optional
+    adminApiKey: 'Strd8oz_m6pgKbml-ivcANsCHfz55IyJD9S-L6pJiCY', // optional
     serverSideUsage: true // default: false
     //bearer token: 'Strd8oz_m6pgKbml-ivcANsCHfz55IyJD9S-L6pJiCY';
+  },
+
+  runtimeConfig: {
+    public: {
+      meiliHost: process.env.MEILISEARCH_HOST || 'http://158.182.151.62:7700',
+      meiliAdminApiKey: process.env.MEILISEARCH_ADMIN_API_KEY || 'Strd8oz_m6pgKbml-ivcANsCHfz55IyJD9S-L6pJiCY',
+    }
   },
 
   compatibilityDate: '2024-11-01',

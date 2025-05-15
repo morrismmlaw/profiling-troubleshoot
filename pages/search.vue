@@ -72,9 +72,7 @@
 
                   <div v-for="(focus, index) in accordionItems[0]" :key="index" class="form-check">
                     <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
-                      :value="focus['name']"
-                      v-model="selectedFilters[0]"
-                    />
+                      :value="focus['name']" v-model="selectedFilters[0]" />
                     <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                   </div>
 
@@ -94,9 +92,7 @@
                     </div> -->
                     <div v-for="(focus, index) in accordionItems[1]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
-                        :value="focus['name']"
-                        v-model="selectedFilters[1]"
-                      />
+                        :value="focus['name']" v-model="selectedFilters[1]" />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                     </div>
 
@@ -118,9 +114,7 @@
 
                     <div v-for="(focus, index) in accordionItems[2]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
-                        :value="focus['name']"
-                        v-model="selectedFilters[2]"
-                      />
+                        :value="focus['name']" v-model="selectedFilters[2]" />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -139,9 +133,7 @@
                         class="form-check-label" for="formCheck-4">Summer Research Programme</label></div> -->
                     <div v-for="(focus, index) in accordionItems[3]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
-                        :value="focus['name']"
-                        v-model="selectedFilters[3]"
-                      />
+                        :value="focus['name']" v-model="selectedFilters[3]" />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -160,9 +152,7 @@
                         class="form-check-label" for="formCheck-5">Healthcare - Diagnostics</label></div> -->
                     <div v-for="(focus, index) in accordionItems[4]" :key="index" class="form-check">
                       <input :id="'formCheck-' + (index + 5)" class="form-check-input" type="checkbox"
-                        :value="focus['name']"
-                        v-model="selectedFilters[4]"
-                      />
+                        :value="focus['name']" v-model="selectedFilters[4]" />
                       <label :for="'formCheck-' + (index + 5)" class="form-check-label">{{ focus['name'] }}</label>
                     </div>
                     <!-- <p class="mb-0">Show All Options</p> -->
@@ -196,6 +186,7 @@
 
 <script lang="ts" setup>
 import { MeiliSearch } from 'meilisearch';
+import { useRuntimeConfig } from '#app';
 
 const searchInput = ref('')
 const router = useRouter()
@@ -209,10 +200,11 @@ const profileStore = useProfileStore();
 const authStore = useAuthStore();
 const isLoading = ref(true);
 
+const config = useRuntimeConfig();
 // Meilisearch client setup
 const meiliClient = new MeiliSearch({
-  host: 'http://158.182.151.62:7700', // Change to your Meilisearch host
-  apiKey: 'e5e806a91bca2b6b58ed2aebba3a6a873bfddcf834cbf1c3dcc7418785f36dac', // Uncomment if you use an API key
+  host: config.public.meiliHost, // Use runtime config
+  apiKey: config.public.meiliAdminApiKey, // Use runtime config
 });
 const meiliIndex = meiliClient.index('profile');
 
@@ -221,6 +213,14 @@ const totalProfiles = ref(0);
 const pageSize = 5;
 const currentPage = ref(Number(route.query.page) || 1);
 const selectedFilters = ref([[], [], [], [], []]); // Track selected options for each accordion section
+
+watch(
+  selectedFilters,
+  (newFilters) => {
+    console.log('Selected filter attributes:', JSON.stringify(newFilters));
+  },
+  { deep: true }
+);
 
 const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) => {
   isLoading.value = true;
@@ -238,8 +238,8 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
     ];
     selectedFilters.value.forEach((arr, idx) => {
       if (arr.length > 0) {
-        // Each filter: field = value1 OR value2 ...
-        const orFilter = arr.map(val => `${filterFields[idx]} = \"${val}\"`).join(' OR ');
+        // Each filter: field.name = value1 OR value2 ...
+        const orFilter = arr.map(val => `${filterFields[idx]}.name = \"${val}\"`).join(' OR ');
         if (orFilter) filters.push(`(${orFilter})`);
       }
     });
@@ -249,10 +249,17 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
       limit,
     };
     if (filterString) (searchOptions as any).filter = filterString;
+    // Debug logs
+    console.log('Meilisearch filter string:', filterString);
+    console.log('Meilisearch search options:', searchOptions);
     // Search by name, biography, and other fields (Meilisearch will search all searchable fields by default)
     const result = await meiliIndex.search(query, searchOptions);
+    console.log('Meilisearch result:', result);
     profiles.value = result.hits;
     totalProfiles.value = result.estimatedTotalHits || 0;
+    if (result.hits.length === 0) {
+      console.warn('No profiles found for current filters:', filterString);
+    }
   } catch (error) {
     console.error('Meilisearch fetch error:', error);
     profiles.value = [];
@@ -320,6 +327,31 @@ const accordionItems = computed(() => {
     authStore.collections['tech-offers'] ?? [],
   ] : [[], [], [], [], []];
 });
+
+const setupMeiliFilterableAttributes = async () => {
+  try {
+    await meiliIndex.updateFilterableAttributes([
+      'research_foci',
+      'fcras',
+      'research_centres',
+      'available_supervisions',
+      'tech_offers',
+    ]);
+    console.log('Meilisearch filterable attributes set.');
+  } catch (error) {
+    console.error('Failed to set filterable attributes:', error);
+  }
+};
+
+onBeforeMount(async () => {
+
+  await setupMeiliFilterableAttributes();
+
+  let meiliRes = await meiliClient.index('profile').getSettings();
+  console.log('meili Setting', meiliRes);
+  // Uncomment the next line to run the setup once, then comment it out after filterable attributes are set
+  // await setupMeiliFilterableAttributes();
+})
 
 onMounted(async () => {
   try {
