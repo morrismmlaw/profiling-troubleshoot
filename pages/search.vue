@@ -171,6 +171,22 @@
                 </div>
               </div>
             </div>
+            <div class="accordion-item" style="width: 324px;">
+              <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-6" aria-expanded="false"
+                  aria-controls="accordion-1 .item-6">Departments</button></h2>
+              <div class="accordion-collapse collapse item-6" role="tabpanel" data-bs-parent="#accordion-1">
+                <div class="accordion-body">
+                  <div>
+                    <div v-for="(focus, index) in accordionItems[5]" :key="index" class="form-check">
+                      <input :id="'formCheck-dept-' + index" class="form-check-input" type="checkbox"
+                        :value="focus['name']" v-model="selectedFilters[5]" />
+                      <label :for="'formCheck-dept-' + index" class="form-check-label">{{ focus['name'] }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-8 col-xl-8">
@@ -223,7 +239,7 @@ const profiles = ref([]);
 const totalProfiles = ref(0);
 const pageSize = 5;
 const currentPage = ref(Number(route.query.page) || 1);
-const selectedFilters = ref([[], [], [], [], []]); // Track selected options for each accordion section
+const selectedFilters = ref([[], [], [], [], [], []]); // Add departments as 6th filter
 const sortBy = ref('relevance'); // 'relevance', 'name', 'department'
 
 const sortOptions = [
@@ -252,6 +268,7 @@ const filterFields = [
   'research_centres',
   'available_supervisions',
   'tech_offers',
+  'departments', // Add departments for filtering
   'name',
   'department',
   'biography', // Added biography for keyword search
@@ -358,7 +375,8 @@ const accordionItems = computed(() => {
     authStore.collections['research-centres'] ?? [],
     authStore.collections['available-supervisions'] ?? [],
     authStore.collections['tech-offers'] ?? [],
-  ] : [[], [], [], [], []];
+    authStore.collections['departments'] ?? [], // Add departments
+  ] : [[], [], [], [], [], []];
 });
 
 const setupMeiliFilterableAttributes = async () => {
