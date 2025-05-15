@@ -63,18 +63,10 @@ watch(checkedForm, (newVal) => {
 
         <div class="row justify-content-center">
           <div class="col-12">
-            <div v-if="authStore.isAuthenticated || authStore.isAdmin">
+            <div>
               <div class="mt-3">
                 <ProfileForm :key="componentKey" v-if="!isLoading" :profile="authStore.user"
                   :collections="authStore.collections" @save="" />
-              </div>
-            </div>
-            <div v-else>
-              <p class="text-center text-danger pt-4">Please login to view your profile.</p>
-              <div class="text-center mt-4">
-                <NuxtLink to="/" class="btn btn-primary">
-                  Go to Home Page
-                </NuxtLink>
               </div>
             </div>
           </div>
