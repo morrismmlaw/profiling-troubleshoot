@@ -207,7 +207,7 @@
             </div>
             <div v-else>
               <div v-for="profile in profiles" :key="profile.id">
-                <ExpertCard :profile="profile" />
+                <ExpertCard :profile="profile" :highlight="profile._formatted" />
               </div>
             </div>
           </div>
@@ -297,6 +297,7 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
     const searchOptions = {
       offset,
       limit,
+      attributesToHighlight: ['name', 'lastname', 'department', 'biography', 'research_interest'], // highlight these fields
     };
     if (filterString) (searchOptions as any).filter = filterString;
     // Add sort option
@@ -391,7 +392,7 @@ const setupMeiliFilterableAttributes = async () => {
   try {
     await meiliIndex.updateFilterableAttributes(filterFields);
     await meiliIndex.updateSortableAttributes(['name', 'lastname']); // Ensure both are sortable
-    await meiliIndex.updateSearchableAttributes(['name', 'lastname', 'department', 'biography']); // Add biography as searchable
+    await meiliIndex.updateSearchableAttributes(['name', 'lastname', 'department', 'biography', 'research_interest']); // Add research_interest as searchable
     console.log('Meilisearch filterable, sortable, and searchable attributes set.');
   } catch (error) {
     console.error('Failed to set filterable/sortable/searchable attributes:', error);

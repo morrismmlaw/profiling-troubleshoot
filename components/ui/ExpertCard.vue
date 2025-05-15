@@ -133,6 +133,11 @@
       </div>
     </div>
 
+    <div v-if="matchedFields.length">
+      <div v-for="item in matchedFields" :key="item.field">
+        <span class="matched-field"><strong>Matched in {{ item.field }}:</strong> <span v-html="item.value"></span></span>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -163,6 +168,7 @@ const router = useRouter();
 
 const props = defineProps<{
   profile: Profile;
+  highlight?: Record<string, any>; // highlight prop for matched fields
 }>();
 
 const truncatedBiography = computed(() => {
@@ -189,6 +195,13 @@ const customPhotoURL = computed(() => {
   } else {
     return props.profile.photoURL;
   }
+});
+
+const matchedFields = computed(() => {
+  if (!props.highlight) return [];
+  return Object.entries(props.highlight)
+    .filter(([field, value]) => value && value !== (props.profile as any)[field])
+    .map(([field, value]) => ({ field, value }));
 });
 
 // let customPhotoURL = 'https://profile-cms.sci.hkbu.edu.hk' + props.profile.uploadPhoto;
@@ -291,5 +304,15 @@ if (props.profile.uploadPhoto) {
 .publication-icon {
   font-size: 24px;
   margin-left: -3px;
+}
+
+.matched-field {
+  display: block;
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #17406a;
+  background: #e6f0fa;
+  border-radius: 4px;
+  padding: 2px 6px;
 }
 </style>
