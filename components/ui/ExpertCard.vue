@@ -135,7 +135,8 @@
 
     <div v-if="matchedFields.length">
       <div v-for="item in matchedFields" :key="item.field">
-        <span class="matched-field"><strong>Matched in {{ item.field }}:</strong> <span v-html="item.value"></span></span>
+        <span class="matched-field"><strong>Matched in {{ item.field }}:</strong> <span
+            v-html="item.value"></span></span>
       </div>
     </div>
 
@@ -199,9 +200,22 @@ const customPhotoURL = computed(() => {
 
 const matchedFields = computed(() => {
   if (!props.highlight) return [];
-  return Object.entries(props.highlight)
+  console.log('OG Profiles', props.profile);
+  console.log('Matched Fields:', props.highlight);
+  let result = Object.entries(props.highlight)
     .filter(([field, value]) => value && value !== (props.profile as any)[field])
     .map(([field, value]) => ({ field, value }));
+
+  result = result.filter(item => !Array.isArray(item.value) || item.value.length > 0);
+
+  // Add a filter to remove the field 'id'
+  result = result.filter(item =>
+    item.field !== 'id'
+  );
+
+  console.log('Cleaned Matched Fields:', result);
+
+  return result
 });
 
 // let customPhotoURL = 'https://profile-cms.sci.hkbu.edu.hk' + props.profile.uploadPhoto;

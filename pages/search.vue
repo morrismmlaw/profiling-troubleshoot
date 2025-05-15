@@ -278,8 +278,10 @@ const filterFields = [
   'tech_offers',
   'departments', // Add departments for filtering
   'name',
-  'department',
+  // 'department',
   'biography', // Added biography for keyword search
+  'research_interest', // Added research_interest for keyword search
+  'research_rewards', // Added research_rewards for keyword search
 ];
 
 const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) => {
@@ -297,7 +299,8 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
     const searchOptions = {
       offset,
       limit,
-      attributesToHighlight: ['name', 'lastname', 'department', 'biography', 'research_interest'], // highlight these fields
+      attributesToHighlight: ['name', 'lastname', 'departments', 'biography', 'research_interest', 'research_rewards'], // highlight these fields
+      // attributesToHighlight: ["*"], // highlight these fields
     };
     if (filterString) (searchOptions as any).filter = filterString;
     // Add sort option
