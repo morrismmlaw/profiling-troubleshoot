@@ -223,10 +223,9 @@
 import { MeiliSearch } from 'meilisearch';
 import { useRuntimeConfig } from '#app';
 
+const searchInput = ref('')
 const router = useRouter()
 const route = useRoute()
-const searchInput = ref(Array.isArray(route.query.q) ? route.query.q[0] : (route.query.q || ''))
-const isLoading = ref(true);
 
 import SearchBar from '~/components/ui/SearchBar.vue';
 import ExpertCard from '~/components/ui/ExpertCard.vue';
@@ -234,6 +233,7 @@ import DottedLine from '~/components/ui/DottedLine.vue';
 
 const profileStore = useProfileStore();
 const authStore = useAuthStore();
+const isLoading = ref(true);
 
 const config = useRuntimeConfig();
 // Meilisearch client setup
@@ -332,13 +332,11 @@ const fetchProfilesFromMeili = async (query = '', page = 1, limit = pageSize) =>
 };
 
 watch(
-  [() => route.query.page, () => route.query.q, selectedFilters],
-  async ([newPage, newQ]) => {
+  [() => route.query.page, searchInput, selectedFilters],
+  async ([newPage, newQuery]) => {
     const pageNum = Number(newPage) || 1;
-    const keyword = Array.isArray(newQ) ? newQ[0] : (newQ || '');
     currentPage.value = pageNum;
-    searchInput.value = keyword;
-    await fetchProfilesFromMeili(keyword, pageNum, pageSize);
+    await fetchProfilesFromMeili(newQuery, pageNum, pageSize);
   },
   { immediate: true, deep: true }
 );
@@ -346,7 +344,7 @@ watch(
 const goToPage = (pageNum: number) => {
   if (pageNum < 1 || pageNum > totalPages.value) return;
   currentPage.value = pageNum;
-  router.push({ query: { ...route.query, page: pageNum, q: searchInput.value } });
+  router.push({ query: { ...route.query, page: pageNum } });
 };
 
 const totalPages = computed(() => Math.ceil(totalProfiles.value / pageSize));
@@ -433,7 +431,7 @@ const clearAllFilters = () => {
 };
 
 const onSearchBarEnter = (val: string) => {
-  searchInput.value = val;
+  fetchProfilesFromMeili(val, 1, pageSize);
   currentPage.value = 1;
   router.push({ query: { ...route.query, q: val, page: 1 } });
 };
