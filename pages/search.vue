@@ -74,7 +74,7 @@
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="false"
                   aria-controls="accordion-1 .item-1">Research Focus</button></h2>
-              <div class="accordion-collapse collapse item-1" role="tabpanel" data-bs-parent="#accordion-1">
+              <div class="accordion-collapse collapse item-1" role="tabpanel">
                 <div class="accordion-body">
 
                   <!-- <div>
@@ -98,7 +98,7 @@
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-2" aria-expanded="false"
                   aria-controls="accordion-1 .item-2">Faculty Collaborative Research Area</button></h2>
-              <div class="accordion-collapse collapse item-2" role="tabpanel" data-bs-parent="#accordion-1">
+              <div class="accordion-collapse collapse item-2" role="tabpanel">
                 <div class="accordion-body">
                   <div>
                     <!-- <div class="form-check"><input id="formCheck-2" class="form-check-input" type="checkbox" /><label
@@ -120,7 +120,7 @@
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-3" aria-expanded="false"
                   aria-controls="accordion-1 .item-3">Strategic Research Centre</button></h2>
-              <div class="accordion-collapse collapse item-3" role="tabpanel" data-bs-parent="#accordion-1">
+              <div class="accordion-collapse collapse item-3" role="tabpanel">
                 <div class="accordion-body">
                   <div>
                     <!-- <div class="form-check"><input id="formCheck-3" class="form-check-input" type="checkbox" /><label
@@ -142,7 +142,7 @@
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-4" aria-expanded="false"
                   aria-controls="accordion-1 .item-4">Availability for Supervision</button></h2>
-              <div class="accordion-collapse collapse item-4" role="tabpanel" data-bs-parent="#accordion-1">
+              <div class="accordion-collapse collapse item-4" role="tabpanel">
                 <div class="accordion-body">
                   <div>
                     <!-- <div class="form-check"><input id="formCheck-4" class="form-check-input" type="checkbox" /><label
@@ -162,7 +162,7 @@
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-5" aria-expanded="false"
                   aria-controls="accordion-1 .item-5">Knowledge Transfer</button></h2>
-              <div class="accordion-collapse collapse item-5" role="tabpanel" data-bs-parent="#accordion-1">
+              <div class="accordion-collapse collapse item-5" role="tabpanel">
                 <div class="accordion-body">
                   <div>
                     <!-- <div class="form-check"><input id="formCheck-5" class="form-check-input" type="checkbox" /><label
@@ -182,7 +182,7 @@
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-6" aria-expanded="false"
                   aria-controls="accordion-1 .item-6">Departments</button></h2>
-              <div class="accordion-collapse collapse item-6" role="tabpanel" data-bs-parent="#accordion-1">
+              <div class="accordion-collapse collapse item-6" role="tabpanel">
                 <div class="accordion-body">
                   <div>
                     <div v-for="(focus, index) in accordionItems[5]" :key="index" class="form-check">
