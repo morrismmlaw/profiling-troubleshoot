@@ -62,7 +62,7 @@ const logout = () => {
   authStore.logout();
 };
 
-import SearchBar from '~/components/ui/SearchBar.vue';
+import SearchBarHome from '~/components/ui/SearchBarHome.vue';
 
 </script>
 
@@ -121,7 +121,7 @@ import SearchBar from '~/components/ui/SearchBar.vue';
                     <!-- <input class="form-control form-control-lg" type="email"
                       placeholder="Search By Name or Keyword" /> -->
 
-                    <SearchBar />
+                    <SearchBarHome />
 
                   </div>
                 </div>

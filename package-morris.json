@@ -22,7 +22,7 @@
     "@vueform/builder-nuxt": "^1.8.0",
     "@vueform/nuxt": "^1.8.0",
     "@vueuse/nuxt": "^12.0.0",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.7",
     "consola": "^3.2.3",
     "D": "^1.0.0",
     "defu": "^6.1.4",

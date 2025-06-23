@@ -13,7 +13,7 @@
                 fill="currentColor"></path>
             </svg>
           </NuxtLink>
-          <input @keyup.enter="handleSearch" v-model="searchInput" id="my-search-input" type="search"
+          <input @input="handleSearch" v-model="searchInput" id="my-search-input" type="search"
             style="margin-left: 7px;margin-top: 4px;width: calc(100% - 100px);border-style: none;background: var(--bs-light);height: 45px;font-size: 20px;font-family: Abel, sans-serif;"
             placeholder="Search by name or keyword" />
           <div class="dropdown">
