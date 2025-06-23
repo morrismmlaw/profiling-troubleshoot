@@ -59,6 +59,66 @@ const formData = reactive({
   tech_offers: props.profile?.attributes.tech_offers || [],
 });
 
+for (const sdg of props.profile?.attributes.SDG.split(',') || []) {
+  let found = false;
+  for (let i = 0; i < formData.sdgs.length; i++) {
+    if (parseInt(formData.sdgs[i].sdgid) === parseInt(sdg.sdgid)) {
+      found = true;
+      continue;
+    }
+  }
+  if (!found) {
+    formData.sdgs.push({
+      sdgid: sdg.trim(),
+      title: '',
+      id: Math.random().toString(36).substring(2, 15), // Generate a random id
+      documentId: '',
+      slogan: '',
+    });
+  }
+}
+
+for (let dept of props.profile?.attributes.unit.split(',') || []) {
+  let found = false;
+  let deptTemp = ''
+  let deptAbbr = '';
+  console.log('dept', dept);
+
+  if (dept.toLowerCase().includes('mathematics')) {
+    deptTemp = 'Mathematics';
+    deptAbbr = 'MATH';
+  } else if (dept.toLowerCase().includes('physics')) {
+    deptTemp = 'Physics';
+    deptAbbr = 'PHYS';
+  } else if (dept.toLowerCase().includes('chemistry')) {
+    deptTemp = 'Chemistry';
+    deptAbbr = 'CHEM';
+  } else if (dept.toLowerCase().includes('biology')) {
+    deptTemp = 'Biology';
+    deptAbbr = 'BIOL';
+  } else if (dept.toLowerCase().includes('computer')) {
+    deptTemp = 'Computer Science';
+    deptAbbr = 'COMP';
+  }
+
+  for (let i = 0; i < formData.departments.length; i++) {
+    if (formData.departments[i].name === deptTemp) {
+      found = true;
+      continue;
+    }
+  }
+  if (!found && deptTemp != '') {
+    formData.departments.push({
+      name: deptTemp,
+      abbr: deptAbbr,
+      documentId: '',
+      createdAt: '',
+      updatedAt: '',
+      publishedAt: ''
+    });
+  }
+}
+
 // ORUGA SECTION
 const ROOptions = props.collections['research-outputs']; //HTHIS IS FOR DA SEARCH ENGINE.
 const sdgOptions = props.collections.sdgs;
@@ -255,7 +315,8 @@ const loadFormDataToORUGA = () => {
  * @returns {Object} The SDG object with the 'documentId' and 'iconweb.documentId' properties removed, or undefined if no matching object is found.
  */
 const getSdgObject = (id) => {
-  let sdgObj = props.collections.sdgs.find((sdg) => sdg.sdgid === id)
+  let sdgObj = props.collections.sdgs.find((sdg) => parseInt(sdg.sdgid) === parseInt(id)  );
+  
   // console.log('return id', id, obj);
   delete sdgObj.documentId;
   delete sdgObj.iconweb.documentId;
@@ -334,7 +395,7 @@ onMounted(() => {
         <div class="col">
           <div class="me-1 profile-form-card">
             <!-- {{ console.log('profile', profile) }} -->
-            <image-card :profile="profile" :editable="false"/>
+            <image-card :profile="profile" :editable="false" />
           </div>
         </div>
 
@@ -375,7 +436,7 @@ onMounted(() => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_interest" :editable="false"/>
+                          <tiptap-editor :formData="formData" field="research_interest" :editable="false" />
                         </div>
                       </div>
                     </div>
@@ -386,7 +447,7 @@ onMounted(() => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_interest" :editable="false"/>
+                          <tiptap-editor :formData="formData" field="research_interest" :editable="false" />
                         </div>
                       </div>
                     </div>
@@ -438,7 +499,8 @@ onMounted(() => {
                                   <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
                                 </div>
                               </template>
-                              <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid" disabled>
+                              <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid"
+                                disabled>
                                 <p class="col-form-label-profile-sdg"> SDG {{ sdg.sdgid }} </p>
                                 <nuxt-img
                                   :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
@@ -490,7 +552,7 @@ onMounted(() => {
             <!-- <div class="me-3">
               <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
             </div> -->
-            
+
           </section>
         </div>
       </div>
