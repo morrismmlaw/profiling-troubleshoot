@@ -83,7 +83,7 @@ const route = useRoute()
 
 const handleSearchWithEnter = () => {
   console.log("Clicked Search:", searchInput.value)
-  emit('search', searchInput.value); // Emit search event
+  // emit('search', searchInput.value); // Emit search event
   router.push({
     path: '/search',
     query: { q: searchInput.value }

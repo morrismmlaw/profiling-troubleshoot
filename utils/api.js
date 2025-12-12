@@ -6,6 +6,7 @@ import { backendURL_ITO, useAuthStore } from '~/composables/useAuth';
 
 //For Get and return of Update profile (inside, not api collection.).
 let populateFields = [
+  'documentId',
   'sdgs', // Populate the 'sdgs' field with the related data
   'research_centres', // Populate the 'research_centres' field with the related data
   'research_foci',
@@ -158,12 +159,28 @@ export const api = {
    * @returns {Promise<{ data: Profile[] }>}
    */
   async findProfileBySSoid(ssoid) {
-    const { findOne } = useStrapi()
+    const { findOne, find } = useStrapi();
+    console.log("Finding Profile by SSOID", ssoid)
 
-    return await findOne('profiles', { //Need to use Populate to fetch relationship && Media Type Data.
-      where: { 'ssoid': ssoid },
-      populate: populateFields
-    })
+    // const profile = await findOne('profiles', { //Need to use Populate to fetch relationship && Media Type Data.
+    //   where: { 'ssoid': ssoid },
+    //   populate: populateFields
+    // })
+    // const profile = await findOne('profiles', {'ssoid': ssoid})
+    // console.log('5',profile)
+    // console.log('5',profile)
+    // return profile
+    // return await findOne('profiles', { //Need to use Populate to fetch relationship && Media Type Data.
+    //   where: { 'ssoid': ssoid },
+    //   populate: populateFields
+    // })
+    // return await findOne('profiles', ssoid);
+
+    const profiles = await find('profiles', { where: { 'ssoid': ssoid }})
+    if (profiles.data.length > 0) {
+      return profiles.data[0]
+    }
+    return null
   },
 
   /**

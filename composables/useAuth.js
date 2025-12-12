@@ -30,9 +30,17 @@ async function findCollection(collectionName) {
   try {
     const response = await api.findCollection(collectionName);
     if (response.data.length > 0) {
-      // Handle the response data as needed for the specific collection
       console.log(`Got the ${collectionName} data`, response.data);
-      return response.data;
+      if (collectionName === 'research-outputs') {
+        var sort_data = response.data.sort((a, b) =>  a.title.localeCompare(b.title));
+      }else if (collectionName === 'sdgs') {
+        var sort_data = response.data.sort((a, b) =>  a.sdgid.localeCompare(b.sdgid));
+      }else{
+        var sort_data = response.data.sort((a, b) =>  a.name.localeCompare(b.name));
+      }
+      // Handle the response data as needed for the specific collection
+      console.log(`sorted ${collectionName} data`, sort_data);
+      return sort_data;
     }
     return null;
   } catch (error) {
@@ -142,17 +150,18 @@ export const useAuthStore = defineStore('auth', {
       // }
       // console.log("Loggin in", ssoid)
 
+      console.log("Setting Profile", ssoid, typeof ssoid)
+
       this.isLoading = true
       this.error = null
       try {
         //Get the Profile Data
         const response = await api.findProfileBySSoid(ssoid)
-        if (response.data.length > 0) {
-          console.log('Got the Profile from API', response);
-
+        console.log('Got the Profile from API',response)
+        if (response !== null) {
           //Set auth State
           this.user = {}; //Init the Object
-          this.user.attributes = { ...response.data[0] }; // Lets store em here
+          this.user.attributes = { ...response }; // Lets store em here
 
           this.collections = {};
 
@@ -161,7 +170,6 @@ export const useAuthStore = defineStore('auth', {
           }
 
           this.setSSO();
-
           return true
         }
         return false

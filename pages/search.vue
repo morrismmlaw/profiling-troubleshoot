@@ -67,8 +67,11 @@
           </small>
         </div>
       </div>
+      
       <div v-if="authStore" class="row" style="margin-top: 0;">
         <div class="col-md-6 col-xl-3 col-xxl-3" style="flex: 0 0 auto !important; width: 351.875px !important;">
+
+          <!-- Filter: Research Focus -->
           <div id="accordion-1" class="accordion" role="tablist" style="width: 281px;margin-left: 10px;">
             <div class="accordion-item" style="width: 324px;">
               <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button"
@@ -76,18 +79,10 @@
                   aria-controls="accordion-1 .item-1">Research Focus</button></h2>
               <div class="accordion-collapse collapse item-1" role="tabpanel">
                 <div class="accordion-body">
-
-                  <!-- <div>
-                    <div class="form-check"><input id="formCheck-1" class="form-check-input" type="checkbox" /><label
-                        class="form-check-label" for="formCheck-1">Data Science and Statistics</label></div>
-                    <div class="form-check"><input id="formCheck-7" class="form-check-input" type="checkbox" /><label
-                        class="form-check-label" for="formCheck-7">Foundations in AI</label></div>
-                  </div> -->
-
-                  <div v-for="(focus, index) in accordionItems[0]" :key="index" class="form-check">
+                  <div v-for="(item, index) in accordionItems[0]" :key="index" class="form-check">
                     <input :id="'formCheck-0-' + index" class="form-check-input" type="checkbox"
-                      :value="focus['name']" v-model="selectedFilters[0]" />
-                    <label :for="'formCheck-0-' + index" class="form-check-label">{{ focus['name'] }}</label>
+                      :value="item['name']" v-model="selectedFilters[0]" />
+                    <label :for="'formCheck-0-' + index" class="form-check-label">{{ item['name'] }}</label>
                   </div>
 
                   <!-- <p class="mb-0">Show All Options</p> -->

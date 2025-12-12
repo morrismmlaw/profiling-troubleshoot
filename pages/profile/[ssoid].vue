@@ -87,7 +87,7 @@ const isLoading = ref(true);
 
 onMounted(async () => {
 
-  console.log('SSOID', ssoid)
+  console.log('[profile/[ssoid].vue] SSOID', ssoid)
   console.log(from);
 
   if (searchMode()) {

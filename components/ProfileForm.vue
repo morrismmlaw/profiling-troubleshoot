@@ -279,12 +279,14 @@ const loadFormDataToORUGA = () => {
     });
   };
 
+  console.log('loadFormDataToORUGA', formData);
   // Load default SDG data into checkbox group.
   if (formData.sdgs) {
     checkboxGroup.value = formData.sdgs.map((sdg) => sdg.sdgid);
   }
 
   if (formData.research_foci) {
+    console.log('loadFormDataToORUGA >> research_foci', formData.research_foci);
     loadTags(formData.research_foci, RFOptionsOrugaNew, RFTags);
   }
 
@@ -367,8 +369,7 @@ const activeTab = ref(0);
 const showBooks = ref(false);
 
 const ORUGAcheckBeforeAdd = (event, tags) => {
-  console.log(event);
-  console.log(tags);
+  console.log('ORUGAcheckBeforeAdd', event, tags);
 
   const eventExists = tags.some(tag => tag.id === event.id);
   return !eventExists;
@@ -447,7 +448,7 @@ onMounted(() => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_interest" :editable="false" />
+                          <tiptap-editor :formData="formData" field="research_awards" :editable="false" />
                         </div>
                       </div>
                     </div>
@@ -457,15 +458,23 @@ onMounted(() => {
                 <o-tab-item :value="1" label="My Research" icon="pen">
                   <div class="card-body">
                     <section>
-                      <o-field class="col-form-tag-profile" label="RESEARCH FOCUS">
+                      <o-field class="col-form-tag-profile" label="RESEARCH FOCUS(ES)">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, RFTags)" v-model="RFTags"
                           :options="RFOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
                           placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
+                    <!-- <section>
+                      <o-field class="col-form-tag-profile" label="DEPARTMENT">
+                        <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
+                          :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                          :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                          placeholder="" expanded disabled :closable="false" />
+                      </o-field>
+                    </section> -->
                     <section>
-                      <o-field class="col-form-tag-profile" label="FACULTY COLLABORATIVE RESEARCH AREA">
+                      <o-field class="col-form-tag-profile" label="FACULTY COLLABORATIVE RESEARCH AREA(S)">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, FCRATags)" v-model="FCRATags"
                           :options="FCRAOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
@@ -473,7 +482,7 @@ onMounted(() => {
                       </o-field>
                     </section>
                     <section>
-                      <o-field class="col-form-tag-profile" label="STRATEGIC RESEARCH CENTRE">
+                      <o-field class="col-form-tag-profile" label="STRATEGIC RESEARCH CENTRE(S)">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags"
                           :options="SRCOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
@@ -490,7 +499,7 @@ onMounted(() => {
                     </div>
                     <div class="">
                       <div class="columns is-multiline">
-                        <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
+                        <div class="column is-one-fifth" v-for="sdg in formData.sdgs" :key="sdg">
                           <o-field class="sdg-field">
                             <o-tooltip label="HTML Content" size="large" variant="info" multiline>
                               <template #content>

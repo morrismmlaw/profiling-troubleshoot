@@ -69,10 +69,10 @@ onMounted(async () => {
   } else {
     console.log('NOT IN UAT MODE')
     //Force load this user's info - from sso;
-    const sucess = await authStore.setProfile(authStore.sso.ssoid);
+    const success = await authStore.setProfile(authStore.sso.ssoid);
 
     //Wait data loading then load the form component.
-    if (sucess) {
+    if (success) {
       isLoading.value = false;
     }
 
@@ -111,13 +111,13 @@ watch(checkedForm, (newVal) => {
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Academic Profile Notification</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Notification</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <p class="profile-modal-message">
                   <br>
-                  Your name, Chinese name, email, HKBU Scholar URL, and department have been imported from HKBU
+                  Your name, Chinese name, email, HKBU Scholar URL, and Department(s) have been imported from HKBU
                   Scholars.
                   <br>
                   <br>

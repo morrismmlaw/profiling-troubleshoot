@@ -11,8 +11,8 @@ const ssoid = route.params.ssoid
 
 
 const searchMode = () => {
-  console.log(from);
-  console.log(ssoid);
+  console.log('2', from); // undefined
+  console.log('3', ssoid); // undefined
   return true;
 }
 
@@ -21,8 +21,8 @@ const componentKey = ref(0);
 const isLoading = ref(true);
 
 onMounted(async () => {
-  console.log('SSOID', ssoid)
-  console.log(from);
+  console.log('[ssoid.vue] SSOID', ssoid)
+  console.log('1', from); // undefined
 
   if (searchMode()) {
     console.log('IN Search MODE')
@@ -68,7 +68,7 @@ watch(checkedForm, (newVal) => {
                 <ProfileForm :key="componentKey" v-if="!isLoading" :profile="authStore.user"
                   :collections="authStore.collections" @save="" />
               </div>
-            </div>
+            </div>w
           </div>
         </div>
       </div>

@@ -47,6 +47,7 @@ export default defineNuxtConfig({
 
   strapi: {
     url: process.env.STRAPI_URL || 'https://profile-cms.sci.hkbu.edu.hk',
+    // url: 'https://profile-cms.sci.hkbu.edu.hk',
     prefix: '/api',
     admin: '/admin',
     version: 'v5',
@@ -65,7 +66,7 @@ export default defineNuxtConfig({
     searchApiKey: 'e5e806a91bca2b6b58ed2aebba3a6a873bfddcf834cbf1c3dcc7418785f36dac', // required
     adminApiKey: 'Strd8oz_m6pgKbml-ivcANsCHfz55IyJD9S-L6pJiCY', // optional
     serverSideUsage: true // default: false
-    //bearer token: 'Strd8oz_m6pgKbml-ivcANsCHfz55IyJD9S-L6pJiCY';
+    //bearer token: 'Strd8oz_m6pgKbml-ivcANsCHfz55IyJD9S-L6pJiCY';  
   },
 
   runtimeConfig: {
@@ -78,7 +79,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: {
     enabled: true,
-
     timeline: {
       enabled: true
     }
@@ -90,6 +90,8 @@ export default defineNuxtConfig({
         scss: {
           // see: https://vite.dev/config/shared-options.html#css-preprocessoroptions
           api: 'modern',
+          quietDeps: true, // Suppress deprecation warnings from dependencies
+          silenceDeprecations: ['import', 'global-builtin', 'color-functions']
         }
       }
     }

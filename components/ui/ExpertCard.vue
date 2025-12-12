@@ -71,33 +71,33 @@
                   <div>
                     <div v-if="props.profile.research_foci.length > 0" class="row">
                       <div class="col"><label class="col-form-label research-label">
-                          <b>Research Focus: </b>
+                          <b>Research Focus(es): </b>
                           <span v-for="(focus, index) in props.profile.research_foci" :key="focus.id">
-                            {{ focus.name }}{{ index < props.profile.research_foci.length - 1 ? ', ' : '' }} </span>
+                            {{ focus.name.trim() }}{{ index < props.profile.research_foci.length - 1 ? ', ' : '' }} </span>
                         </label>
                       </div>
                     </div>
                     <div v-if="props.profile.research_centres.length > 0" class="row">
                       <div class="col"><label class="col-form-label research-label">
                           <b>Strategic Research Centre: </b>
-                          <span v-for="(focus, index) in props.profile.research_centres" :key="focus.id">
-                            {{ focus.name }}{{ index < props.profile.research_centres.length - 1 ? ', ' : '' }} </span>
+                          <span v-for="(center, index) in props.profile.research_centres" :key="center.id">
+                            {{ center.name.trim() }}{{ index < props.profile.research_centres.length - 1 ? ', ' : '' }} </span>
                         </label>
                       </div>
                     </div>
                     <div v-if="props.profile.departments.length > 0" class="row">
                       <div class="col"><label class="col-form-label research-label">
-                          <b>Department: </b>
-                          <span v-for="(focus, index) in props.profile.departments" :key="focus.id">
-                            {{ focus.name }}{{ index < props.profile.departments.length - 1 ? ', ' : '' }} </span>
+                          <b>Department(s): </b>
+                          <span v-for="(dept, index) in props.profile.departments" :key="dept.id">
+                            {{ dept.name.trim() }}{{ index < props.profile.departments.length - 1 ? ', ' : '' }} </span>
                         </label>
                       </div>
                     </div>
                     <div v-if="props.profile.available_supervisions.length > 0" class="row">
                       <div class="col"><label class="col-form-label research-label">
                           <b>Availability for Supervision: </b>
-                          <span v-for="(focus, index) in props.profile.available_supervisions" :key="focus.id">
-                            {{ focus.name }}{{ index < props.profile.available_supervisions.length - 1 ? ', ' : ''
+                          <span v-for="(as, index) in props.profile.available_supervisions" :key="as.id">
+                            {{ as.name.trim() }}{{ index < props.profile.available_supervisions.length - 1 ? ', ' : ''
                             }}</span>
                         </label>
                       </div>
@@ -105,8 +105,8 @@
                     <div v-if="props.profile.fcras.length > 0" class="row">
                       <div class="col"><label class="col-form-label research-label">
                           <b>Faculty Collaborative Research Area: </b>
-                          <span v-for="(focus, index) in props.profile.fcras" :key="focus.id">
-                            {{ focus.name }}{{ index < props.profile.fcras.length - 1 ? ', ' : '' }}</span>
+                          <span v-for="(fcra, index) in props.profile.fcras" :key="fcra.id">
+                            {{ fcra.name.trim() }}{{ index < props.profile.fcras.length - 1 ? ', ' : '' }}</span>
                         </label>
                       </div>
                     </div>
@@ -155,6 +155,7 @@ interface ResearchItem {
 }
 
 interface Profile {
+  documentId: string;
   ssoid: string;
   name: string;
   post: string;
@@ -190,8 +191,10 @@ const truncatedBiography = computed(() => {
 });
 
 const navigateToProfile = () => {
+  console.log('Navigating to Profile', props.profile);
   router.push({
     path: `/${props.profile.ssoid}`,
+    // path: `/${props.profile.documentId}`,
     // query: { from: 'search'}
   })
 };

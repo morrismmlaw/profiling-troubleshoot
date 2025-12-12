@@ -109,8 +109,7 @@ import SearchBarHome from '~/components/ui/SearchBarHome.vue';
                 <span> <vue-typewriter-effect :strings="['Expert']" :delay="200" :pauseFor="5000" style="color: blueviolet;" /></span>
                 <span class=""> at the Faculty of Science <br> Hong Kong Baptist University</span>
               </h1>
-              <h3 class="mb-5 bold-elegant-sub">Your search starts here, whether you are looking for a supervisor to
-                undertake a research degree, an industry expert for a specific project, or a potential partner or
+              <h3 class="mb-5 bold-elegant-sub">Your search starts here, whether you are seeking a supervisor for your research degree, an industry expert for a specific project, or a potential partner or
                 collaborator.</h3>
             </div>
 
