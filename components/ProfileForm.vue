@@ -57,6 +57,8 @@ const formData = reactive({
   uploadPhoto: props.profile?.attributes.uploadPhoto || [],
 
   tech_offers: props.profile?.attributes.tech_offers || [],
+
+  debug_fields: props.profile?.attributes.fcras || []
 });
 
 for (const sdg of props.profile?.attributes.SDG.split(',') || []) {
@@ -268,6 +270,7 @@ const checkboxGroup = ref([]);
  * @throws {Error} If formData is not available.
  */
 const loadFormDataToORUGA = () => {
+  console.log(">>>>>>>>>>>>>formDate", formData);
   if (!formData) {
     throw new Error("No Form Data!");
   }
