@@ -46,8 +46,9 @@ export default defineNuxtConfig({
   },
 
   strapi: {
-    url: process.env.STRAPI_URL || 'https://profile-cms.sci.hkbu.edu.hk',
+    // url: process.env.STRAPI_URL || 'https://profile-cms.sci.hkbu.edu.hk',
     // url: 'https://profile-cms.sci.hkbu.edu.hk',
+    url: 'http://158.182.151.62.1337',
     prefix: '/api',
     admin: '/admin',
     version: 'v5',

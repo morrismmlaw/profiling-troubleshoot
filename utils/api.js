@@ -235,7 +235,7 @@ export const api = {
 
     //Check if There is a new Photo
     //Yes Run Below..
-    await update_uploadPhoto(documentId, FormData, profile, hasChangedImage); //MEDIA ID
+    //await update_uploadPhoto(documentId, FormData, profile, hasChangedImage); //MEDIA ID
     // delete FormData.uploadPhoto;
 
     return await update('profiles', documentId, FormData,

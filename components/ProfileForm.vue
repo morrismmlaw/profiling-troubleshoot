@@ -78,46 +78,46 @@ for (const sdg of props.profile?.attributes.SDG.split(',') || []) {
   }
 }
 
-for (let dept of props.profile?.attributes.unit.split(',') || []) {
-  let found = false;
-  let deptTemp = ''
-  let deptAbbr = '';
-  console.log('dept', dept);
+// for (let dept of props.profile?.attributes.unit.split(',') || []) {
+//   let found = false;
+//   let deptTemp = ''
+//   let deptAbbr = '';
+//   console.log('dept', dept);
 
-  if (dept.toLowerCase().includes('mathematics')) {
-    deptTemp = 'Mathematics';
-    deptAbbr = 'MATH';
-  } else if (dept.toLowerCase().includes('physics')) {
-    deptTemp = 'Physics';
-    deptAbbr = 'PHYS';
-  } else if (dept.toLowerCase().includes('chemistry')) {
-    deptTemp = 'Chemistry';
-    deptAbbr = 'CHEM';
-  } else if (dept.toLowerCase().includes('biology')) {
-    deptTemp = 'Biology';
-    deptAbbr = 'BIOL';
-  } else if (dept.toLowerCase().includes('computer')) {
-    deptTemp = 'Computer Science';
-    deptAbbr = 'COMP';
-  }
+//   if (dept.toLowerCase().includes('mathematics')) {
+//     deptTemp = 'Mathematics';
+//     deptAbbr = 'MATH';
+//   } else if (dept.toLowerCase().includes('physics')) {
+//     deptTemp = 'Physics';
+//     deptAbbr = 'PHYS';
+//   } else if (dept.toLowerCase().includes('chemistry')) {
+//     deptTemp = 'Chemistry';
+//     deptAbbr = 'CHEM';
+//   } else if (dept.toLowerCase().includes('biology')) {
+//     deptTemp = 'Biology';
+//     deptAbbr = 'BIOL';
+//   } else if (dept.toLowerCase().includes('computer')) {
+//     deptTemp = 'Computer Science';
+//     deptAbbr = 'COMP';
+//   }
 
-  for (let i = 0; i < formData.departments.length; i++) {
-    if (formData.departments[i].name === deptTemp) {
-      found = true;
-      continue;
-    }
-  }
-  if (!found && deptTemp != '') {
-    formData.departments.push({
-      name: deptTemp,
-      abbr: deptAbbr,
-      documentId: '',
-      createdAt: '',
-      updatedAt: '',
-      publishedAt: ''
-    });
-  }
-}
+//   for (let i = 0; i < formData.departments.length; i++) {
+//     if (formData.departments[i].name === deptTemp) {
+//       found = true;
+//       continue;
+//     }
+//   }
+//   if (!found && deptTemp != '') {
+//     formData.departments.push({
+//       name: deptTemp,
+//       abbr: deptAbbr,
+//       documentId: '',
+//       createdAt: '',
+//       updatedAt: '',
+//       publishedAt: ''
+//     });
+//   }
+// }
 
 // ORUGA SECTION
 const ROOptions = props.collections['research-outputs']; //HTHIS IS FOR DA SEARCH ENGINE.
