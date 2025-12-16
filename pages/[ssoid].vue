@@ -60,7 +60,6 @@ watch(checkedForm, (newVal) => {
   <div class="nav-offset">
     <div class="bg-light custom-background">
       <div class="container-fluid">
-
         <div class="row justify-content-center">
           <div class="col-12">
             <div>
@@ -68,13 +67,12 @@ watch(checkedForm, (newVal) => {
                 <ProfileForm :key="componentKey" v-if="!isLoading" :profile="authStore.user"
                   :collections="authStore.collections" @save="" />
               </div>
-            </div>w
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 

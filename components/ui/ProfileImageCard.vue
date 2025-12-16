@@ -54,6 +54,10 @@ const initImages = () => {
   }
 }
 
+// const formatUnit = (_unit: string) => {
+//   return _unit.replace(", ", "\n");
+// }
+
 onMounted(() => {
   initImages();
   console.log('ProfileImageCard', props.profile);
@@ -66,7 +70,8 @@ onMounted(() => {
     <div class="card shadow rounded-5 profile-card">
       <div class="row p-1 m-1">
         <div class="d-flex justify-content-center">
-          <ProfileImage :img-url="imgUrl" :profile="profile" :has-upload="true" @cropped-img="handleCroppedImg" :editable="props.editable"/>
+          <ProfileImage :img-url="imgUrl" :profile="profile" :has-upload="true" @cropped-img="handleCroppedImg"
+            :editable="props.editable" />
         </div>
       </div>
       <div class="row">
@@ -125,8 +130,11 @@ onMounted(() => {
             </div>
           </div>
           <div class="row">
-            <p class="d-flex justify-content-center text-white profile-card-text"> {{ props.profile.attributes.unit }}
-            </p>
+            <div class="d-flex justify-content-center flex-column text-white">
+              <p class="profile-card-text text-center"
+                v-for="unit in props.profile.attributes.unit.split(',').map(unit => unit.trim()).sort((a,b) => a.localeCompare(b))"
+                :key="unit"> {{ unit }} </p>
+            </div>
           </div>
         </div>
       </div>

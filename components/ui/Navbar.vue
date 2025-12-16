@@ -26,8 +26,9 @@
         </div>
       </div>
 
-      <div v-if="$route.path.startsWith('/profile')" class="d-flex justify-content-end ms-auto me-3">
-        <div class="custom-text-bar"> Academic Profile</div>
+      <!-- <div v-if="$route.path.startsWith('/profile')" class="d-flex justify-content-end ms-auto me-3"> -->
+      <div class="d-flex justify-content-end ms-auto me-3">
+        <div class="custom-text-bar" @click="navigateTo('/')">Academic Profile</div>
       </div>
 
       <div class="d-flex">

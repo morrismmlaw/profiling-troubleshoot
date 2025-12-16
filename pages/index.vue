@@ -117,11 +117,7 @@ import SearchBarHome from '~/components/ui/SearchBarHome.vue';
               <form>
                 <div class="row">
                   <div class="mb-2 mb-md-0">
-                    <!-- <input class="form-control form-control-lg" type="email"
-                      placeholder="Search By Name or Keyword" /> -->
-
                     <SearchBarHome />
-
                   </div>
                 </div>
               </form>

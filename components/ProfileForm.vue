@@ -41,10 +41,7 @@ const formData = reactive({
   research_interest: props.profile?.attributes.research_interest || '', //Remind, the profile's field is winout s.. 
   biography: props.profile?.attributes.biography || '',
 
-  // SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
-  // SDG-link..  http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png.. Fix ?
   sdgs: props.profile?.attributes.sdgs ? props.profile.attributes.sdgs : [],
-  // FCRA: props.profile?.attributes.FCRA || "", //String type
 
   fcras: props.profile?.attributes.fcras || [],
   research_foci: props.profile?.attributes.research_foci || [],
@@ -58,68 +55,7 @@ const formData = reactive({
 
   tech_offers: props.profile?.attributes.tech_offers || [],
 
-  debug_fields: props.profile?.attributes.fcras || []
 });
-
-for (const sdg of props.profile?.attributes.SDG.split(',') || []) {
-  let found = false;
-  for (let i = 0; i < formData.sdgs.length; i++) {
-    if (parseInt(formData.sdgs[i].sdgid) === parseInt(sdg.sdgid)) {
-      found = true;
-      continue;
-    }
-  }
-  if (!found) {
-    formData.sdgs.push({
-      sdgid: sdg.trim(),
-      title: '',
-      id: Math.random().toString(36).substring(2, 15), // Generate a random id
-      documentId: '',
-      slogan: '',
-    });
-  }
-}
-
-// for (let dept of props.profile?.attributes.unit.split(',') || []) {
-//   let found = false;
-//   let deptTemp = ''
-//   let deptAbbr = '';
-//   console.log('dept', dept);
-
-//   if (dept.toLowerCase().includes('mathematics')) {
-//     deptTemp = 'Mathematics';
-//     deptAbbr = 'MATH';
-//   } else if (dept.toLowerCase().includes('physics')) {
-//     deptTemp = 'Physics';
-//     deptAbbr = 'PHYS';
-//   } else if (dept.toLowerCase().includes('chemistry')) {
-//     deptTemp = 'Chemistry';
-//     deptAbbr = 'CHEM';
-//   } else if (dept.toLowerCase().includes('biology')) {
-//     deptTemp = 'Biology';
-//     deptAbbr = 'BIOL';
-//   } else if (dept.toLowerCase().includes('computer')) {
-//     deptTemp = 'Computer Science';
-//     deptAbbr = 'COMP';
-//   }
-
-//   for (let i = 0; i < formData.departments.length; i++) {
-//     if (formData.departments[i].name === deptTemp) {
-//       found = true;
-//       continue;
-//     }
-//   }
-//   if (!found && deptTemp != '') {
-//     formData.departments.push({
-//       name: deptTemp,
-//       abbr: deptAbbr,
-//       documentId: '',
-//       createdAt: '',
-//       updatedAt: '',
-//       publishedAt: ''
-//     });
-//   }
-// }
 
 // ORUGA SECTION
 const ROOptions = props.collections['research-outputs']; //HTHIS IS FOR DA SEARCH ENGINE.
@@ -282,14 +218,12 @@ const loadFormDataToORUGA = () => {
     });
   };
 
-  console.log('loadFormDataToORUGA', formData);
   // Load default SDG data into checkbox group.
   if (formData.sdgs) {
     checkboxGroup.value = formData.sdgs.map((sdg) => sdg.sdgid);
   }
 
   if (formData.research_foci) {
-    console.log('loadFormDataToORUGA >> research_foci', formData.research_foci);
     loadTags(formData.research_foci, RFOptionsOrugaNew, RFTags);
   }
 
@@ -320,8 +254,8 @@ const loadFormDataToORUGA = () => {
  * @returns {Object} The SDG object with the 'documentId' and 'iconweb.documentId' properties removed, or undefined if no matching object is found.
  */
 const getSdgObject = (id) => {
-  let sdgObj = props.collections.sdgs.find((sdg) => parseInt(sdg.sdgid) === parseInt(id)  );
-  
+  let sdgObj = props.collections.sdgs.find((sdg) => parseInt(sdg.sdgid) === parseInt(id));
+
   // console.log('return id', id, obj);
   delete sdgObj.documentId;
   delete sdgObj.iconweb.documentId;
@@ -398,7 +332,6 @@ onMounted(() => {
 
         <div class="col">
           <div class="me-1 profile-form-card">
-            <!-- {{ console.log('profile', profile) }} -->
             <image-card :profile="profile" :editable="false" />
           </div>
         </div>
@@ -409,14 +342,14 @@ onMounted(() => {
               <div class="card ms-md-0 ms-2 shadow rounded-5 border-0 p-2">
                 <o-tab-item :value="0" label="About me" icon="image">
                   <div class="card-body">
-                    <section>
+                    <div class="row mb-3 rounded-5 border-4">
                       <o-field class="col-form-tag-profile" label="DEPARTMENT">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
                           :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
                           placeholder="" expanded disabled :closable="false" />
                       </o-field>
-                    </section>
+                    </div>
                     <div class="row mb-3 rounded-5 border-4">
                       <div class="row">
                         <o-field label="POST TITLE" class="col-form-label-profile">
@@ -551,13 +484,6 @@ onMounted(() => {
                     </section>
                   </div>
                 </o-tab-item>
-
-                <o-tab-item :value="5" :visible="false" label="Additional" icon="book">
-                  What light is light, if Silvia be not seen? <br />
-                  Except I be by Silvia in the night, <br />
-                  There is no music in the nightingale.
-                </o-tab-item>
-
               </div>
             </o-tabs>
 

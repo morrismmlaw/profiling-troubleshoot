@@ -47,8 +47,8 @@ export default defineNuxtConfig({
 
   strapi: {
     // url: process.env.STRAPI_URL || 'https://profile-cms.sci.hkbu.edu.hk',
-    // url: 'https://profile-cms.sci.hkbu.edu.hk',
-    url: 'http://158.182.151.62.1337',
+    url: 'https://profile-cms.sci.hkbu.edu.hk',
+    // url: 'http://158.182.151.62.1337',
     prefix: '/api',
     admin: '/admin',
     version: 'v5',
@@ -63,7 +63,8 @@ export default defineNuxtConfig({
   },
 
   meilisearch: {
-    hostUrl: 'http://158.182.151.62:7700', //required
+    // hostUrl: 'http://158.182.151.62:7700', //required
+    hostUrl: 'https://profile-api.sci.hkbu.edu.hk', //required
     searchApiKey: 'e5e806a91bca2b6b58ed2aebba3a6a873bfddcf834cbf1c3dcc7418785f36dac', // required
     adminApiKey: 'Strd8oz_m6pgKbml-ivcANsCHfz55IyJD9S-L6pJiCY', // optional
     serverSideUsage: true // default: false
@@ -72,7 +73,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      meiliHost: process.env.MEILISEARCH_HOST || 'http://158.182.151.62:7700',
+      // meiliHost: process.env.MEILISEARCH_HOST || 'http://158.182.151.62:7700',
+      meiliHost: 'https://profile-api.sci.hkbu.edu.hk', //required
       meiliAdminApiKey: process.env.MEILISEARCH_ADMIN_API_KEY || 'Strd8oz_m6pgKbml-ivcANsCHfz55IyJD9S-L6pJiCY',
     }
   },

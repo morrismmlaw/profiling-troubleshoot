@@ -14,35 +14,37 @@
             </svg>
           </NuxtLink>
 
-          <input @keyup.enter="handleSearchWithEnter" @input="handleSearch" v-model="searchInput" id="my-search-input" type="search"
+          <input @keyup.enter="handleSearchWithEnter" @input="handleSearch" v-model="searchInput" id="my-search-input"
+            type="search"
             style="margin-left: 7px;margin-top: 4px;width: calc(100% - 100px);border-style: none;background: var(--bs-light);height: 45px;font-size: 20px;font-family: Abel, sans-serif;"
             placeholder="Search by name or keyword" />
-            <!-- Dropdown for search options -->
-            <!-- Search result dropdown with photo -->
-            <div v-if="searchInput && profiles.length > 0" class="search-dropdown" style="position: absolute; z-index: 1000; background: white; width: 90%; left: 5%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); max-height: 320px; overflow-y: auto;">
-              <ul style="list-style: none; margin: 0; padding: 0;">
-              <li v-for="profile in profiles" :key="profile.id" style="display: flex; align-items: center; padding: 10px 16px; border-bottom: 1px solid #eee; cursor: pointer;" @click="router.push({ path: profile.ssoid })">
-                <img
-                :src="profile.uploadPhoto || profile.photoURL"
-                alt="profile photo"
-                style="width: 36px; height: 36px; object-fit: cover; border-radius: 50%; margin-right: 12px;"
-                />
+          <!-- Dropdown for search options -->
+          <!-- Search result dropdown with photo -->
+          <div v-if="searchInput && profiles.length > 0" class="search-dropdown"
+            style="position: absolute; z-index: 1000; background: white; width: 90%; left: 5%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); max-height: 320px; overflow-y: auto;">
+            <ul style="list-style: none; margin: 0; padding: 0;">
+              <li v-for="profile in profiles" :key="profile.id"
+                style="display: flex; align-items: center; padding: 10px 16px; border-bottom: 1px solid #eee; cursor: pointer;"
+                @click="router.push({ path: profile.ssoid })">
+                <img :src="profile.uploadPhoto ? 'https://profile-cms.sci.hkbu.edu.hk' + profile.uploadPhoto.url : profile.photoURL" alt="profile photo"
+                  style="width: 36px; height: 36px; object-fit: cover; border-radius: 50%; margin-right: 12px;" />
                 <div>
-                <span style="font-weight: bold;">{{ profile.name }}</span>
-                <span v-if="profile.departments && profile.departments.length" style="color: #888; font-size: 0.9em;"> - {{ profile.departments[0].name }}</span>
+                  <span style="font-weight: bold;">{{ profile.name }}</span>
+                  <span v-if="profile.departments && profile.departments.length" style="color: #888; font-size: 0.9em;">
+                    - {{ profile.departments[0].name }}</span>
                 </div>
               </li>
               <li v-if="profiles.length >= pageSize" style="text-align: center; padding: 8px;">
                 <NuxtLink :to="{ path: '/search', query: { q: searchInput } }">See all results</NuxtLink>
               </li>
-              </ul>
-            </div>
+            </ul>
+          </div>
 
-          <div class="dropdown">
-            <!-- <i class="bi bi-list dropdown-toggle" type="button" data-bs-toggle="dropdown"
+          <!-- <div class="dropdown"> -->
+          <!-- <i class="bi bi-list dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                           </i> -->
-            <div class="dropdown">
+          <!-- <div class="dropdown">
               <svg class="text-black icon-hover dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="-4 -2 30 30" fill="none"
                 style="font-size: 30px;margin-top: -4px;color: var(--bs-secondary);margin-left: 8px;">
@@ -55,14 +57,14 @@
                 <path
                   d="M2.99519 17.0096C2.44556 17.0096 2 17.4552 2 18.0048C2 18.5544 2.44556 19 2.99519 19H15.0048C15.5544 19 16 18.5544 16 18.0048C16 17.4552 15.5544 17.0096 15.0048 17.0096H2.99519Z"
                   fill="currentColor"></path>
-              </svg>
-              <ul class="dropdown-menu">
+              </svg> -->
+          <!-- <ul class="dropdown-menu">
                 <li><a class="dropdown-item disabled" href="#">Search Option</a></li>
                 <li><a class="dropdown-item" href="#">Free text search</a></li>
                 <li><a class="dropdown-item" href="#">Tag based search</a></li>
-              </ul>
-            </div>
-          </div>
+              </ul> -->
+          <!-- </div> -->
+          <!-- </div> -->
         </label>
       </div>
     </form>
@@ -269,12 +271,12 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: #000000;
-    transition: background-color 5000s ease-in-out 0s;
-    /* box-shadow: inset 0 0 20px 20px #23232329; */
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #000000;
+  transition: background-color 5000s ease-in-out 0s;
+  /* box-shadow: inset 0 0 20px 20px #23232329; */
 }
 </style>

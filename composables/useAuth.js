@@ -157,7 +157,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         //Get the Profile Data
         const response = await api.findProfileBySSoid(ssoid)
-        console.log('Got the Profile from API',response)
+        console.log('>>>>>>>>>>>>>> Got the Profile from API',response)
         if (response !== null) {
           //Set auth State
           this.user = {}; //Init the Object
