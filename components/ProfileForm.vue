@@ -38,6 +38,7 @@ const emit = defineEmits(['save']);
 const formData = reactive({
   documentId: props.profile?.attributes.documentId || '',
 
+  research_awards: props.profile?.attributes.research_awards || '',
   research_interest: props.profile?.attributes.research_interest || '', //Remind, the profile's field is winout s.. 
   biography: props.profile?.attributes.biography || '',
 

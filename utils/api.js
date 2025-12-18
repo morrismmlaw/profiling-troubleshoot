@@ -166,7 +166,7 @@ export const api = {
       filters: { ssoid: ssoid },
       populate: "*"
     })
-    
+
     if (profiles.data && profiles.data.length > 0) {
       return profiles.data[0]
     }
@@ -215,22 +215,30 @@ export const api = {
     const { update } = useStrapi()
     console.log("Updating PROFILE API JS", documentId, FormData);
 
-    await updateResearch_Centres(documentId, FormData); //Relations
-    await updateResearch_Foci(documentId, FormData); //Relations
-    await update_fcras(documentId, FormData); //Relations
-    await update_available_supervisions(documentId, FormData); //Relations
     await update_departments(documentId, FormData); //Relations
 
-    await update_tech_offers(documentId, FormData); //Relations
+    await updateResearch_Foci(documentId, FormData); //Relations
+    await update_fcras(documentId, FormData); //Relations
+    await updateResearch_Centres(documentId, FormData); //Relations
+
+    await update_available_supervisions(documentId, FormData); //Relations
+
+    // update SDGs?
+
+    // upload photo?
+    if (hasChangedImage === TRUE) {
+      await update_uploadPhoto(documentId, FormData, profile, hasChangedImage); //MEDIA ID
+    }
+
+    return await update_tech_offers(documentId, FormData); //Relations
 
     //Check if There is a new Photo
     //Yes Run Below..
-    //await update_uploadPhoto(documentId, FormData, profile, hasChangedImage); //MEDIA ID
     // delete FormData.uploadPhoto;
 
-    return await update('profiles', documentId, FormData,
-      { populate: populateFields } //Return the Populated data.
-    );
+    // return await update('profiles', documentId, FormData,
+    //   { populate: populateFields } //Return the Populated data.
+    // );
 
     // Need to unwrap the data to pass to strapi for update -> else key error.
     // return await update('profiles', id, data); // Never use DAT Fake id in the table -> else not found error 404.
@@ -239,7 +247,6 @@ export const api = {
     //   data
     // })
   },
-
 
   /**
    * Fetches the current user's data from the backend API.
