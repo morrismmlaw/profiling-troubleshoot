@@ -5,28 +5,12 @@ import TiptapEditor from './TiptapEditor.vue' // path to your Tiptap editor comp
 import ImageCard from './ui/ProfileImageCard.vue';
 import type { CroppedImg } from '~/types/profileImage';
 
-import ProfileSave from './ui/ProfileSave.vue';
-
 /**
  * Record Whether Image has been Changed -> Don't want to upload the Image,
  * after These is a Custom Image, and Other Tags Field Changed at Save
- *
+ * 
  * The Point is on UploadPhoto, if current id unchanged -> turn false;
  */
-const hasChangedImage = ref(false);
-
-// Watch the hasChangedImage state
-watch(hasChangedImage, (newValue, oldValue) => {
-  console.log(`hasChangedImage changed from ${oldValue} to ${newValue}`);
-  // Add any additional logic you need to handle the change
-  if (newValue) {
-    // Perform actions when the image has changed
-    console.log('Image has changed!');
-  } else {
-    // Perform actions when the image has not changed
-    console.log('Image has not changed.');
-  }
-});
 
 const props = defineProps({
   profile: {
@@ -49,38 +33,16 @@ const props = defineProps({
 const profileStore = useProfileStore();
 
 const emit = defineEmits(['save']);
-const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
-  if (croppedImg.value.hasChangedImage) {
-    if (croppedImg.value.clear === true) {
-      //Set it to Clear.
-      formData.uploadPhoto = null;
-      // delete formData.uploadPhoto;
-      hasChangedImage.value = true;
-    } else {
-      let oldID = formData.uploadPhoto;
-      let imgObj = croppedImg.value;
-      // console.log("Capture ProfileForm: ", obj);
-      formData.uploadPhoto = imgObj.strapiID;
-      // console.log('FormData StrapiID:', formData.uploadPhoto);
-      hasChangedImage.value = true;
-    }
-  } else {
-    hasChangedImage.value = false;
-  }
-}
 
 //Used for Reactive for ORUGA to Update..
 const formData = reactive({
   documentId: props.profile?.attributes.documentId || '',
 
-  research_interest: props.profile?.attributes.research_interest || '', //Remind, the profile's field is winout s..
-  research_awards: props.profile?.attributes.research_awards || '', //Remind, the profile's field is winout s..
+  research_awards: props.profile?.attributes.research_awards || '',
+  research_interest: props.profile?.attributes.research_interest || '', //Remind, the profile's field is winout s.. 
   biography: props.profile?.attributes.biography || '',
 
-  // SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
-  // SDG-link..  http://158.182.151.62:1337/uploads/E_WEB_Goal_04_1779e135aa.png.. Fix ?
   sdgs: props.profile?.attributes.sdgs ? props.profile.attributes.sdgs : [],
-  // FCRA: props.profile?.attributes.FCRA || "", //String type
 
   fcras: props.profile?.attributes.fcras || [],
   research_foci: props.profile?.attributes.research_foci || [],
@@ -94,78 +56,7 @@ const formData = reactive({
 
   tech_offers: props.profile?.attributes.tech_offers || [],
 
-
 });
-
-for (const sdg of props.profile?.attributes.SDG.split(',') || []) {
-  let found = false;
-  for (let i = 0; i < formData.sdgs.length; i++) {
-    if (parseInt(formData.sdgs[i].sdgid) === parseInt(sdg.sdgid)) {
-      found = true;
-      continue;
-    }
-  }
-  if (!found) {
-    formData.sdgs.push({
-      sdgid: sdg.trim(),
-      title: '',
-      id: Math.random().toString(36).substring(2, 15), // Generate a random id
-      documentId: '',
-      slogan: '',
-    });
-  }
-}
-
-for (let dept of props.profile?.attributes.unit.split(',') || []) {
-  let found = false;
-  let deptTemp = ''
-  let deptAbbr = '';
-  console.log('dept', dept);
-
-  if (dept.toLowerCase().includes('mathematics')) {
-    deptTemp = 'Mathematics';
-    deptAbbr = 'MATH';
-  } else if (dept.toLowerCase().includes('physics')) {
-    deptTemp = 'Physics';
-    deptAbbr = 'PHYS';
-  } else if (dept.toLowerCase().includes('chemistry')) {
-    deptTemp = 'Chemistry';
-    deptAbbr = 'CHEM';
-  } else if (dept.toLowerCase().includes('biology')) {
-    deptTemp = 'Biology';
-    deptAbbr = 'BIOL';
-  } else if (dept.toLowerCase().includes('computer')) {
-    deptTemp = 'Computer Science';
-    deptAbbr = 'COMP';
-  }
-
-  for (let i = 0; i < formData.departments.length; i++) {
-    if (formData.departments[i].name === deptTemp) {
-      found = true;
-      continue;
-    }
-  }
-  if (!found && deptTemp != '') {
-    formData.departments.push({
-      name: deptTemp,
-      abbr: deptAbbr,
-      documentId: '',
-      createdAt: '',
-      updatedAt: '',
-      publishedAt: ''
-    });
-  }
-}
-
-
-const handleSubmit = () => { //Going to send back to profile.vue parent.
-  delete formData.photoURL;
-
-  emit('save', {
-    formData: formData,
-    hasChangedImage: hasChangedImage.value
-  });
-};
 
 // ORUGA SECTION
 const ROOptions = props.collections['research-outputs']; //HTHIS IS FOR DA SEARCH ENGINE.
@@ -279,21 +170,6 @@ const sortTagOptions = () => {
 }
 
 const debugTagsMsg = () => {
-
-  // console.log('SRC Options', SRCOptions);
-  // console.log('RF Options', RFOptions);
-  // console.log('FCRA Options', FCRAOptions);
-  // console.log('AS Options', ASOptions);
-  // console.log('DEP Options', DEPOptions);
-
-  // console.log("SRC OPTIONS ORUGA2", SRCOptionsOrugaNew);
-  // console.log("RO OPTIONS ORUGA2", ROOptionsOrugaNew);
-  // console.log("FCRA OPTIONS ORUGA2", FCRAOptionsOrugaNew);
-  // console.log("AS OPTIONS ORUGA2", ASOptionsOrugaNew);
-  // console.log("DEP OPTIONS ORUGA2", DEPOptionsOrugaNew);
-
-  // console.log('SDG FORMDATA', formData.SDG);
-  // console.log('sdgs FORMDATA', formData.sdgs);
 }
 
 //FCRA Search
@@ -331,6 +207,7 @@ const checkboxGroup = ref([]);
  * @throws {Error} If formData is not available.
  */
 const loadFormDataToORUGA = () => {
+  console.log(">>>>>>>>>>>>>formDate", formData);
   if (!formData) {
     throw new Error("No Form Data!");
   }
@@ -378,7 +255,7 @@ const loadFormDataToORUGA = () => {
  * @returns {Object} The SDG object with the 'documentId' and 'iconweb.documentId' properties removed, or undefined if no matching object is found.
  */
 const getSdgObject = (id) => {
-  let sdgObj = props.collections.sdgs.find((sdg) => parseInt(sdg.sdgid) === parseInt(id)  );
+  let sdgObj = props.collections.sdgs.find((sdg) => parseInt(sdg.sdgid) === parseInt(id));
 
   // console.log('return id', id, obj);
   delete sdgObj.documentId;
@@ -394,7 +271,7 @@ const syncCheckboxToFormData = () => {
   })
 }
 
-//Got 6 ORUGA Tags to Sync to FormData!
+//Got 6 ORUGA Tags to Sync to FormData! 
 const syncTagsFormData = () => {
   formData.research_centres = SRCTags.value;
   formData.research_foci = RFTags.value;
@@ -414,31 +291,6 @@ const imgCardStyle = computed(() => {
   }
 })
 
-// Load checkbox group to FormData when checkbox group is modified
-watch(checkboxGroup, (newVal, oldVal) => {
-  try {
-    formData.sdgs = [];
-    console.log('Checkbox Changed', formData)
-    formData.sdgs = newVal.map((sdgId) => {
-      return getSdgObject(sdgId)
-    })
-
-  } catch (error) {
-    console.error(error)
-    // handle the error appropriately
-  }
-})
-
-// Load Tags Input group to FormData when modified
-watch([SRCTags, ROTags, RFTags, FCRATags, ASTags, DEPTags, KTTags], (newVal, oldVal) => {
-  try {
-    syncTagsFormData();
-    console.log('FormData Changed', formData)
-  } catch (error) {
-    console.error(error)
-    // handle the error appropriately
-  }
-})
 
 watch(() => props.profile.attributes.ssoid, (newVal, oldVal) => {
   console.log(`SSOID changed from ${oldVal} to ${newVal}`)
@@ -455,8 +307,7 @@ const activeTab = ref(0);
 const showBooks = ref(false);
 
 const ORUGAcheckBeforeAdd = (event, tags) => {
-  console.log(event);
-  console.log(tags);
+  console.log('ORUGAcheckBeforeAdd', event, tags);
 
   const eventExists = tags.some(tag => tag.id === event.id);
   return !eventExists;
@@ -466,25 +317,10 @@ const ORUGAcheckBeforeAdd = (event, tags) => {
 onMounted(() => {
   loadFormDataToORUGA();
   syncCheckboxToFormData();
-
   sortTagOptions();
   debugTagsMsg();
-
   // console.log("Current FormData", formData);
 })
-
-
-const handleHasChange = (e) => {
-  // console.log('Has Image been changed?', e);
-
-  if (e === true) {
-    hasChangedImage.value = true;
-  } else {
-    hasChangedImage.value = false;
-  }
-
-  // console.log('Has Image been changed?', hasChangedImage.value);
-}
 
 </script>
 
@@ -497,8 +333,7 @@ const handleHasChange = (e) => {
 
         <div class="col">
           <div class="me-1 profile-form-card">
-            <!-- {{ console.log('profile', profile) }} -->
-            <image-card :profile="profile" @cropped-img="handleUploadPhoto" @has-changed-image="handleHasChange" />
+            <image-card :profile="profile" :editable="false" />
           </div>
         </div>
 
@@ -508,18 +343,18 @@ const handleHasChange = (e) => {
               <div class="card ms-md-0 ms-2 shadow rounded-5 border-0 p-2">
                 <o-tab-item :value="0" label="About me" icon="image">
                   <div class="card-body">
-                    <section>
+                    <div class="row mb-3 rounded-5 border-4">
                       <o-field class="col-form-tag-profile" label="DEPARTMENT">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
                           :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
-                    </section>
+                    </div>
                     <div class="row mb-3 rounded-5 border-4">
                       <div class="row">
                         <o-field label="POST TITLE" class="col-form-label-profile">
-                          <o-input :placeholder="`${props.profile.attributes.post}`" disabled />
+                          <o-input :placeholder="`${props.profile.attributes.post}`" disabled :closable="false" />
                         </o-field>
                       </div>
                     </div>
@@ -529,7 +364,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="biography" />
+                          <tiptap-editor :formData="formData" field="biography" :editable=false />
                         </div>
                       </div>
                     </div>
@@ -539,7 +374,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_interest" />
+                          <tiptap-editor :formData="formData" field="research_interest" :editable="false" />
                         </div>
                       </div>
                     </div>
@@ -550,7 +385,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_awards" />
+                          <tiptap-editor :formData="formData" field="research_awards" :editable="false" />
                         </div>
                       </div>
                     </div>
@@ -560,27 +395,35 @@ const handleHasChange = (e) => {
                 <o-tab-item :value="1" label="My Research" icon="pen">
                   <div class="card-body">
                     <section>
-                      <o-field class="col-form-tag-profile" label="RESEARCH FOCUS">
+                      <o-field class="col-form-tag-profile" label="RESEARCH FOCUS(ES)">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, RFTags)" v-model="RFTags"
                           :options="RFOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
+                    <!-- <section>
+                      <o-field class="col-form-tag-profile" label="DEPARTMENT">
+                        <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
+                          :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
+                          :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
+                          placeholder="" expanded disabled :closable="false" />
+                      </o-field>
+                    </section> -->
                     <section>
-                      <o-field class="col-form-tag-profile" label="FACULTY COLLABORATIVE RESEARCH AREA">
+                      <o-field class="col-form-tag-profile" label="FACULTY COLLABORATIVE RESEARCH AREA(S)">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, FCRATags)" v-model="FCRATags"
                           :options="FCRAOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                     <section>
-                      <o-field class="col-form-tag-profile" label="STRATEGIC RESEARCH CENTRE">
+                      <o-field class="col-form-tag-profile" label="STRATEGIC RESEARCH CENTRE(S)">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, SRCTags)" v-model="SRCTags"
                           :options="SRCOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                   </div>
@@ -593,7 +436,7 @@ const handleHasChange = (e) => {
                     </div>
                     <div class="">
                       <div class="columns is-multiline">
-                        <div class="column is-one-fifth" v-for="sdg in sdgOptions" :key="sdg">
+                        <div class="column is-one-fifth" v-for="sdg in formData.sdgs" :key="sdg">
                           <o-field class="sdg-field">
                             <o-tooltip label="HTML Content" size="large" variant="info" multiline>
                               <template #content>
@@ -602,7 +445,8 @@ const handleHasChange = (e) => {
                                   <p><strong>Description</strong> <br> {{ sdg.slogan }}</p>
                                 </div>
                               </template>
-                              <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid">
+                              <o-checkbox v-model="checkboxGroup" :native-value="`${sdg.sdgid}`" :label="sdg.sdgid"
+                                disabled>
                                 <p class="col-form-label-profile-sdg"> SDG {{ sdg.sdgid }} </p>
                                 <nuxt-img
                                   :src="`https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal${sdg.sdgid}a.png`"
@@ -623,7 +467,7 @@ const handleHasChange = (e) => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, ASTags)" v-model="ASTags"
                           :options="ASOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options" expanded />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                   </div>
@@ -636,24 +480,18 @@ const handleHasChange = (e) => {
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, KTTags)" v-model="KTTags"
                           :options="KTOptionsOrugaNew" :allow-new="true" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
-                          placeholder="Select options / Custom options" expanded />
+                          placeholder="" expanded disabled :closable="false" />
                       </o-field>
                     </section>
                   </div>
                 </o-tab-item>
-
-                <o-tab-item :value="5" :visible="false" label="Additional" icon="book">
-                  What light is light, if Silvia be not seen? <br />
-                  Except I be by Silvia in the night, <br />
-                  There is no music in the nightingale.
-                </o-tab-item>
-
               </div>
             </o-tabs>
 
-            <div class="me-3">
+            <!-- <div class="me-3">
               <ProfileSave :handle-submit="handleSubmit" :profile-store="profileStore" />
-            </div>
+            </div> -->
+
           </section>
         </div>
       </div>

@@ -8,7 +8,7 @@ import type { CroppedImg } from '~/types/profileImage';
 /**
  * Record Whether Image has been Changed -> Don't want to upload the Image,
  * after These is a Custom Image, and Other Tags Field Changed at Save
- * 
+ *
  * The Point is on UploadPhoto, if current id unchanged -> turn false;
  */
 
@@ -39,7 +39,7 @@ const formData = reactive({
   documentId: props.profile?.attributes.documentId || '',
 
   research_awards: props.profile?.attributes.research_awards || '',
-  research_interest: props.profile?.attributes.research_interest || '', //Remind, the profile's field is winout s.. 
+  research_interest: props.profile?.attributes.research_interest || '', //Remind, the profile's field is winout s..
   biography: props.profile?.attributes.biography || '',
 
   sdgs: props.profile?.attributes.sdgs ? props.profile.attributes.sdgs : [],
@@ -271,7 +271,7 @@ const syncCheckboxToFormData = () => {
   })
 }
 
-//Got 6 ORUGA Tags to Sync to FormData! 
+//Got 6 ORUGA Tags to Sync to FormData!
 const syncTagsFormData = () => {
   formData.research_centres = SRCTags.value;
   formData.research_foci = RFTags.value;

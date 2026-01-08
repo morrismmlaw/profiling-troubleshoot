@@ -10,7 +10,7 @@ import ProfileSave from './ui/ProfileSave.vue';
 /**
  * Record Whether Image has been Changed -> Don't want to upload the Image,
  * after These is a Custom Image, and Other Tags Field Changed at Save
- *
+ * 
  * The Point is on UploadPhoto, if current id unchanged -> turn false;
  */
 const hasChangedImage = ref(false);
@@ -73,8 +73,7 @@ const handleUploadPhoto = (croppedImg: Ref<CroppedImg>) => {
 const formData = reactive({
   documentId: props.profile?.attributes.documentId || '',
 
-  research_interest: props.profile?.attributes.research_interest || '', //Remind, the profile's field is winout s..
-  research_awards: props.profile?.attributes.research_awards || '', //Remind, the profile's field is winout s..
+  research_interest: props.profile?.attributes.research_interest || '', //Remind, the profile's field is winout s.. 
   biography: props.profile?.attributes.biography || '',
 
   // SDG: props.profile?.attributes.SDG ? props.profile.attributes.SDG.split(',').map(Number) : [],
@@ -94,7 +93,7 @@ const formData = reactive({
 
   tech_offers: props.profile?.attributes.tech_offers || [],
 
-
+  
 });
 
 for (const sdg of props.profile?.attributes.SDG.split(',') || []) {
@@ -158,7 +157,7 @@ for (let dept of props.profile?.attributes.unit.split(',') || []) {
 }
 
 
-const handleSubmit = () => { //Going to send back to profile.vue parent.
+const handleSubmit = () => { //Going to send back to profile.vue parent. 
   delete formData.photoURL;
 
   emit('save', {
@@ -379,7 +378,7 @@ const loadFormDataToORUGA = () => {
  */
 const getSdgObject = (id) => {
   let sdgObj = props.collections.sdgs.find((sdg) => parseInt(sdg.sdgid) === parseInt(id)  );
-
+  
   // console.log('return id', id, obj);
   delete sdgObj.documentId;
   delete sdgObj.iconweb.documentId;
@@ -394,7 +393,7 @@ const syncCheckboxToFormData = () => {
   })
 }
 
-//Got 6 ORUGA Tags to Sync to FormData!
+//Got 6 ORUGA Tags to Sync to FormData! 
 const syncTagsFormData = () => {
   formData.research_centres = SRCTags.value;
   formData.research_foci = RFTags.value;
@@ -550,7 +549,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_awards" />
+                          <tiptap-editor :formData="formData" field="research_interest" />
                         </div>
                       </div>
                     </div>

@@ -6,7 +6,7 @@ import { backendURL_ITO, useAuthStore } from '~/composables/useAuth';
 
 //For Get and return of Update profile (inside, not api collection.).
 let populateFields = [
-//  'documentId',
+  'documentId',
   'sdgs', // Populate the 'sdgs' field with the related data
   'research_centres', // Populate the 'research_centres' field with the related data
   'research_foci',
@@ -86,11 +86,11 @@ async function update_tech_offers(documentId, data) {
 }
 
 /**
- * Link the Media ID with the Profile's field, remove media Linkage if needed.
- * @param {*} documentId
- * @param {*} data
- * @param {*} hasChangedImage -> Determin If this Image has not changed -> no need to delete.
- * @returns
+ * Link the Media ID with the Profile's field, remove media Linkage if needed. 
+ * @param {*} documentId 
+ * @param {*} data 
+ * @param {*} hasChangedImage -> Determin If this Image has not changed -> no need to delete. 
+ * @returns 
  */
 async function update_uploadPhoto(documentId, data, profile, hasChangedImage) {
   const { update, findOne } = useStrapi();
@@ -159,25 +159,18 @@ export const api = {
    * @returns {Promise<{ data: Profile[] }>}
    */
   async findProfileBySSoid(ssoid) {
-     const { find } = useStrapi();
-     console.log("Finding Profile by SSOID", ssoid)
+    const { find } = useStrapi();
+    console.log("Finding Profile by SSOID", ssoid)
 
-     const profiles = await find('profiles', {
-       filters: { ssoid: ssoid },
-       populate: "*"
-     })
+    const profiles = await find('profiles', {
+      filters: { ssoid: ssoid },
+      populate: "*"
+    })
 
-     if (profiles.data && profiles.data.length > 0) {
-       return profiles.data[0]
-     }
-     return null
-    //  const { findOne } = useStrapi()
-
-    // return await findOne('profiles', { //Need to use Populate to fetch relationship && Media Type Data.
-    //  where: { 'ssoid': ssoid },
-    //  populate: populateFields
-    // })
-
+    if (profiles.data && profiles.data.length > 0) {
+      return profiles.data[0]
+    }
+    return null
   },
 
   /**
@@ -213,7 +206,7 @@ export const api = {
 
   /**
    * Update profile // GOTTA POPULATE...
-   *
+   * 
    * @param {number} documentId
    * @param {{ academicInterests: string }} FormData
    * @returns {Promise<{ data: Profile }>}
@@ -226,26 +219,26 @@ export const api = {
 
     await updateResearch_Foci(documentId, FormData); //Relations
     await update_fcras(documentId, FormData); //Relations
-    await updateResearch_Centres(documentId, FormData); // Relations
+    await updateResearch_Centres(documentId, FormData); //Relations
 
     await update_available_supervisions(documentId, FormData); //Relations
 
     // update SDGs?
 
     // upload photo?
-    // if (hasChangedImage === TRUE) {
+    if (hasChangedImage === TRUE) {
       await update_uploadPhoto(documentId, FormData, profile, hasChangedImage); //MEDIA ID
-    // }
+    }
 
-    await update_tech_offers(documentId, FormData); //Relations
+    return await update_tech_offers(documentId, FormData); //Relations
 
     //Check if There is a new Photo
     //Yes Run Below..
     // delete FormData.uploadPhoto;
 
-    return await update('profiles', documentId, FormData,
-      { populate: populateFields } //Return the Populated data.
-    );
+    // return await update('profiles', documentId, FormData,
+    //   { populate: populateFields } //Return the Populated data.
+    // );
 
     // Need to unwrap the data to pass to strapi for update -> else key error.
     // return await update('profiles', id, data); // Never use DAT Fake id in the table -> else not found error 404.
@@ -254,7 +247,6 @@ export const api = {
     //   data
     // })
   },
-
 
   /**
    * Fetches the current user's data from the backend API.
