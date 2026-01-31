@@ -18,7 +18,8 @@
       <div v-else>
         <div class="d-flex">
           <NuxtLink class="navbar-brand" to="https://www.hkbu.edu.hk/">
-            <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img-1 ms-4" />
+            <!-- <NuxtImg src="\img\bu-logo.d3e1d17a.png" alt="Logo" class="logo-img-1 ms-4" /> -->
+            <NuxtImg src="\img\hkbu_70.jpg" alt="Logo" class="logo-img-3 ms-4" />
           </NuxtLink>
           <NuxtLink class="navbar-brand" to="https://www.sci.hkbu.edu.hk/">
             <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
@@ -212,6 +213,12 @@ const navbarStylePerRoute = computed(() => {
 
 .logo-img-2 {
   height: 60px;
+  /* Adjust the height as needed */
+  margin-top: 1px;
+}
+
+.logo-img-3 {
+  height: 75px;
   /* Adjust the height as needed */
   margin-top: 1px;
 }
