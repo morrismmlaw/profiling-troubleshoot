@@ -529,7 +529,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="biography" disabled/>
+                          <tiptap-editor :formData="formData" field="biography" :editable=false />
                         </div>
                       </div>
                     </div>
@@ -539,7 +539,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_interest" disabled/>
+                          <tiptap-editor :formData="formData" field="research_interest" :editable=false />
                         </div>
                       </div>
                     </div>
@@ -550,7 +550,7 @@ const handleHasChange = (e) => {
                       </div>
                       <div class="row pe-0">
                         <div class="col pe-0">
-                          <tiptap-editor :formData="formData" field="research_awards" />
+                          <tiptap-editor :formData="formData" field="research_awards" :editable=false />
                         </div>
                       </div>
                     </div>
