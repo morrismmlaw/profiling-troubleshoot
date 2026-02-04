@@ -23,14 +23,15 @@
             <NuxtImg src="\img\hkbu_70.jpg" alt="Logo" class="logo-img-3 ms-4" />
           </NuxtLink>
           <NuxtLink class="navbar-brand" to="https://www.sci.hkbu.edu.hk/">
-            <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2" />
+            <NuxtImg src="\img\scilogo_v3_1012ver.7b173d33.png" alt="Logo" class="logo-img-2a" />
           </NuxtLink>
         </div>
       </div>
 
       <!-- <div v-if="$route.path.startsWith('/profile')" class="d-flex justify-content-end ms-auto me-3"> -->
       <div class="d-flex justify-content-end ms-auto me-3">
-        <div class="custom-text-bar" @click="navigateTo('/')">Academic Profile</div>
+        <div v-if="!isSearch && !isProfile" class="custom-text-bar" @click="navigateTo('/')">Academic Profile</div>
+        <div v-else class="custom-text-bar-white" @click="navigateTo('/')">Academic Profile</div>
       </div>
 
       <div class="d-flex">
@@ -215,9 +216,15 @@ const navbarStylePerRoute = computed(() => {
 .logo-img-2 {
   height: 60px;
   /* Adjust the height as needed */
-  margin-top: 1px;
+  margin-top: 5px;
 }
 
+.logo-img-2a {
+  height: 42px;
+  /* Adjust the height as needed */
+  margin-top: 18px;
+}
+  
 .logo-img-3 {
   height: 75px;
   /* Adjust the height as needed */
@@ -250,6 +257,25 @@ const navbarStylePerRoute = computed(() => {
   /* Adjust spacing between letters if needed */
 }
 
+.custom-text-bar-white {
+  font-family: var(--font-family);
+  font-weight: 500;
+  /* font-style: normal; */
+  font-size: 1.3rem;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /* Adjust the size as needed */
+  color: #FFFFFF;
+  letter-spacing: 1px;
+  /* Adjust spacing between letters if needed */
+}
+  
 .bi {
   font-size: 1.5rem;
 }
