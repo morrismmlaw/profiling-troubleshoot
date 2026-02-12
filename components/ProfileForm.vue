@@ -344,7 +344,7 @@ onMounted(() => {
                 <o-tab-item :value="0" label="About me" icon="image">
                   <div class="card-body">
                     <div class="row mb-3 rounded-5 border-4">
-                      <o-field class="col-form-tag-profile" label="DEPARTMENT">
+                      <o-field class="col-form-tag-profile" label="DEPARTMENT(S)">
                         <o-taginput :validateItem="(event) => ORUGAcheckBeforeAdd(event, DEPTags)" v-model="DEPTags"
                           :options="DEPOptionsOrugaNew" :allow-new="allowNew" :allow-duplicates="false"
                           :open-on-focus="openOnFocus" :keep-open="false" :keep-first="keepFirst" icon="tag"
@@ -353,7 +353,7 @@ onMounted(() => {
                     </div>
                     <div class="row mb-3 rounded-5 border-4">
                       <div class="row">
-                        <o-field label="POST TITLE" class="col-form-label-profile">
+                        <o-field label="POST TITLE(S)" class="col-form-label-profile">
                           <o-input :placeholder="`${props.profile.attributes.post}`" disabled :closable="false" />
                         </o-field>
                       </div>
