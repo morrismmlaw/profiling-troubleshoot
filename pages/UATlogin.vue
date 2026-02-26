@@ -12,7 +12,6 @@ const emit = defineEmits(['success', 'error']);
 const handleSubmit = async () => {
   console.log("Login Form doing the Login")
   const success = await authStore.setProfile(ssoid.value);
-
   if (success) {
     router.push({
       path: `/profile/${ssoid.value}`,
@@ -20,10 +19,14 @@ const handleSubmit = async () => {
     })
     // emit('success');
   } else {
-    router.push({
-      path: '/login-redirect',
-      query: { error: 'Login failed. Please try again.' }
-    })
+    // pop up a message that SSOID is not found 
+    alert("SSOID is not found")
+
+    // console.log("Login failed")
+    // router.push({
+    //   path: '/login-redirect',
+    //   query: { error: 'Login failed. Please try again.' }
+    // })
     // emit('error');
   }
 };

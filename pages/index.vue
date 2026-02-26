@@ -41,6 +41,8 @@ onMounted(async () => {
     isLoaded.value = true;
   };
   img.src = bgM.value;
+
+  console.log(authStore)
 })
 
 const handleLoginSuccess = () => {

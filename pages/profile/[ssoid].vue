@@ -127,7 +127,8 @@ onMounted(async () => {
   // }
   authStore.initializeFromStorage()
 
-  if (authStore.isAuthenticated) {
+  // Temporarily disable auth check in UAT mode
+  if (authStore.isAuthenticated && !UATMode()) {
     const myModal = new Modal(document.getElementById('exampleModal'));
     myModal.show();
   }
@@ -181,7 +182,8 @@ watch(checkedForm, (newVal) => {
 
         <div class="row justify-content-center">
           <div class="col-12">
-            <div v-if="authStore.isAuthenticated || authStore.isAdmin">
+            <!-- Temporarily disable auth check in UAT mode -->
+            <div v-if="authStore.isAuthenticated || authStore.isAdmin || UATMode()">
               <div class="mt-3">
                 <ProfileFormEdit :key="componentKey" v-if="!isLoading" :profile="authStore.user"
                   :collections="authStore.collections" @save="handleSave" />

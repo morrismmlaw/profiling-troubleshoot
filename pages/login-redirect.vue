@@ -66,6 +66,8 @@ const countdown = ref(3);
 let timerId = null;
 
 onMounted(() => {
+  console.log(isLoggedIn.value)
+  
   if (!isLoggedIn.value) {
     timerId = setInterval(() => {
       countdown.value--
@@ -84,7 +86,6 @@ onMounted(() => {
       }
     }, 1000)
   }
-
 })
 
 //TS PARTICLE

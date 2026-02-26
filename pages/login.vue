@@ -7,6 +7,12 @@ const ssoid = ref('');
 const router = useRouter();
 const emit = defineEmits(['success', 'error']);
 
+// Local login form state
+const showLocalLogin = ref(false);
+const localUsername = ref('');
+const localPassword = ref('');
+const localLoginError = ref('');
+
 const handleSubmit = async () => {
   console.log("Login Form doing the Login")
   const success = await authStore.setProfile(ssoid.value);
@@ -68,6 +74,88 @@ const OAuthGoogle = async () => {
 
 const { getProviderAuthenticationUrl } = useStrapiAuth()
 
+// Show local login form
+const showLocalLoginForm = () => {
+  showLocalLogin.value = true;
+  localLoginError.value = '';
+  localUsername.value = '';
+  localPassword.value = '';
+}
+
+// Local OAuth2 Login Flow with validation (Mock/Demo mode - no backend required)
+const handleLocalLogin = async () => {
+  localLoginError.value = '';
+  
+  // Validate credentials
+  if (localUsername.value !== 'demo' || localPassword.value !== 'demodemo') {
+    localLoginError.value = 'Invalid username or password.';
+    return;
+  }
+  
+  try {
+    authStore.isLoading = true;
+    
+    // Mock login - simulate successful authentication without backend call
+    console.log('Demo login: Simulating successful authentication');
+    
+    // Create mock user data
+    const mockData = {
+      jwt: 'mock-jwt-token-' + Date.now(),
+      user: {
+        username: 'demo',
+        email: 'demo@example.com',
+        provider: 'local'
+      }
+    };
+    
+    // Store tokens and user info
+    authStore.sso.provider = 'local';
+    authStore.sso.jwt = mockData.jwt;
+    authStore.sso.username = mockData.user.username;
+    authStore.sso.email = mockData.user.email;
+    authStore.sso.ssoid = mockData.user.username; // Use username as ssoid
+    
+    localStorage.setItem('jwt', authStore.sso.jwt);
+    localStorage.setItem('username', authStore.sso.username);
+    
+    // Set user and profile (these will use the mock JWT)
+    // Note: setUser() and setProfile() may still try to call backend APIs
+    // If you want to fully mock, you might need to mock those too
+    try {
+      await authStore.setUser();
+    } catch (userError) {
+      console.warn('setUser failed (expected in demo mode):', userError);
+      // Set mock authentication state
+      authStore.isAuthenticated = true;
+      authStore.isLogin = true;
+    }
+    
+    try {
+      if (authStore.sso.ssoid) {
+        await authStore.setProfile(authStore.sso.ssoid);
+      }
+    } catch (profileError) {
+      console.warn('setProfile failed (expected in demo mode):', profileError);
+      // Set mock user data
+      authStore.user = {
+        attributes: {
+          ssoid: 'demo',
+          username: 'demo'
+        }
+      };
+    }
+    
+    authStore.setSSO();
+    
+    // Redirect to success page
+    router.push('/login-redirect');
+  } catch (error) {
+    console.error('Local OAuth2 error:', error);
+    authStore.isLoading = false;
+    localLoginError.value = 'Failed to complete demo login. Please try again.';
+  }
+}
+
 const signInWith = (str) => {
   switch (str) {
     case ('hkbu'):
@@ -81,6 +169,9 @@ const signInWith = (str) => {
       break;
     case ('discord'):
       window.location.href = STRAPI_SSODiscordUrl_ITO;
+      break;
+    case ('local'):
+      showLocalLoginForm();
       break;
   }
 }
@@ -151,15 +242,60 @@ const signInWith = (str) => {
                           <div class="card-body">
                             <h2 class="card-title text-center mb-4">Single Sign-On</h2>
                             <div class="d-grid gap-3">
-                              <button @click="signInWith('hkbu')" class="btn btn-primary sso-btn">
+                              <!-- <button @click="signInWith('hkbu')" class="btn btn-primary sso-btn">
                                 <i class="bi bi-mortarboard-fill me-2"></i> Sign in with SSOID
                               </button>
-                              <!-- <button @click="signInWith('google')" class="btn btn-danger sso-btn">
+                              <button @click="signInWith('google')" class="btn btn-danger sso-btn">
                                 <i class="bi bi-google me-2"></i> Sign in with Google
                               </button> -->
+                              <button @click="signInWith('local')" class="btn btn-info sso-btn" v-if="!showLocalLogin">
+                                <i class="bi bi-house-fill me-2"></i> Sign in with Local OAuth2
+                              </button>
                               <!-- <button @click="signInWith('discord')" class="btn btn-success sso-btn">
                                 <i class="bi bi-discord me-2"></i> Sign in with Discord
                               </button> -->
+                            </div>
+                            
+                            <!-- Local Login Form -->
+                            <div v-if="showLocalLogin" class="mt-4 w-100">
+                              <h5 class="text-center mb-3">Local Account Login</h5>
+                              <form @submit.prevent="handleLocalLogin">
+                                <div class="mb-3">
+                                  <label for="local-username" class="form-label">Username</label>
+                                  <input 
+                                    id="local-username" 
+                                    v-model="localUsername" 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Enter username"
+                                    required
+                                    autocomplete="username"
+                                  />
+                                </div>
+                                <div class="mb-3">
+                                  <label for="local-password" class="form-label">Password</label>
+                                  <input 
+                                    id="local-password" 
+                                    v-model="localPassword" 
+                                    type="password" 
+                                    class="form-control" 
+                                    placeholder="Enter password"
+                                    required
+                                    autocomplete="current-password"
+                                  />
+                                </div>
+                                <div v-if="localLoginError" class="alert alert-danger mb-3" role="alert">
+                                  {{ localLoginError }}
+                                </div>
+                                <div class="d-grid gap-2">
+                                  <button type="submit" class="btn btn-info" :disabled="authStore.isLoading">
+                                    {{ authStore.isLoading ? 'Logging in...' : 'Login' }}
+                                  </button>
+                                  <button type="button" class="btn btn-secondary" @click="showLocalLogin = false">
+                                    Cancel
+                                  </button>
+                                </div>
+                              </form>
                             </div>
                             <p class="text-muted text-center mt-3">Forgot your password?</p>
                             <NuxtLink @click="signInWith('hkbu-uat')" class="btn">
